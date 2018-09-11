@@ -69,6 +69,7 @@ var eles = cy.add([
     }
 ]);
 */
+/*
 var cy = (window.cy = cytoscape({
     container: document.getElementById('cy'),
 
@@ -229,11 +230,6 @@ var cy = (window.cy = cytoscape({
                 position: { x: 100, y: 50 },
                 classes: 'class'
             }
-            /*{ data: { id: 'a', parent: 'b' }, position: { x: 215, y: 85 } },
-            { data: { id: 'b' } },
-            { data: { id: 'c', parent: 'b' }, position: { x: 300, y: 85 } },
-            { data: { id: 'e' } },
-            { data: { id: 'f', parent: 'e' }, position: { x: 600, y: 85 } }*/
         ],
         edges: [
             {
@@ -243,7 +239,6 @@ var cy = (window.cy = cytoscape({
                     target: 'n1-1'
                 }
             }
-            /*{ data: { id: 'eb', source: 'e', target: 'b' } }*/
         ]
     },
 
@@ -252,3 +247,50 @@ var cy = (window.cy = cytoscape({
         padding: 50
     }
 }));
+*/
+var cy = cytoscape({
+
+    container: document.getElementById('cy'),
+
+    boxSelectionEnabled: false,
+    autounselectify: true,
+    maxZoom: 2,
+    minZoom: 0.5,
+
+    elements: {
+        nodes: [{
+            data: {
+                id: 'n',
+                label: 'Tap me',
+                faveShape: 'roundrectangle'
+            }
+        }, {
+            data: {
+                id: 'na',
+                label: 'Tap ma',
+                faveShape: 'roundrectangle',
+                parent: 'n'
+            }
+        }]
+    },
+
+    layout: {
+        name: 'grid',
+        padding: 100
+    },
+
+    ready: function() {
+        window.cy = this;
+    },
+
+    style: [{
+        selector: 'node',
+        css: {
+            content: 'data(label)',
+            shape: 'data(faveShape)',
+            'text-valign': 'top',
+            'text-halign': 'center',
+            width: 'label'
+        }
+    }]
+});

@@ -1,6 +1,36 @@
-#cy {
+#canvas {
     width: 800px;
     height: 500px;
     display: block;
-    border: 1px solid black;
+}
+
+.class {
+    background: #e5e5e5;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 4px 8px;
+    border-radius: 6px;
+    margin: 30px;
+}
+
+.group {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.method {
+    background: #f9bb43;
+    padding: 4px 8px;
+    border-radius: 6px;
 }

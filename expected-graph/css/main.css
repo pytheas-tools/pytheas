@@ -34,3 +34,10 @@
     padding: 4px 8px;
     border-radius: 6px;
 }
+
+.property {
+    background: #6fb4d3;
+    padding: 4px 8px;
+    border-radius: 6px;
+    margin: 3px 0;
+}

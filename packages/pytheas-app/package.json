@@ -1,0 +1,44 @@
+{
+    "name": "pytheas-app",
+    "version": "0.1.0",
+    "description": "Electron wrapper of Pytheas app",
+    "main": "main.js",
+    "config": {
+        "pytheasMacIcon": "dist-ui/assets/pytheas.icns",
+        "pytheasLinuxIcon": "dist-ui/assets/pytheas.png",
+        "pytheasWinIcon": "dist-ui/assets/pytheas.ico",
+        "releaseBuildsPath": "release-builds"
+    },
+    "scripts": {
+        "start": "electron .",
+        "start:dev": "PYTHEAS_ENV=DEV electron .",
+        "package:osx": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=$npm_package_config_pytheasMacIcon --prune=true --out=$npm_package_config_releaseBuildsPath",
+        "package:win": "electron-packager . ngKlingon --overwrite --asar=true --platform=win32 --arch=ia32 --icon=$npm_package_config_pytheasWinIcon --prune=true --out=$npm_package_config_releaseBuildsPath",
+        "package:linux": "electron-packager . ngKlingon --overwrite --asar=true --platform=linux --arch=x64 --icon=$npm_package_config_pytheasLinuxIcon --prune=true --out=$npm_package_config_releaseBuildsPath"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/vogloblinsky/pytheas.git"
+    },
+    "keywords": [
+        "pytheas",
+        "typescript",
+        "javascript",
+        "uml",
+        "es6"
+    ],
+    "author": "Vincent Ogloblinsky <vincent.ogloblinsky@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/vogloblinsky/pytheas/issues"
+    },
+    "homepage": "https://github.com/vogloblinsky/pytheas#readme",
+    "engines": {
+        "node": ">= 6 <= 8",
+        "npm": ">= 3"
+    },
+    "devDependencies": {
+        "electron": "^2.0.9",
+        "electron-packager": "^12.1.2"
+    }
+}

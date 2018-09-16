@@ -1,0 +1,14 @@
+::ng-deep {
+    .cm-s-mdn-like.CodeMirror {
+        background: none;
+    }
+    
+    .cm-s-mdn-like .CodeMirror-gutters {
+        border-left: none;
+        background-color: white;
+    }
+    
+    .CodeMirror {
+      height: auto;
+    }
+}

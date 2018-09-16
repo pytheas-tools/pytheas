@@ -1,19 +1,8 @@
 <split [direction]="'horizontal'" [gutterSize]="5">
   <split-area size="50">
-    <p>Graph zone</p>
+    <app-graph></app-graph>
   </split-area>
   <split-area size="50">
-    <ngx-codemirror [(ngModel)]="content" [options]="{
-    lineNumbers: true,
-    theme: 'mdn-like',
-    mode: 'javascript',
-    readOnly: true
-  }"></ngx-codemirror>
-    <ngx-codemirror [(ngModel)]="content2" [options]="{
-    lineNumbers: true,
-    theme: 'mdn-like',
-    mode: 'javascript',
-    readOnly: true
-  }"></ngx-codemirror>
+    <app-code></app-code>
   </split-area>
 </split>

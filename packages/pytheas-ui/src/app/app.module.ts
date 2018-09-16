@@ -2,16 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AngularSplitModule } from 'angular-split';
-import { CodemirrorModule } from '@ctrl/ngx-codemirror';
-
-import 'codemirror/mode/javascript/javascript';
 
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+
+import { CodeModule } from './windows/code/code.module';
+import { GraphModule } from './windows/graph/graph.module';
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [BrowserModule, AngularSplitModule, CodemirrorModule, FormsModule],
+    imports: [BrowserModule, AngularSplitModule, CodeModule, GraphModule],
     providers: [],
     bootstrap: [AppComponent]
 })

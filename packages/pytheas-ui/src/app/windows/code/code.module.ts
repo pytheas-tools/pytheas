@@ -1,15 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { CodemirrorModule } from '@ctrl/ngx-codemirror';
-import 'codemirror/mode/javascript/javascript';
-
 import { CodeComponent } from './code.component';
-import { FormsModule } from '@angular/forms';
+import { CodeBlockModule } from './code-block/code-block.module';
 
 @NgModule({
     declarations: [CodeComponent],
-    imports: [BrowserModule, CodemirrorModule, FormsModule],
+    imports: [BrowserModule, CodeBlockModule],
     providers: [],
     exports: [CodeComponent]
 })

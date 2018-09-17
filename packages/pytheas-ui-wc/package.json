@@ -10,6 +10,7 @@
         "minify-css": "npx uglifycss dist/styles/app.css --output dist/styles/app.css",
         "copy-assets-prod": "npx copyfiles -u 1 app/index.html dist/",
         "copy-assets": "npx copyfiles -u 1 app/index.html .tmp/",
+        "build-wc": "stencil build --config ./components/codeblock/stencil.config.js",
         "watch": "nodemon --watch app -e ts --exec \"npm run compile-ts\"",
         "prebuild": "npx rimraf dist",
         "build": "npm run copy-assets-prod && npm run compile-ts-prod && npm run minify-js && npm run compile-scss-prod && npm run minify-css",

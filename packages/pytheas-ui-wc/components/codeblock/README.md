@@ -1,6 +1,4 @@
-# Stencil Wev Component
-
-This is a starter project for building a standalone Web Component using Stencil.
+# Codeblock Web Component
 
 Stencil is also great for building entire apps. For that, use the [stencil-app-starter](https://github.com/ionic-team/stencil-app-starter) instead.
 

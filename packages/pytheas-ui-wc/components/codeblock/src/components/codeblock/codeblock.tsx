@@ -1,4 +1,8 @@
-import { Component, Prop } from '@stencil/core';
+import { Component, Prop, Element } from '@stencil/core';
+
+import CodeMirror from 'codemirror';
+
+import CodeMirrorJavaScript from 'codemirror/mode/javascript/javascript';
 
 @Component({
     tag: 'py-codeblock',
@@ -10,6 +14,27 @@ export class CodeBlock {
     code: string;
     @Prop()
     filename: string;
+
+    @Element()
+    el: HTMLElement;
+
+    componentWillLoad() {
+        console.log('CodeBlock is about to be rendered');
+        console.log(CodeMirror.version);
+    }
+
+    componentDidLoad() {
+        console.log(
+            'CodeBlock has been rendered: ',
+            this.el,
+            this.el.shadowRoot.querySelector('.code'),
+            this.code
+        );
+        CodeMirror.fromTextArea(this.el.shadowRoot.querySelector('.code'), {
+            value: this.code,
+            mode: 'javascript'
+        });
+    }
 
     render() {
         return (

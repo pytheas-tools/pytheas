@@ -1,3 +1,7 @@
-var t = 8;
+import { defineCustomElements } from '../components/codeblock';
+defineCustomElements(window);
 
-console.log(t);
+import Split from 'split.js';
+Split(['#three', '#four'], {
+    sizes: [50, 50]
+});

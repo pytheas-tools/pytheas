@@ -12,7 +12,7 @@ let mainWindow;
 function createWindow() {
     let url = isDev
         ? 'http://localhost:4200'
-        : `file://${__dirname}/dist-ui/pytheas-ui/index.html`;
+        : `file://${__dirname}/dist-ui/index.html`;
 
     mainWindow = new BrowserWindow({ width: 1024, height: 768 });
 

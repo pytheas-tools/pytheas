@@ -4,9 +4,11 @@
     "description": "Pytheas core",
     "scripts": {
         "start:ui": "cd packages/pytheas-ui/ && npm start",
-        "start:app": "cd packages/pytheas-app && npm run start:dev",
+        "start:app": "cd packages/pytheas-app && npm run start",
+        "start:app:dev": "cd packages/pytheas-app && npm run start:dev",
         "build:website": "cd packages/pytheas-website/ && npm run build",
         "build:app:ui": "cd packages/pytheas-ui/ && npm run build && cd - && cp -R ./packages/pytheas-ui/dist ./packages/pytheas-app/dist-ui",
+        "build:app:ui-wc": "cd packages/pytheas-ui-wc/ && npm run build && cd - && cp -R ./packages/pytheas-ui-wc/dist ./packages/pytheas-app/dist-ui",
         "package:app:osx": "npm run build:app:ui && cd ./packages/pytheas-app/ && npm run package:osx",
         "package:app:linux": "npm run build:app:ui && cd ./packages/pytheas-app/ && npm run package:linux",
         "package:app:win": "npm run build:app:ui && cd ./packages/pytheas-app/ && npm run package:win"

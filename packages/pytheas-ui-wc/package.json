@@ -11,12 +11,21 @@
         "copy-assets-prod": "npx copyfiles -u 1 app/index.html dist/",
         "copy-assets": "npx copyfiles -u 1 app/index.html .tmp/",
         "build-wc": "stencil build --config ./components/codeblock/stencil.config.ts",
-        "watch": "nodemon --watch app -e ts,html,scss --exec \"npm run build-wc && npm run compile-ts && npm run copy-assets && npm run compile-scss\"",
+        "watch": "npm-watch",
         "prebuild": "npx rimraf dist",
         "build": "npm run copy-assets-prod && npm run compile-ts-prod && npm run minify-js && npm run compile-scss-prod && npm run minify-css",
         "serve": "npx live-server .tmp --no-browser",
         "prestart": "npx rimraf .tmp",
         "start": "npm-run-all -p serve watch"
+    },
+    "watch": {
+        "build-wc": {
+            "patterns": ["components"],
+            "extensions": "tsx"
+        },
+        "compile-ts": "app/*.ts",
+        "copy-assets": "app/*.html",
+        "compile-scss": "app/*.scss"
     },
     "dependencies": {
         "@stencil/sass": "^0.1.0",
@@ -32,6 +41,7 @@
         "node-sass": "^4.9.3",
         "nodemon": "^1.18.4",
         "npm-run-all": "^4.1.3",
+        "npm-watch": "^0.4.0",
         "rimraf": "^2.6.2",
         "rollup": "^0.66.0",
         "rollup-plugin-babel": "^4.0.3",

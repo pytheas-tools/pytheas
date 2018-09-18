@@ -10,5 +10,6 @@ export const config: Config = {
             dir: 'codeblock'
         }
     ],
+    enableCache: false,
     plugins: [sass()]
 };

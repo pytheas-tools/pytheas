@@ -2,8 +2,11 @@ class Singleton {
     $element: HTMLElement;
 
     code = `function myScript(): string {
-        return 100;
-    }`;
+    return 100;
+}
+function myScript2(): string {
+    return 500;
+}`;
 
     codeMirrorOptions = {
         lineNumbers: true,

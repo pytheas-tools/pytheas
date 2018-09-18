@@ -2,19 +2,20 @@ import { Component, Prop } from '@stencil/core';
 
 @Component({
     tag: 'py-codeblock',
-    styleUrl: 'codeblock.css',
+    styleUrl: 'codeblock.scss',
     shadow: true
 })
 export class CodeBlock {
     @Prop()
-    first: string;
+    code: string;
     @Prop()
-    last: string;
+    filename: string;
 
     render() {
         return (
-            <div>
-                Hello, World! I'm {this.first} {this.last}
+            <div class="codeblock">
+                <div class="filename">{this.filename}</div>
+                <div class="code">{this.code}</div>
             </div>
         );
     }

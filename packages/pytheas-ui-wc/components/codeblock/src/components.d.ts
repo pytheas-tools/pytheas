@@ -12,12 +12,12 @@ import '@stencil/core';
 export namespace Components {
 
   interface PyCodeblock {
-    'first': string;
-    'last': string;
+    'code': string;
+    'filename': string;
   }
   interface PyCodeblockAttributes extends StencilHTMLAttributes {
-    'first'?: string;
-    'last'?: string;
+    'code'?: string;
+    'filename'?: string;
   }
 }
 

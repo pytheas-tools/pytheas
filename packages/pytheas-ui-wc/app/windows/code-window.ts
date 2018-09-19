@@ -27,10 +27,7 @@ function myScript2(): string {
     }
     init(element: HTMLElement) {
         this.$element = element;
-
         this.$element.setAttribute('code', this.code);
-
-        console.log(this.$element);
     }
 }
 

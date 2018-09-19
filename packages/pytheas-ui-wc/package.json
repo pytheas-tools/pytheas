@@ -18,7 +18,8 @@
         "build": "npm run copy-assets-prod && npm run compile-ts-prod && npm run minify-js && npm run compile-scss-prod && npm run minify-css",
         "serve": "npx live-server .tmp --no-browser",
         "prestart": "npx rimraf .tmp",
-        "start": "npm-run-all -p serve watch"
+        "start": "npm-run-all -p serve watch",
+        "test-wc": "jest"
     },
     "watch": {
         "build-wc": {
@@ -27,7 +28,12 @@
             ],
             "extensions": "tsx"
         },
-        "compile-ts": "app/*.ts",
+        "compile-ts": {
+            "patterns": [
+                "app"
+            ],
+            "extensions": "ts"
+        },
         "copy-assets": "app/*.html",
         "compile-scss": "app/*.scss"
     },
@@ -39,9 +45,11 @@
     "devDependencies": {
         "@babel/core": "^7.0.1",
         "@stencil/core": "^0.12.4",
+        "@types/jest": "^23.3.2",
         "babel-preset-es2015-rollup": "^3.0.0",
         "concat": "^1.0.3",
         "copyfiles": "^2.1.0",
+        "jest": "^23.6.0",
         "live-server": "^1.2.0",
         "node-sass": "^4.9.3",
         "nodemon": "^1.18.4",
@@ -57,5 +65,18 @@
         "typescript": "^3.0.3",
         "uglify-es": "^3.3.9",
         "uglifycss": "0.0.29"
+    },
+    "jest": {
+        "transform": {
+            "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
+        },
+        "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(tsx?|jsx?)$",
+        "moduleFileExtensions": [
+            "ts",
+            "tsx",
+            "js",
+            "json",
+            "jsx"
+        ]
     }
 }

@@ -5,12 +5,14 @@
         "compile-scss": "npx node-sass app/styles/app.scss .tmp/styles/app.css",
         "compile-scss-prod": "npx node-sass app/styles/app.scss dist/styles/app.css",
         "compile-ts": "npx rollup -c rollup-app_dev.config.js",
+        "postcompile-ts": "npm run concat-wc-codemirror",
         "compile-ts-prod": "npx rollup -c rollup-app_prod.config.js",
         "minify-js": "npx uglifyjs dist/scripts/app.js --output dist/scripts/app.js",
         "minify-css": "npx uglifycss dist/styles/app.css --output dist/styles/app.css",
         "copy-assets-prod": "npx copyfiles -u 1 app/index.html dist/",
         "copy-assets": "npx copyfiles -u 1 app/index.html .tmp/",
         "build-wc": "stencil build --config ./components/codeblock/stencil.config.ts",
+        "concat-wc-codemirror": "npx concat -o .tmp/scripts/app.js ./node_modules/codemirror/lib/codemirror.js ./node_modules/codemirror/mode/javascript/javascript.js ./node_modules/codemirror/addon/fold/foldcode.js ./node_modules/codemirror/addon/fold/foldgutter.js ./node_modules/codemirror/addon/fold/brace-fold.js .tmp/scripts/app.js",
         "watch": "npm-watch",
         "prebuild": "npx rimraf dist",
         "build": "npm run copy-assets-prod && npm run compile-ts-prod && npm run minify-js && npm run compile-scss-prod && npm run minify-css",
@@ -20,7 +22,9 @@
     },
     "watch": {
         "build-wc": {
-            "patterns": ["components"],
+            "patterns": [
+                "components"
+            ],
             "extensions": "tsx"
         },
         "compile-ts": "app/*.ts",
@@ -36,6 +40,7 @@
         "@babel/core": "^7.0.1",
         "@stencil/core": "^0.12.4",
         "babel-preset-es2015-rollup": "^3.0.0",
+        "concat": "^1.0.3",
         "copyfiles": "^2.1.0",
         "live-server": "^1.2.0",
         "node-sass": "^4.9.3",

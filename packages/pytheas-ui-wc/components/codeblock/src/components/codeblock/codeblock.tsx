@@ -1,10 +1,5 @@
 import { Component, Prop, Element } from '@stencil/core';
 
-import CodeMirror from 'codemirror';
-
-import CodeMirrorJavaScript from 'codemirror/mode/javascript/javascript';
-console.log(CodeMirrorJavaScript);
-
 @Component({
     tag: 'py-codeblock',
     styleUrl: 'codeblock.scss',
@@ -21,7 +16,7 @@ export class CodeBlock {
 
     componentWillLoad() {
         console.log('CodeBlock is about to be rendered..');
-        console.log(CodeMirror.version);
+        console.log(window['CodeMirror'].version);
     }
 
     componentDidLoad() {
@@ -31,11 +26,14 @@ export class CodeBlock {
             this.el.shadowRoot.querySelector('.code'),
             this.code
         );
-        CodeMirror(this.el.shadowRoot.querySelector('.code'), {
+        window['CodeMirror'](this.el.shadowRoot.querySelector('.code'), {
             value: this.code,
             mode: 'javascript',
             lineNumbers: true,
-            viewportMargin: Infinity
+            viewportMargin: Infinity,
+            lineWrapping: true,
+            foldGutter: true,
+            gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
         });
     }
 

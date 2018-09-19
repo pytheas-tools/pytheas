@@ -1,4 +1,4 @@
-class Singleton {
+class CodeWindow {
     $element: HTMLElement;
 
     code = `function myScript(): string {
@@ -17,13 +17,13 @@ function myScript2(): string {
         gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
     };
 
-    private static instance: Singleton;
+    private static instance: CodeWindow;
     private constructor() {}
     static getInstance() {
-        if (!Singleton.instance) {
-            Singleton.instance = new Singleton();
+        if (!CodeWindow.instance) {
+            CodeWindow.instance = new CodeWindow();
         }
-        return Singleton.instance;
+        return CodeWindow.instance;
     }
     init(element: HTMLElement) {
         this.$element = element;
@@ -31,4 +31,4 @@ function myScript2(): string {
     }
 }
 
-export default new Singleton();
+export default new CodeWindow();

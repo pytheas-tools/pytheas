@@ -34,11 +34,22 @@
             ],
             "extensions": "ts"
         },
-        "copy-assets": "app/*.html",
-        "compile-scss": "app/*.scss"
+        "copy-assets": {
+            "patterns": [
+                "app"
+            ],
+            "extensions": "html"
+        },
+        "compile-scss": {
+            "patterns": [
+                "app"
+            ],
+            "extensions": "scss"
+        }
     },
     "dependencies": {
         "@stencil/sass": "^0.1.0",
+        "@types/filesystem": "0.0.29",
         "codemirror": "^5.40.0",
         "split.js": "^1.3.5"
     },

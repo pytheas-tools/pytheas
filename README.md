@@ -32,6 +32,7 @@ The web interface should manage getting files for exploration in many different 
 -   a CLI as light as possible : pytheas src & boom web browser open with UI and parsed files
 
 https://www.html5rocks.com/en/tutorials/file/filesystem
+https://github.com/leonadler/drag-and-drop-across-browsers
 
 ## Technologies
 

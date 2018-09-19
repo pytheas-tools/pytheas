@@ -9,3 +9,7 @@ Split(['.graph-window', '.code-window'], {
 import CodeWindowManager from './windows/code-window';
 
 CodeWindowManager.init(document.getElementsByTagName('py-codeblock')[0]);
+
+import DropWindowManager from './windows/drop-window';
+
+DropWindowManager.init();

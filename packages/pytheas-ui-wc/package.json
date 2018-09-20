@@ -26,7 +26,7 @@
             "patterns": [
                 "components"
             ],
-            "extensions": "tsx"
+            "extensions": "tsx,scss"
         },
         "compile-ts": {
             "patterns": [

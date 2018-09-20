@@ -33,7 +33,10 @@ export class CodeBlock {
     render() {
         return (
             <div class="codeblock">
-                <div class="filename">{this.filename}</div>
+                <div class="filename">
+                    <div class="icon icon-file"></div>
+                    <span>{this.filename}</span>
+                </div>
                 <div class="code" />
             </div>
         );

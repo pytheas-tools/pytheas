@@ -49,3 +49,11 @@ https://github.com/leonadler/drag-and-drop-across-browsers
 -   codebase parsing : ts-simple-ast
 
 -   lerna for managing packages (https://lernajs.io/) ?
+
+## Alternatives
+
+https://scitools.com/feature-category/graphing/
+
+https://www.sourcetrail.com/documentation/#CodeView60
+
+http://stan4j.com/about/

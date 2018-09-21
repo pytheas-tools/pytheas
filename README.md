@@ -36,7 +36,7 @@ https://github.com/leonadler/drag-and-drop-across-browsers
 
 ## Technologies
 
--   UI with Angular ? + webcomponents ?
+-   UI with vanilla JS + webcomponents
 
 -   CSS with BEM methodology http://getbem.com/
 
@@ -48,7 +48,9 @@ https://github.com/leonadler/drag-and-drop-across-browsers
 
 -   codebase parsing : ts-simple-ast
 
--   lerna for managing packages (https://lernajs.io/) ?
+-   typescript + rollup + code splitting
+
+-   typescript AST generation inside web worker
 
 ## Alternatives
 

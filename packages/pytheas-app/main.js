@@ -1,32 +1,21 @@
 const electron = require('electron');
-const { app, BrowserWindow } = electron;
+const { app } = electron;
 
-const path = require('path');
-const url = require('url');
-const isDev = process.env.PYTHEAS_ENV === 'DEV';
+const menu = require('./menu');
+const window = require('./window');
+
+const APP_NAME = 'Pytheas';
+app.setName(APP_NAME);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
 function createWindow() {
-    let url = isDev
-        ? 'http://localhost:4200'
-        : `file://${__dirname}/dist-ui/index.html`;
+    console.log('Create window');
 
-    mainWindow = new BrowserWindow({ width: 1024, height: 768 });
-
-    mainWindow.loadURL(url);
-
-    if (isDev) {
-        mainWindow.webContents.openDevTools();
-    }
-
-    mainWindow.on('closed', function() {
-        mainWindow = null;
-    });
-
-    mainWindow.maximize();
+    window.init();
+    menu.init();
 }
 
 app.on('ready', createWindow);

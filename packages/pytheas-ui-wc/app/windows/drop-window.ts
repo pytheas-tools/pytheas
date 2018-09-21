@@ -26,8 +26,7 @@ class DropWindow {
             this.countFiles = 0;
             if (ev.dataTransfer && ev.dataTransfer.items) {
                 this.parseFiles(ev.dataTransfer.items);
-            }
-            else if (ev.dataTransfer && ev.dataTransfer.files) {
+            } else if (ev.dataTransfer && ev.dataTransfer.files) {
                 this.parseFiles(ev.dataTransfer.files);
             }
         });
@@ -37,6 +36,10 @@ class DropWindow {
         document.addEventListener('dragover', () => {
             event.preventDefault();
         });
+
+        window['scanfolder'] = files => {
+            console.log('call from electron wrapper: ', files);
+        };
     }
 
     private updateCounter(quantity) {
@@ -61,45 +64,44 @@ class DropWindow {
 
             if (file.isFile || file.isDirectory) {
                 entry = file;
-            }
-            else if (file.getAsEntry) {
+            } else if (file.getAsEntry) {
                 entry = file.getAsEntry();
-            }
-            else if (file.webkitGetAsEntry) {
+            } else if (file.webkitGetAsEntry) {
                 entry = file.webkitGetAsEntry();
-            }
-            else if (typeof file.getAsFile === 'function') {
+            } else if (typeof file.getAsFile === 'function') {
                 this.handleFile(file.getAsFile());
                 continue;
-            }
-            else if (File && file instanceof File) {
+            } else if (File && file instanceof File) {
                 this.handleFile(file);
                 continue;
-            }
-            else {
+            } else {
                 this.updateCounter(-1);
                 continue;
             }
 
             if (!entry) {
                 this.updateCounter(-1);
-            }
-            else if (entry.isFile) {
-                entry.file((file) => {
-                    this.handleFile(file);
-                }, (err) => {
-                    console.warn(err);
-                });
-            }
-            else if (entry.isDirectory) {
+            } else if (entry.isFile) {
+                entry.file(
+                    file => {
+                        this.handleFile(file);
+                    },
+                    err => {
+                        console.warn(err);
+                    }
+                );
+            } else if (entry.isDirectory) {
                 reader = entry.createReader();
 
-                reader.readEntries((entries) => {
-                    this.parseFiles(entries);
-                    this.updateCounter(-1);
-                }, (err) => {
-                    console.warn(err);
-                });
+                reader.readEntries(
+                    entries => {
+                        this.parseFiles(entries);
+                        this.updateCounter(-1);
+                    },
+                    err => {
+                        console.warn(err);
+                    }
+                );
             }
         }
     }

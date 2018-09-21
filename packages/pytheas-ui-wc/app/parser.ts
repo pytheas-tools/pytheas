@@ -13,8 +13,15 @@ class Parser {
     addFile(file: FileEntry) {
         this.files.push(file);
     }
+    addFiles(files: FileEntry[]) {
+        this.files = [...this.files, ...files];
+    }
     parseFiles() {
         console.log('parse files for their AST: ', this.files);
+    }
+
+    clearFiles() {
+        this.files = [];
     }
 }
 

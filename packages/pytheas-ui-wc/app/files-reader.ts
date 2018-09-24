@@ -25,11 +25,18 @@ class FilesReader {
         }
         return FilesReader.instance;
     }
+    /**
+     * Init reader, get reference in Electron of fs module
+     */
     init() {
         if (typeof require !== 'undefined') {
             this.electronReader = require('fs');
         }
     }
+    /**
+     * Read a list of files from browser drop
+     * @param files Array List of files
+     */
     readFilesFromBrowser(files: FileEntry[]) {
         let i = 0,
             len = files.length;
@@ -54,7 +61,12 @@ class FilesReader {
             loopFiles();
         });
     }
-    readFileFromBrowser(file: FileEntry) {
+    /**
+     * Read a file from browser drop using FileReader
+     * @param file FileEntry File to read
+     * @returns Promise
+     */
+    readFileFromBrowser(file: FileEntry): Promise {
         return new Promise((resolve, reject) => {
             this.browserReader.onload = e => {
                 const readedFile: ReadedFile = {
@@ -70,7 +82,12 @@ class FilesReader {
             this.browserReader.readAsText(file);
         });
     }
-    readFilesFromElectron(file: FileFromElectron) {}
+    /**
+     * Read a file from Electron using fs
+     * @param file FileEntry File to read
+     * @returns Promise
+     */
+    readFilesFromElectron(file: FileFromElectron): Promise {}
 }
 
 export default new FilesReader();

@@ -30,7 +30,7 @@ function getMenuTemplate() {
                                 if (!Array.isArray(selectedPaths)) return;
                                 window.dispatch(
                                     'folder-selected',
-                                    selectedPaths
+                                    selectedPaths[0]
                                 );
                             }
                         );

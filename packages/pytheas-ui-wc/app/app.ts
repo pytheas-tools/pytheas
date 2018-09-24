@@ -6,6 +6,7 @@ import CodeWindowManager from './windows/code-window';
 import DropWindowManager from './windows/drop-window';
 
 import FilesScanner from './files-scanner';
+import FilesReader from './files-reader';
 
 /**
  * Init CodeBlock web component
@@ -33,3 +34,8 @@ DropWindowManager.init();
  * Init files scanner
  */
 FilesScanner.init();
+
+/**
+ * Init files reader
+ */
+FilesReader.init();

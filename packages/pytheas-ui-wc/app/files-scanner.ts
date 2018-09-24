@@ -1,12 +1,10 @@
-import Parser from './parser';
-
-//import Walker from 'walker';
+import Parser from './files-parser';
+import { FileFromElectron } from './files-reader';
 
 let Walker;
 if (typeof require !== 'undefined') {
     Walker = require('walker');
 }
-console.log(Walker);
 
 /**
  * Managing files from drag'n'drop inside main window, or from electron folder selector
@@ -66,14 +64,12 @@ class FilesScanner {
     scanFilesFromElectron(path: string) {
         if (typeof require !== 'undefined') {
             Walker(path)
-                .on('file', (entry, stat) => {
-                    if (stat.size > 1024 * 1024) {
-                        this.scannedFiles.push({
-                            path: entry,
-                            size: stat.size,
-                            dir: false
-                        });
-                    }
+                .on('file', (file, stat) => {
+                    const fileFromElectron: FileFromElectron = {
+                        path: file,
+                        size: stat.size
+                    };
+                    this.scannedFiles.push(fileFromElectron);
                 })
                 .on('error', error => {
                     console.log(error);
@@ -85,11 +81,11 @@ class FilesScanner {
         }
     }
 
-    private updateCounter(quantity) {
+    private updateCounter(quantity: number) {
         this.countFiles += quantity;
     }
 
-    private handleFile(file) {
+    private handleFile(file: FileEntry) {
         this.scannedFiles.push(file);
 
         if (this.scannedFiles.length === this.countFiles) {
@@ -101,52 +97,70 @@ class FilesScanner {
     private parseFiles(files) {
         this.updateCounter(files.length);
 
-        for (var i = 0; i < files.length; i++) {
-            var file = files[i];
-            var entry, reader;
+        let i = 0,
+            len = files.length;
 
-            if (file.isFile || file.isDirectory) {
-                entry = file;
-            } else if (file.getAsEntry) {
-                entry = file.getAsEntry();
-            } else if (file.webkitGetAsEntry) {
-                entry = file.webkitGetAsEntry();
-            } else if (typeof file.getAsFile === 'function') {
-                this.handleFile(file.getAsFile());
-                continue;
-            } else if (File && file instanceof File) {
-                this.handleFile(file);
-                continue;
-            } else {
-                this.updateCounter(-1);
-                continue;
+        let loopFiles = () => {
+            if (i < len) {
+                let file = files[i];
+                let entry: FileSystemFileEntry, reader;
+
+                if (file.isFile || file.isDirectory) {
+                    entry = file;
+                } else if (file.getAsEntry) {
+                    entry = file.getAsEntry();
+                } else if (file.webkitGetAsEntry) {
+                    entry = file.webkitGetAsEntry();
+                } else if (typeof file.getAsFile === 'function') {
+                    this.handleFile(file.getAsFile());
+                    i++;
+                    loopFiles();
+                } else if (File && file instanceof File) {
+                    this.handleFile(file);
+                    i++;
+                    loopFiles();
+                } else {
+                    this.updateCounter(-1);
+                    i++;
+                    loopFiles();
+                }
+
+                if (!entry) {
+                    this.updateCounter(-1);
+                    i++;
+                    loopFiles();
+                } else if (entry.isFile) {
+                    entry.file(
+                        file => {
+                            let finalFile = Object.assign(file, {
+                                fullPath: entry.fullPath
+                            });
+                            this.handleFile(finalFile);
+                            i++;
+                            loopFiles();
+                        },
+                        err => {
+                            console.warn(err);
+                        }
+                    );
+                } else if (entry.isDirectory) {
+                    reader = entry.createReader();
+
+                    reader.readEntries(
+                        entries => {
+                            this.parseFiles(entries);
+                            this.updateCounter(-1);
+                            i++;
+                            loopFiles();
+                        },
+                        err => {
+                            console.warn(err);
+                        }
+                    );
+                }
             }
-
-            if (!entry) {
-                this.updateCounter(-1);
-            } else if (entry.isFile) {
-                entry.file(
-                    file => {
-                        this.handleFile(file);
-                    },
-                    err => {
-                        console.warn(err);
-                    }
-                );
-            } else if (entry.isDirectory) {
-                reader = entry.createReader();
-
-                reader.readEntries(
-                    entries => {
-                        this.parseFiles(entries);
-                        this.updateCounter(-1);
-                    },
-                    err => {
-                        console.warn(err);
-                    }
-                );
-            }
-        }
+        };
+        loopFiles();
     }
 }
 

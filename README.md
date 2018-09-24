@@ -59,3 +59,23 @@ https://scitools.com/feature-category/graphing/
 https://www.sourcetrail.com/documentation/#CodeView60
 
 http://stan4j.com/about/
+
+## Electron examples
+
+https://github.com/meetfranz/franz
+
+## Electron alternatives
+
+https://github.com/pojala/electrino
+
+## Online IDE for ideas
+
+https://github.com/styfle/awesome-online-ide
+
+## Ressources
+
+https://blog.dcpos.ch/how-to-make-your-electron-app-sexy
+
+https://github.com/kristianmandrup/wheel-of-fate
+
+https://github.com/sindresorhus/awesome-electron

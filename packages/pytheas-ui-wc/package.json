@@ -21,7 +21,8 @@
         "serve": "npx live-server .tmp --no-browser",
         "prestart": "npx rimraf .tmp",
         "start": "npm-run-all -p serve watch",
-        "test-wc": "jest"
+        "test-wc": "jest",
+        "doc": "npx typedoc --out doc --module commonjs --ignoreCompilerErrors app"
     },
     "watch": {
         "build-wc": {
@@ -76,6 +77,7 @@
         "rollup-plugin-node-resolve": "^3.4.0",
         "rollup-plugin-typescript": "^1.0.0",
         "tslib": "^1.9.3",
+        "typedoc": "^0.12.0",
         "typescript": "^3.0.3",
         "uglify-es": "^3.3.9",
         "uglifycss": "0.0.29"

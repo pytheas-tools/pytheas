@@ -5,6 +5,7 @@
     "scripts": {
         "start:ui": "cd packages/pytheas-ui/ && npm start",
         "start:app": "cd packages/pytheas-app && npm run start",
+        "prestart:app:dev": "rm -rf packages/pytheas-app/dist-ui/node_modules && mkdir packages/pytheas-app/dist-ui/node_modules && cp -R packages/pytheas-app/node_modules/walker packages/pytheas-app/dist-ui/node_modules",
         "start:app:dev": "cd packages/pytheas-app && npm run start:dev",
         "build:website": "cd packages/pytheas-website/ && npm run build",
         "build:app:ui": "cd packages/pytheas-ui/ && npm run build && cd - && cp -R ./packages/pytheas-ui/dist ./packages/pytheas-app/dist-ui",

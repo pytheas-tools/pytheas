@@ -6,8 +6,6 @@ const { Menu, dialog } = require('electron');
 
 const window = require('./window');
 
-console.log(window);
-
 let menu = null;
 
 function init() {
@@ -17,7 +15,7 @@ function init() {
 
 function getMenuTemplate() {
     const template = [
-        /*{
+        {
             label: 'Project',
             submenu: [
                 {
@@ -30,14 +28,16 @@ function getMenuTemplate() {
                             },
                             selectedPaths => {
                                 if (!Array.isArray(selectedPaths)) return;
-                                console.log(selectedPaths);
-                                window.dispatch('scanfolder', selectedPaths);
+                                window.dispatch(
+                                    'folder-selected',
+                                    selectedPaths
+                                );
                             }
                         );
                     }
                 }
             ]
-        }*/
+        }
     ];
 
     if (process.platform === 'darwin') {

@@ -33,7 +33,7 @@ function init() {
 }
 
 function dispatch(...args) {
-    send('dispatch', ...args);
+    send(...args);
 }
 
 function send(...args) {

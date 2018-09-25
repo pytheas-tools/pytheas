@@ -23,7 +23,7 @@ Split(['.graph-window', '.code-window'], {
 /**
  * Init right code window
  */
-CodeWindowManager.init(document.getElementsByTagName('py-codeblock')[0]);
+CodeWindowManager.init(document.querySelector('.code-window'));
 
 /**
  * Init drop window

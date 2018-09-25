@@ -1,5 +1,8 @@
 import FilesReader, { ReadedFile, FileFromElectron } from './files-reader';
 
+import { pubsub } from './utils/pubsub';
+import { EVENTS } from './events';
+
 /**
  * Parse file for their AST using ts-simpe-ast
  */
@@ -57,6 +60,11 @@ class FilesParser {
         });
         const sourceFiles = project.getSourceFiles();
         console.log(sourceFiles);
+        pubsub.publish(EVENTS.FILES_PARSED);
+    }
+
+    getReadedFiles() {
+        return this.readedFiles;
     }
 
     clearFiles() {

@@ -1,21 +1,10 @@
+import { pubsub } from '../utils/pubsub';
+import { EVENTS } from '../events';
+
+import Parser from '../files-parser';
+
 class CodeWindow {
     $element: HTMLElement;
-
-    code = `function myScript(): string {
-    return 100;
-}
-function myScript2(): string {
-    return 500;
-}`;
-
-    codeMirrorOptions = {
-        lineNumbers: true,
-        theme: 'mdn-like',
-        mode: 'javascript',
-        readOnly: true,
-        foldGutter: true,
-        gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
-    };
 
     private static instance: CodeWindow;
     private constructor() {}
@@ -27,7 +16,22 @@ function myScript2(): string {
     }
     init(element: HTMLElement) {
         this.$element = element;
-        this.$element.setAttribute('code', this.code);
+        pubsub.subscribe(EVENTS.FILES_PARSED, () => {
+            this.clearWindow();
+            const files = Parser.getReadedFiles();
+            files.forEach(file => {
+                let $codeBlock = document.createElement('py-codeblock');
+                $codeBlock.setAttribute('filename', file.name);
+                $codeBlock.setAttribute('code', file.sourcecode);
+                this.$element.appendChild($codeBlock);
+            });
+        });
+    }
+
+    clearWindow() {
+        while (this.$element.firstChild) {
+            this.$element.firstChild.remove();
+        }
     }
 }
 

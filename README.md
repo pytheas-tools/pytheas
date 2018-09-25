@@ -79,3 +79,5 @@ https://blog.dcpos.ch/how-to-make-your-electron-app-sexy
 https://github.com/kristianmandrup/wheel-of-fate
 
 https://github.com/sindresorhus/awesome-electron
+
+https://github.com/cancerberoSgx/typescript-in-the-browser

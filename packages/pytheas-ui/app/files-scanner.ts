@@ -159,4 +159,4 @@ class FilesScanner {
     }
 }
 
-export default new FilesScanner();
+export default FilesScanner.getInstance();

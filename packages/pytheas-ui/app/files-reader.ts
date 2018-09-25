@@ -135,4 +135,4 @@ class FilesReader {
     }
 }
 
-export default new FilesReader();
+export default FilesReader.getInstance();

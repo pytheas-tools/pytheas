@@ -46,4 +46,4 @@ class FilesParser {
     }
 }
 
-export default new FilesParser();
+export default FilesParser.getInstance();

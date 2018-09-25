@@ -31,4 +31,4 @@ function myScript2(): string {
     }
 }
 
-export default new CodeWindow();
+export default CodeWindow.getInstance();

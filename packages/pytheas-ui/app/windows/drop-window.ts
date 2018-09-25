@@ -29,4 +29,4 @@ class DropWindow {
     }
 }
 
-export default new DropWindow();
+export default DropWindow.getInstance();

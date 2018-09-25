@@ -4,7 +4,8 @@ import FilesReader, { ReadedFile, FileFromElectron } from './files-reader';
  * Parse file for their AST using ts-simpe-ast
  */
 class FilesParser {
-    files: any[] = [];
+    rawFiles: any[] = [];
+    readedFiles: ReadedFile[] = [];
 
     private static instance: FilesParser;
     private constructor() {}
@@ -16,16 +17,18 @@ class FilesParser {
     }
     init() {}
     addFile(file: FileEntry) {
-        this.files.push(file);
+        this.rawFiles.push(file);
     }
     addFiles(files: FileEntry[]) {
-        this.files = [...this.files, ...files];
+        this.rawFiles = [...this.rawFiles, ...files];
     }
     parseBrowserFiles() {
-        console.log('files from browser listed: ', this.files);
-        FilesReader.readFilesFromBrowser(this.files).then(
+        console.log('files from browser listed: ', this.rawFiles);
+        FilesReader.readFilesFromBrowser(this.rawFiles).then(
             readedFiles => {
+                this.readedFiles = readedFiles;
                 console.log('files readed, start ast parsing: ', readedFiles);
+                this.parseFiles();
             },
             e => {
                 console.error(e);
@@ -33,10 +36,12 @@ class FilesParser {
         );
     }
     parseElectronFiles() {
-        console.log('files from electron listed: ', this.files);
-        FilesReader.readFilesFromElectron(this.files).then(
+        console.log('files from electron listed: ', this.rawFiles);
+        FilesReader.readFilesFromElectron(this.rawFiles).then(
             (readedFiles: ReadedFile[]) => {
+                this.readedFiles = readedFiles;
                 console.log('files readed, start ast parsing: ', readedFiles);
+                this.parseFiles();
             },
             e => {
                 console.error(e);
@@ -44,8 +49,18 @@ class FilesParser {
         );
     }
 
+    parseFiles() {
+        console.log('Parse files');
+        const project = new window['tsSimpleAst']['default']({ useVirtualFileSystem: true });
+        this.readedFiles.forEach(file => {
+            project.createSourceFile(file.path, file.sourcecode);
+        });
+        const sourceFiles = project.getSourceFiles();
+        console.log(sourceFiles);
+    }
+
     clearFiles() {
-        this.files = [];
+        this.rawFiles = [];
     }
 }
 

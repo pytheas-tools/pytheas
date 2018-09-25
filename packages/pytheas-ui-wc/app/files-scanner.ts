@@ -32,6 +32,7 @@ class FilesScanner {
             const ipc = require('electron').ipcRenderer;
             ipc.on('folder-selected', (event, path) => {
                 console.log('folder-selected from electron wrapper: ', path);
+                Parser.clearFiles();
                 this.clearInternals();
                 this.scanFilesFromElectron(path);
             });
@@ -76,7 +77,7 @@ class FilesScanner {
                 })
                 .on('end', () => {
                     Parser.addFiles(this.scannedFiles);
-                    Parser.parseFiles();
+                    Parser.parseElectronFiles();
                 });
         }
     }
@@ -90,7 +91,7 @@ class FilesScanner {
 
         if (this.scannedFiles.length === this.countFiles) {
             Parser.addFiles(this.scannedFiles);
-            Parser.parseFiles();
+            Parser.parseBrowserFiles();
         }
     }
 

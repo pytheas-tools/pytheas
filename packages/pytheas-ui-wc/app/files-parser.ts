@@ -21,8 +21,8 @@ class FilesParser {
     addFiles(files: FileEntry[]) {
         this.files = [...this.files, ...files];
     }
-    parseFiles() {
-        console.log('files listed: ', this.files);
+    parseBrowserFiles() {
+        console.log('files from browser listed: ', this.files);
         FilesReader.readFilesFromBrowser(this.files).then(
             readedFiles => {
                 console.log('files readed, start ast parsing: ', readedFiles);
@@ -31,6 +31,14 @@ class FilesParser {
                 console.error(e);
             }
         );
+    }
+    parseElectronFiles() {
+        console.log('files from electron listed: ', this.files);
+        FilesReader.readFilesFromElectron(this.files).then(readedFiles => {
+                console.log('files readed, start ast parsing: ', readedFiles);
+            }, e => {
+                console.error(e);
+            });
     }
 
     clearFiles() {

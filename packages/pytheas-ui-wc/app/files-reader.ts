@@ -83,11 +83,56 @@ class FilesReader {
         });
     }
     /**
+     * Read a list of files from Electron using fs
+     * @param files Array List of files
+     * @returns Promise
+     */
+    readFilesFromElectron(files: FileFromElectron[]): Promise {
+        let i = 0,
+            len = files.length;
+        const readedFiles = [];
+        return new Promise((resolve, reject) => {
+            const loopFiles = () => {
+                let fileToRead = files[i];
+                if (i < len) {
+                    this.readFileFromElectron(fileToRead)
+                        .then(readedFile => {
+                            readedFiles.push(readedFile);
+                            i++;
+                            loopFiles();
+                        })
+                        .catch(e => {
+                            reject(e);
+                        });
+                } else {
+                    resolve(readedFiles);
+                }
+            };
+            loopFiles();
+        });
+    }
+
+    /**
      * Read a file from Electron using fs
      * @param file FileEntry File to read
      * @returns Promise
      */
-    readFilesFromElectron(file: FileFromElectron): Promise {}
+    readFileFromElectron(file: FileFromElectron): Promise {
+        return new Promise((resolve, reject) => {
+            this.electronReader.readFile(file.path, 'utf8', function(
+                err: string,
+                contents: string
+            ) {
+                if (err) {
+                    reject(err);
+                }
+                const path = require('path');
+
+                const readedFile: ReadedFile = { path: file.path, name: path.basename(file.path), sourcecode: contents };
+                resolve(readedFile);
+            });
+        });
+    }
 }
 
 export default new FilesReader();

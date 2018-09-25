@@ -22,7 +22,8 @@
         "prestart": "npx rimraf .tmp",
         "start": "npm-run-all -p serve watch",
         "test-wc": "jest",
-        "doc": "npx typedoc --out doc --module commonjs --ignoreCompilerErrors app"
+        "doc": "npx typedoc --out doc --module commonjs --ignoreCompilerErrors app",
+        "madge": "npx madge --warning -i doc/dependency-graph.png app/**/*.ts"
     },
     "watch": {
         "build-wc": {
@@ -67,6 +68,7 @@
         "filesize-cli": "0.0.3",
         "jest": "^23.6.0",
         "live-server": "^1.2.0",
+        "madge": "^3.2.0",
         "node-sass": "^4.9.3",
         "nodemon": "^1.18.4",
         "npm-run-all": "^4.1.3",

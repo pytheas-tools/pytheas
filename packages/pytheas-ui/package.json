@@ -23,7 +23,8 @@
         "start": "npm-run-all -p serve watch",
         "test-wc": "jest",
         "doc": "npx typedoc --out doc --module commonjs --ignoreCompilerErrors app",
-        "madge": "npx madge --warning -i doc/dependency-graph.png app/**/*.ts"
+        "madge": "npx madge --warning -i doc/dependency-graph.png app/**/*.ts",
+        "lint": "npx tslint -p tsconfig.json -c tslint.json"
     },
     "watch": {
         "build-wc": {
@@ -80,6 +81,7 @@
         "rollup-plugin-node-resolve": "^3.4.0",
         "rollup-plugin-typescript": "^1.0.0",
         "tslib": "^1.9.3",
+        "tslint": "^5.11.0",
         "typedoc": "^0.12.0",
         "typescript": "^3.0.3",
         "uglify-es": "^3.3.9",

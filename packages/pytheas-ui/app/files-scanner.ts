@@ -98,12 +98,12 @@ class FilesScanner {
     private parseFiles(files) {
         this.updateCounter(files.length);
 
-        let i = 0,
-            len = files.length;
+        let i = 0;
+        const len = files.length;
 
-        let loopFiles = () => {
+        const loopFiles = () => {
             if (i < len) {
-                let file = files[i];
+                const file = files[i];
                 let entry: FileSystemFileEntry, reader;
 
                 if (file.isFile || file.isDirectory) {
@@ -131,33 +131,27 @@ class FilesScanner {
                     i++;
                     loopFiles();
                 } else if (entry.isFile) {
-                    entry.file(
-                        file => {
-                            let finalFile = Object.assign(file, {
+                    entry.file(fileEntry => {
+                            const finalFile = Object.assign(fileEntry, {
                                 fullPath: entry.fullPath
                             });
                             this.handleFile(finalFile);
                             i++;
                             loopFiles();
-                        },
-                        err => {
+                        }, err => {
                             console.warn(err);
-                        }
-                    );
+                        });
                 } else if (entry.isDirectory) {
                     reader = entry.createReader();
 
-                    reader.readEntries(
-                        entries => {
+                    reader.readEntries(entries => {
                             this.parseFiles(entries);
                             this.updateCounter(-1);
                             i++;
                             loopFiles();
-                        },
-                        err => {
+                        }, err => {
                             console.warn(err);
-                        }
-                    );
+                        });
                 }
             }
         };

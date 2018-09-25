@@ -38,12 +38,12 @@ class FilesReader {
      * @param files Array List of files
      */
     readFilesFromBrowser(files: FileEntry[]) {
-        let i = 0,
-            len = files.length;
-        const readedFiles = [];
+        let i = 0;
+        const len = files.length,
+              readedFiles = [];
         return new Promise((resolve, reject) => {
             const loopFiles = () => {
-                let fileToRead = files[i];
+                const fileToRead = files[i];
                 if (i < len) {
                     this.readFileFromBrowser(fileToRead)
                         .then(readedFile => {
@@ -88,12 +88,12 @@ class FilesReader {
      * @returns Promise
      */
     readFilesFromElectron(files: FileFromElectron[]): Promise {
-        let i = 0,
-            len = files.length;
-        const readedFiles = [];
+        let i = 0;
+        const len = files.length,
+            readedFiles = [];
         return new Promise((resolve, reject) => {
             const loopFiles = () => {
-                let fileToRead = files[i];
+                const fileToRead = files[i];
                 if (i < len) {
                     this.readFileFromElectron(fileToRead)
                         .then(readedFile => {
@@ -119,10 +119,10 @@ class FilesReader {
      */
     readFileFromElectron(file: FileFromElectron): Promise {
         return new Promise((resolve, reject) => {
-            this.electronReader.readFile(file.path, 'utf8', function(
+            this.electronReader.readFile(file.path, 'utf8', (
                 err: string,
                 contents: string
-            ) {
+            ) => {
                 if (err) {
                     reject(err);
                 }

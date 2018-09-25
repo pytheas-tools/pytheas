@@ -9,7 +9,7 @@ export default {
         file: './dist/scripts/app.js',
         format: 'cjs',
         name: 'App',
-        sourcemap: true
+        sourcemap: false
     },
     context: 'window',
     plugins: [

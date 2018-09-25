@@ -7,9 +7,13 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": true,
-        "typeRoots": ["../node_modules/@types"],
-        "types": ["node"],
-        "lib": ["dom", "es2015"]
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "lib": [
+            "dom",
+            "es2015"
+        ]
     },
     "atom": {
         "rewriteTsconfig": false

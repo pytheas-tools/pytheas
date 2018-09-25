@@ -1,10 +1,10 @@
-import FilesReader from './files-reader';
+import FilesReader, { ReadedFile, FileFromElectron } from './files-reader';
 
 /**
  * Parse file for their AST using ts-simpe-ast
  */
 class FilesParser {
-    files: FileEntry[] = [];
+    files: any[] = [];
 
     private static instance: FilesParser;
     private constructor() {}
@@ -34,11 +34,14 @@ class FilesParser {
     }
     parseElectronFiles() {
         console.log('files from electron listed: ', this.files);
-        FilesReader.readFilesFromElectron(this.files).then(readedFiles => {
+        FilesReader.readFilesFromElectron(this.files).then(
+            (readedFiles: ReadedFile[]) => {
                 console.log('files readed, start ast parsing: ', readedFiles);
-            }, e => {
+            },
+            e => {
                 console.error(e);
-            });
+            }
+        );
     }
 
     clearFiles() {

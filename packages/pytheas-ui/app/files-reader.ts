@@ -16,7 +16,7 @@ export interface ReadedFile {
  */
 class FilesReader {
     browserReader = new FileReader();
-    electronReader;
+    electronReader: any;
     private static instance: FilesReader;
     private constructor() {}
     static getInstance() {
@@ -37,10 +37,10 @@ class FilesReader {
      * Read a list of files from browser drop
      * @param files Array List of files
      */
-    readFilesFromBrowser(files: FileEntry[]) {
+    readFilesFromBrowser(files: FileEntry[]): Promise<ReadedFile[]> {
         let i = 0;
         const len = files.length,
-              readedFiles = [];
+            readedFiles: ReadedFile[] = [];
         return new Promise((resolve, reject) => {
             const loopFiles = () => {
                 const fileToRead = files[i];
@@ -66,7 +66,7 @@ class FilesReader {
      * @param file FileEntry File to read
      * @returns Promise
      */
-    readFileFromBrowser(file: FileEntry): Promise {
+    readFileFromBrowser(file: any): Promise<ReadedFile> {
         return new Promise((resolve, reject) => {
             this.browserReader.onload = e => {
                 const readedFile: ReadedFile = {
@@ -87,10 +87,10 @@ class FilesReader {
      * @param files Array List of files
      * @returns Promise
      */
-    readFilesFromElectron(files: FileFromElectron[]): Promise {
+    readFilesFromElectron(files: FileFromElectron[]): Promise<ReadedFile[]> {
         let i = 0;
         const len = files.length,
-            readedFiles = [];
+            readedFiles: ReadedFile[] = [];
         return new Promise((resolve, reject) => {
             const loopFiles = () => {
                 const fileToRead = files[i];
@@ -117,12 +117,9 @@ class FilesReader {
      * @param file FileEntry File to read
      * @returns Promise
      */
-    readFileFromElectron(file: FileFromElectron): Promise {
+    readFileFromElectron(file: FileFromElectron): Promise<ReadedFile> {
         return new Promise((resolve, reject) => {
-            this.electronReader.readFile(file.path, 'utf8', (
-                err: string,
-                contents: string
-            ) => {
+            this.electronReader.readFile(file.path, 'utf8', (err: string, contents: string) => {
                 if (err) {
                     reject(err);
                 }

@@ -13,9 +13,7 @@ export default {
     },
     context: 'window',
     plugins: [
-        rollupTypescript({
-            typescript: require('typescript')
-        }),
+        rollupTypescript(),
         nodeResolve({
             jsnext: true,
             main: true

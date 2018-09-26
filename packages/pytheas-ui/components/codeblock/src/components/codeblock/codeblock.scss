@@ -1,0 +1,32 @@
+@import "../../../../../node_modules/codemirror/lib/codemirror";
+@import "../../../../../node_modules/codemirror/addon/fold/foldgutter";
+
+
+:host {
+    .codeblock {
+        border: 1px solid #d0d0d0;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .filename {
+        background: #d0d0d0;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding: 5px 10px;
+    }
+
+    .CodeMirror {
+        height: auto;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    .icon-file {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iICAgICB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIiAgICAgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIiAgICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgICAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgICAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIgICAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIiAgICAgdmVyc2lvbj0iMS4xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDgwIDEwMCI+ICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMCwtOTUyLjM2MjE4KSI+PHBhdGggZD0ibSAxNyw5NjAuMzYyMTUgMCwzIDAsNzguMDAwMDUgMCwzIDMsMCA2MCwwIDMsMCAwLC0zIGMgMCwtMjEuMDgzNCAwLC0zOC4xNjY3IDAsLTU5LjI1MDA4IC03LjcwMzEsLTcuNzAzMDQgLTE1LjAzMTEsLTE1LjAzMTA4IC0yMS43NSwtMjEuNzQ5OTcgLTEzLjc1LDAgLTI3LjUsMCAtNDEuMjUsMCB6IG0gNiw2IDM0LDAgMCwxNi45OTk5NyAwLDMgMywwIDE3LDAgMCw1Mi4wMDAwOCAtNTQsMCB6IG0gNDAsNC4yMTg3NSA5Ljc4MTIsOS43ODEyNSAtOS43ODEyLDAgeiIgc3R5bGU9InRleHQtaW5kZW50OjA7dGV4dC10cmFuc2Zvcm06bm9uZTtkaXJlY3Rpb246bHRyO2Jsb2NrLXByb2dyZXNzaW9uOnRiO2Jhc2VsaW5lLXNoaWZ0OmJhc2VsaW5lO2NvbG9yOiMwMDAwMDA7ZW5hYmxlLWJhY2tncm91bmQ6YWNjdW11bGF0ZTsiIGZpbGw9IiMwMDAwMDAiIGZpbGwtb3BhY2l0eT0iMSIgZmlsbC1ydWxlPSJub256ZXJvIiBzdHJva2U9Im5vbmUiIG1hcmtlcj0ibm9uZSIgdmlzaWJpbGl0eT0idmlzaWJsZSIgZGlzcGxheT0iaW5saW5lIiBvdmVyZmxvdz0idmlzaWJsZSIvPjwvZz48L3N2Zz4=);
+        width: 13px;
+        height: 15px;
+        display: inline-block;
+        margin: 0px 4px 0 0;
+    }
+}

@@ -1,0 +1,15 @@
+os:
+  - linux
+language: node_js
+node_js:
+  - "10"
+install:
+    - npm install npm@latest -g
+    - cd packages/pytheas-ui
+    - npm ci
+script:
+    - npm run test
+    - npm run test-wc
+branches:
+  only:
+    - develop

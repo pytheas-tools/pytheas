@@ -4,6 +4,7 @@ import { sass } from '@stencil/sass';
 
 export const config: Config = {
     namespace: 'pytheas',
+    minifyJs: false,
     outputTargets: [
         {
             type: 'dist'

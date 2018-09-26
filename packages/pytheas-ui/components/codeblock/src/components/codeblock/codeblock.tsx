@@ -15,10 +15,11 @@ export class CodeBlock {
     el: HTMLElement;
 
     componentWillLoad() {
-        //console.log('CodeBlock is about to be rendered..');
+        console.log('CodeBlock is about to be rendered..');
     }
 
     componentDidLoad() {
+        console.log('CodeBlock is rendered..');
         window['CodeMirror'](this.el.shadowRoot.querySelector('.code'), {
             value: this.code,
             mode: 'javascript',
@@ -31,6 +32,7 @@ export class CodeBlock {
     }
 
     render() {
+        console.log('CodeBlock rendering..');
         return (
             <div class="codeblock">
                 <div class="filename">

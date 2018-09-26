@@ -18,7 +18,7 @@ class CodeWindow {
         this.$element = element;
         pubsub.subscribe(EVENTS.FILES_PARSED, () => {
             this.clearWindow();
-            const files = Parser.getReadedFiles();
+            const files = Parser.getParsedFiles();
             files.forEach(file => {
                 let $codeBlock = document.createElement('py-codeblock');
                 $codeBlock.setAttribute('filename', file.name);

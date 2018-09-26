@@ -1,14 +1,8 @@
-import Parser from './files-parser';
 import { FileFromElectron } from './files-reader';
-import { EventEmitter } from 'events';
 
 let Walker: any;
 if (typeof require !== 'undefined') {
     Walker = require('walker');
-}
-
-interface ElectronEvent {
-    sender: EventEmitter
 }
 
 /**
@@ -20,6 +14,10 @@ class FilesScanner {
     countFiles = 0;
     scannedFiles: any = [];
 
+    scanPromise: Promise;
+    scanResolve: any;
+    scanReject: any;
+
     private static instance: FilesScanner;
     private constructor() {}
     static getInstance() {
@@ -29,20 +27,7 @@ class FilesScanner {
         return FilesScanner.instance;
     }
 
-    /**
-     * Start listening if available from electron wrapper which
-     */
-    init() {
-        if (typeof require !== 'undefined') {
-            const ipc = require('electron').ipcRenderer;
-            ipc.on('folder-selected', (event: ElectronEvent, path: string) => {
-                console.log('folder-selected from electron wrapper: ', event, path);
-                Parser.clearFiles();
-                this.clearInternals();
-                this.scanFilesFromElectron(path);
-            });
-        }
-    }
+    init() {}
 
     clearInternals() {
         this.scannedFiles = [];
@@ -54,13 +39,17 @@ class FilesScanner {
      * @param ev DragEvent Event from browser
      */
     scanFilesFromBrowser(ev: DragEvent) {
-        Parser.clearFiles();
-        this.clearInternals();
-        if (ev.dataTransfer && ev.dataTransfer.items) {
-            this.parseFiles(ev.dataTransfer.items);
-        } else if (ev.dataTransfer && ev.dataTransfer.files) {
-            this.parseFiles(ev.dataTransfer.files);
-        }
+        this.scanPromise = new Promise((resolve, reject) => {
+            this.scanResolve = resolve;
+            this.scanReject = reject;
+            this.clearInternals();
+            if (ev.dataTransfer && ev.dataTransfer.items) {
+                this.parseFiles(ev.dataTransfer.items);
+            } else if (ev.dataTransfer && ev.dataTransfer.files) {
+                this.parseFiles(ev.dataTransfer.files);
+            }
+        });
+        return this.scanPromise;
     }
 
     /**
@@ -68,23 +57,26 @@ class FilesScanner {
      * @param path string Folder path from electron
      */
     scanFilesFromElectron(path: string) {
-        if (typeof require !== 'undefined') {
-            Walker(path)
-                .on('file', (file: any, stat: any) => {
-                    const fileFromElectron: FileFromElectron = {
-                        path: file,
-                        size: stat.size
-                    };
-                    this.scannedFiles.push(fileFromElectron);
-                })
-                .on('error', (error: string) => {
-                    console.log(error);
-                })
-                .on('end', () => {
-                    Parser.addFiles(this.scannedFiles);
-                    Parser.parseElectronFiles();
-                });
-        }
+        this.scanPromise = new Promise((resolve, reject) => {
+            this.scanResolve = resolve;
+            this.scanReject = reject;
+            if (typeof require !== 'undefined') {
+                this.clearInternals();
+                Walker(path)
+                    .on('file', (file: any, stat: any) => {
+                        const fileFromElectron: FileFromElectron = { path: file, size: stat.size };
+                        this.scannedFiles.push(fileFromElectron);
+                    })
+                    .on('error', (error: string) => {
+                        console.log(error);
+                        this.scanReject(error);
+                    })
+                    .on('end', () => {
+                        this.scanResolve(this.scannedFiles);
+                    });
+            }
+        });
+        return this.scanPromise;
     }
 
     private updateCounter(quantity: number) {
@@ -95,8 +87,7 @@ class FilesScanner {
         this.scannedFiles.push(file);
 
         if (this.scannedFiles.length === this.countFiles) {
-            Parser.addFiles(this.scannedFiles);
-            Parser.parseBrowserFiles();
+            this.scanResolve(this.scannedFiles);
         }
     }
 

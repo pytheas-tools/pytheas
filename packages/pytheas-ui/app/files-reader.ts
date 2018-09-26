@@ -66,7 +66,7 @@ class FilesReader {
      * @param file FileEntry File to read
      * @returns Promise
      */
-    readFileFromBrowser(file: any): Promise<ReadedFile> {
+    private readFileFromBrowser(file: any): Promise<ReadedFile> {
         return new Promise((resolve, reject) => {
             this.browserReader.onload = e => {
                 const readedFile: ReadedFile = {
@@ -117,7 +117,7 @@ class FilesReader {
      * @param file FileEntry File to read
      * @returns Promise
      */
-    readFileFromElectron(file: FileFromElectron): Promise<ReadedFile> {
+    private readFileFromElectron(file: FileFromElectron): Promise<ReadedFile> {
         return new Promise((resolve, reject) => {
             this.electronReader.readFile(file.path, 'utf8', (err: string, contents: string) => {
                 if (err) {

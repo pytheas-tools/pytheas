@@ -24,7 +24,9 @@ class FilesParser {
 
         this.parsedFiles = files;
 
-        const project = new window['tsSimpleAst']['default']({ useVirtualFileSystem: true });
+        const { tsSimpleAst } = <any>window;
+
+        const project = new tsSimpleAst['default']({ useVirtualFileSystem: true });
 
         return new Promise((resolve, reject) => {
             files.forEach(file => {

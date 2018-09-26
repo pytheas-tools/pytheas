@@ -14,7 +14,7 @@ class FilesScanner {
     countFiles = 0;
     scannedFiles: any = [];
 
-    scanPromise: Promise;
+    scanPromise: any;
     scanResolve: any;
     scanReject: any;
 

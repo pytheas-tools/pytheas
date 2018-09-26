@@ -65,6 +65,9 @@
         ],
         "no-string-literal": [
             false
+        ],
+        "no-angle-bracket-type-assertion": [
+            false
         ]
     },
     "rulesDirectory": []

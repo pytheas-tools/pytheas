@@ -23,18 +23,13 @@
         "serve": "npx live-server .tmp --no-browser",
         "prestart": "npx rimraf .tmp",
         "start": "npm-run-all -p serve watch",
-        "test-wc": "jest",
+        "test": "jest --config jest.config.js --coverage",
+        "test-wc": "jest --config jest.wc.config.js --coverage",
         "doc": "npx typedoc --out doc --module commonjs --ignoreCompilerErrors app",
         "madge": "npx madge --warning -i doc/dependency-graph.png app/**/*.ts",
         "lint": "npx tslint -p tsconfig.json -c tslint.json"
     },
     "watch": {
-        "build-wc": {
-            "patterns": [
-                "components"
-            ],
-            "extensions": "tsx,scss"
-        },
         "compile-ts": {
             "patterns": [
                 "app"
@@ -84,24 +79,12 @@
         "rollup-plugin-commonjs": "^9.1.6",
         "rollup-plugin-node-resolve": "^3.4.0",
         "rollup-plugin-typescript": "^1.0.0",
+        "ts-jest": "^23.10.1",
         "tslib": "^1.9.3",
         "tslint": "^5.11.0",
         "typedoc": "^0.12.0",
         "typescript": "^3.0.3",
         "uglify-es": "^3.3.9",
         "uglifycss": "0.0.29"
-    },
-    "jest": {
-        "transform": {
-            "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
-        },
-        "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(tsx?|jsx?)$",
-        "moduleFileExtensions": [
-            "ts",
-            "tsx",
-            "js",
-            "json",
-            "jsx"
-        ]
     }
 }

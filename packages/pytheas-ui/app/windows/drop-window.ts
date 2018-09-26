@@ -1,6 +1,7 @@
 import FilesScanner from '../files-scanner';
 import FilesReader from '../files-reader';
 import FilesParser from '../files-parser';
+import { EventEmitter } from 'events';
 
 interface ElectronEvent {
     sender: EventEmitter
@@ -8,6 +9,8 @@ interface ElectronEvent {
 
 class DropWindow {
     $element: HTMLElement;
+
+    dropped = false;
 
     private static instance: DropWindow;
     private constructor() {}
@@ -24,6 +27,7 @@ class DropWindow {
          */
         document.addEventListener('drop', (ev: DragEvent) => {
             ev.preventDefault();
+            this.dropped = true;
             FilesScanner.scanFilesFromBrowser(ev).then((scannedFiles: any[]) => {
                 FilesReader.readFilesFromBrowser(scannedFiles).then(readedFiles => {
                     FilesParser.parseFiles(readedFiles).then(() => {
@@ -41,7 +45,7 @@ class DropWindow {
         /**
          * Start listening if available from electron wrapper which
          */
-        if (typeof require !== 'undefined') {
+        /*if (typeof require !== 'undefined') {
             const ipc = require('electron').ipcRenderer;
             ipc.on('folder-selected', (event: ElectronEvent, path: string) => {
                 console.log('folder-selected from electron wrapper: ', event, path);
@@ -53,7 +57,11 @@ class DropWindow {
                     });
                 });
             });
-        }
+        }*/
+    }
+
+    test() {
+        return this.dropped;
     }
 }
 

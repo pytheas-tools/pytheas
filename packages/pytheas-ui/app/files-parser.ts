@@ -5,6 +5,7 @@ import { EVENTS } from './events';
 
 /**
  * Parse file for their AST using ts-simpe-ast
+ * TODO : make it language agnostic, or with a layer that makes easy to support others languages !== .js & .ts
  */
 class FilesParser {
     rawFiles: any[] = [];

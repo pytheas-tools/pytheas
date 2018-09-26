@@ -1,4 +1,4 @@
-import { TestWindow } from '@stencil/core/testing';
+// import { TestWindow } from '@stencil/core/testing';
 import { CodeBlock } from './codeblock';
 
 describe('codeblock', () => {

@@ -1,4 +1,4 @@
-import FilesReader, { ReadedFile, FileFromElectron } from './files-reader';
+import { ReadedFile } from './files-reader';
 
 import { pubsub } from './utils/pubsub';
 import { EVENTS } from './events';
@@ -18,8 +18,6 @@ class FilesParser {
         }
         return FilesParser.instance;
     }
-
-    init() {}
 
     parseFiles(files: any[]) {
         console.log('Readed files: ', files);

@@ -5,9 +5,6 @@ import { defineCustomElements } from '../components/codeblock';
 import CodeWindowManager from './windows/code-window';
 import DropWindowManager from './windows/drop-window';
 
-import FilesScanner from './files-scanner';
-import FilesReader from './files-reader';
-
 /**
  * Init CodeBlock web component
  */
@@ -29,13 +26,3 @@ CodeWindowManager.init(document.querySelector('.code-window'));
  * Init drop window
  */
 DropWindowManager.init();
-
-/**
- * Init files scanner
- */
-FilesScanner.init();
-
-/**
- * Init files reader
- */
-FilesReader.init();

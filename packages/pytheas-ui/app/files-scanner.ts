@@ -27,8 +27,6 @@ class FilesScanner {
         return FilesScanner.instance;
     }
 
-    init() {}
-
     clearInternals() {
         this.scannedFiles = [];
         this.countFiles = 0;

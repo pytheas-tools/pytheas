@@ -22,17 +22,16 @@ class FilesReader {
     static getInstance() {
         if (!FilesReader.instance) {
             FilesReader.instance = new FilesReader();
+            /**
+             * Init reader, get reference in Electron of fs module
+             */
+            if (typeof require !== 'undefined') {
+                FilesReader.instance.electronReader = require('fs');
+            }
         }
         return FilesReader.instance;
     }
-    /**
-     * Init reader, get reference in Electron of fs module
-     */
-    init() {
-        if (typeof require !== 'undefined') {
-            this.electronReader = require('fs');
-        }
-    }
+
     /**
      * Read a list of files from browser drop
      * @param files Array List of files

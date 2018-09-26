@@ -2,11 +2,11 @@
     "name": "codeblock",
     "version": "0.0.1",
     "description": "Codeblock Web Component",
-    "module": "codeblock/esm/index.js",
-    "main": "codeblock/index.js",
-    "types": "codeblock/types/components.d.ts",
-    "collection": "codeblock/collection/collection-manifest.json",
+    "module": "dist/esm/index.js",
+    "main": "dist/index.js",
+    "types": "dist/types/components.d.ts",
+    "collection": "dist/collection/collection-manifest.json",
     "files": [
-        "codeblock/"
+        "dist/"
     ]
 }

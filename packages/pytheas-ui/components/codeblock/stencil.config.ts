@@ -6,8 +6,7 @@ export const config: Config = {
     namespace: 'pytheas',
     outputTargets: [
         {
-            type: 'dist',
-            dir: 'codeblock'
+            type: 'dist'
         }
     ],
     enableCache: false,

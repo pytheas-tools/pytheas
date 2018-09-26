@@ -1,6 +1,6 @@
 import Split from 'split.js';
 
-import { defineCustomElements } from '../components/codeblock';
+import { defineCustomElements as defineCodeBlock } from '../components/codeblock/dist/loader';
 
 import CodeWindowManager from './windows/code-window';
 import DropWindowManager from './windows/drop-window';
@@ -8,7 +8,7 @@ import DropWindowManager from './windows/drop-window';
 /**
  * Init CodeBlock web component
  */
-defineCustomElements(window);
+defineCodeBlock(window);
 
 /**
  * Init split.js inside main window

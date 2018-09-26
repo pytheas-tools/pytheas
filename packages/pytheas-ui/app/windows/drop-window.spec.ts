@@ -13,8 +13,11 @@ describe('should drop files', () => {
         var dragSource = document.createElement('div');
         dragMock
             .dragStart(dragSource, null, (event: any, eventName: any) => {
-                if (event.dataTransfer) {
-                    event.dataTransfer.setData('application/javascript', `import { Player } from './player';
+                /*if (event.dataTransfer) {
+                    event.dataTransfer.setData(
+                        'application/javascript',
+                        'game.js',
+                        `import { Player } from './player';
 class Game {
     player1;
     player2;
@@ -27,20 +30,21 @@ class Game {
     clearUI() {}
 }
 new Game();
-`);
-                }
+`
+                    );
+                }*/
             })
             .drop(document, (dropEvent: any) => {});
     });
 
-    test('drop', () => {
-        /*let files = FilesParser.getParsedFiles();
-        console.log(files);
+    test('drop', done => {
         setTimeout(() => {
-            expect(files.length).toBe(1);
+            /*let files = FilesParser.getParsedFiles();
+            console.log(files);*/
+            // expect(files.length).toBe(1);
+            const variable = DropWindowManager.test();
+            expect(variable).toBeTruthy();
             done();
-        }, 1000);*/
-        const variable = DropWindowManager.test();
-        expect(variable).toBeTruthy();
+        }, 1000);
     });
 });

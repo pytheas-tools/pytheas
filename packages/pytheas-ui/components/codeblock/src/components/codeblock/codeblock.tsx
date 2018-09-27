@@ -15,32 +15,32 @@ export class CodeBlock {
     el: HTMLElement;
 
     componentWillLoad() {
-        console.log('CodeBlock is about to be rendered..');
+        // console.log('CodeBlock is about to be rendered..');
     }
 
     componentDidLoad() {
-        console.log('CodeBlock is rendered..');
-        window['CodeMirror'](this.el.shadowRoot.querySelector('.code'), {
-            value: this.code,
-            mode: 'javascript',
-            lineNumbers: true,
-            viewportMargin: Infinity,
-            lineWrapping: true,
-            foldGutter: true,
-            gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
-        });
+        // console.log('CodeBlock is rendered..');
+        if (window['CodeMirror']) {
+            window['CodeMirror'](this.el.shadowRoot.querySelector('.code'), {
+                value: this.code,
+                mode: 'javascript',
+                lineNumbers: true,
+                viewportMargin: Infinity,
+                lineWrapping: true,
+                foldGutter: true,
+                gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+            });
+        }
     }
 
     render() {
-        console.log('CodeBlock rendering..');
-        return (
-            <div class="codeblock">
+        // console.log('CodeBlock rendering..');
+        return <div class="codeblock">
                 <div class="filename">
                     <div class="icon icon-file" />
                     <span>{this.filename}</span>
                 </div>
                 <div class="code" />
-            </div>
-        );
+            </div>;
     }
 }

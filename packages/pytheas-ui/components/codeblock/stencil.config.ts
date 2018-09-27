@@ -8,6 +8,10 @@ export const config: Config = {
     outputTargets: [
         {
             type: 'dist'
+        },
+        {
+            type: 'www',
+            serviceWorker: null
         }
     ],
     enableCache: false,

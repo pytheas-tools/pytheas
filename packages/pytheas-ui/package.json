@@ -22,6 +22,7 @@
         "prebuild": "npx rimraf dist",
         "build": "npm run copy-assets:prod && npm run compile-ts:prod && npm run minify-js && npm run compile-scss:prod && npm run minify-css && npm run build-ts-simple-ast:prod",
         "serve": "npx live-server .tmp --no-browser --port=8383",
+        "serve:ci": "npx live-server .tmp --no-browser --port=8383 &",
         "prestart": "npx rimraf .tmp",
         "start": "npm-run-all -p serve watch",
         "test-jest": "jest --config jest.config.js --coverage",

@@ -9,7 +9,7 @@ install:
     - npm ci
 script:
     - npm run test-wc
-    - npm run serve
+    - npm run serve:ci
     - npm run test
 branches:
     only:

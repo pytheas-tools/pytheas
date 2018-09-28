@@ -9,8 +9,8 @@ install:
     - npm ci
 script:
     - npm run test-wc
-    - npm run serve:ci
-    - npm run test
+    - npm run serve
+    - npm run test:e2e
 branches:
     only:
         - develop

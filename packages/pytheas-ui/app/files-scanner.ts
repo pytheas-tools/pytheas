@@ -111,6 +111,7 @@ class FilesScanner {
                     i++;
                     loopFiles();
                 } else if (File && file instanceof File) {
+                    file.fullPath = file.name;
                     this.handleFile(file);
                     i++;
                     loopFiles();
@@ -125,14 +126,17 @@ class FilesScanner {
                     i++;
                     loopFiles();
                 } else if (entry.isFile) {
-                    entry.file((fileEntry: File) => {
+                    entry.file(
+                        (fileEntry: File) => {
                             const finalFile = Object.assign(fileEntry, { fullPath: entry.fullPath });
                             this.handleFile(finalFile);
                             i++;
                             loopFiles();
-                        }, (err: string) => {
+                        },
+                        (err: string) => {
                             console.warn(err);
-                        });
+                        }
+                    );
                 } else if (entry.isDirectory) {
                     reader = entry.createReader();
 

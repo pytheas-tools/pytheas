@@ -4,8 +4,8 @@ beforeEach(() => {
     });
 });
 
-describe('My First Test', function() {
-    it('Does not do much!', function() {
+describe('Code Window Test', function() {
+    it('Should display a code block', function() {
         cy.visit('');
         cy.window().then(win => {
             win.startMockDrag();

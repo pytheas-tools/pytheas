@@ -4,7 +4,7 @@ import FilesParser from '../files-parser';
 import { EventEmitter } from 'events';
 
 interface ElectronEvent {
-    sender: EventEmitter
+    sender: EventEmitter;
 }
 
 class DropWindow {
@@ -39,7 +39,7 @@ class DropWindow {
         /**
          * Listen dragover event and cancel it to dispatch drop event
          */
-        document.addEventListener('dragover', () => {
+        document.addEventListener('dragover', event => {
             event.preventDefault();
         });
         /**

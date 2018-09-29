@@ -35,12 +35,14 @@ export class CodeBlock {
 
     render() {
         // console.log('CodeBlock rendering..');
-        return <div class="codeblock">
+        return (
+            <div class="codeblock">
                 <div class="filename">
                     <div class="icon icon-file" />
                     <span>{this.filename}</span>
                 </div>
                 <div class="code" />
-            </div>;
+            </div>
+        );
     }
 }

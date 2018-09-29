@@ -9,7 +9,8 @@ describe('My First Test', function() {
         cy.visit('');
         cy.window().then(win => {
             win.startMockDrag();
-            expect(true).to.equal(true);
+            cy.wait(500);
+            cy.get('.code-window').find('py-codeblock');
         });
     });
 });

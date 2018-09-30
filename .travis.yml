@@ -11,7 +11,7 @@ install:
     - npm ci
 script:
     - npm run test-wc
-    - npm run test:testcafe:saucelabs
+    - npm run test:testcafe:browserstack
 branches:
     only:
         - develop

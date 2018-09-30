@@ -1,4 +1,4 @@
-/*import { Selector, ClientFunction } from 'testcafe';
+import { Selector, ClientFunction } from 'testcafe';
 
 const startMockDrag = ClientFunction(() => {
     window.startMockDrag();
@@ -15,8 +15,8 @@ test('Code Window Test - Should display a code block', async t => {
         //.expect(Selector(() => document.querySelector('#host').shadowRoot.querySelector('.filename')).contains('game.js'))
         .ok();
 });
-*/
 
+/*
 import { Selector } from 'testcafe';
 
 fixture`Getting Started`.page`http://devexpress.github.io/testcafe/example`;
@@ -28,3 +28,4 @@ test('My first test', async t => {
         .expect(Selector('#article-header').innerText)
         .eql('Thank you, John Smith!');
 });
+*/

@@ -33,7 +33,7 @@
         "serve": "superstatic .tmp --port 8383 --host localhost",
         "test:e2e": "run-s build:dev:test-e2e && run-p --race serve test:testcafe:saucelabs",
         "test:testcafe": "npm run build:dev:test-e2e && npx testcafe chromium test/testcafe/test.js",
-        "test:testcafe:saucelabs": "npm run build:dev:test-e2e && npx testcafe \"saucelabs:Chrome@beta:Windows 10\" test/testcafe/test.js",
+        "test:testcafe:saucelabs": "npm run build:dev:test-e2e && npx testcafe chrome test/testcafe/test.js",
         "test:testcafe:browserstack": "npx testcafe \"browserstack:chrome@69.0:Windows 10\" test/testcafe/test.js",
         "test-jest": "jest --config jest.config.js --coverage",
         "test-wc": "jest --config jest.wc.config.js --coverage",

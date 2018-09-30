@@ -34,7 +34,7 @@
         "test:e2e": "npm run build:dev:test-e2e && npm run test:testcafe:saucelabs",
         "test:testcafe:local": "npm run build:dev:test-e2e && npx testcafe chromium test/testcafe/test.js",
         "test:testcafe:remote": "npm run build:dev:test-e2e && npx testcafe chrome,firefox test/testcafe/test.js",
-        "test:testcafe:saucelabs": "npm run build:dev:test-e2e && npx testcafe \"browserstack:saucelabs:Chrome@48.0:Linux\" test/testcafe/test.js --app \"http-server .tmp -p 8383\"",
+        "test:testcafe:saucelabs": "npm run build:dev:test-e2e && npx testcafe \"saucelabs:Chrome@48.0:Linux\" test/testcafe/test.js --app \"http-server .tmp -p 8383\"",
         "test:testcafe:browserstack": "npx testcafe \"browserstack:chrome@69.0:Windows 10\" test/testcafe/test.js",
         "test-jest": "jest --config jest.config.js --coverage",
         "test-wc": "jest --config jest.wc.config.js --coverage",

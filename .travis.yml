@@ -11,7 +11,7 @@ install:
     - npm ci
 script:
     - npm run test-wc
-    - npm run test:testcafe:browserstack
+    - npm run test:e2e
 branches:
     only:
         - develop

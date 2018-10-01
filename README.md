@@ -44,9 +44,31 @@ https://github.com/leonadler/drag-and-drop-across-browsers
 
     -   TODO : validate global layout with css grid
 
--   codebase view : monaco editor (https://microsoft.github.io/monaco-editor/)
+-   codebase view : codemirror
+
+TODO : loaded by custom WC, like https://github.com/atomicojs/atom-google-map/blob/master/src/import-google-map.js
 
 -   codebase parsing : ts-simple-ast
+
+-   dependency tree : start with https://github.com/dependents/node-dependency-tree ?
+
+https://github.com/dependents/node-precinct
+
+https://github.com/pahen/detective-typescript
+
+intellisenses VSCode ?
+
+https://github.com/typhonjs-node-escomplex/typhonjs-escomplex
+
+Raw ideas :
+
+-   create dependency tree of files
+
+-   list in global : classes, files, functions
+
+-   link them globally and inside each class and function code, references etc
+
+Performance tricks :
 
 -   typescript + rollup + code splitting
 

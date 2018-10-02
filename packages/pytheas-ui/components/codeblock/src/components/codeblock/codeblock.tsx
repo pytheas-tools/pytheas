@@ -14,6 +14,13 @@ export class CodeBlock {
     @Element()
     el: HTMLElement;
 
+    reduceButton: HTMLButtonElement;
+    openButton: HTMLButtonElement;
+    fullsizeButton: HTMLButtonElement;
+
+    topBar: HTMLElement;
+    codeView: HTMLElement;
+
     componentWillLoad() {
         // console.log('CodeBlock is about to be rendered..');
     }
@@ -21,7 +28,7 @@ export class CodeBlock {
     componentDidLoad() {
         // console.log('CodeBlock is rendered..');
         if (window['CodeMirror']) {
-            window['CodeMirror'](this.el.shadowRoot.querySelector('.code'), {
+            window['CodeMirror'](this.el.shadowRoot.querySelector('.code-view'), {
                 value: this.code,
                 mode: 'javascript',
                 lineNumbers: true,
@@ -31,17 +38,60 @@ export class CodeBlock {
                 gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
             });
         }
+        this.topBar = this.el.shadowRoot.querySelector('.top-bar');
+        this.codeView = this.el.shadowRoot.querySelector('.code-view');
+
+        this.reduceButton = this.el.shadowRoot.querySelector('.button.open');
+        this.reduceButton.classList.add('disabled');
+
+        this.openButton = this.el.shadowRoot.querySelector('.button.reduce');
+        this.fullsizeButton = this.el.shadowRoot.querySelector('.button.maximize');
+    }
+
+    reduce() {
+        console.log('Reduce');
+        this.codeView.classList.add('reduced');
+        this.topBar.classList.add('reduced');
+
+        this.reduceButton.classList.add('disabled');
+        this.openButton.classList.remove('disabled');
+    }
+
+    open() {
+        console.log('open');
+        this.codeView.classList.remove('reduced');
+        this.topBar.classList.remove('reduced');
+
+        this.reduceButton.classList.remove('disabled');
+        this.openButton.classList.add('disabled');
+    }
+
+    maximize() {
+        console.log('maximize');
     }
 
     render() {
         // console.log('CodeBlock rendering..');
         return (
             <div class="codeblock">
-                <div class="filename">
-                    <div class="icon icon-file" />
-                    <span>{this.filename}</span>
+                <div class="top-bar">
+                    <div class="filename">
+                        <div class="icon icon-file" />
+                        <span>{this.filename}</span>
+                    </div>
+                    <div class="buttons">
+                        <button class="button reduce" title="Reduce" type="button" onClick={this.reduce.bind(this)}>
+                            -
+                        </button>
+                        <button class="button open" title="Open" type="button" onClick={this.open.bind(this)}>
+                            =
+                        </button>
+                        <button class="button maximize" title="Maximize" type="button" onClick={this.maximize.bind(this)}>
+                            &#9633;
+                        </button>
+                    </div>
                 </div>
-                <div class="code" />
+                <div class="code-view" />
             </div>
         );
     }

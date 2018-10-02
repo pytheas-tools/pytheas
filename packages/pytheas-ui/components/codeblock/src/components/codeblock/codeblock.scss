@@ -1,6 +1,5 @@
-@import "../../../../../node_modules/codemirror/lib/codemirror";
-@import "../../../../../node_modules/codemirror/addon/fold/foldgutter";
-
+@import '../../../../../node_modules/codemirror/lib/codemirror';
+@import '../../../../../node_modules/codemirror/addon/fold/foldgutter';
 
 :host {
     .codeblock {
@@ -10,10 +9,7 @@
     }
 
     .filename {
-        background: #d0d0d0;
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
-        padding: 5px 10px;
+        flex-grow: 1;
     }
 
     .CodeMirror {
@@ -28,5 +24,43 @@
         height: 15px;
         display: inline-block;
         margin: 0px 4px 0 0;
+    }
+
+    .top-bar {
+        display: flex;
+        background: #d0d0d0;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding: 5px 10px;
+
+        &.reduced {
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+    }
+    .button {
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        padding: 0;
+        font-weight: bold;
+        font-size: 12px;
+        cursor: pointer;
+        &:focus {
+            outline: none;
+        }
+        &:hover {
+            border: 1px solid #828282;
+        }
+        &.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    }
+
+    .code-view {
+        &.reduced {
+            display: none;
+        }
     }
 }

@@ -26,7 +26,7 @@
         "prebuild:dev": "npx rimraf .tmp",
         "build:dev": "npm run build-wc && npm run compile-ts && npm run copy-assets && npm run compile-scss && npm run build-ts-simple-ast",
         "concat-app-dragmock": "npx concat -o .tmp/scripts/app.js .tmp/scripts/app.js .tmp/scripts/dragmock.js test/mock-drag.js",
-        "build:dev:test-e2e": "npm run compile-dragmock && npm run build-wc && npm run compile-ts && npm run concat-app-dragmock && npm run copy-assets && npm run compile-scss && npm run build-ts-simple-ast",
+        "build:dev:test-e2e": "npm run compile-dragmock && npm run build-wc && npm run compile-ts && npm run concat-app-dragmock && npm run copy-assets && npm run compile-scss && npm run build-tsquery",
         "doc": "npx typedoc --out doc --module commonjs --ignoreCompilerErrors app",
         "madge": "npx madge --warning -i doc/dependency-graph.png app/**/*.ts",
         "lint": "npx tslint -p tsconfig.json -c tslint.json",

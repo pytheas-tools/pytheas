@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "scripts": {
         "build-ts-simple-ast": "npx browserify node_modules/ts-simple-ast/dist/main.js -s ts-simple-ast | uglifyjs -c > .tmp/scripts/ts-simple-ast.min.js",
+        "build-tsquery": "npx browserify node_modules/@phenomnomnominal/tsquery/dist/src/index.js -s tsquery | uglifyjs -c > .tmp/scripts/tsquery.min.js",
         "build-ts-simple-ast:prod": "npx browserify node_modules/ts-simple-ast/dist/main.js -s ts-simple-ast | uglifyjs -c > dist/scripts/ts-simple-ast.min.js",
         "compile-scss": "npx node-sass app/styles/app.scss .tmp/styles/app.css",
         "compile-scss:prod": "npx node-sass app/styles/app.scss dist/styles/app.css",
@@ -68,6 +69,7 @@
     },
     "devDependencies": {
         "@babel/core": "^7.1.0",
+        "@phenomnomnominal/tsquery": "^2.1.1",
         "@stencil/core": "0.12.4",
         "@types/filesystem": "0.0.29",
         "@types/split.js": "^1.3.1",

@@ -24,17 +24,20 @@ class FilesParser {
 
         this.parsedFiles = files;
 
-        const { tsSimpleAst } = <any>window;
+        const { tsquery } = <any>window;
 
-        const project = new tsSimpleAst['default']({ useVirtualFileSystem: true });
+        // const { tsSimpleAst } = <any>window;
+
+        // const project = new tsSimpleAst['default']({ useVirtualFileSystem: true });
 
         return new Promise((resolve, reject) => {
             files.forEach(file => {
-                project.createSourceFile(file.path, file.sourcecode);
+                // project.createSourceFile(file.path, file.sourcecode);
+                file.ast = tsquery.tsquery.ast(file.sourcecode);
             });
 
-            const sourceFiles = project.getSourceFiles();
-            console.log('Parsed files: ', sourceFiles);
+            //const sourceFiles = project.getSourceFiles();
+            console.log('Parsed files: ', files);
             pubsub.publish(EVENTS.FILES_PARSED);
             resolve();
         });

@@ -56,6 +56,10 @@ https://github.com/dependents/node-precinct
 
 https://github.com/pahen/detective-typescript
 
+https://github.com/eslint/typescript-eslint-parser
+
+https://github.com/JamesHenry/typescript-estree
+
 intellisenses VSCode ?
 
 https://github.com/typhonjs-node-escomplex/typhonjs-escomplex

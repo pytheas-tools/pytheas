@@ -18,6 +18,8 @@ export namespace Components {
   interface PyCodeblockAttributes extends StencilHTMLAttributes {
     'code'?: string;
     'filename'?: string;
+    'onCodeblockMaximized'?: (event: CustomEvent) => void;
+    'onCodeblockUnmaximized'?: (event: CustomEvent) => void;
   }
 
   interface MyComponent2 {

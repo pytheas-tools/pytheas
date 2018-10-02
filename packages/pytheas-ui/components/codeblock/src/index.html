@@ -11,12 +11,86 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/addon/fold/foldcode.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/addon/fold/foldgutter.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.40.2/addon/fold/brace-fold.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.3.5/split.min.js"></script>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    /** SPLIT WINDOWS **/
+
+    .app {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      display: flex;
+    }
+
+    .split {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .split.split-horizontal,
+    .gutter.gutter-horizontal {
+      height: 100%;
+      position: relative;
+    }
+
+    .gutter {
+      background-color: #eee;
+      background-repeat: no-repeat;
+      background-position: 50%;
+    }
+
+    .gutter.gutter-horizontal {
+      background-image:
+        url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
+      cursor: ew-resize;
+    }
+
+    /** WINDOWS **/
+
+    .graph-window {
+      padding: 10px;
+    }
+
+    .code-window {
+      background: #f6f6f6;
+    }
+  </style>
 </head>
 
 <body>
 
-  <py-codeblock filename="Stencil" code="console.log('4');"></py-codeblock>
-  <my-component2 first="Stencil" last="'Don't call me a framework' JS"></my-component2>
+  <div class="app">
+    <div class="split split-horizontal graph-window">
+      <my-component2 first="Stencil" last="'Don't call me a framework' JS"></my-component2>
+    </div>
+    <div class="split split-horizontal code-window">
+      <py-codeblock filename="Stencil" code="console.log('4');"></py-codeblock>
+    </div>
+  </div>
+
+  <script>
+    Split(['.graph-window', '.code-window'], {
+      sizes: [50, 50]
+    });
+  </script>
 
 </body>
 

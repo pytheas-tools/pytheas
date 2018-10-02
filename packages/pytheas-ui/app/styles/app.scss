@@ -16,6 +16,8 @@ p {
 .app {
     width: 100%;
     height: 100%;
+    position: absolute;
+    display: flex;
 }
 
 .split {
@@ -29,7 +31,7 @@ p {
 .split.split-horizontal,
 .gutter.gutter-horizontal {
     height: 100%;
-    float: left;
+    position: relative;
 }
 
 .gutter {
@@ -45,11 +47,14 @@ p {
 
 /** WINDOWS **/
 
-.graph-window,
-.code-window {
+.graph-window {
     padding: 10px;
 }
 
 .code-window {
     background: #f6f6f6;
+
+    &.codeblock-maximized {
+        overflow-y: hidden;
+    }
 }

@@ -1,4 +1,6 @@
-import { Player } from './player';
+import {
+    Player
+} from './player/player';
 
 class Game {
     player1;

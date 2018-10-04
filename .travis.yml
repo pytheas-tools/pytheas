@@ -28,6 +28,7 @@ install:
     - npm ci
 script:
     - npm run test:wc
+    - npm run build:dev:test
     - npm run test:unit
     - npm run test:e2e
 branches:

@@ -1,4 +1,10 @@
 import { FileFromElectron } from './files-reader';
+import { getExtension } from '../utils/fs';
+
+enum SUPPORTED_FILES {
+    Js = 'js',
+    ts = 'ts'
+}
 
 let Walker: any;
 if (typeof require !== 'undefined') {
@@ -77,12 +83,20 @@ class FilesScanner {
         return this.scanPromise;
     }
 
+    private isFileSupported(extension: string): boolean {
+        return extension in SUPPORTED_FILES;
+    }
+
     private updateCounter(quantity: number) {
         this.countFiles += quantity;
     }
 
     private handleFile(file: FileEntry | File) {
-        this.scannedFiles.push(file);
+        if (this.isFileSupported(file.extension)) {
+            this.scannedFiles.push(file);
+        } else {
+            this.updateCounter(-1);
+        }
 
         if (this.scannedFiles.length === this.countFiles) {
             this.scanResolve(this.scannedFiles);
@@ -128,7 +142,10 @@ class FilesScanner {
                 } else if (entry.isFile) {
                     entry.file(
                         (fileEntry: File) => {
-                            const finalFile = Object.assign(fileEntry, { fullPath: entry.fullPath });
+                            const finalFile = Object.assign(fileEntry, {
+                                fullPath: entry.fullPath,
+                                extension: getExtension(entry.name)
+                            });
                             this.handleFile(finalFile);
                             i++;
                             loopFiles();

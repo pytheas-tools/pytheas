@@ -1,7 +1,7 @@
 import { pubsub } from '../utils/pubsub';
-import { EVENTS } from '../events';
+import { EVENTS } from '../utils/events';
 
-import Parser from '../files-parser';
+import Parser from '../background/files-parser';
 
 class CodeWindow {
     $element: HTMLElement;

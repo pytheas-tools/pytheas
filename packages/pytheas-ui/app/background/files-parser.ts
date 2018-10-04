@@ -1,7 +1,7 @@
 import { ReadedFile } from './files-reader';
 
-import { pubsub } from './utils/pubsub';
-import { EVENTS } from './events';
+import { pubsub } from '../utils/pubsub';
+import { EVENTS } from '../utils/events';
 
 /**
  * Parse file for their AST using ts-simpe-ast

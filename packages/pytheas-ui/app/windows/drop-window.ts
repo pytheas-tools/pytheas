@@ -1,6 +1,6 @@
-import FilesScanner from '../files-scanner';
-import FilesReader from '../files-reader';
-import FilesParser from '../files-parser';
+import FilesScanner from '../background/files-scanner';
+import FilesReader from '../background/files-reader';
+import FilesParser from '../background/files-parser';
 import { EventEmitter } from 'events';
 
 interface ElectronEvent {

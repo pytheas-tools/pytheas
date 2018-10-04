@@ -37,8 +37,8 @@
         "test:testcafe:local": "npx testcafe chromium test/testcafe/test.js",
         "test:testcafe:remote": "npx testcafe chrome,firefox test/testcafe/test.js",
         "test:testcafe:saucelabs": "npx testcafe \"saucelabs:Chrome@48.0:Linux\" test/testcafe/test.js --app \"http-server .tmp -p 8383\"",
-        "test-jest": "jest --config jest.config.js --coverage",
-        "test-wc": "jest --config jest.wc.config.js --coverage",
+        "test:unit": "jest --config jest.config.js --coverage",
+        "test:wc": "jest --config jest.wc.config.js --coverage",
         "cypress:run": "npx cypress run",
         "cypress:open": "npx cypress open"
     },

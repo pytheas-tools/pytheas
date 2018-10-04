@@ -11,9 +11,11 @@ beforeAll(() => {
 describe('should drop files', () => {
     beforeEach(() => {
         var dragSource = document.createElement('div');
+        var createdMock = false;
         dragMock
             .dragStart(dragSource, null, (event: any, eventName: any) => {
-                /*if (event.dataTransfer) {
+                if (event.dataTransfer && !createdMock) {
+                    createdMock = true;
                     event.dataTransfer.setData(
                         'application/javascript',
                         'game.js',
@@ -32,18 +34,15 @@ class Game {
 new Game();
 `
                     );
-                }*/
+                }
             })
             .drop(document, (dropEvent: any) => {});
     });
 
     test('drop', done => {
         setTimeout(() => {
-            /*let files = FilesParser.getParsedFiles();
-            console.log(files);*/
-            // expect(files.length).toBe(1);
-            const variable = DropWindowManager.test();
-            expect(variable).toBeTruthy();
+            let files = FilesParser.getParsedFiles();
+            expect(files.length).toBe(1);
             done();
         }, 1000);
     });

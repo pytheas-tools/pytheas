@@ -27,7 +27,8 @@ install:
     - cd packages/pytheas-ui
     - npm ci
 script:
-    - npm run test-wc
+    - npm run test:wc
+    - npm run test:unit
     - npm run test:e2e
 branches:
     only:

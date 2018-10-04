@@ -97,7 +97,7 @@ class FilesScanner {
         if (this.isFileSupported(file.extension)) {
             this.scannedFiles.push(file);
         } else {
-            Notifier.info('File not supported');
+            Notifier.info(`${file.extension} files not supported`);
             this.updateCounter(-1);
         }
 
@@ -129,6 +129,7 @@ class FilesScanner {
                     loopFiles();
                 } else if (File && file instanceof File) {
                     file.fullPath = file.name;
+                    file.extension = getExtension(file.name);
                     this.handleFile(file);
                     i++;
                     loopFiles();

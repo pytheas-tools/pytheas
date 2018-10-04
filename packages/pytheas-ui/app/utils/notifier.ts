@@ -11,7 +11,7 @@ class Notifier {
     }
 
     info(message: string) {
-        notifier.show('', message, 'info', '', 3000);
+        notifier.show('Information', message, 'info', '', 3000);
     }
 }
 

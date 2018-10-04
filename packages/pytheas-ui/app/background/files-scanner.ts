@@ -2,7 +2,7 @@ import { FileFromElectron } from './files-reader';
 import { getExtension } from '../utils/fs';
 
 enum SUPPORTED_FILES {
-    Js = 'js',
+    js = 'js',
     ts = 'ts'
 }
 

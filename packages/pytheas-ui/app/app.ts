@@ -17,5 +17,6 @@ DropWindowManager.init();
  * Init split.js inside main window
  */
 Split(['.graph-window', '.code-window'], {
-    sizes: [50, 50]
+    sizes: [50, 50],
+    gutterSize: 5
 });

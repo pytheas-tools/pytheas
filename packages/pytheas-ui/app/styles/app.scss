@@ -62,3 +62,9 @@ p {
 /** NOTIFIER **/
 
 @import '../../node_modules/notifier-js/dist/css/notifier';
+
+.notifier-container {
+    top: inherit;
+    bottom: 5px;
+    right: 10px;
+}

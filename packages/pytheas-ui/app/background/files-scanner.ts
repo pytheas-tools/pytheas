@@ -1,6 +1,8 @@
 import { FileFromElectron } from './files-reader';
 import { getExtension } from '../utils/fs';
 
+import Notifier from '../utils/notifier';
+
 enum SUPPORTED_FILES {
     js = 'js',
     ts = 'ts'
@@ -95,6 +97,7 @@ class FilesScanner {
         if (this.isFileSupported(file.extension)) {
             this.scannedFiles.push(file);
         } else {
+            Notifier.info('File not supported');
             this.updateCounter(-1);
         }
 

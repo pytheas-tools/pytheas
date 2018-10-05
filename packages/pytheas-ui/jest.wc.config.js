@@ -1,18 +1,22 @@
-module.exports = {
-    "transform": {
-        "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
-    },
-    "testPathIgnorePatterns": [
-        "<rootDir>/components/codeblock/codeblock/"
-    ],
-    "testMatch": [
-        "**/components/**/*.spec.ts"
-    ],
-    "moduleFileExtensions": [
-        "ts",
-        "tsx",
-        "js",
-        "json",
-        "jsx"
-    ]
+let tsJest = require('ts-jest');
+let config = tsJest.createJestPreset();
+
+config.testEnvironment = 'jsdom';
+config.transform = {
+    "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
 };
+config.testPathIgnorePatterns = ['<rootDir>/components/codeblock/codeblock/'];
+
+config.testMatch = [
+    '**/components/**/*.spec.ts'
+];
+config.moduleFileExtensions = ["ts",
+    "tsx",
+    "js",
+    "json",
+    "jsx"
+];
+
+// config.setupFiles = ['./test/setup-jest.js'];
+
+module.exports = config;

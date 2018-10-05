@@ -22,25 +22,26 @@ export namespace Components {
     'onCodeblockUnmaximized'?: (event: CustomEvent) => void;
   }
 
-  interface MyComponent2 {
-    'first': string;
-    'last': string;
+  interface PyNavigationBar {
+    'current': string;
   }
-  interface MyComponent2Attributes extends StencilHTMLAttributes {
-    'first'?: string;
-    'last'?: string;
+  interface PyNavigationBarAttributes extends StencilHTMLAttributes {
+    'current'?: string;
+    'onBackEvent'?: (event: CustomEvent) => void;
+    'onHomeEvent'?: (event: CustomEvent) => void;
+    'onNextEvent'?: (event: CustomEvent) => void;
   }
 }
 
 declare global {
   interface StencilElementInterfaces {
     'PyCodeblock': Components.PyCodeblock;
-    'MyComponent2': Components.MyComponent2;
+    'PyNavigationBar': Components.PyNavigationBar;
   }
 
   interface StencilIntrinsicElements {
     'py-codeblock': Components.PyCodeblockAttributes;
-    'my-component2': Components.MyComponent2Attributes;
+    'py-navigation-bar': Components.PyNavigationBarAttributes;
   }
 
 
@@ -50,20 +51,20 @@ declare global {
     new (): HTMLPyCodeblockElement;
   };
 
-  interface HTMLMyComponent2Element extends Components.MyComponent2, HTMLStencilElement {}
-  var HTMLMyComponent2Element: {
-    prototype: HTMLMyComponent2Element;
-    new (): HTMLMyComponent2Element;
+  interface HTMLPyNavigationBarElement extends Components.PyNavigationBar, HTMLStencilElement {}
+  var HTMLPyNavigationBarElement: {
+    prototype: HTMLPyNavigationBarElement;
+    new (): HTMLPyNavigationBarElement;
   };
 
   interface HTMLElementTagNameMap {
     'py-codeblock': HTMLPyCodeblockElement
-    'my-component2': HTMLMyComponent2Element
+    'py-navigation-bar': HTMLPyNavigationBarElement
   }
 
   interface ElementTagNameMap {
     'py-codeblock': HTMLPyCodeblockElement;
-    'my-component2': HTMLMyComponent2Element;
+    'py-navigation-bar': HTMLPyNavigationBarElement;
   }
 
 

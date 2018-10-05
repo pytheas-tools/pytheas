@@ -1,2 +1,5 @@
-import { defineCustomElements as defineCodeBlock } from '../components/codeblock/';
+import { defineCustomElements as defineCodeBlock } from '../components/';
 defineCodeBlock(window);
+
+import { defineCustomElements as defineNavigationBar } from '../components/';
+defineNavigationBar(window);

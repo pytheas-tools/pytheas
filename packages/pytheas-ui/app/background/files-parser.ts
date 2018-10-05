@@ -3,8 +3,6 @@ import { ReadedFile } from './files-reader';
 import { pubsub } from '../utils/pubsub';
 import { EVENTS } from '../utils/events';
 
-// import { getDependencies } from './detectives/typescript-module-detective';
-
 /**
  * Parse file for their AST using ts-simpe-ast
  * TODO : make it language agnostic, or with a layer that makes easy to support others languages !== .js & .ts
@@ -31,7 +29,7 @@ class FilesParser {
         return new Promise((resolve, reject) => {
             files.forEach(file => {
                 file.ast = tsquery.tsquery.ast(file.sourcecode);
-                // file.dependencies = getDependencies(file.ast);
+                file.importStatements = tsquery.tsquery(file.ast, 'ImportDeclaration');
             });
 
             console.log('Parsed files: ', files);

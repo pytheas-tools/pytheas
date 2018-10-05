@@ -5,3 +5,5 @@ dist
 doc
 coverage
 cypress
+documentation/code-documentation
+documentation/contributor-documentation/_book

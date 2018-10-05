@@ -1,13 +1,16 @@
-import { Selector, ClientFunction } from 'testcafe';
+import {
+    Selector,
+    ClientFunction
+} from 'testcafe';
 
 const startMockDrag = ClientFunction(() => {
     window.startMockDrag();
 });
 
-fixture`Home page`.page`http://localhost:8383`;
+fixture `Home page`.page `http://localhost:8383`;
 
 test('Code Window Test - Should display a code block', async t => {
-    await t.wait(10000); // Await async resources loaded...
+    await t.wait(8000); // Await async resources loaded...
     await startMockDrag();
     await t
         .wait(1000)

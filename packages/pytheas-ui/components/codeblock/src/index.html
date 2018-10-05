@@ -82,7 +82,19 @@
       <my-component2 first="Stencil" last="'Don't call me a framework' JS"></my-component2>
     </div>
     <div class="split split-horizontal code-window">
-      <py-codeblock filename="Stencil" code="console.log('4');"></py-codeblock>
+      <py-codeblock filename="Stencil" code="import { Player } from './player';
+class Game {
+    player1;
+    player2;
+    constructor() {}
+    start() {
+        this.player1 = new Player('Eric');
+        this.player2 = new Player('Henry');
+        this.clearUI();
+    }
+    clearUI() {}
+}
+new Game();"></py-codeblock>
     </div>
   </div>
 

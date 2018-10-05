@@ -1,1 +1,1 @@
-global.tsquery = require('../.tmp/scripts/tsquery.min');
+global.tsquery = require('../.tmp/scripts/tsquery');

@@ -1,0 +1,54 @@
+py-graph-overview {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.types-list {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.type {
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    position: relative;
+    cursor: pointer;
+
+    &.file {
+        background: #c1e1aa;
+    }
+    &.class {
+        background: #e6e6e6;
+    }
+    &.function {
+        background: #f1d16e;
+    }
+
+    &[data-badge]:after {
+        content: attr(data-badge);
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        font-size: 0.7em;
+        background: white;
+        color: black;
+        width: 18px;
+        height: 18px;
+        text-align: center;
+        line-height: 18px;
+        border-radius: 50%;
+        box-shadow: 0 0 1px #333;
+    }
+}

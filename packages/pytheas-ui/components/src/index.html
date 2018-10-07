@@ -68,6 +68,17 @@
     .code-window {
       background: #f6f6f6;
     }
+
+    .graph-window {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .graph-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+    }
   </style>
 </head>
 
@@ -76,6 +87,9 @@
   <div class="app">
     <div class="split split-horizontal graph-window">
       <py-navigation-bar current="TicTacToe"></py-navigation-bar>
+      <div class="graph-container">
+        <py-graph-overview></py-graph-overview>
+      </div>
     </div>
     <div class="split split-horizontal code-window">
       <py-codeblock filename="Stencil" code="import { Player } from './player';
@@ -98,6 +112,10 @@ new Game();"></py-codeblock>
     Split(['.graph-window', '.code-window'], {
       sizes: [50, 50]
     });
+    var overviewData = {
+      'files': 14, 'classes': 6
+    };
+    document.querySelector('py-graph-overview').data = overviewData;
   </script>
 
 </body>

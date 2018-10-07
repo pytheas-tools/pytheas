@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+
 import { pubsub } from '../utils/pubsub';
 import { EVENTS } from '../utils/events';
 
@@ -21,15 +23,24 @@ class CodeWindow {
         this.$element = element;
         pubsub.subscribe(EVENTS.FILES_PARSED, () => {
             this.clearWindow();
+            let lines = 0;
             const files = Parser.getParsedFiles();
             files.forEach(file => {
-                let $codeBlock = document.createElement('py-codeblock');
-                $codeBlock.setAttribute('filename', file.name);
-                $codeBlock.setAttribute('code', file.sourcecode);
-                $codeBlock.addEventListener(EVENTS.CODEBLOCK_MAXIMIZED, this.onCodeblockMaximized.bind(this));
-                $codeBlock.addEventListener(EVENTS.CODEBLOCK_UNMAXIMIZED, this.onCodeblockUnmaximized.bind(this));
-                this.$element.appendChild($codeBlock);
+                lines += file.sloc.total;
             });
+            const $codeBlock = document.createElement('py-codeblock');
+            $codeBlock.setAttribute('filename', 'Last scan');
+            $codeBlock.setAttribute(
+                'code',
+                `last indexed: ${format(new Date(), 'dd-MM-YYYY HH:mm:ss')}
+
+${files.length} files
+${lines} lines of code
+`
+            );
+            $codeBlock.addEventListener(EVENTS.CODEBLOCK_MAXIMIZED, this.onCodeblockMaximized.bind(this));
+            $codeBlock.addEventListener(EVENTS.CODEBLOCK_UNMAXIMIZED, this.onCodeblockUnmaximized.bind(this));
+            this.$element.appendChild($codeBlock);
         });
     }
 

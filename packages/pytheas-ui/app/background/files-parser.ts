@@ -2,6 +2,7 @@ import { ReadedFile } from './files-reader';
 
 import { pubsub } from '../utils/pubsub';
 import { EVENTS } from '../utils/events';
+import { getSlocInformations } from './detectives/file-sloc';
 
 /**
  * Parse file for their AST using ts-simpe-ast
@@ -30,6 +31,7 @@ class FilesParser {
             files.forEach(file => {
                 file.ast = tsquery.tsquery.ast(file.sourcecode);
                 file.importStatements = tsquery.tsquery(file.ast, 'ImportDeclaration');
+                file.sloc = getSlocInformations(file.sourcecode, file.extension);
             });
 
             console.log('Parsed files: ', files);

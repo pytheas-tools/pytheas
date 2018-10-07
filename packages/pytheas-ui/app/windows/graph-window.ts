@@ -2,6 +2,8 @@ import domtoimage from 'dom-to-image';
 import { pubsub } from '../utils/pubsub';
 import { EVENTS } from '../utils/events';
 
+import Parser from '../background/files-parser';
+
 class GraphWindow {
     $element: HTMLElement;
 
@@ -20,7 +22,13 @@ class GraphWindow {
         this.$element = element;
         this.$graphContainer = element.querySelector('.graph-container');
 
-        pubsub.subscribe(EVENTS.FILES_PARSED, () => {
+        pubsub.subscribe(EVENTS.FILES_PARSED, data => {
+            const files = Parser.getParsedFiles();
+            const $graphOverview = document.createElement('py-graph-overview');
+            $graphOverview.data = {
+                files: files.length
+            };
+            this.$graphContainer.appendChild($graphOverview);
             /*const node = document.querySelector('py-navigation-bar');
             domtoimage
                 .toPng(node)

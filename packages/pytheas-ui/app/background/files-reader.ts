@@ -6,6 +6,7 @@ export interface FileFromElectron {
 export interface ReadedFile {
     path: string;
     name: string;
+    extension: string;
     sourcecode: string | ArrayBuffer;
 }
 
@@ -71,6 +72,7 @@ class FilesReader {
                 const readedFile: ReadedFile = {
                     path: file.fullPath,
                     name: file.name,
+                    extension: file.extension,
                     sourcecode: this.browserReader.result
                 };
                 resolve(readedFile);

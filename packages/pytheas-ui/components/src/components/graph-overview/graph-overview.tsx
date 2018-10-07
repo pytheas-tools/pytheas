@@ -1,6 +1,6 @@
 import { Component, Prop } from '@stencil/core';
 
-interface OverviewData {
+export interface OverviewData {
     files;
     classes;
     functions;
@@ -35,9 +35,27 @@ export class GraphOverview {
         } else {
             return (
                 <ul class="types-list">
-                    {this.data.files ? <li class="type file" data-badge={this.data.files}>Files </li> : ''}
-                    {this.data.classes ? <li class="type class" data-badge={this.data.classes}>Classes</li> : ''}
-                    {this.data.functions ? <li class="type function" data-badge={this.data.functions}>Functions</lip> : ''}
+                    {this.data.files ? (
+                        <li class="type file" data-badge={this.data.files}>
+                            Files{' '}
+                        </li>
+                    ) : (
+                        ''
+                    )}
+                    {this.data.classes ? (
+                        <li class="type class" data-badge={this.data.classes}>
+                            Classes
+                        </li>
+                    ) : (
+                        ''
+                    )}
+                    {this.data.functions ? (
+                        <li class="type function" data-badge={this.data.functions}>
+                            Functions
+                        </li>
+                    ) : (
+                        ''
+                    )}
                 </ul>
             );
         }

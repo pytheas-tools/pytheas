@@ -1,10 +1,5 @@
 import { Component, Prop } from '@stencil/core';
-
-export interface OverviewData {
-    files;
-    classes;
-    functions;
-}
+import { OverviewData } from './overview-data';
 
 @Component({
     tag: 'py-graph-overview',

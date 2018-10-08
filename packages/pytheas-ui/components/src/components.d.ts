@@ -7,20 +7,12 @@
 import '@stencil/core';
 
 
+import {
+  OverviewData,
+} from './components/graph-overview/overview-data';
 
 
 export namespace Components {
-
-  interface PyCodeblock {
-    'code': string;
-    'filename': string;
-  }
-  interface PyCodeblockAttributes extends StencilHTMLAttributes {
-    'code'?: string;
-    'filename'?: string;
-    'onCodeblockMaximized'?: (event: CustomEvent) => void;
-    'onCodeblockUnmaximized'?: (event: CustomEvent) => void;
-  }
 
   interface PyGraphOverview {
     'data': OverviewData;
@@ -42,23 +34,15 @@ export namespace Components {
 
 declare global {
   interface StencilElementInterfaces {
-    'PyCodeblock': Components.PyCodeblock;
     'PyGraphOverview': Components.PyGraphOverview;
     'PyNavigationBar': Components.PyNavigationBar;
   }
 
   interface StencilIntrinsicElements {
-    'py-codeblock': Components.PyCodeblockAttributes;
     'py-graph-overview': Components.PyGraphOverviewAttributes;
     'py-navigation-bar': Components.PyNavigationBarAttributes;
   }
 
-
-  interface HTMLPyCodeblockElement extends Components.PyCodeblock, HTMLStencilElement {}
-  var HTMLPyCodeblockElement: {
-    prototype: HTMLPyCodeblockElement;
-    new (): HTMLPyCodeblockElement;
-  };
 
   interface HTMLPyGraphOverviewElement extends Components.PyGraphOverview, HTMLStencilElement {}
   var HTMLPyGraphOverviewElement: {
@@ -73,13 +57,11 @@ declare global {
   };
 
   interface HTMLElementTagNameMap {
-    'py-codeblock': HTMLPyCodeblockElement
     'py-graph-overview': HTMLPyGraphOverviewElement
     'py-navigation-bar': HTMLPyNavigationBarElement
   }
 
   interface ElementTagNameMap {
-    'py-codeblock': HTMLPyCodeblockElement;
     'py-graph-overview': HTMLPyGraphOverviewElement;
     'py-navigation-bar': HTMLPyNavigationBarElement;
   }

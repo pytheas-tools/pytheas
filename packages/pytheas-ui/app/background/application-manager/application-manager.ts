@@ -2,20 +2,23 @@ import CodeWindowManager from '../../windows/code-window';
 import DropWindowManager from '../../windows/drop-window';
 import GraphWindowManager from '../../windows/graph-window';
 import NavigationBarManager from '../../windows/navigation-bar-manager';
+
+import DataManager from '../data/data-manager';
+
 import { pubsub } from '../../utils/pubsub';
 import { EVENTS } from '../../utils/events';
 
 /**
  * Manage all application state, main orchestrator
  */
-class applicationManager {
-    private static instance: applicationManager;
+class ApplicationManager {
+    private static instance: ApplicationManager;
     private constructor() {}
     static getInstance() {
-        if (!applicationManager.instance) {
-            applicationManager.instance = new applicationManager();
+        if (!ApplicationManager.instance) {
+            ApplicationManager.instance = new ApplicationManager();
         }
-        return applicationManager.instance;
+        return ApplicationManager.instance;
     }
 
     visitedItems;
@@ -23,25 +26,30 @@ class applicationManager {
     init() {
         CodeWindowManager.init(document.querySelector('.code-window'));
         GraphWindowManager.init(document.querySelector('.graph-window'));
-        DropWindowManager.init();
         NavigationBarManager.init(document.querySelector('py-navigation-bar'));
+        DropWindowManager.init();
+
+        pubsub.subscribe(EVENTS.FILES_PARSED, parsedFiles => {
+            DataManager.init(parsedFiles);
+            pubsub.publish(EVENTS.INIT_VIEW);
+        });
 
         pubsub.subscribe(EVENTS.CODEBLOCK_STATEMENT_CLICKED, () => {
-            console.log('applicationManager CODEBLOCK_STATEMENT_CLICKED notify everybody');
+            console.log('ApplicationManager CODEBLOCK_STATEMENT_CLICKED notify everybody');
         });
 
         pubsub.subscribe(EVENTS.GRAPH_ELEMENT_CLICKED, () => {
-            console.log('applicationManager GRAPH_ELEMENT_CLICKED notify everybody');
+            console.log('ApplicationManager GRAPH_ELEMENT_CLICKED notify everybody');
         });
 
         pubsub.subscribe(EVENTS.NAVIGATIONBAR_BACK, () => {
-            console.log('applicationManager NAVIGATIONBAR_BACK notify everybody');
+            console.log('ApplicationManager NAVIGATIONBAR_BACK notify everybody');
         });
         pubsub.subscribe(EVENTS.NAVIGATIONBAR_HOME, () => {
-            console.log('applicationManager NAVIGATIONBAR_HOME notify everybody');
+            console.log('ApplicationManager NAVIGATIONBAR_HOME notify everybody');
         });
         pubsub.subscribe(EVENTS.NAVIGATIONBAR_NEXT, () => {
-            console.log('applicationManager NAVIGATIONBAR_NEXT notify everybody');
+            console.log('ApplicationManager NAVIGATIONBAR_NEXT notify everybody');
         });
     }
 
@@ -50,4 +58,4 @@ class applicationManager {
     }
 }
 
-export default applicationManager.getInstance();
+export default ApplicationManager.getInstance();

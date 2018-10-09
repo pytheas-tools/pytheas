@@ -26,12 +26,10 @@ class GraphWindow {
         this.$element = element;
         this.$graphContainer = element.querySelector('.graph-container');
 
-        pubsub.subscribe(EVENTS.FILES_PARSED, data => {
+        pubsub.subscribe(EVENTS.INIT_VIEW, data => {
             const files = Parser.getParsedFiles();
             const $graphOverview = document.createElement('py-graph-overview');
-            $graphOverview.data = {
-                files: files.length
-            };
+            $graphOverview.data = { files: files.length };
             $graphOverview.addEventListener(EVENTS.GRAPH_ELEMENT_CLICKED, this.onGraphElementClicked.bind(this));
             this.$graphContainer.appendChild($graphOverview);
             /*const node = document.querySelector('py-navigation-bar');

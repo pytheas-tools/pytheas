@@ -2,6 +2,8 @@ import FilesScanner from '../background/files-scanner';
 import FilesReader from '../background/files-reader';
 import FilesParser from '../background/files-parser';
 import { EventEmitter } from 'events';
+import { pubsub } from '../utils/pubsub';
+import { EVENTS } from '../utils/events';
 
 interface ElectronEvent {
     sender: EventEmitter;
@@ -30,8 +32,8 @@ class DropWindow {
             this.dropped = true;
             FilesScanner.scanFilesFromBrowser(ev).then((scannedFiles: any[]) => {
                 FilesReader.readFilesFromBrowser(scannedFiles).then(readedFiles => {
-                    FilesParser.parseFiles(readedFiles).then(() => {
-                        console.log('files parsed');
+                    FilesParser.parseFiles(readedFiles).then(parsedFiles => {
+                        pubsub.publish(EVENTS.FILES_PARSED, parsedFiles);
                     });
                 });
             });

@@ -33,10 +33,7 @@ class FilesParser {
                 file.importStatements = tsquery.tsquery(file.ast, 'ImportDeclaration');
                 file.sloc = getSlocInformations(file.sourcecode, file.extension);
             });
-
-            console.log('Parsed files: ', files);
-            pubsub.publish(EVENTS.FILES_PARSED);
-            resolve();
+            resolve(files);
         });
     }
 

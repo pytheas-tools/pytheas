@@ -25,7 +25,7 @@ class CodeWindow {
 
     init(element: HTMLElement) {
         this.$element = element;
-        pubsub.subscribe(EVENTS.FILES_PARSED, () => {
+        pubsub.subscribe(EVENTS.INIT_VIEW, () => {
             this.clearWindow();
             this.displayInitialParsingInformations();
         });

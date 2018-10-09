@@ -10,22 +10,22 @@ export class NavigationBar {
     current: string;
 
     @Event()
-    backEvent: EventEmitter;
+    navigationBarBackEvent: EventEmitter;
     @Event()
-    homeEvent: EventEmitter;
+    navigationBarHomeEvent: EventEmitter;
     @Event()
-    nextEvent: EventEmitter;
+    navigationBarNextEvent: EventEmitter;
 
     back() {
-        this.backEvent.emit();
+        this.navigationBarBackEvent.emit();
     }
 
     home() {
-        this.homeEvent.emit();
+        this.navigationBarHomeEvent.emit();
     }
 
     next() {
-        this.nextEvent.emit();
+        this.navigationBarNextEvent.emit();
     }
 
     render() {

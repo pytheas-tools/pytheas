@@ -37,9 +37,9 @@ export namespace Components {
   }
   interface PyNavigationBarAttributes extends StencilHTMLAttributes {
     'current'?: string;
-    'onBackEvent'?: (event: CustomEvent) => void;
-    'onHomeEvent'?: (event: CustomEvent) => void;
-    'onNextEvent'?: (event: CustomEvent) => void;
+    'onNavigationBarBackEvent'?: (event: CustomEvent) => void;
+    'onNavigationBarHomeEvent'?: (event: CustomEvent) => void;
+    'onNavigationBarNextEvent'?: (event: CustomEvent) => void;
   }
 }
 

@@ -27,10 +27,8 @@ class GraphWindow {
         this.$graphContainer = element.querySelector('.graph-container');
 
         pubsub.subscribe(EVENTS.INIT_VIEW, data => {
-            const $graphOverview = document.createElement('py-graph-overview');
-            $graphOverview.data = { file: DataManager.getFiles(), class: DataManager.getClasses(), function: DataManager.getFunctions() };
-            $graphOverview.addEventListener(EVENTS.GRAPH_ELEMENT_CLICKED, this.onGraphElementClicked.bind(this));
-            this.$graphContainer.appendChild($graphOverview);
+            this.clearWindow();
+            this.displayInitView();
             /*const node = document.querySelector('py-navigation-bar');
             domtoimage
                 .toPng(node)
@@ -49,6 +47,19 @@ class GraphWindow {
         pubsub.subscribe(EVENTS.SOMETHING_SELECTED, () => {
             console.log('GraphWindow something selected, display graph');
         });
+    }
+
+    clearWindow() {
+        while (this.$graphContainer.firstChild) {
+            this.$graphContainer.firstChild.remove();
+        }
+    }
+
+    displayInitView() {
+        const $graphOverview = document.createElement('py-graph-overview');
+        $graphOverview.data = { file: DataManager.getFiles(), class: DataManager.getClasses(), function: DataManager.getFunctions() };
+        $graphOverview.addEventListener(EVENTS.GRAPH_ELEMENT_CLICKED, this.onGraphElementClicked.bind(this));
+        this.$graphContainer.appendChild($graphOverview);
     }
 
     onGraphElementClicked(ev) {

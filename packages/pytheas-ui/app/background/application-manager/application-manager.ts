@@ -21,7 +21,7 @@ class ApplicationManager {
         return ApplicationManager.instance;
     }
 
-    visitedItems;
+    filesReady = false;
 
     init() {
         CodeWindowManager.init(document.querySelector('.code-window'));
@@ -30,6 +30,7 @@ class ApplicationManager {
         DropWindowManager.init();
 
         pubsub.subscribe(EVENTS.FILES_PARSED, parsedFiles => {
+            this.filesReady = true;
             DataManager.init(parsedFiles);
             pubsub.publish(EVENTS.INIT_VIEW);
         });
@@ -46,7 +47,9 @@ class ApplicationManager {
             console.log('ApplicationManager NAVIGATIONBAR_BACK notify everybody');
         });
         pubsub.subscribe(EVENTS.NAVIGATIONBAR_HOME, () => {
+            if (!this.filesReady) return;
             console.log('ApplicationManager NAVIGATIONBAR_HOME notify everybody');
+            pubsub.publish(EVENTS.INIT_VIEW);
         });
         pubsub.subscribe(EVENTS.NAVIGATIONBAR_NEXT, () => {
             console.log('ApplicationManager NAVIGATIONBAR_NEXT notify everybody');

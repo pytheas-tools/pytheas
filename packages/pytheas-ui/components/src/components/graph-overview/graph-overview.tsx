@@ -72,7 +72,7 @@ export class GraphOverview {
                         ''
                     )}
                     {this.data.function ? (
-                        <li class="type function" data-badge={this.data.function} onClick={this.selectType.bind(this)} data-type="function">
+                        <li class="type function" data-badge={this.data.function.length} onClick={this.selectType.bind(this)} data-type="function">
                             Functions
                         </li>
                     ) : (

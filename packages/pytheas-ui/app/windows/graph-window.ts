@@ -2,7 +2,7 @@ import domtoimage from 'dom-to-image';
 import { pubsub } from '../utils/pubsub';
 import { EVENTS } from '../utils/events';
 
-import Parser from '../background/files-parser';
+import DataManager from '../background/data/data-manager';
 
 /**
  * Manage graph window, display and instanciate a graph WC with informations from application manager.
@@ -27,9 +27,8 @@ class GraphWindow {
         this.$graphContainer = element.querySelector('.graph-container');
 
         pubsub.subscribe(EVENTS.INIT_VIEW, data => {
-            const files = Parser.getParsedFiles();
             const $graphOverview = document.createElement('py-graph-overview');
-            $graphOverview.data = { files: files.length };
+            $graphOverview.data = { file: DataManager.getFiles(), class: DataManager.getClasses(), function: DataManager.getFunctions() };
             $graphOverview.addEventListener(EVENTS.GRAPH_ELEMENT_CLICKED, this.onGraphElementClicked.bind(this));
             this.$graphContainer.appendChild($graphOverview);
             /*const node = document.querySelector('py-navigation-bar');

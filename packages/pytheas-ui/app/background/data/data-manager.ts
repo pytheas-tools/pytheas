@@ -16,6 +16,18 @@ class DataManager {
     init(parsedFiles) {
         this.elements = parsedFiles;
     }
+
+    getFiles() {
+        return this.elements;
+    }
+
+    getClasses() {
+        return [];
+    }
+
+    getFunctions() {
+        return [];
+    }
 }
 
 export default DataManager.getInstance();

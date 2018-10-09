@@ -18,6 +18,8 @@ export class GraphOverview {
 
     @Event()
     graphOverviewDetailSelected: EventEmitter;
+    @Event()
+    graphElementSelected: EventEmitter;
 
     componentWillLoad() {
         console.log('GraphOverview is about to be rendered..: ', this.data);
@@ -37,6 +39,12 @@ export class GraphOverview {
         }
     }
 
+    openElement(element) {
+        console.log('openElement: ', element);
+
+        this.graphElementSelected.emit(element);
+    }
+
     renderInternal() {
         console.log('renderInternal: ', this.inDetailList);
         if (this.inDetailList) {
@@ -47,7 +55,9 @@ export class GraphOverview {
                     <div class="title">{this.selectedType}</div>
                     <ul>
                         {this.selectedElements.map(element => (
-                            <li class={'type ' + this.selectedType}>{element.name}</li>
+                            <li class={'type ' + this.selectedType} onClick={this.openElement.bind(this, element)}>
+                                {element.name}
+                            </li>
                         ))}
                     </ul>
                 </div>

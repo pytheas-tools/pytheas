@@ -7,6 +7,8 @@ export const EVENTS = {
     NAVIGATIONBAR_HOME: 'navigationBarHomeEvent',
     NAVIGATIONBAR_NEXT: 'navigationBarNextEvent',
     GRAPH_ELEMENT_CLICKED: 'graphElementClicked',
+    GRAPH_ELEMENT_SELECTED: 'graphElementSelected',
+    GRAPH_OVERVIEW_DETAIL_SELECTED: 'graphOverviewDetailSelected',
     SOMETHING_SELECTED: 'somethingSelected',
     INIT_VIEW: 'initView'
 };

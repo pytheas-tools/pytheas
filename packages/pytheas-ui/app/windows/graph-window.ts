@@ -58,8 +58,15 @@ class GraphWindow {
     displayInitView() {
         const $graphOverview = document.createElement('py-graph-overview');
         $graphOverview.data = { file: DataManager.getFiles(), class: DataManager.getClasses(), function: DataManager.getFunctions() };
+
         $graphOverview.addEventListener(EVENTS.GRAPH_ELEMENT_CLICKED, this.onGraphElementClicked.bind(this));
+        $graphOverview.addEventListener(EVENTS.GRAPH_OVERVIEW_DETAIL_SELECTED, this.onGraphOverviewDetailSelected.bind(this));
+
         this.$graphContainer.appendChild($graphOverview);
+    }
+
+    onGraphOverviewDetailSelected(ev) {
+        console.log('onGraphOverviewDetailSelected: ', ev);
     }
 
     onGraphElementClicked(ev) {

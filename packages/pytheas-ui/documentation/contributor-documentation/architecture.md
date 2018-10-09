@@ -37,7 +37,7 @@ The 2 main windows and the navigation bar are all linked with a global state man
 
 -   code view emit events for statement selection, and get new codeblock to display -> NB updates, and graph view display a new graph
 
-ApplicationManager plays the role of orchetrating all the stuff with a Mobx store
+ApplicationManager plays the role of orchestrating all the stuff with a local store
 
 DataManager drives all the data informations : drives the scanner, the reader, the parser. And after that returns specific informations for a selection.
 

@@ -1,6 +1,7 @@
 import CodeWindowManager from '../../windows/code-window';
 import DropWindowManager from '../../windows/drop-window';
 import GraphWindowManager from '../../windows/graph-window';
+import NavigationBarManager from '../../windows/navigation-bar-manager';
 
 /**
  * Manage all application state, main orchestrator
@@ -15,21 +16,13 @@ class applicationManager {
         return applicationManager.instance;
     }
 
+    visitedItems;
+
     init() {
-        /**
-         * Init right code window
-         */
         CodeWindowManager.init(document.querySelector('.code-window'));
-
-        /**
-         * Init left code window
-         */
         GraphWindowManager.init(document.querySelector('.graph-window'));
-
-        /**
-         * Init drop window
-         */
         DropWindowManager.init();
+        NavigationBarManager.init(document.querySelector('py-navigation-bar'));
     }
 }
 

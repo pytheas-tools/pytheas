@@ -4,12 +4,14 @@ import { EVENTS } from '../utils/events';
 
 import Parser from '../background/files-parser';
 
+/**
+ * Manage graph window, display and instanciate a graph WC with informations from application manager.
+ * Proxy events from graph for AM
+ */
 class GraphWindow {
     $element: HTMLElement;
 
     $graphContainer: HTMLElement;
-
-    $navigationBar: HTMLElement;
 
     private static instance: GraphWindow;
     private constructor() {}
@@ -23,8 +25,6 @@ class GraphWindow {
     init(element: HTMLElement) {
         this.$element = element;
         this.$graphContainer = element.querySelector('.graph-container');
-
-        this.initNavigationBar();
 
         pubsub.subscribe(EVENTS.FILES_PARSED, data => {
             const files = Parser.getParsedFiles();
@@ -46,22 +46,6 @@ class GraphWindow {
                 .catch((error: string) => {
                     console.error('oops, something went wrong!', error);
                 });*/
-        });
-    }
-
-    initNavigationBar() {
-        this.$navigationBar = this.$element.querySelector('py-navigation-bar');
-
-        this.$navigationBar.addEventListener(EVENTS.NAVIGATIONBAR_BACK, () => {
-            console.log('backEvent listener');
-        });
-
-        this.$navigationBar.addEventListener(EVENTS.NAVIGATIONBAR_HOME, () => {
-            console.log('homeEvent listener');
-        });
-
-        this.$navigationBar.addEventListener(EVENTS.NAVIGATIONBAR_NEXT, () => {
-            console.log('nextEvent listener');
         });
     }
 }

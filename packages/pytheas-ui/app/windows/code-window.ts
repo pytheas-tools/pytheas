@@ -5,6 +5,10 @@ import { EVENTS } from '../utils/events';
 
 import Parser from '../background/files-parser';
 
+/**
+ * Manage code window, display and instanciate codeblock WCs with informations from application manager.
+ * Proxy events from codeblocks for AM
+ */
 class CodeWindow {
     $element: HTMLElement;
 

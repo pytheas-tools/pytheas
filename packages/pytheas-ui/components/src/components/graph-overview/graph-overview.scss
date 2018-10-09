@@ -19,6 +19,29 @@ py-graph-overview {
     padding: 0;
 }
 
+.type-list {
+    border: 1px solid #c4c2c2;
+    border-radius: 10px;
+
+    .title {
+        background: #c4c2c2;
+        color: black;
+        border-top-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding: 10px 8px;
+        display: inline-block;
+        font-weight: bold;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        list-style-type: none;
+        margin: 20px 20px 10px 20px;
+        padding: 0;
+    }
+}
+
 .type {
     padding: 10px;
     border-radius: 8px;
@@ -29,9 +52,11 @@ py-graph-overview {
     &.file {
         background: #c1e1aa;
     }
+
     &.class {
         background: #e6e6e6;
     }
+
     &.function {
         background: #f1d16e;
     }

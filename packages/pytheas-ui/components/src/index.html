@@ -109,8 +109,20 @@ new Game();"></py-codeblock>
       sizes: [50, 50]
     });
     var overviewData = {
-      'files': 14,
-      'classes': 6
+      'file': [{
+        'name': 'manager.ts'
+      }, {
+        'name': 'event.ts'
+      }, {
+        'name': 'player.ts'
+      }],
+      'class': [{
+        'name': 'Manager'
+      }, {
+        'name': 'Event'
+      }, {
+        'name': 'Player'
+      }]
     };
     document.querySelector('py-graph-overview').data = overviewData;
   </script>

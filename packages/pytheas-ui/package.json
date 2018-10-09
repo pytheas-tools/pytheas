@@ -36,6 +36,7 @@
         "start": "npm-run-all -p serve watch",
         "serve": "superstatic .tmp --port 8383 --host localhost",
         "test:e2e": "run-p --race serve test:testcafe:remote",
+        "test:e2e:local": "run-p --race serve test:testcafe:local",
         "test:testcafe:local": "npx testcafe chromium test/testcafe/test.js",
         "test:testcafe:remote": "npx testcafe chrome,firefox test/testcafe/test.js",
         "test:testcafe:saucelabs": "npx testcafe \"saucelabs:Chrome@48.0:Linux\" test/testcafe/test.js --app \"http-server .tmp -p 8383\"",
@@ -45,6 +46,12 @@
         "cypress:open": "npx cypress open"
     },
     "watch": {
+        "build-wc": {
+            "patterns": [
+                "components"
+            ],
+            "extensions": "tsx"
+        },
         "compile-ts": {
             "patterns": [
                 "app"
@@ -68,6 +75,8 @@
         "codemirror": "^5.40.2",
         "date-fns": "^2.0.0-alpha.21",
         "dom-to-image": "^2.6.0",
+        "mobx": "^5.5.0",
+        "mobx-state-tree": "^3.5.0",
         "node-source-walk": "^4.0.0",
         "notifier-js": "^1.0.0",
         "sloc": "^0.2.0",

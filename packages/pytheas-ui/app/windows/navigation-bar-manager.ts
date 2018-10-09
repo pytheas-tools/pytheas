@@ -25,14 +25,20 @@ class NavigationBar {
     initListeners() {
         this.$element.addEventListener(EVENTS.NAVIGATIONBAR_BACK, () => {
             console.log('backEvent listener');
+            pubsub.publish(EVENTS.NAVIGATIONBAR_BACK);
         });
 
         this.$element.addEventListener(EVENTS.NAVIGATIONBAR_HOME, () => {
             console.log('homeEvent listener');
+            pubsub.publish(EVENTS.NAVIGATIONBAR_HOME);
         });
 
         this.$element.addEventListener(EVENTS.NAVIGATIONBAR_NEXT, () => {
             console.log('nextEvent listener');
+            pubsub.publish(EVENTS.NAVIGATIONBAR_NEXT);
+        });
+        pubsub.subscribe(EVENTS.SOMETHING_SELECTED, () => {
+            console.log('NavigationBar something selected, update bar value');
         });
     }
 }

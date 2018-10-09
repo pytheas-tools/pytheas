@@ -32,6 +32,7 @@ class GraphWindow {
             $graphOverview.data = {
                 files: files.length
             };
+            $graphOverview.addEventListener(EVENTS.GRAPH_ELEMENT_CLICKED, this.onGraphElementClicked.bind(this));
             this.$graphContainer.appendChild($graphOverview);
             /*const node = document.querySelector('py-navigation-bar');
             domtoimage
@@ -47,6 +48,15 @@ class GraphWindow {
                     console.error('oops, something went wrong!', error);
                 });*/
         });
+
+        pubsub.subscribe(EVENTS.SOMETHING_SELECTED, () => {
+            console.log('GraphWindow something selected, display graph');
+        });
+    }
+
+    onGraphElementClicked(ev) {
+        console.log('onGraphElementClicked: ', ev);
+        pubsub.publish(EVENTS.GRAPH_ELEMENT_CLICKED);
     }
 }
 

@@ -1,7 +1,5 @@
 import { ReadedFile } from './files-reader';
 
-import { pubsub } from '../utils/pubsub';
-import { EVENTS } from '../utils/events';
 import { getSlocInformations } from './detectives/file-sloc';
 
 /**

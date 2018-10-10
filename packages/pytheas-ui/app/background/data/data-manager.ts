@@ -11,10 +11,30 @@ class DataManager {
         return DataManager.instance;
     }
 
-    elements;
+    elements = [];
+
+    classes = [];
+
+    functions = [];
 
     init(parsedFiles) {
         this.elements = parsedFiles;
+        this.processElements();
+    }
+
+    processElements() {
+        const { tsquery } = <any>window;
+
+        this.elements.forEach(element => {
+            const classesForFile = tsquery.tsquery(element.ast, 'ClassDeclaration');
+            if (classesForFile.length > 0) {
+                this.classes = [...this.classes, ...classesForFile];
+            }
+            const functionsForFile = tsquery.tsquery(element.ast, 'FunctionDeclaration');
+            if (functionsForFile.length > 0) {
+                this.functions = [...this.functions, ...functionsForFile];
+            }
+        });
     }
 
     getFiles() {
@@ -22,11 +42,11 @@ class DataManager {
     }
 
     getClasses() {
-        return [];
+        return this.classes;
     }
 
     getFunctions() {
-        return [];
+        return this.functions;
     }
 }
 

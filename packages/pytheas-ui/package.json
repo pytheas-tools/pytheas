@@ -80,8 +80,8 @@
         "node-source-walk": "^4.0.0",
         "notifier-js": "^1.0.0",
         "sloc": "^0.2.0",
-        "split.js": "^1.3.5",
-        "ts-simple-ast": "^16.0.2"
+        "split.js": "^1.5.2",
+        "ts-simple-ast": "^16.0.3"
     },
     "devDependencies": {
         "@babel/core": "^7.1.2",
@@ -106,7 +106,7 @@
         "npm-run-all": "^4.1.3",
         "npm-watch": "^0.4.0",
         "rimraf": "^2.6.2",
-        "rollup": "^0.66.3",
+        "rollup": "^0.66.5",
         "rollup-plugin-babel": "^4.0.3",
         "rollup-plugin-commonjs": "^9.1.8",
         "rollup-plugin-node-builtins": "^2.1.2",
@@ -116,7 +116,7 @@
         "superstatic": "^6.0.3",
         "testcafe": "^0.22.0",
         "testcafe-browser-provider-saucelabs": "^1.3.1",
-        "ts-jest": "^23.10.3",
+        "ts-jest": "^23.10.4",
         "tslib": "^1.9.3",
         "tslint": "^5.11.0",
         "typedoc": "^0.12.0",

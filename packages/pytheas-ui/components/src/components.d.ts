@@ -27,6 +27,7 @@ export namespace Components {
 
   interface PyGraphOverview {
     'data': OverviewData;
+    'selectType': (ev: any, notify: any) => void;
   }
   interface PyGraphOverviewAttributes extends StencilHTMLAttributes {
     'data'?: OverviewData;
@@ -35,10 +36,14 @@ export namespace Components {
   }
 
   interface PyNavigationBar {
+    'backDisabled': boolean;
     'current': string;
+    'nextDisabled': boolean;
   }
   interface PyNavigationBarAttributes extends StencilHTMLAttributes {
+    'backDisabled'?: boolean;
     'current'?: string;
+    'nextDisabled'?: boolean;
     'onNavigationBarBackEvent'?: (event: CustomEvent) => void;
     'onNavigationBarHomeEvent'?: (event: CustomEvent) => void;
     'onNavigationBarNextEvent'?: (event: CustomEvent) => void;

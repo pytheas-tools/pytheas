@@ -15,5 +15,10 @@ export const config: Config = {
         }
     ],
     enableCache: false,
-    plugins: [sass()]
+    plugins: [sass()],
+    copy: [
+        {
+            src: 'libs'
+        }
+    ]
 };

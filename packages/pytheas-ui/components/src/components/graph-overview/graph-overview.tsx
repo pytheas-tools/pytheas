@@ -1,4 +1,4 @@
-import { Component, Prop, Event, EventEmitter, State } from '@stencil/core';
+import { Component, Prop, Event, EventEmitter, State, Method } from '@stencil/core';
 import { OverviewData } from './overview-data';
 
 @Component({
@@ -29,27 +29,25 @@ export class GraphOverview {
         console.log('GraphOverview is rendered : ', this.data);
     }
 
-    selectType(ev) {
-        console.log('selectType: ', ev.target.dataset.type);
-        this.selectedType = ev.target.dataset.type;
+    @Method()
+    selectType(ev, notify) {
+        this.selectedType = ev.target ? ev.target.dataset.type : ev;
+        console.log('selectType: ', this.selectedType);
         if (this.data[this.selectedType]) {
             this.inDetailList = true;
-            this.graphOverviewDetailSelected.emit();
+            if (typeof notify === 'undefined') {
+                this.graphOverviewDetailSelected.emit(this.selectedType);
+            }
             this.selectedElements = this.data[this.selectedType];
         }
     }
 
     openElement(element) {
-        console.log('openElement: ', element);
-
         this.graphElementSelected.emit(element);
     }
 
     renderInternal() {
-        console.log('renderInternal: ', this.inDetailList);
         if (this.inDetailList) {
-            console.log('render detail');
-
             return (
                 <div class="type-list">
                     <div class="title">{this.selectedType}</div>
@@ -63,8 +61,6 @@ export class GraphOverview {
                 </div>
             );
         } else {
-            console.log('render types');
-
             return (
                 <ul class="types-list">
                     {this.data.file ? (
@@ -94,8 +90,6 @@ export class GraphOverview {
     }
 
     render() {
-        console.log('render');
-
         return <div class="container">{this.renderInternal()}</div>;
     }
 }

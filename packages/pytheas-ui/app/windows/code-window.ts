@@ -45,11 +45,10 @@ class CodeWindow {
         $codeBlock.setAttribute('filename', 'Last scan');
         $codeBlock.setAttribute(
             'code',
-            `last indexed: ${format(new Date(), 'dd-MM-YYYY HH:mm:ss')}
+            `Last indexed: ${format(new Date(), 'dd-MM-YYYY HH:mm:ss')}
 
 ${files.length} files
-${lines} lines of code
-`
+${lines} lines of code`
         );
 
         $codeBlock.addEventListener(EVENTS.CODEBLOCK_MAXIMIZED, this.onCodeblockMaximized.bind(this));

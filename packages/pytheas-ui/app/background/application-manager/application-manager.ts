@@ -37,22 +37,18 @@ class ApplicationManager {
 
         pubsub.subscribe(EVENTS.CODEBLOCK_STATEMENT_CLICKED, () => {
             console.log('ApplicationManager CODEBLOCK_STATEMENT_CLICKED notify everybody');
+            this.onSomethingSelected();
         });
 
-        pubsub.subscribe(EVENTS.GRAPH_ELEMENT_CLICKED, () => {
-            console.log('ApplicationManager GRAPH_ELEMENT_CLICKED notify everybody');
+        pubsub.subscribe(EVENTS.GRAPH_ELEMENT_SELECTED, () => {
+            console.log('ApplicationManager GRAPH_ELEMENT_SELECTED notify everybody');
+            this.onSomethingSelected();
         });
 
-        pubsub.subscribe(EVENTS.NAVIGATIONBAR_BACK, () => {
-            console.log('ApplicationManager NAVIGATIONBAR_BACK notify everybody');
-        });
         pubsub.subscribe(EVENTS.NAVIGATIONBAR_HOME, () => {
             if (!this.filesReady) return;
             console.log('ApplicationManager NAVIGATIONBAR_HOME notify everybody');
             pubsub.publish(EVENTS.INIT_VIEW);
-        });
-        pubsub.subscribe(EVENTS.NAVIGATIONBAR_NEXT, () => {
-            console.log('ApplicationManager NAVIGATIONBAR_NEXT notify everybody');
         });
     }
 

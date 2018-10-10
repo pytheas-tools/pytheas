@@ -12,6 +12,7 @@ class GraphWindow {
     $element: HTMLElement;
 
     $graphContainer: HTMLElement;
+    $graphOverview: HTMLElement;
 
     private static instance: GraphWindow;
     private constructor() {}
@@ -47,6 +48,21 @@ class GraphWindow {
         pubsub.subscribe(EVENTS.SOMETHING_SELECTED, () => {
             console.log('GraphWindow something selected, display graph');
         });
+
+        pubsub.subscribe(EVENTS.NAVIGATIONBAR_ONUPDATE, item => {
+            console.log('NAVIGATIONBAR_ONUPDATE: ', item);
+
+            if (item) {
+                if (item.type === 'overview' && !item.subtype) {
+                    this.clearWindow();
+                    this.displayInitView();
+                } else if (item.type === 'overview' && item.subtype) {
+                    if (this.$graphOverview) {
+                        this.$graphOverview.selectType(item.subtype, false);
+                    }
+                }
+            }
+        });
     }
 
     clearWindow() {
@@ -56,22 +72,23 @@ class GraphWindow {
     }
 
     displayInitView() {
-        const $graphOverview = document.createElement('py-graph-overview');
-        $graphOverview.data = { file: DataManager.getFiles(), class: DataManager.getClasses(), function: DataManager.getFunctions() };
+        this.$graphOverview = document.createElement('py-graph-overview');
+        this.$graphOverview.data = { file: DataManager.getFiles(), class: DataManager.getClasses(), function: DataManager.getFunctions() };
 
-        $graphOverview.addEventListener(EVENTS.GRAPH_ELEMENT_CLICKED, this.onGraphElementClicked.bind(this));
-        $graphOverview.addEventListener(EVENTS.GRAPH_OVERVIEW_DETAIL_SELECTED, this.onGraphOverviewDetailSelected.bind(this));
+        this.$graphOverview.addEventListener(EVENTS.GRAPH_ELEMENT_SELECTED, this.onGraphElementSelected.bind(this));
+        this.$graphOverview.addEventListener(EVENTS.GRAPH_OVERVIEW_DETAIL_SELECTED, this.onGraphOverviewDetailSelected.bind(this));
 
-        this.$graphContainer.appendChild($graphOverview);
+        this.$graphContainer.appendChild(this.$graphOverview);
     }
 
     onGraphOverviewDetailSelected(ev) {
-        console.log('onGraphOverviewDetailSelected: ', ev);
+        console.log('onGraphOverviewDetailSelected: ', ev.detail);
+        pubsub.publish(EVENTS.GRAPH_OVERVIEW_DETAIL_SELECTED, ev.detail);
     }
 
-    onGraphElementClicked(ev) {
-        console.log('onGraphElementClicked: ', ev);
-        pubsub.publish(EVENTS.GRAPH_ELEMENT_CLICKED);
+    onGraphElementSelected(ev) {
+        console.log('onGraphElementClicked: ', ev.detail);
+        pubsub.publish(EVENTS.GRAPH_ELEMENT_SELECTED);
     }
 }
 

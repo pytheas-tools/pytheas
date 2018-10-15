@@ -22,6 +22,8 @@ https://www.sourcetrail.com/documentation/#CodeView60
 
 http://stan4j.com/about/
 
+https://tylermcginnis.com/javascript-visualizer/
+
 ## Electron examples
 
 https://github.com/meetfranz/franz

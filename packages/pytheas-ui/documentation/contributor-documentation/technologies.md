@@ -41,3 +41,9 @@ Performance tricks :
 -   typescript + rollup + code splitting
 
 -   typescript AST generation inside web worker
+
+UML TypeScript :
+
+https://github.com/joaompneves/tsviz
+
+https://github.com/joaompneves/tsviz/blob/master/src/ts-analyser.ts

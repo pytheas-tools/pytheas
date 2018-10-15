@@ -42,3 +42,16 @@ ApplicationManager plays the role of orchestrating all the stuff with a local st
 DataManager drives all the data informations : drives the scanner, the reader, the parser. And after that returns specific informations for a selection.
 
 The data layer should contains all the relations/references for a class, and everything inside, functions and properties.
+
+## Relations
+
+In memory graph database ?
+
+https://github.com/typicaljoe/taffydb
+
+http://lokijs.org/#/demo
+
+https://github.com/jbmusso/tinkergraph-js
+https://github.com/jbmusso/gremlin-tinkergraph
+
+http://zuudo.github.io/helios.js/

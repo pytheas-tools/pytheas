@@ -11,6 +11,21 @@ p {
     margin: 0;
 }
 
+.top-bar {
+    width: 100%;
+    height: 40px;
+    background: #5e5d5d;
+    display: flex;
+    color: white;
+
+    h1 {
+        font-size: 16px;
+    }
+    h2 {
+        font-size: 14px;
+    }
+}
+
 /** SPLIT WINDOWS **/
 
 .app {
@@ -18,6 +33,13 @@ p {
     height: 100%;
     position: absolute;
     display: flex;
+    flex-direction: column;
+}
+
+.windows {
+    display: flex;
+    width: 100%;
+    height: 100%;
 }
 
 .split {

@@ -13,11 +13,18 @@
 
 <body>
     <div class="app">
-        <div class="split split-horizontal graph-window">
-            <py-navigation-bar></py-navigation-bar>
-            <div class="graph-container"></div>
+        <div class="top-bar">
+            <img src="assets/logo.svg" height="100%"/>
+            <h1>Pytheas</h1>
+            <h2>&nbsp;-&nbsp;Your codebase explorer</h2>
         </div>
-        <div class="split split-horizontal code-window"></div>
+        <div class="windows">
+            <div class="split split-horizontal graph-window">
+                <py-navigation-bar></py-navigation-bar>
+                <div class="graph-container"></div>
+            </div>
+            <div class="split split-horizontal code-window"></div>
+        </div>
     </div>
     <script src="scripts/tsquery.js" async></script>
     <script src="scripts/codemirror.js" async></script>

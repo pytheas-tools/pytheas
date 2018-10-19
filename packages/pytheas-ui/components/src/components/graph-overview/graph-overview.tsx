@@ -10,6 +10,8 @@ export class GraphOverview {
     @Prop()
     data: OverviewData;
 
+    dataOrderedByFirstLetter;
+
     @State()
     inDetailList = false;
 
@@ -23,6 +25,31 @@ export class GraphOverview {
 
     componentWillLoad() {
         console.log('GraphOverview is about to be rendered..: ', this.data);
+        this.dataOrderedByFirstLetter = this.orderByLetter(this.data);
+        console.log(this.dataOrderedByFirstLetter);
+    }
+
+    orderByLetter(els) {
+        const files = {},
+            classes = {};
+
+        const groupByFirstLetter = (element, list) => {
+            const firstLetter = element.name.charAt(0);
+            if (list[firstLetter]) {
+                list[firstLetter].elements.push(element);
+            } else {
+                list[firstLetter] = { elements: [element] };
+            }
+        };
+
+        els.file.forEach(element => {
+            return groupByFirstLetter(element, files);
+        });
+        els.class.forEach(element => {
+            return groupByFirstLetter(element, classes);
+        });
+
+        return { file: files, class: classes };
     }
 
     componentDidLoad() {
@@ -33,12 +60,12 @@ export class GraphOverview {
     selectType(ev, notify) {
         this.selectedType = ev.target ? ev.target.dataset.type : ev;
         console.log('selectType: ', this.selectedType);
-        if (this.data[this.selectedType]) {
+        if (this.dataOrderedByFirstLetter[this.selectedType]) {
             this.inDetailList = true;
             if (typeof notify === 'undefined') {
                 this.graphOverviewDetailSelected.emit(this.selectedType);
             }
-            this.selectedElements = this.data[this.selectedType];
+            this.selectedElements = this.dataOrderedByFirstLetter[this.selectedType];
         }
     }
 
@@ -46,20 +73,31 @@ export class GraphOverview {
         this.graphElementSelected.emit(element);
     }
 
+    renderListOfElements(elements) {
+        const lines = [];
+        elements.map(element => {
+            lines.push(
+                <li class={'type ' + this.selectedType} onClick={this.openElement.bind(this, element)}>
+                    {element.name}
+                </li>
+            );
+        });
+        return lines;
+    }
+
     renderInternal() {
         if (this.inDetailList) {
-            return (
-                <div class="type-list">
+            return <div class="type-list">
                     <div class="title">{this.selectedType}</div>
                     <ul>
-                        {this.selectedElements.map(element => (
-                            <li class={'type ' + this.selectedType} onClick={this.openElement.bind(this, element)}>
-                                {element.name}
-                            </li>
-                        ))}
+                        {Object.keys(this.selectedElements).map(key => <li>
+                                {key}
+                                <ul>
+                                {this.renderListOfElements(this.selectedElements[key].elements)}
+                                </ul>
+                            </li>)}
                     </ul>
-                </div>
-            );
+                </div>;
         } else {
             return (
                 <ul class="types-list">

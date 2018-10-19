@@ -1,3 +1,5 @@
+import { ECMAScriptClass } from './ecmascript-class';
+
 /**
  * Manage the data layer
  */
@@ -10,6 +12,8 @@ class DataManager {
         }
         return DataManager.instance;
     }
+
+    database = new Set();
 
     elements = [];
 
@@ -26,9 +30,16 @@ class DataManager {
         const { tsquery } = <any>window;
 
         this.elements.forEach(element => {
-            const classesForFile = tsquery.tsquery(element.ast, 'ClassDeclaration');
-            if (classesForFile.length > 0) {
-                this.classes = [...this.classes, ...classesForFile];
+            let classesNodesForFile = tsquery.tsquery(element.ast, 'ClassDeclaration');
+            classesNodesForFile = classesNodesForFile.map((classeNode) => {
+                switch (element.extension) {
+                    case 'ts':
+                    case 'js':
+                        return new ECMAScriptClass(classeNode);
+                }
+            });
+            if (classesNodesForFile.length > 0) {
+                this.classes = [...this.classes, ...classesNodesForFile];
             }
             const functionsForFile = tsquery.tsquery(element.ast, 'FunctionDeclaration');
             if (functionsForFile.length > 0) {

@@ -45,7 +45,7 @@ class CodeWindow {
         $codeBlock.setAttribute('filename', 'Last scan');
         $codeBlock.setAttribute(
             'code',
-            `Last indexed: ${format(new Date(), 'dd-MM-YYYY HH:mm:ss')}
+            `Last indexed: ${format(new Date(), 'dd-MM-YYYY HH:mm:ss', { awareOfUnicodeTokens: true })}
 
 ${files.length} files
 ${lines} lines of code`

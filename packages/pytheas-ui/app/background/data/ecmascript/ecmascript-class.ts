@@ -31,5 +31,7 @@ export class ECMAScriptClass extends PyElement {
         if (constructorNodeForFile.length > 0) {
             this.constructorDeclaration = new ECMAScriptConstructor(constructorNodeForFile[0]);
         }
+
+        this.relations = this.propertyDeclarations.map(propertyDeclaration => propertyDeclaration.type);
     }
 }

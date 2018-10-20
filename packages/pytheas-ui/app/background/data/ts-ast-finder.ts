@@ -1,12 +1,17 @@
-import { Node, Identifier, TypeReference } from 'typescript';
+import { Node, Identifier, TypeReference, Token } from 'typescript';
 
 export interface TypeReferenceObject {
-    text: string; // TypeReference
+    text: string;
+}
+
+export interface TokenObject {
+    text: string;
 }
 
 export declare type NodeObject = Node & {
     name: Identifier;
     type: TypeReferenceObject; // TypeReference for TypeScript
+    modifiers: TokenObject[]; // TokenObject for TypeScript
 };
 
 /**

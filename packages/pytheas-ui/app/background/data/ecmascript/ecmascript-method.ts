@@ -1,9 +1,15 @@
 import { PyElement } from '../py-element';
-import tsAstFinder, { NodeObject } from '../ts-ast-finder';
+import tsAstFinder, { NodeObject, TokenObject } from '../ts-ast-finder';
 
 export class ECMAScriptMethod extends PyElement {
-    constructor(propertyNode: NodeObject) {
+    modifiers: string[];
+    constructor(methodNode: NodeObject) {
         super();
-        this.name = tsAstFinder.getName(propertyNode);
+        this.name = tsAstFinder.getName(methodNode);
+        if (methodNode.modifiers && methodNode.modifiers.length > 0) {
+            this.modifiers = methodNode.modifiers.map((modifier: TokenObject) => {
+                return modifier.text;
+            });
+        }
     }
 }

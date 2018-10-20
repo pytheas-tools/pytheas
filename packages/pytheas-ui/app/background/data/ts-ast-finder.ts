@@ -1,7 +1,12 @@
-import { Node, Identifier } from 'typescript';
+import { Node, Identifier, TypeReference } from 'typescript';
+
+export interface TypeReferenceObject {
+    text: string; // TypeReference
+}
 
 export declare type NodeObject = Node & {
     name: Identifier;
+    type: TypeReferenceObject; // TypeReference for TypeScript
 };
 
 /**
@@ -19,6 +24,10 @@ class TsAstFinder {
 
     getName(node: NodeObject): string {
         return node.name.text;
+    }
+
+    getType(node: TypeReferenceObject): string {
+        return node.text;
     }
 }
 

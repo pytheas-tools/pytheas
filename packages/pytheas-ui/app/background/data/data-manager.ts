@@ -1,4 +1,4 @@
-import { ECMAScriptClass } from './ecmascript-class';
+import { ECMAScriptClass } from './ecmascript/ecmascript-class';
 
 /**
  * Manage the data layer

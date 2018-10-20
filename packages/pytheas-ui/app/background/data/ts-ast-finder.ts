@@ -1,7 +1,7 @@
 import { Node, Identifier } from 'typescript';
 
 export declare type NodeObject = Node & {
-    name: Identifier
+    name: Identifier;
 };
 
 /**

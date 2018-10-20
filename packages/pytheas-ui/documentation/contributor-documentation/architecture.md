@@ -55,3 +55,5 @@ https://github.com/jbmusso/tinkergraph-js
 https://github.com/jbmusso/gremlin-tinkergraph
 
 http://zuudo.github.io/helios.js/
+
+-> simple ES6 map for now in DataManager

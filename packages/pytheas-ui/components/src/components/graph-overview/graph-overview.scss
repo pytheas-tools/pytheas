@@ -33,12 +33,23 @@ py-graph-overview {
         font-weight: bold;
     }
 
+    .letter-group {
+        color: #a2a2a2;
+        font-size: 15px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
     ul {
         display: flex;
         flex-direction: column;
         list-style-type: none;
         margin: 20px 20px 10px 20px;
         padding: 0;
+    }
+
+    ul.elements {
+        margin: 10px 0;
     }
 }
 

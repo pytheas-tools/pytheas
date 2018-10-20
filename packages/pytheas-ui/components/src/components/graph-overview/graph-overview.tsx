@@ -87,17 +87,19 @@ export class GraphOverview {
 
     renderInternal() {
         if (this.inDetailList) {
-            return <div class="type-list">
+            return (
+                <div class="type-list">
                     <div class="title">{this.selectedType}</div>
                     <ul>
-                        {Object.keys(this.selectedElements).map(key => <li>
-                                {key}
-                                <ul>
-                                {this.renderListOfElements(this.selectedElements[key].elements)}
-                                </ul>
-                            </li>)}
+                        {Object.keys(this.selectedElements).map(key => (
+                            <li>
+                                <span class="letter-group">{key}</span>
+                                <ul class="elements">{this.renderListOfElements(this.selectedElements[key].elements)}</ul>
+                            </li>
+                        ))}
                     </ul>
-                </div>;
+                </div>
+            );
         } else {
             return (
                 <ul class="types-list">

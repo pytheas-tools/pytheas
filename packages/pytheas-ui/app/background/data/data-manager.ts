@@ -22,8 +22,15 @@ class DataManager {
     functions = [];
 
     init(parsedFiles) {
+        this.reset();
         this.elements = parsedFiles;
         this.processElements();
+    }
+
+    reset() {
+        this.elements = [];
+        this.classes = [];
+        this.functions = [];
     }
 
     processElements() {
@@ -31,7 +38,7 @@ class DataManager {
 
         this.elements.forEach(element => {
             let classesNodesForFile = tsquery.tsquery(element.ast, 'ClassDeclaration');
-            classesNodesForFile = classesNodesForFile.map((classeNode) => {
+            classesNodesForFile = classesNodesForFile.map(classeNode => {
                 switch (element.extension) {
                     case 'ts':
                     case 'js':

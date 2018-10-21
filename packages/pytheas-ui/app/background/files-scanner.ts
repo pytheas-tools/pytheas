@@ -26,6 +26,8 @@ class FilesScanner {
     scanResolve: any;
     scanReject: any;
 
+    notSupportedExtensions = new Set();
+
     private static instance: FilesScanner;
     private constructor() {}
     static getInstance() {
@@ -38,6 +40,7 @@ class FilesScanner {
     clearInternals() {
         this.scannedFiles = [];
         this.countFiles = 0;
+        this.notSupportedExtensions.clear();
     }
 
     /**
@@ -89,6 +92,10 @@ class FilesScanner {
         return extension in SUPPORTED_FILES;
     }
 
+    private getAllNotSupportedExtensions(): string {
+        return Array.from(this.notSupportedExtensions).join(', ');
+    }
+
     private updateCounter(quantity: number) {
         this.countFiles += quantity;
     }
@@ -97,11 +104,12 @@ class FilesScanner {
         if (this.isFileSupported(file.extension)) {
             this.scannedFiles.push(file);
         } else {
-            Notifier.info(`${file.extension} files not supported`);
+            this.notSupportedExtensions.add(file.extension);
             this.updateCounter(-1);
         }
 
         if (this.scannedFiles.length === this.countFiles) {
+            Notifier.info(`${this.getAllNotSupportedExtensions()} files not supported`);
             this.scanResolve(this.scannedFiles);
         }
     }

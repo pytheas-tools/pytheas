@@ -4,7 +4,7 @@ import { ECMAScriptProperty } from './ecmascript-property';
 import { ECMAScriptMethod } from './ecmascript-method';
 import { ECMAScriptConstructor } from './ecmascript-constructor';
 
-const { tsquery } = <any>window;
+import ECMAScriptParser from './ecmascript-parser';
 
 export class ECMAScriptClass extends PyElement {
     ast: NodeObject;
@@ -17,17 +17,17 @@ export class ECMAScriptClass extends PyElement {
         this.ast = classeNode;
         this.name = tsAstFinder.getName(classeNode);
 
-        const propertyDeclarationsNodesForFile = tsquery.tsquery(this.ast, 'PropertyDeclaration');
+        const propertyDeclarationsNodesForFile = ECMAScriptParser.getPropertyDeclaration(this.ast);
         this.propertyDeclarations = propertyDeclarationsNodesForFile.map((propertyDeclaration: NodeObject) => {
             return new ECMAScriptProperty(propertyDeclaration);
         });
 
-        const methodDeclarationsNodesForFile = tsquery.tsquery(this.ast, 'MethodDeclaration');
+        const methodDeclarationsNodesForFile = ECMAScriptParser.getMethodDeclaration(this.ast);
         this.methodDeclarations = methodDeclarationsNodesForFile.map((methodDeclaration: NodeObject) => {
             return new ECMAScriptMethod(methodDeclaration);
         });
 
-        const constructorNodeForFile = tsquery.tsquery(this.ast, 'Constructor');
+        const constructorNodeForFile = ECMAScriptParser.getConstructor(this.ast);
         if (constructorNodeForFile.length > 0) {
             this.constructorDeclaration = new ECMAScriptConstructor(constructorNodeForFile[0]);
         }

@@ -57,3 +57,10 @@ https://github.com/jbmusso/gremlin-tinkergraph
 http://zuudo.github.io/helios.js/
 
 -> simple ES6 map for now in DataManager
+
+## Languages support
+
+-   JS
+-   TS
+-   Java ? : https://github.com/urish/java-ast / https://github.com/tunnelvisionlabs/antlr4ts#readme
+-   Kotlin ? : https://github.com/antlr/grammars-v4/tree/master/kotlin

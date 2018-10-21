@@ -5,7 +5,8 @@ import Notifier from '../utils/notifier';
 
 enum SUPPORTED_FILES {
     js = 'js',
-    ts = 'ts'
+    ts = 'ts',
+    java = 'java'
 }
 
 let Walker: any;

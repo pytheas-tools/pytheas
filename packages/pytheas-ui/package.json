@@ -73,6 +73,7 @@
     },
     "dependencies": {
         "@phenomnomnominal/tsquery": "^2.1.1",
+        "@types/jest": "^23.3.5",
         "codemirror": "^5.40.2",
         "date-fns": "^2.0.0-alpha.23",
         "dom-to-image": "^2.6.0",

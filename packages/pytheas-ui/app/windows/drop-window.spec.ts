@@ -10,8 +10,8 @@ beforeAll(() => {
 
 describe('should drop files', () => {
     beforeEach(() => {
-        var dragSource = document.createElement('div');
-        var createdMock = false;
+        const dragSource = document.createElement('div');
+        let createdMock = false;
         dragMock
             .dragStart(dragSource, null, (event: any, eventName: any) => {
                 if (event.dataTransfer && !createdMock) {
@@ -41,7 +41,7 @@ new Game();
 
     test('drop', done => {
         setTimeout(() => {
-            let files = FilesParser.getParsedFiles();
+            const files = FilesParser.getParsedFiles();
             expect(files.length).toBe(1);
             done();
         }, 1000);

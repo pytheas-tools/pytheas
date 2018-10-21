@@ -12,6 +12,7 @@ class Game {
     public start() {
         this.player1 = new Player('Eric');
         this.player2 = new Player('Henry');
+        this.rule = new Rule('An important rule');
         this.clearUI();
     }
 

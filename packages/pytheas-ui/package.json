@@ -41,9 +41,7 @@
         "test:testcafe:remote": "npx testcafe chrome,firefox test/testcafe/test.js",
         "test:testcafe:saucelabs": "npx testcafe \"saucelabs:Chrome@48.0:Linux\" test/testcafe/test.js --app \"http-server .tmp -p 8383\"",
         "test:unit": "jest --config jest.config.js --coverage",
-        "test:wc": "jest --config jest.wc.config.js --coverage",
-        "cypress:run": "npx cypress run",
-        "cypress:open": "npx cypress open"
+        "test:wc": "jest --config jest.wc.config.js --coverage"
     },
     "watch": {
         "build-wc": {
@@ -77,6 +75,7 @@
         "codemirror": "^5.40.2",
         "date-fns": "^2.0.0-alpha.23",
         "dom-to-image": "^2.6.0",
+        "java-ast": "^0.1.0",
         "node-source-walk": "^4.0.0",
         "notifier-js": "^1.0.0",
         "sloc": "^0.2.0",
@@ -93,7 +92,6 @@
         "browserify": "^16.2.3",
         "concat": "^1.0.3",
         "copyfiles": "^2.1.0",
-        "cypress": "^3.1.0",
         "filesize-cli": "0.0.3",
         "gitbook-cli": "^2.3.2",
         "http-server": "^0.11.1",

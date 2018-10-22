@@ -5,7 +5,7 @@ export let pubsub = (() => {
   return {
     subscribe: (topic: string, listener: (data: any) => void) => {
       // Create the topic's object if not yet created
-      if(!hOP.call(topics, topic)) topics[topic] = [];
+      if (!hOP.call(topics, topic)) topics[topic] = [];
 
       // Add the listener to queue
       const index = topics[topic].push(listener) - 1;
@@ -19,11 +19,13 @@ export let pubsub = (() => {
     },
     publish: (topic: string, info?: any) => {
       // If the topic doesn't exist, or there's no listeners in queue, just leave
-      if(!hOP.call(topics, topic)) return;
+      if (!hOP.call(topics, topic)) {
+        return;
+      }
 
       // Cycle through topics queue, fire!
       topics[topic].forEach((item: any) => {
-      		item(info != undefined ? info : {});
+      		item(info !== undefined ? info : {});
       });
     }
   };

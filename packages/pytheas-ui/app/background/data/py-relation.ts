@@ -1,5 +1,3 @@
-const { uniqid } = <any>window;
-
 export enum RelationTypes {
     In = 'in',
     Out = 'out'

@@ -1,5 +1,10 @@
 {
     "defaultSeverity": "error",
+    "linterOptions": {
+        "exclude": [
+            "test/vendors/**"
+        ]
+    },
     "extends": [
         "tslint:recommended"
     ],

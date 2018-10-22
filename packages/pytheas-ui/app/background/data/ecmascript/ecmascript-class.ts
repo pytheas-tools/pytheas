@@ -1,10 +1,11 @@
 import { PyElement } from '../py-element';
-import tsAstFinder, { NodeObject } from '../ts-ast-finder';
+import tsAstFinder, { NodeObject } from './ts-ast-finder';
 import { ECMAScriptProperty } from './ecmascript-property';
 import { ECMAScriptMethod } from './ecmascript-method';
 import { ECMAScriptConstructor } from './ecmascript-constructor';
 
 import ECMAScriptParser from './ecmascript-parser';
+import { RelationTypes } from '../py-relation';
 
 export class ECMAScriptClass extends PyElement {
     ast: NodeObject;
@@ -32,6 +33,8 @@ export class ECMAScriptClass extends PyElement {
             this.constructorDeclaration = new ECMAScriptConstructor(constructorNodeForFile[0]);
         }
 
-        this.relations = this.propertyDeclarations.map(propertyDeclaration => propertyDeclaration.type);
+        this.propertyDeclarations.forEach(propertyDeclaration => {
+            this.addRelation(this.name, propertyDeclaration.type, RelationTypes.Out);
+        });
     }
 }

@@ -1,5 +1,5 @@
 import { PyElement } from '../py-element';
-import tsAstFinder, { NodeObject } from '../ts-ast-finder';
+import tsAstFinder, { NodeObject } from './ts-ast-finder';
 
 export class ECMAScriptProperty extends PyElement {
     type: string;

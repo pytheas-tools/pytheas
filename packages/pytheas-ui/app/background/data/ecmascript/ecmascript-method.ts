@@ -1,5 +1,5 @@
 import { PyElement } from '../py-element';
-import tsAstFinder, { NodeObject, TokenObject } from '../ts-ast-finder';
+import tsAstFinder, { NodeObject, TokenObject } from './ts-ast-finder';
 
 export class ECMAScriptMethod extends PyElement {
     modifiers: string[];

@@ -35,6 +35,15 @@ export namespace Components {
     'onGraphOverviewDetailSelected'?: (event: CustomEvent) => void;
   }
 
+  interface PyGraph {
+    'data': any;
+    'onExternalDragEvent': () => void;
+  }
+  interface PyGraphAttributes extends StencilHTMLAttributes {
+    'data'?: any;
+    'onGraphElementSelected'?: (event: CustomEvent) => void;
+  }
+
   interface PyNavigationBar {
     'backDisabled': boolean;
     'current': string;
@@ -54,12 +63,14 @@ declare global {
   interface StencilElementInterfaces {
     'PyCodeblock': Components.PyCodeblock;
     'PyGraphOverview': Components.PyGraphOverview;
+    'PyGraph': Components.PyGraph;
     'PyNavigationBar': Components.PyNavigationBar;
   }
 
   interface StencilIntrinsicElements {
     'py-codeblock': Components.PyCodeblockAttributes;
     'py-graph-overview': Components.PyGraphOverviewAttributes;
+    'py-graph': Components.PyGraphAttributes;
     'py-navigation-bar': Components.PyNavigationBarAttributes;
   }
 
@@ -76,6 +87,12 @@ declare global {
     new (): HTMLPyGraphOverviewElement;
   };
 
+  interface HTMLPyGraphElement extends Components.PyGraph, HTMLStencilElement {}
+  var HTMLPyGraphElement: {
+    prototype: HTMLPyGraphElement;
+    new (): HTMLPyGraphElement;
+  };
+
   interface HTMLPyNavigationBarElement extends Components.PyNavigationBar, HTMLStencilElement {}
   var HTMLPyNavigationBarElement: {
     prototype: HTMLPyNavigationBarElement;
@@ -85,12 +102,14 @@ declare global {
   interface HTMLElementTagNameMap {
     'py-codeblock': HTMLPyCodeblockElement
     'py-graph-overview': HTMLPyGraphOverviewElement
+    'py-graph': HTMLPyGraphElement
     'py-navigation-bar': HTMLPyNavigationBarElement
   }
 
   interface ElementTagNameMap {
     'py-codeblock': HTMLPyCodeblockElement;
     'py-graph-overview': HTMLPyGraphOverviewElement;
+    'py-graph': HTMLPyGraphElement;
     'py-navigation-bar': HTMLPyNavigationBarElement;
   }
 

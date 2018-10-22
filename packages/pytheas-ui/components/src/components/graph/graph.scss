@@ -1,0 +1,49 @@
+py-graph {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.class {
+    background: #e5e5e5;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 4px 8px;
+    border-radius: 6px;
+    margin: 30px;
+}
+
+.group {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.method {
+    background: #f9bb43;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.property {
+    background: #6fb4d3;
+    padding: 4px 8px;
+    border-radius: 6px;
+    margin: 3px 0;
+}

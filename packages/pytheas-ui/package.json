@@ -80,6 +80,7 @@
         "date-fns": "^2.0.0-alpha.23",
         "dom-to-image": "^2.6.0",
         "java-ast": "^0.1.0",
+        "jsplumb": "^2.8.2",
         "node-source-walk": "^4.0.0",
         "notifier-js": "^1.0.0",
         "sloc": "^0.2.0",

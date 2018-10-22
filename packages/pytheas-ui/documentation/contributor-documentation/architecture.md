@@ -63,4 +63,17 @@ http://zuudo.github.io/helios.js/
 -   JS
 -   TS
 -   Java ? : https://github.com/urish/java-ast / https://github.com/tunnelvisionlabs/antlr4ts#readme
+-   Python ? : https://github.com/differentmatt/filbert
+-   PHP ? : https://github.com/glayzzle/php-parser
 -   Kotlin ? : https://github.com/antlr/grammars-v4/tree/master/kotlin
+-   C# : https://github.com/sebastienros/esprima-dotnet
+
+## Stackoverflow survey 2018
+
+https://insights.stackoverflow.com/survey/2018/#technology
+
+- JavaScript
+- Java
+- Python
+- C#
+- PHP

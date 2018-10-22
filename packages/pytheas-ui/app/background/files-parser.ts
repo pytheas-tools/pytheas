@@ -97,8 +97,7 @@ class FilesParser {
             });
             script.src = `scripts/${parserToLoad}.js`;
             script.async = true;
-            console.log(document);
-            document.getElementsByTagName('script')[0].parentNode.appendChild(script);
+            document.body.appendChild(script);
         });
     }
 

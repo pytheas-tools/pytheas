@@ -2,7 +2,7 @@ import {
     Player
 } from './player/player';
 
-class Game {
+export class Game {
     player1;
     player2;
 
@@ -16,5 +16,3 @@ class Game {
 
     clearUI() {}
 }
-
-new Game();

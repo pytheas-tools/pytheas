@@ -1,7 +1,7 @@
 import { Player } from './player/player';
 import { Rule } from './rule/rule';
 
-class Game {
+export class Game {
     player1: Player;
     player2: Player;
 
@@ -18,5 +18,3 @@ class Game {
 
     private clearUI() {}
 }
-
-new Game();

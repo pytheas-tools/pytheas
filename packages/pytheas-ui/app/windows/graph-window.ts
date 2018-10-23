@@ -45,8 +45,10 @@ class GraphWindow {
                 });*/
         });
 
-        pubsub.subscribe(EVENTS.SOMETHING_SELECTED, () => {
-            console.log('GraphWindow something selected, display graph');
+        pubsub.subscribe(EVENTS.SOMETHING_SELECTED, element => {
+            console.log('GraphWindow something selected, display graph: ', element);
+            this.clearWindow();
+            this.addGraph(element);
         });
 
         pubsub.subscribe(EVENTS.NAVIGATIONBAR_ONUPDATE, item => {
@@ -63,6 +65,12 @@ class GraphWindow {
                 }
             }
         });
+    }
+
+    addGraph(element) {
+        const $graph = document.createElement('py-graph');
+        $graph.data = element;
+        this.$graphContainer.appendChild($graph);
     }
 
     clearWindow() {

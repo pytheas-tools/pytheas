@@ -1,6 +1,7 @@
 import Split from 'split.js';
 
 import ApplicationManager from './background/application-manager/application-manager';
+import { Graph } from '../components/dist/types/components/graph/graph';
 
 ApplicationManager.init();
 
@@ -9,5 +10,21 @@ ApplicationManager.init();
  */
 Split(['.graph-window', '.code-window'], {
     sizes: [50, 50],
-    gutterSize: 5
+    gutterSize: 5,
+    onDrag: () => {
+        syncGraphWithResize();
+    }
 });
+
+let $graph: Graph = null;
+
+const syncGraphWithResize = () => {
+    if (!$graph) {
+        $graph = document.querySelector('py-graph');
+    }
+    if ($graph) {
+        $graph.onExternalDragEvent();
+    }
+};
+
+window.addEventListener('resize', syncGraphWithResize, false);

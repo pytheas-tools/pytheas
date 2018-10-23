@@ -29,9 +29,10 @@ class CodeWindow {
             this.clearWindow();
             this.displayInitialParsingInformations();
         });
-        pubsub.subscribe(EVENTS.SOMETHING_SELECTED, () => {
-            console.log('CodeWindow something selected, display related blocks');
+        pubsub.subscribe(EVENTS.SOMETHING_SELECTED, element => {
+            console.log('CodeWindow something selected, display related blocks: ', element);
             this.clearWindow();
+            this.addCodeBlock(element.file);
         });
     }
 
@@ -50,6 +51,18 @@ class CodeWindow {
 ${files.length} files
 ${lines} lines of code`
         );
+
+        $codeBlock.addEventListener(EVENTS.CODEBLOCK_MAXIMIZED, this.onCodeblockMaximized.bind(this));
+        $codeBlock.addEventListener(EVENTS.CODEBLOCK_UNMAXIMIZED, this.onCodeblockUnmaximized.bind(this));
+        $codeBlock.addEventListener(EVENTS.CODEBLOCK_STATEMENT_CLICKED, this.onCodeblockStatementClicked.bind(this));
+
+        this.$element.appendChild($codeBlock);
+    }
+
+    addCodeBlock(file) {
+        const $codeBlock = document.createElement('py-codeblock');
+        $codeBlock.setAttribute('filename', file.name);
+        $codeBlock.setAttribute('code', file.sourcecode);
 
         $codeBlock.addEventListener(EVENTS.CODEBLOCK_MAXIMIZED, this.onCodeblockMaximized.bind(this));
         $codeBlock.addEventListener(EVENTS.CODEBLOCK_UNMAXIMIZED, this.onCodeblockUnmaximized.bind(this));

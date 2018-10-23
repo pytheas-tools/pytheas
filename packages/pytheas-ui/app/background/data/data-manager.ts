@@ -45,7 +45,7 @@ class DataManager {
                 case 'ts':
                     classesNodesForFile = ECMAScriptParser.getClassDeclarations(element.ast);
                     classesNodesForFile = classesNodesForFile.map(classeNode => {
-                        return new ECMAScriptClass(classeNode);
+                        return new ECMAScriptClass(classeNode, element);
                     });
                     functionsForFile = ECMAScriptParser.getFunctionDeclarations(element.ast);
                     break;

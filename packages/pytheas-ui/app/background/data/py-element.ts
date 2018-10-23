@@ -15,6 +15,7 @@ export class PyElement {
     name: string;
     relations: any[] = [];
     id: string;
+    file: any;
 
     constructor() {
         this.id = uniqid();

@@ -88,7 +88,7 @@ class GraphWindow {
 
     onGraphElementSelected(ev) {
         console.log('onGraphElementClicked: ', ev.detail);
-        pubsub.publish(EVENTS.GRAPH_ELEMENT_SELECTED);
+        pubsub.publish(EVENTS.GRAPH_ELEMENT_SELECTED, ev.detail);
     }
 }
 

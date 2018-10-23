@@ -40,9 +40,9 @@ class ApplicationManager {
             this.onSomethingSelected();
         });
 
-        pubsub.subscribe(EVENTS.GRAPH_ELEMENT_SELECTED, () => {
+        pubsub.subscribe(EVENTS.GRAPH_ELEMENT_SELECTED, element => {
             console.log('ApplicationManager GRAPH_ELEMENT_SELECTED notify everybody');
-            this.onSomethingSelected();
+            this.onSomethingSelected(element);
         });
 
         pubsub.subscribe(EVENTS.NAVIGATIONBAR_HOME, () => {
@@ -52,8 +52,8 @@ class ApplicationManager {
         });
     }
 
-    onSomethingSelected() {
-        pubsub.publish(EVENTS.SOMETHING_SELECTED);
+    onSomethingSelected(element) {
+        pubsub.publish(EVENTS.SOMETHING_SELECTED, element);
     }
 }
 

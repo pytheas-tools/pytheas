@@ -34,7 +34,7 @@ export class ECMAScriptClass extends PyElement {
         }
 
         this.propertyDeclarations.forEach(propertyDeclaration => {
-            this.addRelation(this.name, propertyDeclaration.type, RelationTypes.Out);
+            this.addRelation(this.id, propertyDeclaration.type, propertyDeclaration.typeKind, RelationTypes.Out);
         });
     }
 }

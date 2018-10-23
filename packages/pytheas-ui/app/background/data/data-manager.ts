@@ -1,5 +1,6 @@
 import { ECMAScriptClass } from './ecmascript/ecmascript-class';
 import ECMAScriptParser from './ecmascript/ecmascript-parser';
+import RelationManager from './relation-manager';
 
 /**
  * Manage the data layer
@@ -16,26 +17,26 @@ class DataManager {
 
     database = new Set();
 
-    elements = [];
+    filesToProcess = <any>[];
 
-    classes = [];
+    classes = <any>[];
 
-    functions = [];
+    functions = <any>[];
 
     init(parsedFiles) {
         this.reset();
-        this.elements = parsedFiles;
+        this.filesToProcess = parsedFiles;
         this.processElements();
     }
 
     reset() {
-        this.elements = [];
+        this.filesToProcess = [];
         this.classes = [];
         this.functions = [];
     }
 
     processElements() {
-        this.elements.forEach(element => {
+        this.filesToProcess.forEach(element => {
             let classesNodesForFile = [];
             let functionsForFile = [];
 
@@ -59,10 +60,13 @@ class DataManager {
                 this.functions = [...this.functions, ...functionsForFile];
             }
         });
+        console.log(this.classes);
+        RelationManager.mergeInRelations(this.classes);
+        console.log(this.classes);
     }
 
     getFiles() {
-        return this.elements;
+        return this.filesToProcess;
     }
 
     getClasses() {

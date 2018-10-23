@@ -2,6 +2,15 @@ import { PyRelation, RelationTypes } from './py-relation';
 
 const { uniqid } = <any>window;
 
+enum BasicTypes {
+    number,
+    boolean,
+    string,
+    object,
+    date,
+    function
+}
+
 export class PyElement {
     name: string;
     relations: any[] = [];
@@ -21,9 +30,9 @@ export class PyElement {
         return test;
     }
 
-    addRelation(from: string, to: string, type: RelationTypes) {
-        if (!this.hasRelation(from, to, type)) {
-            this.relations.push(new PyRelation(from, to, type));
+    addRelation(from: string, to: string, toType: string, type: RelationTypes) {
+        if (!this.hasRelation(from, to, type) && !(to in BasicTypes)) {
+            this.relations.push(new PyRelation(from, to, toType, type));
         }
     }
 }

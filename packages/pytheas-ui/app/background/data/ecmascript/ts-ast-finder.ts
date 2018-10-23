@@ -2,6 +2,7 @@ import { Node, Identifier, TypeReference, Token } from 'typescript';
 
 export interface TypeReferenceObject {
     text: string;
+    kindName: string;
 }
 
 export interface TokenObject {
@@ -33,6 +34,10 @@ class TsAstFinder {
 
     getType(node: TypeReferenceObject): string {
         return node.text;
+    }
+
+    getTypeKind(node: TypeReferenceObject): string {
+        return node.kindName;
     }
 }
 

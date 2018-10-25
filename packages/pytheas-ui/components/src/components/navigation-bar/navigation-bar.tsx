@@ -2,8 +2,7 @@ import { Component, Prop, Event, EventEmitter } from '@stencil/core';
 
 @Component({
     tag: 'py-navigation-bar',
-    styleUrl: 'navigation-bar.scss',
-    shadow: true
+    styleUrl: 'navigation-bar.scss'
 })
 export class NavigationBar {
     @Prop()

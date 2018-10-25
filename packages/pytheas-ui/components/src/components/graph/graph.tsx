@@ -4,8 +4,7 @@ import { jsPlumb } from 'jsplumb';
 
 @Component({
     tag: 'py-graph',
-    styleUrl: 'graph.scss',
-    shadow: false
+    styleUrl: 'graph.scss'
 })
 export class Graph {
     @Prop()

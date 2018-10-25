@@ -3,8 +3,7 @@ import { OverviewData } from './overview-data';
 
 @Component({
     tag: 'py-graph-overview',
-    styleUrl: 'graph-overview.scss',
-    shadow: false
+    styleUrl: 'graph-overview.scss'
 })
 export class GraphOverview {
     @Prop()

@@ -2,8 +2,7 @@ import { Component, Prop, Element, Event, EventEmitter } from '@stencil/core';
 
 @Component({
     tag: 'py-codeblock',
-    styleUrl: 'codeblock.scss',
-    shadow: true
+    styleUrl: 'codeblock.scss'
 })
 export class CodeBlock {
     @Prop()

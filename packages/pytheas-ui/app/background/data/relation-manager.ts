@@ -25,8 +25,8 @@ class RelationManager {
                 if (relation.type === RelationTypes.Out) {
                     let toElement = this.findInListByName(elements, relation.to);
                     if (toElement) {
-                        toElement.addRelation(element.id, toElement.id, relation.toType, RelationTypes.In);
-                        relation.to = toElement.id;
+                        toElement.addRelation(element, toElement, relation.toType, RelationTypes.In);
+                        relation.to = toElement;
                     }
                 }
             });

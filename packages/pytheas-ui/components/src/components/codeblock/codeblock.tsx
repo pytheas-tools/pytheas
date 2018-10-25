@@ -34,7 +34,7 @@ export class CodeBlock {
     componentDidLoad() {
         // console.log('CodeBlock is rendered..');
         if (window['CodeMirror']) {
-            window['CodeMirror'](this.el.shadowRoot.querySelector('.code-view'), {
+            window['CodeMirror'](this.el.querySelector('.code-view'), {
                 value: this.code,
                 mode: 'javascript',
                 lineNumbers: true,
@@ -44,15 +44,15 @@ export class CodeBlock {
                 gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
             });
         }
-        this.topBar = this.el.shadowRoot.querySelector('.top-bar');
-        this.codeView = this.el.shadowRoot.querySelector('.code-view');
+        this.topBar = this.el.querySelector('.top-bar');
+        this.codeView = this.el.querySelector('.code-view');
 
-        this.reduceButton = this.el.shadowRoot.querySelector('.button.reduce');
+        this.reduceButton = this.el.querySelector('.button.reduce');
 
-        this.openButton = this.el.shadowRoot.querySelector('.button.open');
+        this.openButton = this.el.querySelector('.button.open');
         this.openButton.classList.add('disabled');
 
-        this.fullsizeButton = this.el.shadowRoot.querySelector('.button.maximize');
+        this.fullsizeButton = this.el.querySelector('.button.maximize');
     }
 
     reduce() {

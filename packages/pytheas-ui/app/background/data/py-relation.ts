@@ -5,11 +5,11 @@ export enum RelationTypes {
 
 export class PyRelation {
     type: RelationTypes;
-    from: string;
-    to: string;
+    from: any;
+    to: any;
     toType: string;
 
-    constructor(from: string, to: string, toType: string, type: RelationTypes) {
+    constructor(from: any, to: any, toType: string, type: RelationTypes) {
         this.type = type;
         this.from = from;
         this.to = to;

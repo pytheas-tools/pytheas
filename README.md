@@ -36,6 +36,8 @@ https://github.com/pojala/electrino
 
 https://github.com/styfle/awesome-online-ide
 
+https://www.theia-ide.org
+
 ## Ressources
 
 https://blog.dcpos.ch/how-to-make-your-electron-app-sexy

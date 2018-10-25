@@ -72,8 +72,15 @@ http://zuudo.github.io/helios.js/
 
 https://insights.stackoverflow.com/survey/2018/#technology
 
-- JavaScript
-- Java
-- Python
-- C#
-- PHP
+-   JavaScript
+-   Java
+-   Python
+-   C#
+-   PHP
+
+## Design
+
+Support themes light and dark
+
+-   dark like VSCode
+-   light like VSCode

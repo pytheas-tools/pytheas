@@ -63,6 +63,7 @@
 
     .code-window {
       background: #f6f6f6;
+      padding: 10px;
     }
 
     .graph-window {
@@ -108,13 +109,13 @@ new Game();"></py-codeblock>
   <script>
     Split(['.graph-window', '.code-window'], {
       sizes: [50, 50],
-      onDrag: function () {
+      onDrag: function() {
         document.querySelector('py-graph').onExternalDragEvent();
       },
-      onDragStart: function () {
+      onDragStart: function() {
         console.log('onDragStart splitjs');
       },
-      onDragEnd: function () {
+      onDragEnd: function() {
         console.log('onDragEnd splitjs');
       }
     });
@@ -141,9 +142,9 @@ new Game();"></py-codeblock>
   <script>
     if ('serviceWorker' in navigator && location.protocol !== 'file:') {
       // auto-unregister service worker during dev mode
-      navigator.serviceWorker.getRegistration().then(function (registration) {
+      navigator.serviceWorker.getRegistration().then(function(registration) {
         if (registration) {
-          registration.unregister().then(function () {
+          registration.unregister().then(function() {
             location.reload(true)
           });
         }

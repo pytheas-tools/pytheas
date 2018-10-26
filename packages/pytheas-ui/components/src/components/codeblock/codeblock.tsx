@@ -34,7 +34,7 @@ export class CodeBlock {
     componentDidLoad() {
         // console.log('CodeBlock is rendered..');
         if (window['CodeMirror']) {
-            window['CodeMirror'](this.el.querySelector('.code-view'), {
+            window['CodeMirror'](this.el.querySelector('.py-codeblock__code-view'), {
                 value: this.code,
                 mode: 'javascript',
                 lineNumbers: true,
@@ -44,8 +44,8 @@ export class CodeBlock {
                 gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
             });
         }
-        this.topBar = this.el.querySelector('.top-bar');
-        this.codeView = this.el.querySelector('.code-view');
+        this.topBar = this.el.querySelector('.py-codeblock__top-bar');
+        this.codeView = this.el.querySelector('.py-codeblock__code-view');
 
         this.reduceButton = this.el.querySelector('.button.reduce');
 
@@ -95,27 +95,25 @@ export class CodeBlock {
     render() {
         // console.log('CodeBlock rendering..');
         return (
-            <div class="container">
-                <div class="codeblock">
-                    <div class="top-bar">
-                        <div class="filename">
-                            <div class="icon icon-file" />
-                            <span>{this.filename}</span>
-                        </div>
-                        <div class="buttons">
-                            <button class="button reduce" title="Reduce" type="button" onClick={this.reduce.bind(this)}>
-                                -
-                            </button>
-                            <button class="button open" title="Open" type="button" onClick={this.open.bind(this)}>
-                                =
-                            </button>
-                            <button class="button maximize" title="Maximize" type="button" onClick={this.maximize.bind(this)}>
-                                &#9633;
-                            </button>
-                        </div>
+            <div>
+                <div class="py-codeblock__top-bar">
+                    <div class="py-codeblock__top-bar__filename">
+                        <div class="icon icon-file" />
+                        <span>{this.filename}</span>
                     </div>
-                    <div class="code-view" />
+                    <div class="py-codeblock__top-bar__buttons">
+                        <button class="button reduce" title="Reduce" type="button" onClick={this.reduce.bind(this)}>
+                            -
+                        </button>
+                        <button class="button open" title="Open" type="button" onClick={this.open.bind(this)}>
+                            =
+                        </button>
+                        <button class="button maximize" title="Maximize" type="button" onClick={this.maximize.bind(this)}>
+                            &#9633;
+                        </button>
+                    </div>
                 </div>
+                <div class="py-codeblock__code-view" />
             </div>
         );
     }

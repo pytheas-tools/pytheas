@@ -19,6 +19,7 @@ p {
     h1 {
         font-size: 16px;
     }
+
     h2 {
         font-size: 14px;
     }
@@ -67,8 +68,11 @@ p {
 /** WINDOWS **/
 
 .code-window {
+    padding: 10px;
+
     &.codeblock-maximized {
         overflow-y: hidden;
+        padding: 0;
     }
 }
 

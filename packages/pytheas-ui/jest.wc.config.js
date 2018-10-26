@@ -1,4 +1,4 @@
-let tsJest = require('ts-jest');
+let tsJest = require('ts-jest/utils');
 let config = tsJest.createJestPreset();
 
 config.testEnvironment = 'jsdom';

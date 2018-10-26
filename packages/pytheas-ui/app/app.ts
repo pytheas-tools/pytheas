@@ -1,6 +1,6 @@
 import Split from 'split.js';
 
-import ApplicationManager from './background/application-manager/application-manager';
+import ApplicationManager from './background/managers/application-manager';
 import { Graph } from '../components/dist/types/components/graph/graph';
 
 ApplicationManager.init();

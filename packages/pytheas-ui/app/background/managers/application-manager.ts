@@ -4,6 +4,7 @@ import GraphWindowManager from '../../windows/graph-window';
 import NavigationBarManager from '../../windows/navigation-bar-manager';
 
 import DataManager from '../data/data-manager';
+import SettingsManager from './settings-manager';
 
 import { pubsub } from '../../utils/pubsub';
 import { EVENTS } from '../../utils/events';
@@ -28,6 +29,7 @@ class ApplicationManager {
         GraphWindowManager.init(document.querySelector('.graph-window'));
         NavigationBarManager.init(document.querySelector('py-navigation-bar'));
         DropWindowManager.init();
+        SettingsManager.init();
 
         pubsub.subscribe(EVENTS.FILES_PARSED, parsedFiles => {
             this.filesReady = true;

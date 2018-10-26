@@ -23,7 +23,7 @@ class RelationManager {
             // loop for each out relation, and verify related element has the correct in relation referenced
             element.relations.forEach(relation => {
                 if (relation.type === RelationTypes.Out) {
-                    let toElement = this.findInListByName(elements, relation.to);
+                    const toElement = this.findInListByName(elements, relation.to);
                     if (toElement) {
                         toElement.addRelation(element, toElement, relation.toType, RelationTypes.In);
                         relation.to = toElement;

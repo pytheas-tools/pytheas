@@ -45,10 +45,10 @@ class GraphWindow {
                 });*/
         });
 
-        pubsub.subscribe(EVENTS.SOMETHING_SELECTED, element => {
-            console.log('GraphWindow something selected, display graph: ', element);
+        pubsub.subscribe(EVENTS.SOMETHING_SELECTED, selectedElement => {
+            console.log('GraphWindow something selected, display graph: ', selectedElement);
             this.clearWindow();
-            this.addGraph(element);
+            this.addGraph(selectedElement);
         });
 
         pubsub.subscribe(EVENTS.NAVIGATIONBAR_ONUPDATE, item => {

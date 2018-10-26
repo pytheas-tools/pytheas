@@ -10,5 +10,6 @@ export const EVENTS = {
     GRAPH_ELEMENT_SELECTED: 'graphElementSelected',
     GRAPH_OVERVIEW_DETAIL_SELECTED: 'graphOverviewDetailSelected',
     SOMETHING_SELECTED: 'somethingSelected',
-    INIT_VIEW: 'initView'
+    INIT_VIEW: 'initView',
+    THEME_CHANGED: 'themeChanged'
 };

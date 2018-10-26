@@ -17,12 +17,15 @@ export namespace Components {
   interface PyCodeblock {
     'code': string;
     'filename': string;
+    'theme': string;
+    'updateTheme': (theme: string) => void;
   }
   interface PyCodeblockAttributes extends StencilHTMLAttributes {
     'code'?: string;
     'filename'?: string;
     'onCodeblockMaximized'?: (event: CustomEvent) => void;
     'onCodeblockUnmaximized'?: (event: CustomEvent) => void;
+    'theme'?: string;
   }
 
   interface PyGraphOverview {

@@ -1,5 +1,5 @@
 .theme-dark {
-    .top-bar {
+    .app-container__top-bar {
         background: #3c3c3c;
         color: #cccccc;
     }
@@ -9,10 +9,21 @@
     }
 
     .code-window {
-        background: #1e1e1e;
+        background: #333333;
     }
 
     py-navigation-bar {
         background: #333333;
+    }
+
+    py-codeblock {
+        &>div {
+            border-color: #2c2c2c;
+        }
+
+        .py-codeblock__top-bar {
+            background: #2c2c2c;
+            color: white;
+        }
     }
 }

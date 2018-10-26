@@ -11,7 +11,7 @@ p {
     margin: 0;
 }
 
-.top-bar {
+.app-container__top-bar {
     width: 100%;
     height: 40px;
     display: flex;
@@ -23,11 +23,20 @@ p {
     h2 {
         font-size: 14px;
     }
+
+    .app-container__top-bar__infos {
+        flex-grow: 1;
+        display: flex;
+    }
+
+    .app-container__top-bar__settings {
+        padding: 10px;
+    }
 }
 
 /** SPLIT WINDOWS **/
 
-.app {
+.app-container {
     width: 100%;
     height: 100%;
     position: absolute;

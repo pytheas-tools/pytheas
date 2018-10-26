@@ -1,4 +1,4 @@
-import { Component, Prop, Element, Event, EventEmitter } from '@stencil/core';
+import { Component, Prop, Element, Event, EventEmitter, Method } from '@stencil/core';
 
 @Component({
     tag: 'py-codeblock',
@@ -9,8 +9,11 @@ export class CodeBlock {
     code: string;
     @Prop()
     filename: string;
+    @Prop()
+    theme: string;
 
     maximized = false;
+    codeMirrorEditor;
 
     @Event()
     codeblockMaximized: EventEmitter;
@@ -34,13 +37,14 @@ export class CodeBlock {
     componentDidLoad() {
         // console.log('CodeBlock is rendered..');
         if (window['CodeMirror']) {
-            window['CodeMirror'](this.el.querySelector('.py-codeblock__code-view'), {
+            this.codeMirrorEditor = window['CodeMirror'](this.el.querySelector('.py-codeblock__code-view'), {
                 value: this.code,
                 mode: 'javascript',
                 lineNumbers: true,
                 viewportMargin: Infinity,
                 lineWrapping: true,
                 foldGutter: true,
+                theme: this.theme && this.theme === 'theme-dark' ? 'monokai' : 'default',
                 gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
             });
         }
@@ -53,6 +57,12 @@ export class CodeBlock {
         this.openButton.classList.add('disabled');
 
         this.fullsizeButton = this.el.querySelector('.button.maximize');
+    }
+
+    @Method()
+    updateTheme(theme: string) {
+        const localTheme = theme === 'theme-dark' ? 'monokai' : 'default';
+        this.codeMirrorEditor.setOption('theme', localTheme);
     }
 
     reduce() {
@@ -98,7 +108,6 @@ export class CodeBlock {
             <div>
                 <div class="py-codeblock__top-bar">
                     <div class="py-codeblock__top-bar__filename">
-                        <div class="icon icon-file" />
                         <span>{this.filename}</span>
                     </div>
                     <div class="py-codeblock__top-bar__buttons">

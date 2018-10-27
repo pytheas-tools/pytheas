@@ -2,27 +2,33 @@ import rollupTypescript from 'rollup-plugin-typescript';
 import babel from 'rollup-plugin-babel';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
+import builtins from 'rollup-plugin-node-builtins';
+import globals from 'rollup-plugin-node-globals';
 
 export default [{
     input: './app/app.ts',
     output: {
-        file: './dist/scripts/app.js',
+        file: 'output/scripts/app.js',
         format: 'cjs',
         name: 'App',
-        sourcemap: false
+        sourcemap: (process.env.NODE_ENV && process.env.NODE_ENV === 'development') ? true : false
     },
     context: 'window',
     plugins: [
         rollupTypescript(),
+        globals(),
+        builtins(),
         nodeResolve({
             jsnext: true,
             main: true
         }),
-        commonjs()
+        commonjs({
+            include: 'node_modules/**'
+        })
         /*,
-                   babel({
-                       exclude: 'node_modules/**',
-                       presets: 'es2015-rollup'
-                   })*/
+        babel({
+            exclude: 'node_modules/**',
+            presets: 'es2015-rollup'
+        })*/
     ]
 }];

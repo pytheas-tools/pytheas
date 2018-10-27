@@ -1,6 +1,7 @@
 node_modules
 build
 .tmp
+output
 dist
 doc
 coverage

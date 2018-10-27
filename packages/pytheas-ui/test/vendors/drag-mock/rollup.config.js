@@ -6,7 +6,7 @@ import commonjs from 'rollup-plugin-commonjs';
 export default {
     input: 'test/vendors/drag-mock/src/index.ts',
     output: {
-        file: '.tmp/scripts/dragmock.js',
+        file: 'output/scripts/dragmock.js',
         format: 'umd',
         name: 'dragMock',
         sourcemap: false
@@ -18,10 +18,11 @@ export default {
             jsnext: true,
             main: true
         }),
-        commonjs() /*,
-            babel({
-                exclude: 'node_modules/**',
-                presets: 'es2015-rollup'
-            })*/
+        commonjs()
+        /*,
+                   babel({
+                       exclude: 'node_modules/**',
+                       presets: 'es2015-rollup'
+                   })*/
     ]
 };

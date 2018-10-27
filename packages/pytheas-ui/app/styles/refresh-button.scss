@@ -1,0 +1,35 @@
+.refresh-toaster {
+    position: absolute;
+    left: 25px;
+    bottom: 25px;
+    padding: 15px;
+    border-radius: 5px;
+    display: none;
+    align-items: center;
+
+    .refresh-toaster__refresh-button,
+    .refresh-toaster__close-button {
+        border: none;
+        margin: 0;
+        padding: 0;
+        width: auto;
+        overflow: visible;
+        background: transparent;
+        font-weight: bold;
+        font-size: 16px;
+        cursor: pointer;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .refresh-toaster__message,
+    .refresh-toaster__refresh-button {
+        margin-right: 10px;
+    }
+
+    .refresh-toaster__close-button {
+        font-size: 20px;
+    }
+}

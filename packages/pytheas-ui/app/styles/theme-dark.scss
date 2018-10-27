@@ -26,4 +26,17 @@
             color: white;
         }
     }
+
+    .refresh-toaster {
+        background: #2c2c2c;
+        color: white;
+
+        .refresh-toaster__refresh-button {
+            color: #3897fb;
+        }
+
+        .refresh-toaster__close-button {
+            color: white;
+        }
+    }
 }

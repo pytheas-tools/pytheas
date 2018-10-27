@@ -8,6 +8,7 @@ import SettingsManager from './settings-manager';
 
 import { pubsub } from '../../utils/pubsub';
 import { EVENTS } from '../../utils/events';
+import PWAManager from './pwa-manager';
 
 /**
  * Manage all application state, main orchestrator
@@ -30,6 +31,7 @@ class ApplicationManager {
         NavigationBarManager.init(document.querySelector('py-navigation-bar'));
         DropWindowManager.init();
         SettingsManager.init();
+        PWAManager.init();
 
         pubsub.subscribe(EVENTS.FILES_PARSED, parsedFiles => {
             this.filesReady = true;

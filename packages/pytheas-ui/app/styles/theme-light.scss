@@ -15,4 +15,17 @@
     py-navigation-bar {
         background: #f3f3f3;
     }
+
+    .refresh-toaster {
+        background: #a6a6a6;
+        color: white;
+
+        .refresh-toaster__refresh-button {
+            color: #0871e0;
+        }
+
+        .refresh-toaster__close-button {
+            color: white;
+        }
+    }
 }

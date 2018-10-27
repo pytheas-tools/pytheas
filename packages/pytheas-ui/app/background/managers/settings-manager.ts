@@ -2,7 +2,7 @@ import { pubsub } from '../../utils/pubsub';
 import { EVENTS } from '../../utils/events';
 
 /**
- * Manage all application state, main orchestrator
+ * Manage settings
  */
 class SettingsManager {
     private static instance: SettingsManager;

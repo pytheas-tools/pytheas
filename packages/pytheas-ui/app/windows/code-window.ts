@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import dayjs from 'dayjs';
 
 import { pubsub } from '../utils/pubsub';
 import { EVENTS } from '../utils/events';
@@ -51,7 +51,7 @@ class CodeWindow {
         });
         this.addCodeBlock({
             name: 'Last scan',
-            sourcecode: `Last indexed: ${format(new Date(), 'dd-MM-YYYY HH:mm:ss', { awareOfUnicodeTokens: true })}
+            sourcecode: `Last indexed: ${dayjs().format('DD-MM-YYYY HH:mm:ss')}
 
             ${files.length} files
             ${lines} lines of code`

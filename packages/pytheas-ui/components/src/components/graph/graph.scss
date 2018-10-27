@@ -10,17 +10,17 @@ py-graph {
     height: 100%;
 }
 
-.class {
+.block-class {
     background: #e5e5e5;
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 4px 8px;
-    border-radius: 6px;
+    padding: 12px 15px;
+    border-radius: 10px;
     margin: 30px;
 }
 
-.group {
+.block-class_group {
     background: white;
     display: flex;
     flex-direction: column;
@@ -30,9 +30,9 @@ py-graph {
     margin-bottom: 10px;
 }
 
-.title {
+.block-class_title {
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .method {

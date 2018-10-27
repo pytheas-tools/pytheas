@@ -3,9 +3,9 @@ import { Rule } from './rule/rule';
 
 export class Game {
     player1: Player;
-    player2: Player;
+    public player2: Player;
 
-    rule: Rule;
+    private rule: Rule;
 
     constructor() {}
 
@@ -17,4 +17,6 @@ export class Game {
     }
 
     private clearUI() {}
+
+    simpleMethod() {}
 }

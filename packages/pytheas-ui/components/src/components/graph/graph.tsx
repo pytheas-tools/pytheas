@@ -10,6 +10,10 @@ export class Graph {
     @Prop()
     data: any;
 
+    centralElement;
+    innerRelations;
+    outerRelations;
+
     jsPlumbInstance;
 
     @Method()
@@ -22,6 +26,9 @@ export class Graph {
 
     componentWillLoad() {
         console.log('Graph is about to be rendered..: ', this.data);
+
+        this.centralElement = this.data;
+        this.centralElement.relations.forEach(relation => {});
     }
 
     componentDidLoad() {
@@ -82,16 +89,26 @@ export class Graph {
     render() {
         return (
             <div class="container">
-                <div class="class">
-                    <div class="title">TicTacToe</div>
-                    <div class="group">
+                <div class="inner-relations">
+                    <div class="class">
+                        <div class="title">Main</div>
+                        <div class="group">
+                            <div class="title">Public</div>
+                            <div id="c2_1" class="method">
+                                init
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="block-class">
+                    <div class="block-class__title">{this.centralElement.name}</div>
+                    <div class="block-class_group">
                         <div class="title">Public</div>
                         <div id="c1_1" class="method">
                             start
                         </div>
                     </div>
-
-                    <div class="group">
+                    <div class="block-class_group">
                         <div class="title">Private</div>
                         <div id="c1_2" class="method">
                             Reset
@@ -101,12 +118,14 @@ export class Graph {
                         </div>
                     </div>
                 </div>
-                <div class="class">
-                    <div class="title">Field</div>
-                    <div class="group">
-                        <div class="title">Public</div>
-                        <div id="c2_1" class="method">
-                            init
+                <div class="outer-relations">
+                    <div class="class">
+                        <div class="title">Field</div>
+                        <div class="group">
+                            <div class="title">Public</div>
+                            <div id="c2_1" class="method">
+                                init
+                            </div>
                         </div>
                     </div>
                 </div>

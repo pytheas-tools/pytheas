@@ -6,7 +6,7 @@ import commonjs from 'rollup-plugin-commonjs';
 export default [{
     input: './app/app.ts',
     output: {
-        file: './.tmp/scripts/app.js',
+        file: './dist/scripts/app.js',
         format: 'cjs',
         name: 'App',
         sourcemap: false

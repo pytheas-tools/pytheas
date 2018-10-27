@@ -1,6 +1,6 @@
 import { ReadedFile } from './files-reader';
 
-import { getSlocInformations } from './detectives/file-sloc';
+import { getSlocInformations } from '../utils/file-sloc';
 import ECMAScriptParser from './data/ecmascript/ecmascript-parser';
 import JavaParser from './data/java/java-parser';
 

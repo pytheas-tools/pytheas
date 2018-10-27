@@ -5,12 +5,10 @@
         "BUILD-EXTERNAL-DEPENDENCIES": "",
         "build-tsquery": "npx browserify node_modules/@phenomnomnominal/tsquery/dist/src/index.js -s tsquery -o .tmp/scripts/tsquery.js",
         "build-tsquery:prod": "npx browserify node_modules/@phenomnomnominal/tsquery/dist/src/index.js -s tsquery | uglifyjs -c > dist/scripts/tsquery.js",
-        "build-uniqid": "npx browserify node_modules/uniqid/index.js -s uniqid -o .tmp/scripts/uniqid.js",
-        "build-uniqid:prod": "npx browserify node_modules/uniqid/index.js -s uniqid | uglifyjs -c > dist/scripts/uniqid.js",
         "build-java-ast": "npx browserify node_modules/java-ast/dist/index.js -s javaast -o .tmp/scripts/javaast.js",
         "build-java-ast:prod": "npx browserify node_modules/java-ast/dist/index.js -s javaast | uglifyjs -c > dist/scripts/javaast.js",
-        "build-browser-dependencies": "npm run build-tsquery && npm run build-uniqid && npm run build-java-ast",
-        "build-browser-dependencies:prod": "npm run build-tsquery:prod && npm run build-uniqid:prod && npm run build-java-ast:prod",
+        "build-browser-dependencies": "run-s build-tsquery build-java-ast",
+        "build-browser-dependencies:prod": "run-s build-tsquery:prod build-java-ast:prod",
         "concat-wc-codemirror": "npx concat -o .tmp/scripts/codemirror.js ./node_modules/codemirror/lib/codemirror.js ./node_modules/codemirror/mode/javascript/javascript.js ./node_modules/codemirror/addon/fold/foldcode.js ./node_modules/codemirror/addon/fold/foldgutter.js ./node_modules/codemirror/addon/fold/brace-fold.js",
         "concat-wc-codemirror:prod": "npx concat -o dist/scripts/codemirror.js ./node_modules/codemirror/lib/codemirror.js ./node_modules/codemirror/mode/javascript/javascript.js ./node_modules/codemirror/addon/fold/foldcode.js ./node_modules/codemirror/addon/fold/foldgutter.js ./node_modules/codemirror/addon/fold/brace-fold.js",
         "compile-dragmock": "npx rollup -c test/vendors/drag-mock/rollup.config.js",
@@ -97,8 +95,7 @@
         "node-source-walk": "^4.0.0",
         "notifier-js": "^1.0.0",
         "sloc": "^0.2.0",
-        "split.js": "^1.5.7",
-        "uniqid": "^5.0.3"
+        "split.js": "^1.5.7"
     },
     "devDependencies": {
         "@babel/core": "^7.1.2",

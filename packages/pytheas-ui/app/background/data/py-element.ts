@@ -1,6 +1,5 @@
 import { PyRelation, RelationTypes } from './py-relation';
-
-const { uniqid } = <any>window;
+import { uniqId } from '../../utils/uniqid';
 
 enum BasicTypes {
     number,
@@ -18,7 +17,7 @@ export class PyElement {
     file: any;
 
     constructor() {
-        this.id = uniqid();
+        this.id = uniqId();
     }
 
     hasRelation(from: string, to: string, type: string) {

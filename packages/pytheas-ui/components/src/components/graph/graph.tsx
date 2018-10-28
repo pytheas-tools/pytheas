@@ -2,6 +2,14 @@ import { Component, Prop, Event, EventEmitter, Method } from '@stencil/core';
 
 import { jsPlumb } from 'jsplumb';
 
+interface JsPlumbConnection {
+    source?: any;
+    target?: any;
+    anchors?: any;
+    endpoint: string;
+    paintStyle: any;
+}
+
 @Component({
     tag: 'py-graph',
     styleUrl: 'graph.scss'
@@ -11,8 +19,8 @@ export class Graph {
     data: any;
 
     centralElement;
-    innerRelations;
-    outerRelations;
+    innerElements = [];
+    outerElements = [];
 
     jsPlumbInstance;
 
@@ -28,21 +36,33 @@ export class Graph {
         console.log('Graph is about to be rendered..: ', this.data);
 
         this.centralElement = this.data;
-        // this.centralElement.relations.forEach(relation => {});
+        this.centralElement.relations.forEach(relation => {
+            if (relation.type === 'in') {
+                this.innerElements.push(relation.from);
+            }
+            if (relation.type === 'out') {
+                this.outerElements.push(relation.to);
+            }
+        });
     }
 
     componentDidLoad() {
-        console.log('Graph is rendered : ', this.data);
+        console.log('Graph is rendered : ', this);
         this.jsPlumbInstance = jsPlumb.getInstance({
             Container: 'canvas',
-            Connector: 'Flowchart',
+            Connector: [
+                'Flowchart',
+                {
+                    cornerRadius: 10
+                }
+            ],
             ConnectionOverlays: [
                 [
                     'Arrow',
                     {
                         location: 1,
-                        width: 11,
-                        length: 11,
+                        width: 10,
+                        length: 10,
                         id: 'ARROW'
                     }
                 ]
@@ -50,88 +70,62 @@ export class Graph {
             Anchor: 'Center'
         });
 
-        const connectorPaintStyleBlue = {
-                strokeWidth: 2,
-                stroke: '#61B7CF',
-                joinstyle: 'round',
-                outlineStroke: 'transparent'
-            },
-            connectorPaintStyleYellow = {
-                strokeWidth: 2,
-                stroke: '#f9bb43',
-                joinstyle: 'round',
-                outlineStroke: 'transparent'
-            };
+        const connectorPaintStyleGrey = {
+            strokeWidth: 2,
+            stroke: '#e5e5e5',
+            joinstyle: 'round',
+            outlineStroke: 'transparent'
+        };
 
-        this.jsPlumbInstance.connect({
-            source: document.getElementById('c1_1'),
-            target: document.getElementById('c2_1'),
-            anchors: ['Right', 'Left'],
-            endpoint: 'Blank',
-            paintStyle: connectorPaintStyleYellow
-        });
-        this.jsPlumbInstance.connect({
-            source: document.getElementById('c1_1'),
-            target: document.getElementById('c1_2'),
-            anchors: ['Right', 'Right'],
-            endpoint: 'Blank',
-            paintStyle: connectorPaintStyleYellow
-        });
-        this.jsPlumbInstance.connect({
-            source: document.getElementById('c1_1'),
-            target: document.getElementById('c1_3'),
-            anchors: ['Right', 'Right'],
-            endpoint: 'Blank',
-            paintStyle: connectorPaintStyleBlue
+        this.centralElement.relations.forEach(relation => {
+            const jsPlumbConnectionParameters: JsPlumbConnection = {
+                endpoint: 'Blank',
+                paintStyle: connectorPaintStyleGrey,
+                anchors: ['Right', 'Left']
+            };
+            jsPlumbConnectionParameters.source = document.getElementById(relation.from.id);
+            jsPlumbConnectionParameters.target = document.getElementById(relation.to.id);
+            this.jsPlumbInstance.connect(jsPlumbConnectionParameters);
         });
     }
 
     render() {
         return (
             <div class="container">
-                <div class="inner-relations">
-                    <div class="class">
-                        <div class="title">Main</div>
-                        <div class="group">
-                            <div class="title">Public</div>
-                            <div id="c2_1" class="method">
-                                init
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="inner-relations">{this.innerElements.map(element => this.renderBlockClass(element))}</div>
                 {this.renderBlockClass(this.centralElement)}
-                <div class="outer-relations">
-                    <div class="class">
-                        <div class="title">Field</div>
-                        <div class="group">
-                            <div class="title">Public</div>
-                            <div id="c2_1" class="method">
-                                init
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="outer-relations">{this.outerElements.map(element => this.renderBlockClass(element))}</div>
             </div>
         );
     }
 
     renderBlockClass(classElement) {
+        console.log('renderBlockClass: ', classElement);
         return (
-            <div class="block-class">
+            <div class="block-class" id={classElement.id}>
                 <div class="block-class_title">{classElement.name}</div>
                 {classElement.publicElements.length > 0 ? (
                     <div class="block-class_group">
-                        <div class="title">Public</div>
-                        {this.renderPublicPrivateElements(classElement.publicElements)}
+                        <div class="container">
+                            <div class="title">
+                                <ion-icon name="ios-globe" />
+                                Public
+                            </div>
+                            {this.renderPublicPrivateElements(classElement.publicElements)}
+                        </div>
                     </div>
                 ) : (
                     ''
                 )}
                 {classElement.privateElements.length > 0 ? (
                     <div class="block-class_group">
-                        <div class="title">Private</div>
-                        {this.renderPublicPrivateElements(classElement.privateElements)}
+                        <div class="container">
+                            <div class="title">
+                                <ion-icon name="ios-home" />
+                                Private
+                            </div>
+                            {this.renderPublicPrivateElements(classElement.privateElements)}
+                        </div>
                     </div>
                 ) : (
                     ''

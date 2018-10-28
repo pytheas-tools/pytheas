@@ -36,4 +36,12 @@ export class PyElement {
             this.relations.push(new PyRelation(from, to, toType, type));
         }
     }
+
+    getInRelations() {
+        return this.relations.filter(relation => relation.type === RelationTypes.In);
+    }
+
+    getOutRelations() {
+        return this.relations.filter(relation => relation.type === RelationTypes.Out);
+    }
 }

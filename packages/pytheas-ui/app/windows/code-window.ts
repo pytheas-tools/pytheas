@@ -34,6 +34,9 @@ class CodeWindow {
             console.log('CodeWindow something selected, display related blocks: ', selectedElement);
             this.clearWindow();
             this.addCodeBlock(selectedElement.file);
+            selectedElement.getInRelations().forEach(relation => {
+                this.addCodeBlock(relation.from.file);
+            });
         });
         pubsub.subscribe(EVENTS.THEME_CHANGED, theme => {
             const codeBlocks = document.querySelectorAll('py-codeblock');

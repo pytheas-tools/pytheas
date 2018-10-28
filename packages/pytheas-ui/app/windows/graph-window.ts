@@ -61,7 +61,7 @@ class GraphWindow {
         });
 
         pubsub.subscribe(EVENTS.NAVIGATIONBAR_ONUPDATE, item => {
-            console.log('NAVIGATIONBAR_ONUPDATE: ', item);
+            console.log('GraphWindow NAVIGATIONBAR_ONUPDATE: ', item);
 
             if (item) {
                 if (item.type === 'overview' && !item.subtype) {

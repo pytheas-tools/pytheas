@@ -44,6 +44,13 @@ class CodeWindow {
                 codeBlock.updateTheme(theme);
             });
         });
+        pubsub.subscribe(EVENTS.NAVIGATIONBAR_ONUPDATE, item => {
+            console.log('CodeWindow NAVIGATIONBAR_ONUPDATE: ', item);
+
+            if (item && item.type === 'overview') {
+                this.clearWindow();
+            }
+        });
     }
 
     displayInitialParsingInformations() {

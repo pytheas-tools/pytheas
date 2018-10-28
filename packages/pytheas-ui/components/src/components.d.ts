@@ -43,6 +43,7 @@ export namespace Components {
 
   interface PyGraph {
     'data': any;
+    'getJsPlumbInstance': () => Promise<any>;
     'onExternalDragEvent': () => void;
   }
   interface PyGraphAttributes extends StencilHTMLAttributes {

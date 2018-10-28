@@ -32,6 +32,11 @@ export class Graph {
         this.jsPlumbInstance.repaintEverything();
     }
 
+    @Method()
+    async getJsPlumbInstance() {
+        return this.jsPlumbInstance;
+    }
+
     @Event()
     graphElementSelected: EventEmitter;
 
@@ -52,7 +57,7 @@ export class Graph {
     componentDidLoad() {
         console.log('Graph is rendered : ', this);
         this.jsPlumbInstance = jsPlumb.getInstance({
-            Container: this.graphElement,
+            Container: document.querySelector('.graph-container__zoomable'),
             Connector: [
                 'Flowchart',
                 {
@@ -90,6 +95,10 @@ export class Graph {
             jsPlumbConnectionParameters.target = document.getElementById(relation.to.id);
             this.jsPlumbInstance.connect(jsPlumbConnectionParameters);
         });
+
+        setTimeout(() => {
+            this.onExternalDragEvent();
+        }, 0);
     }
 
     componentDidUnload() {

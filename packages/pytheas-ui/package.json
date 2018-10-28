@@ -99,6 +99,7 @@
         "java-ast": "^0.1.0",
         "jsplumb": "^2.8.3",
         "notifier-js": "^1.0.0",
+        "panzoom": "^6.3.2",
         "sloc": "^0.2.0",
         "split.js": "^1.5.7",
         "workbox": "0.0.0"

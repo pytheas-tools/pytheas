@@ -1,0 +1,45 @@
+.graph-controls {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    display: flex;
+    align-items: flex-end;
+
+    .graph-controls__buttons {
+        display: flex;
+        flex-direction: column;
+        margin-right: 5px;
+
+        button {
+            border: none;
+            margin: 0;
+            padding: 0;
+            width: 25px;
+            height: 25px;
+            overflow: visible;
+            background: #bfbfbf;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            margin-top: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+
+            &:focus {
+                outline: none;
+            }
+
+            &:hover {
+                background: #918f8f;
+            }
+        }
+    }
+
+    .graph-controls_level-message {
+        background: #bfbfbf;
+        color: white;
+        padding: 4px 15px;
+        border-radius: 5px;
+        display: none;
+    }
+}

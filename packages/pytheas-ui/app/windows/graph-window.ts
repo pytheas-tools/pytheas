@@ -1,4 +1,6 @@
 import domtoimage from 'dom-to-image';
+import panzoom from 'panzoom';
+
 import { pubsub } from '../utils/pubsub';
 import { EVENTS } from '../utils/events';
 
@@ -13,6 +15,10 @@ class GraphWindow {
 
     $graphContainer: HTMLElement;
     $graphOverview: HTMLElement;
+    $graphContainerZoomable: HTMLElement;
+
+    panZoomInstance;
+    panZoomMessage: HTMLElement;
 
     private static instance: GraphWindow;
     private constructor() {}
@@ -26,6 +32,9 @@ class GraphWindow {
     init(element: HTMLElement) {
         this.$element = element;
         this.$graphContainer = element.querySelector('.graph-container');
+        this.$graphContainerZoomable = element.querySelector('.graph-container__zoomable');
+
+        this.initPanzoom();
 
         pubsub.subscribe(EVENTS.INIT_VIEW, data => {
             this.clearWindow();
@@ -67,15 +76,56 @@ class GraphWindow {
         });
     }
 
+    initPanzoom() {
+        this.panZoomInstance = panzoom(this.$graphContainerZoomable, {
+            maxZoom: 1.25,
+            minZoom: 0.25
+        });
+        this.panZoomMessage = document.querySelector('.graph-controls_level-message');
+        const zoomPlusButton = document.querySelectorAll('.graph-controls__buttons button')[0];
+        const zoomMinButton = document.querySelectorAll('.graph-controls__buttons button')[1];
+        zoomPlusButton.addEventListener('click', () => {
+            const e = document.createEvent('HTMLEvents');
+            e.keyCode = 107;
+            e.initEvent('keydown', false, true);
+            this.$graphContainer.dispatchEvent(e);
+            this.displayZoomLevel();
+        });
+        zoomMinButton.addEventListener('click', () => {
+            const e = document.createEvent('HTMLEvents');
+            e.keyCode = 109;
+            e.initEvent('keydown', false, true);
+            this.$graphContainer.dispatchEvent(e);
+            this.displayZoomLevel();
+        });
+    }
+
+    displayZoomLevel() {
+        let scale = Math.ceil(this.panZoomInstance.getTransform().scale * 100);
+        this.panZoomMessage.style.display = 'block';
+        this.panZoomMessage.innerHTML = `${scale}%`;
+        document
+            .querySelector('py-graph')
+            .getJsPlumbInstance()
+            .then(instance => {
+                setTimeout(() => {
+                    instance.repaintEverything();
+                }, 0);
+            });
+        setTimeout(() => {
+            this.panZoomMessage.style.display = 'none';
+        }, 2000);
+    }
+
     addGraph(element) {
         const $graph = document.createElement('py-graph');
         $graph.data = element;
-        this.$graphContainer.appendChild($graph);
+        this.$graphContainerZoomable.appendChild($graph);
     }
 
     clearWindow() {
-        while (this.$graphContainer.firstChild) {
-            this.$graphContainer.firstChild.remove();
+        while (this.$graphContainerZoomable.firstChild) {
+            this.$graphContainerZoomable.firstChild.remove();
         }
     }
 
@@ -86,7 +136,7 @@ class GraphWindow {
         this.$graphOverview.addEventListener(EVENTS.GRAPH_ELEMENT_SELECTED, this.onGraphElementSelected.bind(this));
         this.$graphOverview.addEventListener(EVENTS.GRAPH_OVERVIEW_DETAIL_SELECTED, this.onGraphOverviewDetailSelected.bind(this));
 
-        this.$graphContainer.appendChild(this.$graphOverview);
+        this.$graphContainerZoomable.appendChild(this.$graphOverview);
     }
 
     onGraphOverviewDetailSelected(ev) {

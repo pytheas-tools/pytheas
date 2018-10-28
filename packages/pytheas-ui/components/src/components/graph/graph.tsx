@@ -28,7 +28,7 @@ export class Graph {
         console.log('Graph is about to be rendered..: ', this.data);
 
         this.centralElement = this.data;
-        this.centralElement.relations.forEach(relation => {});
+        // this.centralElement.relations.forEach(relation => {});
     }
 
     componentDidLoad() {
@@ -100,24 +100,7 @@ export class Graph {
                         </div>
                     </div>
                 </div>
-                <div class="block-class">
-                    <div class="block-class__title">{this.centralElement.name}</div>
-                    <div class="block-class_group">
-                        <div class="title">Public</div>
-                        <div id="c1_1" class="method">
-                            start
-                        </div>
-                    </div>
-                    <div class="block-class_group">
-                        <div class="title">Private</div>
-                        <div id="c1_2" class="method">
-                            Reset
-                        </div>
-                        <div id="c1_3" class="property">
-                            _players
-                        </div>
-                    </div>
-                </div>
+                {this.renderBlockClass(this.centralElement)}
                 <div class="outer-relations">
                     <div class="class">
                         <div class="title">Field</div>
@@ -131,5 +114,37 @@ export class Graph {
                 </div>
             </div>
         );
+    }
+
+    renderBlockClass(classElement) {
+        return (
+            <div class="block-class">
+                <div class="block-class_title">{classElement.name}</div>
+                {classElement.publicElements.length > 0 ? (
+                    <div class="block-class_group">
+                        <div class="title">Public</div>
+                        {this.renderPublicPrivateElements(classElement.publicElements)}
+                    </div>
+                ) : (
+                    ''
+                )}
+                {classElement.privateElements.length > 0 ? (
+                    <div class="block-class_group">
+                        <div class="title">Private</div>
+                        {this.renderPublicPrivateElements(classElement.privateElements)}
+                    </div>
+                ) : (
+                    ''
+                )}
+            </div>
+        );
+    }
+
+    renderPublicPrivateElements(elements) {
+        const lines = [];
+        elements.forEach(element => {
+            lines.push(<div class={element.kind}>{element.name}</div>);
+        });
+        return lines;
     }
 }

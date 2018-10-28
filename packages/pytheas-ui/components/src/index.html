@@ -136,6 +136,223 @@ new Game();"></py-codeblock>
       }]
     };
     document.querySelector('py-graph-overview').data = overviewData;*/
+    var MainClass = {
+      "id": "jnsnh17v",
+      "publicElements": [{
+        "relations": [],
+        "id": "jnsnh17w",
+        "name": "game",
+        "type": "Game",
+        "kind": "property",
+        "typeKind": "TypeReference"
+      }, {
+        "relations": [],
+        "id": "jnsnh17x",
+        "name": "start",
+        "kind": "method",
+        "modifiers": ["public"]
+      }],
+      "privateElements": [],
+      "name": "Main",
+      "propertyDeclarations": [{
+        "relations": [],
+        "id": "jnsnh17w",
+        "name": "game",
+        "type": "Game",
+        "typeKind": "TypeReference"
+      }],
+      "methodDeclarations": [{
+        "relations": [],
+        "id": "jnsnh17x",
+        "name": "start",
+        "modifiers": ["public"]
+      }],
+      "constructorDeclaration": {
+        "relations": [],
+        "id": "jnsnh17y"
+      }
+    };
+    var RuleClass = {
+      "id": "jnsnh17d",
+      "publicElements": [{
+        "relations": [],
+        "id": "jnsnh17f",
+        "name": "sentence",
+        "type": "string",
+        "kind": "property",
+        "typeKind": "StringKeyword"
+      }],
+      "privateElements": [],
+      "name": "Rule",
+      "propertyDeclarations": [{
+        "relations": [],
+        "id": "jnsnh17f",
+        "name": "sentence",
+        "type": "string",
+        "typeKind": "StringKeyword"
+      }],
+      "methodDeclarations": [],
+      "constructorDeclaration": {
+        "relations": [],
+        "id": "jnsnh17g"
+      }
+    };
+    var PlayerClass = {
+      "id": "jnsnh17h",
+      "publicElements": [{
+        "relations": [],
+        "id": "jnsnh17i",
+        "name": "name",
+        "type": "string",
+        "kind": "property",
+        "typeKind": "StringKeyword"
+      }, {
+        "relations": [],
+        "id": "jnsnh17j",
+        "name": "power",
+        "type": "number",
+        "kind": "property",
+        "typeKind": "NumberKeyword"
+      }, {
+        "relations": [],
+        "id": "jnsnh17k",
+        "name": "type",
+        "kind": "property"
+      }, {
+        "relations": [],
+        "id": "jnsnh17l",
+        "name": "init",
+        "kind": "method"
+      }],
+      "privateElements": [],
+      "name": "Player",
+      "propertyDeclarations": [{
+        "relations": [],
+        "id": "jnsnh17i",
+        "name": "name",
+        "type": "string",
+        "typeKind": "StringKeyword"
+      }, {
+        "relations": [],
+        "id": "jnsnh17j",
+        "name": "power",
+        "type": "number",
+        "typeKind": "NumberKeyword"
+      }, {
+        "relations": [],
+        "id": "jnsnh17k",
+        "name": "type"
+      }],
+      "methodDeclarations": [{
+        "relations": [],
+        "id": "jnsnh17l",
+        "name": "init"
+      }],
+      "constructorDeclaration": {
+        "relations": [],
+        "id": "jnsnh17m"
+      }
+    };
+    var GameClass = {
+      "id": "jnsnh17n",
+      "publicElements": [{
+        "relations": [],
+        "id": "jnsnh17o",
+        "name": "player1",
+        "type": "Player",
+        "kind": "property",
+        "typeKind": "TypeReference"
+      }, {
+        "relations": [],
+        "id": "jnsnh17p",
+        "name": "player2",
+        "type": "Player",
+        "kind": "property",
+        "typeKind": "TypeReference",
+        "modifiers": ["public"]
+      }, {
+        "relations": [],
+        "id": "jnsnh17r",
+        "name": "start",
+        "kind": "method",
+        "modifiers": ["public"]
+      }, {
+        "relations": [],
+        "id": "jnsnh17t",
+        "kind": "method",
+        "name": "simpleMethod"
+      }],
+      "privateElements": [{
+        "relations": [],
+        "id": "jnsnh17q",
+        "name": "rule",
+        "type": "Rule",
+        "kind": "property",
+        "typeKind": "TypeReference",
+        "modifiers": ["private"]
+      }, {
+        "relations": [],
+        "id": "jnsnh17s",
+        "name": "clearUI",
+        "kind": "method",
+        "modifiers": ["private"]
+      }],
+      "name": "Game",
+      "propertyDeclarations": [{
+        "relations": [],
+        "id": "jnsnh17o",
+        "name": "player1",
+        "type": "Player",
+        "typeKind": "TypeReference"
+      }, {
+        "relations": [],
+        "id": "jnsnh17p",
+        "name": "player2",
+        "type": "Player",
+        "typeKind": "TypeReference",
+        "modifiers": ["public"]
+      }, {
+        "relations": [],
+        "id": "jnsnh17q",
+        "name": "rule",
+        "type": "Rule",
+        "typeKind": "TypeReference",
+        "modifiers": ["private"]
+      }],
+      "methodDeclarations": [{
+        "relations": [],
+        "id": "jnsnh17r",
+        "name": "start",
+        "modifiers": ["public"]
+      }, {
+        "relations": [],
+        "id": "jnsnh17s",
+        "name": "clearUI",
+        "modifiers": ["private"]
+      }, {
+        "relations": [],
+        "id": "jnsnh17t",
+        "name": "simpleMethod"
+      }],
+      "constructorDeclaration": {
+        "relations": [],
+        "id": "jnsnh17u"
+      }
+    };
+    GameClass.relations = [{
+      type: 'out',
+      from: GameClass,
+      to: PlayerClass
+    }, {
+      type: 'out',
+      from: GameClass,
+      to: RuleClass
+    }, {
+      type: 'in',
+      from: MainClass,
+      to: GameClass
+    }]
+    document.querySelector('py-graph').data = GameClass;
   </script>
 
 

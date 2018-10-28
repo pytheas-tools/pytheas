@@ -4,6 +4,7 @@ import tsAstFinder, { NodeObject, TokenObject } from './ts-ast-finder';
 export class ECMAScriptProperty extends PyElement {
     type: string;
     typeKind: string;
+    kind = 'property';
 
     constructor(propertyNode: NodeObject) {
         super();

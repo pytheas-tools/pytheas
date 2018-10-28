@@ -72,6 +72,24 @@ export class GraphOverview {
         this.graphElementSelected.emit(element);
     }
 
+    getPluralForType(type: string): string {
+        let pluralForType = '';
+        switch (type) {
+            case 'file':
+                pluralForType = 'Files';
+                break;
+            case 'class':
+                pluralForType = 'Classes';
+                break;
+            case 'function':
+                pluralForType = 'Functions';
+                break;
+            default:
+                break;
+        }
+        return pluralForType;
+    }
+
     renderListOfElements(elements) {
         const lines = [];
         elements.map(element => {
@@ -88,7 +106,7 @@ export class GraphOverview {
         if (this.inDetailList) {
             return (
                 <div class="type-list">
-                    <div class="title">{this.selectedType}</div>
+                    <div class="title">{this.getPluralForType(this.selectedType)}</div>
                     <ul>
                         {Object.keys(this.selectedElements).map(key => (
                             <li>

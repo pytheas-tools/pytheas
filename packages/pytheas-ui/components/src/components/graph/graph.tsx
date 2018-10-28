@@ -48,7 +48,7 @@ export class Graph {
             if (relation.type === 'in') {
                 this.innerElements.push(relation.from);
             }
-            if (relation.type === 'out') {
+            if (relation.type === 'out' && relation.to) {
                 this.outerElements.push(relation.to);
             }
         });
@@ -86,14 +86,16 @@ export class Graph {
         };
 
         this.centralElement.relations.forEach(relation => {
-            const jsPlumbConnectionParameters: JsPlumbConnection = {
-                endpoint: 'Blank',
-                paintStyle: connectorPaintStyleGrey,
-                anchors: ['Right', 'Left']
-            };
-            jsPlumbConnectionParameters.source = document.getElementById(relation.from.id);
-            jsPlumbConnectionParameters.target = document.getElementById(relation.to.id);
-            this.jsPlumbInstance.connect(jsPlumbConnectionParameters);
+            if (relation.to && relation.from) {
+                const jsPlumbConnectionParameters: JsPlumbConnection = {
+                    endpoint: 'Blank',
+                    paintStyle: connectorPaintStyleGrey,
+                    anchors: ['Right', 'Left']
+                };
+                jsPlumbConnectionParameters.source = document.getElementById(relation.from.id);
+                jsPlumbConnectionParameters.target = document.getElementById(relation.to.id);
+                this.jsPlumbInstance.connect(jsPlumbConnectionParameters);
+            }
         });
 
         setTimeout(() => {

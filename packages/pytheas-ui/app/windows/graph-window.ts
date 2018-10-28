@@ -104,14 +104,14 @@ class GraphWindow {
         let scale = Math.ceil(this.panZoomInstance.getTransform().scale * 100);
         this.panZoomMessage.style.display = 'block';
         this.panZoomMessage.innerHTML = `${scale}%`;
-        document
-            .querySelector('py-graph')
-            .getJsPlumbInstance()
-            .then(instance => {
+        const pygraph = document.querySelector('py-graph');
+        if (pygraph) {
+            pygraph.getJsPlumbInstance().then(instance => {
                 setTimeout(() => {
                     instance.repaintEverything();
                 }, 0);
             });
+        }
         setTimeout(() => {
             this.panZoomMessage.style.display = 'none';
         }, 2000);

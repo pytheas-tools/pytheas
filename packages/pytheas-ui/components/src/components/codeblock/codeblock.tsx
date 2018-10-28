@@ -110,7 +110,7 @@ export class CodeBlock {
             <div>
                 <div class="py-codeblock__top-bar">
                     <div class="py-codeblock__top-bar__filename">
-                        <ion-icon name="ios-document" />
+                        <ion-icon name="list" />
                         <span>{this.filename}</span>
                     </div>
                     <div class="py-codeblock__top-bar__buttons">

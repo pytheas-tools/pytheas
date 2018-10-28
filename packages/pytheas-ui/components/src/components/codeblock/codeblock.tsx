@@ -11,6 +11,8 @@ export class CodeBlock {
     filename: string;
     @Prop()
     theme: string;
+    @Prop()
+    language: string;
 
     maximized = false;
     codeMirrorEditor;
@@ -39,7 +41,7 @@ export class CodeBlock {
         if (window['CodeMirror']) {
             this.codeMirrorEditor = window['CodeMirror'](this.el.querySelector('.py-codeblock__code-view'), {
                 value: this.code,
-                mode: 'javascript',
+                mode: this.language ? 'text/' + this.language : 'javascript',
                 lineNumbers: true,
                 viewportMargin: Infinity,
                 lineWrapping: true,

@@ -1,3 +1,5 @@
+import { extensionToLanguage } from '../utils/extension-to-language';
+
 export interface FileFromElectron {
     path: string;
     size: number;
@@ -7,6 +9,7 @@ export interface ReadedFile {
     path: string;
     name: string;
     extension: string;
+    language: string;
     sourcecode: string | ArrayBuffer;
 }
 
@@ -73,6 +76,7 @@ class FilesReader {
                     path: file.fullPath,
                     name: file.name,
                     extension: file.extension,
+                    language: extensionToLanguage(file.extension),
                     sourcecode: this.browserReader.result
                 };
                 resolve(readedFile);

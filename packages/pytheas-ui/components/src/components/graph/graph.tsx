@@ -1,4 +1,4 @@
-import { Component, Prop, Event, EventEmitter, Method } from '@stencil/core';
+import { Component, Prop, Event, EventEmitter, Method, Element } from '@stencil/core';
 
 import { jsPlumb } from 'jsplumb';
 
@@ -21,6 +21,9 @@ export class Graph {
     centralElement;
     innerElements = [];
     outerElements = [];
+
+    @Element()
+    graphElement: HTMLElement;
 
     jsPlumbInstance;
 
@@ -49,7 +52,7 @@ export class Graph {
     componentDidLoad() {
         console.log('Graph is rendered : ', this);
         this.jsPlumbInstance = jsPlumb.getInstance({
-            Container: 'canvas',
+            Container: this.graphElement,
             Connector: [
                 'Flowchart',
                 {
@@ -89,20 +92,23 @@ export class Graph {
         });
     }
 
+    componentDidUnload() {
+        this.jsPlumbInstance.reset();
+    }
+
     render() {
         return (
             <div class="container">
                 <div class="inner-relations">{this.innerElements.map(element => this.renderBlockClass(element))}</div>
-                {this.renderBlockClass(this.centralElement)}
+                {this.renderBlockClass(this.centralElement, 'central')}
                 <div class="outer-relations">{this.outerElements.map(element => this.renderBlockClass(element))}</div>
             </div>
         );
     }
 
-    renderBlockClass(classElement) {
-        console.log('renderBlockClass: ', classElement);
+    renderBlockClass(classElement, optionalClass?) {
         return (
-            <div class="block-class" id={classElement.id}>
+            <div class={'block-class ' + optionalClass} id={classElement.id}>
                 <div class="block-class_title">{classElement.name}</div>
                 {classElement.publicElements.length > 0 ? (
                     <div class="block-class_group">

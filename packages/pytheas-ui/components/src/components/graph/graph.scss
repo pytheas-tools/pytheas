@@ -19,6 +19,11 @@ py-graph {
     padding: 12px 15px;
     border-radius: 10px;
     margin: 30px;
+
+    &.central {
+        border-color: #707070;
+        border-width: 2px;
+    }
 }
 
 .block-class_group {

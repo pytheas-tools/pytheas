@@ -53,8 +53,9 @@ class CodeWindow {
             name: 'Last scan',
             sourcecode: `Last indexed: ${dayjs().format('DD-MM-YYYY HH:mm:ss')}
 
-            ${files.length} files
-            ${lines} lines of code`
+${files.length} files
+
+${lines} lines of code`
         });
     }
 

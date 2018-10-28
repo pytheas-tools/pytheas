@@ -109,7 +109,7 @@ export class Graph {
 
     render() {
         return (
-            <div class="container">
+            <div class="container jctx-host">
                 <div class="inner-relations">{this.innerElements.map(element => this.renderBlockClass(element))}</div>
                 {this.renderBlockClass(this.centralElement, 'central')}
                 <div class="outer-relations">{this.outerElements.map(element => this.renderBlockClass(element))}</div>

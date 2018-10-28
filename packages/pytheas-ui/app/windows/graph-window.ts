@@ -5,6 +5,9 @@ import { pubsub } from '../utils/pubsub';
 import { EVENTS } from '../utils/events';
 
 import DataManager from '../background/data/data-manager';
+import ContextmenuManager from '../background/managers/contextmenu-manager';
+
+import * as downloadjs from 'downloadjs';
 
 /**
  * Manage graph window, display and instanciate a graph WC with informations from application manager.
@@ -39,25 +42,17 @@ class GraphWindow {
         pubsub.subscribe(EVENTS.INIT_VIEW, data => {
             this.clearWindow();
             this.displayInitView();
-            /*const node = document.querySelector('py-navigation-bar');
-            domtoimage
-                .toPng(node)
-                .then((dataUrl: string) => {
-                    const img = new Image();
-                    console.log(dataUrl);
+        });
 
-                    img.src = dataUrl;
-                    this.$graphContainer.appendChild(img);
-                })
-                .catch((error: string) => {
-                    console.error('oops, something went wrong!', error);
-                });*/
+        pubsub.subscribe(EVENTS.SAVEGRAPHASIMAGE, () => {
+            this.saveasimage();
         });
 
         pubsub.subscribe(EVENTS.SOMETHING_SELECTED, selectedElement => {
             console.log('GraphWindow something selected, display graph: ', selectedElement);
             this.clearWindow();
             this.addGraph(selectedElement);
+            ContextmenuManager.updateHost();
         });
 
         pubsub.subscribe(EVENTS.NAVIGATIONBAR_ONUPDATE, item => {
@@ -74,6 +69,19 @@ class GraphWindow {
                 }
             }
         });
+    }
+
+    saveasimage() {
+        const node = document.querySelector('.graph-container__zoomable');
+        domtoimage
+            .toPng(node)
+            .then((dataUrl: string) => {
+                const img = new Image();
+                downloadjs.default(dataUrl, 'my-image.png', 'image/png');
+            })
+            .catch((error: string) => {
+                console.error('oops, something went wrong!', error);
+            });
     }
 
     initPanzoom() {

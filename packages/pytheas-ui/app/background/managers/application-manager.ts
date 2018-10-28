@@ -9,6 +9,7 @@ import SettingsManager from './settings-manager';
 import { pubsub } from '../../utils/pubsub';
 import { EVENTS } from '../../utils/events';
 import PWAManager from './pwa-manager';
+import ContextmenuManager from './contextmenu-manager';
 
 /**
  * Manage all application state, main orchestrator
@@ -31,6 +32,7 @@ class ApplicationManager {
         NavigationBarManager.init(document.querySelector('py-navigation-bar'));
         DropWindowManager.init();
         SettingsManager.init();
+        ContextmenuManager.init();
         // PWAManager.init();
 
         pubsub.subscribe(EVENTS.FILES_PARSED, parsedFiles => {

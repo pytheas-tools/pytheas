@@ -95,6 +95,7 @@
         "codemirror": "^5.41.0",
         "dayjs": "^1.7.7",
         "dom-to-image": "^2.6.0",
+        "downloadjs": "^1.4.7",
         "ionicons": "^4.4.6",
         "java-ast": "^0.1.0",
         "jsplumb": "^2.8.3",

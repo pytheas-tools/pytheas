@@ -11,5 +11,6 @@ export const EVENTS = {
     GRAPH_OVERVIEW_DETAIL_SELECTED: 'graphOverviewDetailSelected',
     SOMETHING_SELECTED: 'somethingSelected',
     INIT_VIEW: 'initView',
-    THEME_CHANGED: 'themeChanged'
+    THEME_CHANGED: 'themeChanged',
+    SAVEGRAPHASIMAGE: 'savegraphasimage'
 };

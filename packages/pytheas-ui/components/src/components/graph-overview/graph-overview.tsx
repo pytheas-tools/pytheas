@@ -94,7 +94,7 @@ export class GraphOverview {
         const lines = [];
         elements.map(element => {
             lines.push(
-                <li class={'type ' + this.selectedType} onClick={this.openElement.bind(this, element)}>
+                <li class={'type ' + this.selectedType} onClick={this.openElement.bind(this, element)} onTouchStart={this.openElement.bind(this, element)}>
                     {element.name}
                 </li>
             );
@@ -121,21 +121,39 @@ export class GraphOverview {
             return (
                 <ul class="types-list">
                     {this.data.file ? (
-                        <li class="type file" data-badge={this.data.file.length} onClick={this.selectType.bind(this)} data-type="file">
+                        <li
+                            class="type file"
+                            data-badge={this.data.file.length}
+                            onClick={this.selectType.bind(this)}
+                            onTouchStart={this.selectType.bind(this)}
+                            data-type="file"
+                        >
                             Files{' '}
                         </li>
                     ) : (
                         ''
                     )}
                     {this.data.class ? (
-                        <li class="type class" data-badge={this.data.class.length} onClick={this.selectType.bind(this)} data-type="class">
+                        <li
+                            class="type class"
+                            data-badge={this.data.class.length}
+                            onClick={this.selectType.bind(this)}
+                            onTouchStart={this.selectType.bind(this)}
+                            data-type="class"
+                        >
                             Classes
                         </li>
                     ) : (
                         ''
                     )}
                     {this.data.function ? (
-                        <li class="type function" data-badge={this.data.function.length} onClick={this.selectType.bind(this)} data-type="function">
+                        <li
+                            class="type function"
+                            data-badge={this.data.function.length}
+                            onClick={this.selectType.bind(this)}
+                            onTouchStart={this.selectType.bind(this)}
+                            data-type="function"
+                        >
                             Functions
                         </li>
                     ) : (

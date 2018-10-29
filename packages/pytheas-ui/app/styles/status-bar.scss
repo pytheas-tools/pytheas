@@ -6,5 +6,26 @@
 
     &>span {
         padding: 10px;
+        display: flex;
+    }
+
+    span:first-child {
+        flex-grow: 1;
+    }
+
+    span:last-child {
+        ion-icon {
+            color: red;
+        }
+
+        ion-icon,
+        a {
+            margin: 0 5px;
+        }
+
+        a {
+            color: #3897fb;
+            text-decoration: none;
+        }
     }
 }

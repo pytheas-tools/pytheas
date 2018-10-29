@@ -27,6 +27,10 @@ p {
     .app-container__top-bar__infos {
         flex-grow: 1;
         display: flex;
+
+        img {
+            margin: 0 5px;
+        }
     }
 
     .app-container__top-bar__settings {

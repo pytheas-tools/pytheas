@@ -7,15 +7,17 @@
     }
 
     .gutter {
-        background: #424242;
+        background: #3c3c3c;
     }
 
-    .code-window {
+    .code-window,
+    .graph-container,
+    py-navigation-bar {
         background: #333333;
     }
 
     py-navigation-bar {
-        background: #333333;
+        border-bottom: 5px solid #3c3c3c;
     }
 
     py-codeblock {
@@ -30,6 +32,29 @@
 
         .py-codeblock__code-view {
             background: #272822;
+        }
+    }
+
+    py-graph {
+        .block-class {
+            background: #272822;
+            border-color: #424242;
+
+            .block-class_title {
+                color: white;
+            }
+
+            .block-class_group {
+                background: #2c2c2c;
+
+                .title {
+                    color: white;
+                }
+            }
+
+            &.central {
+                border-color: white;
+            }
         }
     }
 

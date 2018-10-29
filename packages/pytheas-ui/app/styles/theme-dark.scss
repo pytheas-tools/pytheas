@@ -1,5 +1,7 @@
 .theme-dark {
-    .app-container__top-bar {
+
+    .app-container__top-bar,
+    .app-container__status-bar {
         background: #3c3c3c;
         color: #cccccc;
     }

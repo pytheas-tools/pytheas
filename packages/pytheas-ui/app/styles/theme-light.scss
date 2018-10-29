@@ -1,5 +1,7 @@
 .theme-light {
-    .app-container__top-bar {
+
+    .app-container__top-bar,
+    .app-container__status-bar {
         background: #ececec;
         color: #868686;
     }

@@ -3,6 +3,8 @@ import { ReadedFile } from './files-reader';
 import { getSlocInformations } from '../utils/file-sloc';
 import ECMAScriptParser from './data/ecmascript/ecmascript-parser';
 import JavaParser from './data/java/java-parser';
+import StatusbarManager from './managers/statusbar-manager';
+import { MESSAGES } from '../utils/messages';
 
 /**
  * Parse file for their AST using ts-simpe-ast
@@ -90,6 +92,7 @@ class FilesParser {
             script.addEventListener('load', () => {
                 console.log(`${parserToLoad} parser finished loading and executing`);
                 resolve();
+                StatusbarManager.displayMessage('');
             });
             script.addEventListener('error', () => {
                 console.log(`${parserToLoad} parser error loading`);
@@ -97,6 +100,7 @@ class FilesParser {
             });
             script.src = `scripts/${parserToLoad}.js`;
             script.async = true;
+            StatusbarManager.displayMessage(MESSAGES.DOWNLOADING_PARSER, true);
             document.body.appendChild(script);
         });
     }

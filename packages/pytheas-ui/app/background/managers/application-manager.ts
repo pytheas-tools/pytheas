@@ -10,6 +10,7 @@ import { pubsub } from '../../utils/pubsub';
 import { EVENTS } from '../../utils/events';
 import PWAManager from './pwa-manager';
 import ContextmenuManager from './contextmenu-manager';
+import StatusbarManager from './statusbar-manager';
 
 /**
  * Manage all application state, main orchestrator
@@ -33,6 +34,7 @@ class ApplicationManager {
         DropWindowManager.init();
         SettingsManager.init();
         ContextmenuManager.init();
+        StatusbarManager.init();
         // PWAManager.init();
 
         pubsub.subscribe(EVENTS.FILES_PARSED, parsedFiles => {

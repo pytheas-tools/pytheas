@@ -107,6 +107,10 @@ export class Graph {
         this.jsPlumbInstance.reset();
     }
 
+    openElement(element) {
+        this.graphElementSelected.emit(element);
+    }
+
     render() {
         return (
             <div class="container jctx-host">
@@ -119,7 +123,12 @@ export class Graph {
 
     renderBlockClass(classElement, optionalClass?) {
         return (
-            <div class={'block-class ' + optionalClass} id={classElement.id}>
+            <div
+                class={'block-class ' + optionalClass}
+                id={classElement.id}
+                onClick={this.openElement.bind(this, classElement)}
+                onTouchStart={this.openElement.bind(this, classElement)}
+            >
                 <div class="block-class_title">{classElement.name}</div>
                 {classElement.publicElements.length > 0 ? (
                     <div class="block-class_group">

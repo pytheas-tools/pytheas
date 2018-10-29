@@ -17,8 +17,9 @@ class GraphWindow {
     $element: HTMLElement;
 
     $graphContainer: HTMLElement;
-    $graphOverview: HTMLElement;
     $graphContainerZoomable: HTMLElement;
+    $graph: HTMLElement;
+    $graphOverview: HTMLElement;
 
     panZoomInstance;
     panZoomMessage: HTMLElement;
@@ -126,9 +127,10 @@ class GraphWindow {
     }
 
     addGraph(element) {
-        const $graph = document.createElement('py-graph');
-        $graph.data = element;
-        this.$graphContainerZoomable.appendChild($graph);
+        this.$graph = document.createElement('py-graph');
+        this.$graph.data = element;
+        this.$graph.addEventListener(EVENTS.GRAPH_ELEMENT_SELECTED, this.onGraphElementSelected.bind(this));
+        this.$graphContainerZoomable.appendChild(this.$graph);
     }
 
     clearWindow() {

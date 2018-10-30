@@ -21,11 +21,13 @@ class StatusbarManager {
     }
 
     displayMessage(message, permanent: boolean) {
-        this.$element.innerHTML = message;
-        if (!permanent) {
-            setTimeout(() => {
-                this.$element.innerHTML = '';
-            }, 3000);
+        if (this.$element) {
+            this.$element.innerHTML = message;
+            if (!permanent) {
+                setTimeout(() => {
+                    this.$element.innerHTML = '';
+                }, 3000);
+            }
         }
     }
 }

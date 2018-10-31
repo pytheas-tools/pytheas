@@ -4,21 +4,21 @@ py-navigation-bar {
     z-index: 5;
 }
 
-.container {
+.navigation-bar__container {
     display: flex;
 }
 
-.history-buttons {
+.navigation-bar__history-buttons {
     margin-right: 10px;
     display: flex;
 }
 
-.history-bar {
+.navigation-bar__history-bar {
     flex-grow: 1;
     padding: 5px;
 }
 
-.button {
+.navigation-bar__history-buttons__button {
     width: 30px;
     height: 30px;
     border-radius: 15px;

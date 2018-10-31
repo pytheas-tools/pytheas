@@ -1,27 +1,34 @@
 py-graph-overview {
     width: 100%;
     height: 100%;
-}
-
-.container {
     display: flex;
-    width: 100%;
-    height: 100%;
     align-items: center;
     justify-content: center;
 }
 
-.types-list {
+.graph-overview__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.graph-overview__types-list {
     display: flex;
     flex-direction: column;
     list-style-type: none;
     margin: 0;
     padding: 0;
+    margin: auto;
 }
 
-.type-list {
+.graph-overview__type-list__spacer {
     border: 1px solid #c4c2c2;
     border-radius: 10px;
+    margin: 20px;
+}
+
+.graph-overview__type-list {
+    margin: auto;
 
     .title {
         background: #c4c2c2;
@@ -55,7 +62,7 @@ py-graph-overview {
     }
 }
 
-.type {
+.graph-overview__type {
     padding: 10px;
     border-radius: 8px;
     margin-bottom: 15px;

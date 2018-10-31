@@ -94,7 +94,11 @@ export class GraphOverview {
         const lines = [];
         elements.map(element => {
             lines.push(
-                <li class={'type ' + this.selectedType} onClick={this.openElement.bind(this, element)} onTouchStart={this.openElement.bind(this, element)}>
+                <li
+                    class={'graph-overview__type ' + this.selectedType}
+                    onClick={this.openElement.bind(this, element)}
+                    onTouchStart={this.openElement.bind(this, element)}
+                >
                     {element.name}
                 </li>
             );
@@ -105,24 +109,26 @@ export class GraphOverview {
     renderInternal() {
         if (this.inDetailList) {
             return (
-                <div class="type-list">
-                    <div class="title">{this.getPluralForType(this.selectedType)}</div>
-                    <ul>
-                        {Object.keys(this.selectedElements).map(key => (
-                            <li>
-                                <span class="letter-group">{key}</span>
-                                <ul class="elements">{this.renderListOfElements(this.selectedElements[key].elements)}</ul>
-                            </li>
-                        ))}
-                    </ul>
+                <div class="graph-overview__type-list">
+                    <div class="graph-overview__type-list__spacer">
+                        <div class="title">{this.getPluralForType(this.selectedType)}</div>
+                        <ul>
+                            {Object.keys(this.selectedElements).map(key => (
+                                <li>
+                                    <span class="letter-group">{key}</span>
+                                    <ul class="elements">{this.renderListOfElements(this.selectedElements[key].elements)}</ul>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             );
         } else {
             return (
-                <ul class="types-list">
+                <ul class="graph-overview__types-list">
                     {this.data.file ? (
                         <li
-                            class="type file"
+                            class="graph-overview__type file"
                             data-badge={this.data.file.length}
                             onClick={this.selectType.bind(this)}
                             onTouchStart={this.selectType.bind(this)}
@@ -135,7 +141,7 @@ export class GraphOverview {
                     )}
                     {this.data.class ? (
                         <li
-                            class="type class"
+                            class="graph-overview__type class"
                             data-badge={this.data.class.length}
                             onClick={this.selectType.bind(this)}
                             onTouchStart={this.selectType.bind(this)}
@@ -148,7 +154,7 @@ export class GraphOverview {
                     )}
                     {this.data.function ? (
                         <li
-                            class="type function"
+                            class="graph-overview__type function"
                             data-badge={this.data.function.length}
                             onClick={this.selectType.bind(this)}
                             onTouchStart={this.selectType.bind(this)}
@@ -165,6 +171,6 @@ export class GraphOverview {
     }
 
     render() {
-        return <div class="container">{this.renderInternal()}</div>;
+        return this.renderInternal();
     }
 }

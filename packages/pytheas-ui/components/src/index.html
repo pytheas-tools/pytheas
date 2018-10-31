@@ -29,11 +29,45 @@
 
     /** SPLIT WINDOWS **/
 
-    .app {
+    .app-container {
       width: 100%;
       height: 100%;
       position: absolute;
       display: flex;
+      flex-direction: column;
+    }
+
+    .windows {
+      display: flex;
+      width: 100%;
+      height: calc(100% - 75px);
+    }
+
+    .app-container__top-bar {
+      width: 100%;
+      height: 40px;
+      display: flex;
+    }
+
+    .app-container__top-bar h1 {
+      font-size: 16px;
+    }
+
+    .app-container__top-bar h2 {
+      font-size: 14px;
+    }
+
+    .app-container__top-bar .app-container__top-bar__infos {
+      flex-grow: 1;
+      display: flex;
+    }
+
+    .app-container__top-bar .app-container__top-bar__infos img {
+      margin: 0 5px;
+    }
+
+    .app-container__top-bar .app-container__top-bar__settings {
+      padding: 10px;
     }
 
     .split {
@@ -62,19 +96,64 @@
       cursor: ew-resize;
     }
 
+    .app-container__status-bar {
+      width: 100%;
+      height: 35px;
+      display: flex;
+    }
+
+    .app-container__status-bar>span {
+      padding: 10px;
+      display: flex;
+    }
+
+    .app-container__status-bar span:first-child {
+      flex-grow: 1;
+    }
+
+    .app-container__status-bar span:last-child ion-icon {
+      color: red;
+    }
+
+    .app-container__status-bar span:last-child ion-icon,
+    .app-container__status-bar span:last-child a {
+      margin: 0 5px;
+    }
+
+    .app-container__status-bar span:last-child a {
+      color: #3897fb;
+      text-decoration: none;
+    }
+
     /** WINDOWS **/
 
     .code-window {
-      background: #f6f6f6;
       padding: 10px;
+    }
+
+    .code-window.codeblock-maximized {
+      overflow-y: hidden;
+      padding: 0;
     }
 
     .graph-window {
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     .graph-container {
+      overflow: auto;
+      flex: auto;
+    }
+
+    .graph-container:focus {
+      outline: none;
+    }
+
+    .graph-container,
+    .graph-container__zoomable {
       width: 100%;
       height: 100%;
       display: flex;
@@ -84,16 +163,29 @@
 
 <body>
 
-  <div class="app">
-    <div class="split split-horizontal graph-window">
-      <py-navigation-bar current="TicTacToe" next-disabled="false" back-disabled="false"></py-navigation-bar>
-      <div class="graph-container">
-        <!--<py-graph-overview></py-graph-overview>-->
-        <py-graph></py-graph>
+  <div class="app-container">
+    <div class="app-container__top-bar">
+      <div class="app-container__top-bar__infos">
+        <h1>Pytheas</h1>
+        <h2>&nbsp;-&nbsp;Your codebase explorer</h2>
+      </div>
+      <div class="app-container__top-bar__settings">
+        <select id="theme-selector">
+          <option value="theme-dark" selected>Dark theme</option>
+          <option value="theme-light">Light theme</option>
+        </select>
       </div>
     </div>
-    <div class="split split-horizontal code-window">
-      <py-codeblock filename="Stencil" code="import { Player } from './player';
+    <div class="windows">
+      <div class="split split-horizontal graph-window">
+        <!--<py-navigation-bar current="TicTacToe" next-disabled="false" back-disabled="false"></py-navigation-bar>-->
+        <div class="graph-container">
+          <py-graph-overview></py-graph-overview>
+          <!--<py-graph></py-graph>-->
+        </div>
+      </div>
+      <div class="split split-horizontal code-window">
+        <py-codeblock filename="Stencil" code="import { Player } from './player';
 class Game {
     player1;
     player2;
@@ -106,6 +198,11 @@ class Game {
     clearUI() {}
 }
 new Game();"></py-codeblock>
+      </div>
+    </div>
+    <div class="app-container__status-bar">
+      <span></span>
+      <span>Created with <ion-icon name="heart"></ion-icon> by <a href="https://twitter.com/vogloblinsky" target="_blank">@vogloblinsky</a></span>
     </div>
   </div>
 
@@ -122,7 +219,7 @@ new Game();"></py-codeblock>
         console.log('onDragEnd splitjs');
       }
     });
-    /*var overviewData = {
+    var overviewData = {
       'file': [{
         'name': 'manager.ts'
       }, {
@@ -136,10 +233,36 @@ new Game();"></py-codeblock>
         'name': 'Event'
       }, {
         'name': 'Player'
+      }, {
+        'name': 'Player1'
+      }, {
+        'name': 'Player2'
+      }, {
+        'name': 'Player3'
+      }, {
+        'name': 'Player4'
+      }, {
+        'name': 'Player5'
+      }, {
+        'name': 'Player6'
+      }, {
+        'name': 'Player7'
+      }, {
+        'name': 'Player8'
+      }, {
+        'name': 'Player9'
+      }, {
+        'name': 'Player10'
+      }, {
+        'name': 'Player11'
+      }, {
+        'name': 'Player12'
+      }, {
+        'name': 'Player13'
       }]
     };
-    document.querySelector('py-graph-overview').data = overviewData;*/
-    var MainClass = {
+    document.querySelector('py-graph-overview').data = overviewData;
+    /*var MainClass = {
       "id": "jnsnh17v",
       "publicElements": [{
         "relations": [],
@@ -355,7 +478,7 @@ new Game();"></py-codeblock>
       from: MainClass,
       to: GameClass
     }]
-    document.querySelector('py-graph').data = GameClass;
+    document.querySelector('py-graph').data = GameClass;*/
   </script>
 
 

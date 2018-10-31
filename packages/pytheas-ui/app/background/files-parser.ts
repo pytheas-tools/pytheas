@@ -88,20 +88,24 @@ class FilesParser {
     loadParserForFiles() {
         return new Promise((resolve, reject) => {
             const parserToLoad = this.detectParser();
-            const script = document.createElement('script');
-            script.addEventListener('load', () => {
-                console.log(`${parserToLoad} parser finished loading and executing`);
+            if (!window[parserToLoad]) {
+                const script = document.createElement('script');
+                script.addEventListener('load', () => {
+                    console.log(`${parserToLoad} parser finished loading and executing`);
+                    resolve();
+                    StatusbarManager.displayMessage('');
+                });
+                script.addEventListener('error', () => {
+                    console.log(`${parserToLoad} parser error loading`);
+                    reject();
+                });
+                script.src = `scripts/${parserToLoad}.js`;
+                script.async = true;
+                StatusbarManager.displayMessage(MESSAGES.DOWNLOADING_PARSER, true);
+                document.body.appendChild(script);
+            } else {
                 resolve();
-                StatusbarManager.displayMessage('');
-            });
-            script.addEventListener('error', () => {
-                console.log(`${parserToLoad} parser error loading`);
-                reject();
-            });
-            script.src = `scripts/${parserToLoad}.js`;
-            script.async = true;
-            StatusbarManager.displayMessage(MESSAGES.DOWNLOADING_PARSER, true);
-            document.body.appendChild(script);
+            }
         });
     }
 

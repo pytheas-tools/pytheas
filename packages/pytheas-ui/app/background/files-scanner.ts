@@ -110,7 +110,10 @@ class FilesScanner {
         }
 
         if (this.scannedFiles.length === this.countFiles) {
-            Notifier.info(`${this.getAllNotSupportedExtensions()} files not supported`);
+            const extensionsNotSupported = this.getAllNotSupportedExtensions();
+            if (extensionsNotSupported.length > 0) {
+                Notifier.info(`${extensionsNotSupported} files not supported`);
+            }
             this.scanResolve(this.scannedFiles);
         }
     }

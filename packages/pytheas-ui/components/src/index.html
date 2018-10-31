@@ -178,10 +178,10 @@
     </div>
     <div class="windows">
       <div class="split split-horizontal graph-window">
-        <!--<py-navigation-bar current="TicTacToe" next-disabled="false" back-disabled="false"></py-navigation-bar>-->
+        <py-navigation-bar current="TicTacToe" next-disabled="false" back-disabled="false"></py-navigation-bar>
         <div class="graph-container">
-          <py-graph-overview></py-graph-overview>
-          <!--<py-graph></py-graph>-->
+          <!--<py-graph-overview></py-graph-overview>-->
+          <py-graph></py-graph>
         </div>
       </div>
       <div class="split split-horizontal code-window">
@@ -261,8 +261,8 @@ new Game();"></py-codeblock>
         'name': 'Player13'
       }]
     };
-    document.querySelector('py-graph-overview').data = overviewData;
-    /*var MainClass = {
+    //document.querySelector('py-graph-overview').data = overviewData;
+    var MainClass = {
       "id": "jnsnh17v",
       "publicElements": [{
         "relations": [],
@@ -300,14 +300,7 @@ new Game();"></py-codeblock>
     };
     var RuleClass = {
       "id": "jnsnh17d",
-      "publicElements": [{
-        "relations": [],
-        "id": "jnsnh17f",
-        "name": "sentence",
-        "type": "string",
-        "kind": "property",
-        "typeKind": "StringKeyword"
-      }],
+      "publicElements": [],
       "privateElements": [],
       "name": "Rule",
       "propertyDeclarations": [{
@@ -478,7 +471,7 @@ new Game();"></py-codeblock>
       from: MainClass,
       to: GameClass
     }]
-    document.querySelector('py-graph').data = GameClass;*/
+    document.querySelector('py-graph').data = GameClass;
   </script>
 
 

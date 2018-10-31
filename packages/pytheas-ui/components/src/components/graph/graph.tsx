@@ -129,7 +129,9 @@ export class Graph {
                 onClick={this.openElement.bind(this, classElement)}
                 onTouchStart={this.openElement.bind(this, classElement)}
             >
-                <div class="block-class_title">{classElement.name}</div>
+                <div class={'block-class_title ' + (classElement.publicElements.length > 0 || classElement.privateElements.length > 0 ? 'has-child' : '')}>
+                    {classElement.name}
+                </div>
                 {classElement.publicElements.length > 0 ? (
                     <div class="block-class_group">
                         <div class="container">

@@ -59,9 +59,12 @@ py-graph {
 .block-class_title {
     font-weight: bold;
     font-size: 18px;
-    margin-bottom: 10px;
     width: 100%;
     text-align: center;
+
+    &.has-child {
+        margin-bottom: 10px;
+    }
 }
 
 .method {

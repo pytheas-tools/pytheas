@@ -5,6 +5,9 @@ export class Game {
     player1: Player;
     public player2: Player;
 
+    players: Player[];
+    morePlayers: Array<Player>;
+
     private rule: Rule;
 
     constructor() {}

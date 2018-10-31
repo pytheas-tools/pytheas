@@ -25,7 +25,6 @@ export class GraphOverview {
     componentWillLoad() {
         console.log('GraphOverview is about to be rendered..: ', this.data);
         this.dataOrderedByFirstLetter = this.orderByLetter(this.data);
-        console.log(this.dataOrderedByFirstLetter);
     }
 
     orderByLetter(els) {

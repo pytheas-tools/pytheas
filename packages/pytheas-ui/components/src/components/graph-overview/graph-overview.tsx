@@ -29,8 +29,14 @@ export class GraphOverview {
     }
 
     orderByLetter(els) {
-        const files = {},
+        let files = {},
             classes = {};
+
+        function sortObject(o) {
+            return Object.keys(o)
+                .sort()
+                .reduce((r, k) => ((r[k] = o[k]), r), {});
+        }
 
         const groupByFirstLetter = (element, list) => {
             const firstLetter = element.name.charAt(0);
@@ -47,6 +53,9 @@ export class GraphOverview {
         els.class.forEach(element => {
             return groupByFirstLetter(element, classes);
         });
+
+        files = sortObject(files);
+        classes = sortObject(classes);
 
         return { file: files, class: classes };
     }

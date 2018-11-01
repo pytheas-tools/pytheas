@@ -84,3 +84,12 @@ Support themes light and dark
 
 -   dark like VSCode
 -   light like VSCode
+
+## Hover statements codemirror
+
+https://github.com/angelozerr/CodeMirror-Extension
+
+http://localhost/TMP/pytheas/CodeMirror-Extension/demo/token-hover.html
+
+https://discuss.codemirror.net/t/hover-over-symbol-idea/245
+

@@ -1,6 +1,4 @@
-import {
-    Game
-} from './game';
+import { Game } from './game';
 
 class Main {
     game;

@@ -1,6 +1,4 @@
-import {
-    PLAYER_TYPES
-} from './player-types';
+import { PLAYER_TYPES } from './player-types';
 
 export class Player {
     name;

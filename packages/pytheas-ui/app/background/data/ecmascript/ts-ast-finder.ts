@@ -7,6 +7,11 @@ export interface TypeReferenceObject {
     typeArguments: any;
 }
 
+export interface IdentifierObject {
+    text: string;
+    name: string;
+}
+
 export interface TokenObject {
     text: string;
 }
@@ -15,6 +20,7 @@ export declare type NodeObject = Node & {
     name: Identifier;
     type: TypeReferenceObject; // TypeReference for TypeScript
     modifiers: TokenObject[]; // TokenObject for TypeScript
+    expression: any; // IdentifierObject for TypeScript
 };
 
 /**
@@ -32,6 +38,10 @@ class TsAstFinder {
 
     getName(node: NodeObject): string {
         return node.name.text;
+    }
+
+    getExpressionName(node: IdentifierObject): string {
+        return node.text;
     }
 
     getType(node: TypeReferenceObject): string {

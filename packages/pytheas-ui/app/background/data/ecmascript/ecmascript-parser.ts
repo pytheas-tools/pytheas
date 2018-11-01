@@ -37,6 +37,10 @@ class ECMAScriptParser {
     getConstructor(sourceast: any) {
         return tsquery.tsquery(sourceast, 'Constructor');
     }
+
+    getNewExpressions(sourceast: any) {
+        return tsquery.tsquery(sourceast, 'NewExpression');
+    }
 }
 
 export default ECMAScriptParser.getInstance();

@@ -6,6 +6,7 @@ import { ECMAScriptConstructor } from './ecmascript-constructor';
 
 import ECMAScriptParser from './ecmascript-parser';
 import { RelationTypes } from '../py-relation';
+import { ECMAScriptNewExpression } from './ecmascript-new-expression';
 
 export class ECMAScriptClass extends PyElement {
     ast: NodeObject;
@@ -35,6 +36,14 @@ export class ECMAScriptClass extends PyElement {
         const constructorNodeForFile = ECMAScriptParser.getConstructor(this.ast);
         if (constructorNodeForFile.length > 0) {
             this.constructorDeclaration = new ECMAScriptConstructor(constructorNodeForFile[0]);
+        }
+
+        const newExpressionNodesForFile = ECMAScriptParser.getNewExpressions(this.ast);
+        if (newExpressionNodesForFile.length > 0) {
+            newExpressionNodesForFile.forEach((newExpressionNode: any) => {
+                const nexExpression = new ECMAScriptNewExpression(newExpressionNode);
+                this.addRelation(this, nexExpression.type, nexExpression.typeKind, RelationTypes.Out);
+            });
         }
 
         this.propertyDeclarations.forEach(propertyDeclaration => {

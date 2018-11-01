@@ -55,6 +55,10 @@
             &.central {
                 border-color: white;
             }
+
+            &:hover {
+                border-color: #707070;
+            }
         }
     }
 
@@ -69,5 +73,10 @@
         .refresh-toaster__close-button {
             color: white;
         }
+    }
+
+    .jctx {
+        background: black;
+        color: white;
     }
 }

@@ -49,6 +49,9 @@ class DataManager {
                     });
                     functionsForFile = ECMAScriptParser.getFunctionDeclarations(element.ast);
                     break;
+                case 'java':
+                    classesNodesForFile = ECMAScriptParser.getClassDeclarations(element.ast);
+                    break;
                 default:
                     break;
             }

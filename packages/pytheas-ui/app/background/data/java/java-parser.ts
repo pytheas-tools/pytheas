@@ -15,6 +15,23 @@ class JavaParser {
     parseFile(sourcecode: string) {
         return javaast.parse(sourcecode);
     }
+
+    getClassDeclarations(sourceast: any): any {
+        const entries = [];
+        const pendingNodes = [sourceast];
+        while (pendingNodes.length) {
+            const node = pendingNodes.shift();
+            if (node && node.childCount) {
+                if (node.payload.constructor.name === 'ClassDeclarationContext') {
+                    entries.push(node.payload);
+                }
+                for (let i = 0; i < node.childCount; i++) {
+                    pendingNodes.push(node.getChild(i));
+                }
+            }
+        }
+        return entries;
+    }
 }
 
 export default JavaParser.getInstance();

@@ -2,6 +2,8 @@ import { ECMAScriptClass } from './ecmascript/ecmascript-class';
 import ECMAScriptParser from './ecmascript/ecmascript-parser';
 import RelationManager from './relation-manager';
 import VueParser from './vue/vue-parser';
+import JavaParser from './java/java-parser';
+import { JavaClass } from './java/java-class';
 
 /**
  * Manage the data layer
@@ -51,7 +53,10 @@ class DataManager {
                     functionsForFile = ECMAScriptParser.getFunctionDeclarations(element.ast);
                     break;
                 case 'java':
-                    classesNodesForFile = ECMAScriptParser.getClassDeclarations(element.ast);
+                    classesNodesForFile = JavaParser.getClassDeclarations(element.ast);
+                    classesNodesForFile = classesNodesForFile.map(classeNode => {
+                        return new JavaClass(classeNode, element);
+                    });
                     break;
                 case 'vue':
                     classesNodesForFile = VueParser.getClassDeclarations(element.ast);

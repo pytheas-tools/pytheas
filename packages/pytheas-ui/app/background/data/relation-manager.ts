@@ -21,15 +21,17 @@ class RelationManager {
         // Loop for each element
         elements.map(element => {
             // loop for each out relation, and verify related element has the correct in relation referenced
-            element.relations.forEach(relation => {
-                if (relation.type === RelationTypes.Out) {
-                    const toElement = this.findInListByName(elements, relation.to);
-                    if (toElement) {
-                        toElement.addRelation(element, toElement, relation.toType, RelationTypes.In);
-                        relation.to = toElement;
+            if (element.relations && element.relations.length > 0) {
+                element.relations.forEach(relation => {
+                    if (relation.type === RelationTypes.Out) {
+                        const toElement = this.findInListByName(elements, relation.to);
+                        if (toElement) {
+                            toElement.addRelation(element, toElement, relation.toType, RelationTypes.In);
+                            relation.to = toElement;
+                        }
                     }
-                }
-            });
+                });
+            }
         });
     }
 }

@@ -89,35 +89,39 @@ class FilesParser {
         return new Promise((resolveLoadingParsers, rejectLoadingParsers) => {
             const parsersToLoad = this.detectParsers();
             const parsersPromiseLoading: any = [];
-            console.log(parsersToLoad);
 
             parsersToLoad.forEach(parser => {
                 if (!window[parser]) {
-                    parsersPromiseLoading.push(new Promise((resolveLoadingParser, rejectLoadingParser) => {
-                        const script = document.createElement('script');
-                        script.addEventListener('load', () => {
-                            console.log(`${parser} parser finished loading and executing`);
-                            resolveLoadingParser();
-                            StatusbarManager.displayMessage('');
-                        });
-                        script.addEventListener('error', () => {
-                            console.log(`${parser} parser error loading`);
-                            rejectLoadingParser();
-                        });
-                        script.src = `scripts/${parser}.js`;
-                        script.async = true;
-                        StatusbarManager.displayMessage(MESSAGES.DOWNLOADING_PARSER, true);
-                        document.body.appendChild(script);
-                    }));
+                    parsersPromiseLoading.push(
+                        new Promise((resolveLoadingParser, rejectLoadingParser) => {
+                            const script = document.createElement('script');
+                            script.addEventListener('load', () => {
+                                console.log(`${parser} parser finished loading and executing`);
+                                resolveLoadingParser();
+                                StatusbarManager.displayMessage('');
+                            });
+                            script.addEventListener('error', () => {
+                                console.log(`${parser} parser error loading`);
+                                rejectLoadingParser();
+                            });
+                            script.src = `scripts/${parser}.js`;
+                            script.async = true;
+                            StatusbarManager.displayMessage(MESSAGES.DOWNLOADING_PARSER, true);
+                            document.body.appendChild(script);
+                        })
+                    );
                 }
             });
 
-            Promise.all(parsersPromiseLoading).then(() => {
-                console.log('All parsers loaded');
-                resolveLoadingParsers();
-            }, () => {
-                rejectLoadingParsers();
-            });
+            Promise.all(parsersPromiseLoading).then(
+                () => {
+                    console.log('All parsers loaded');
+                    resolveLoadingParsers();
+                },
+                () => {
+                    rejectLoadingParsers();
+                }
+            );
         });
     }
 

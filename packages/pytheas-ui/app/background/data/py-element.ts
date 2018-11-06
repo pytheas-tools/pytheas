@@ -7,7 +7,8 @@ enum BasicTypes {
     string,
     object,
     date,
-    function
+    function,
+    Promise
 }
 
 export class PyElement {

@@ -9,8 +9,10 @@
         "build-tsquery:prod": "npm run build-tsquery && npx google-closure-compiler --warning_level=QUIET --js=output/scripts/tsquery.js --js_output_file=output/scripts/tsquery.min.js && mv output/scripts/tsquery.min.js output/scripts/tsquery.js",
         "build-java-ast": "npx browserify node_modules/java-ast/dist/index.js -s javaast -o output/scripts/javaast.js",
         "build-java-ast:prod": "npx browserify node_modules/java-ast/dist/index.js -s javaast | uglifyjs -c > output/scripts/javaast.js",
-        "build-browser-dependencies": "run-s build-tsquery build-java-ast",
-        "build-browser-dependencies:prod": "run-s build-tsquery:prod build-java-ast:prod",
+        "build-vue-compiler": "npx browserify node_modules/vue-template-compiler/browser.js -s vuetemplatecompiler -o output/scripts/vue-template-compiler.js",
+        "build-vue-compiler:prod": "npx browserify node_modules/java-ast/dist/index.js -s vuetemplatecompiler | uglifyjs -c > output/scripts/vue-template-compiler.js",
+        "build-browser-dependencies": "run-s build-tsquery build-java-ast build-vue-compiler",
+        "build-browser-dependencies:prod": "run-s build-tsquery:prod build-java-ast:prod build-vue-compiler:prod",
         "build-codemirror": "npx concat -o output/scripts/codemirror.js ./node_modules/codemirror/lib/codemirror.js ./node_modules/codemirror/mode/javascript/javascript.js ./node_modules/codemirror/addon/fold/foldcode.js ./node_modules/codemirror/addon/fold/foldgutter.js ./node_modules/codemirror/addon/fold/brace-fold.js",
         "postbuild-codemirror": "npx google-closure-compiler --warning_level=QUIET --js=output/scripts/codemirror.js --js_output_file=output/scripts/codemirror.min.js && mv output/scripts/codemirror.min.js output/scripts/codemirror.js",
         "compile-dragmock": "npx rollup -c test/vendors/drag-mock/rollup.config.js",
@@ -103,6 +105,7 @@
         "panzoom": "^7.0.2",
         "sloc": "^0.2.0",
         "split.js": "^1.5.9",
+        "vue-template-compiler": "^2.5.17",
         "workbox": "0.0.0"
     },
     "devDependencies": {

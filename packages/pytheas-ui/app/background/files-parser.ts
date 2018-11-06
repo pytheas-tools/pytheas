@@ -5,6 +5,7 @@ import ECMAScriptParser from './data/ecmascript/ecmascript-parser';
 import JavaParser from './data/java/java-parser';
 import StatusbarManager from './managers/statusbar-manager';
 import { MESSAGES } from '../utils/messages';
+import VueParser from './data/vue/vue-parser';
 
 /**
  * Parse file for their AST using ts-simpe-ast
@@ -28,7 +29,7 @@ class FilesParser {
         this.parsedFiles = files;
 
         return new Promise((resolve, reject) => {
-            this.loadParserForFiles().then(
+            this.loadParsersForFiles().then(
                 () => {
                     files.forEach(file => {
                         switch (file.extension) {
@@ -40,10 +41,16 @@ class FilesParser {
                             case 'java':
                                 file.ast = JavaParser.parseFile(file.sourcecode);
                                 break;
+                            case 'vue':
+                                file.ast = VueParser.parseFile(file.sourcecode);
                             default:
                                 break;
                         }
-                        file.sloc = getSlocInformations(file.sourcecode, file.extension);
+                        try {
+                            file.sloc = getSlocInformations(file.sourcecode, file.extension);
+                        } catch (e) {
+                            file.sloc = 0;
+                        }
                     });
                     resolve(files);
                 },
@@ -55,57 +62,62 @@ class FilesParser {
         });
     }
 
-    detectParser() {
-        let parser = '';
-
-        let ECMAScriptFiles = 0;
-        let JavaFiles = 0;
+    detectParsers(): Set<string> {
+        const parsers = new Set();
 
         this.parsedFiles.forEach(file => {
             switch (file.extension) {
                 case 'js':
                 case 'ts':
-                    ECMAScriptFiles += 1;
+                    parsers.add('tsquery');
                     break;
                 case 'java':
-                    JavaFiles += 1;
+                    parsers.add('javaast');
+                    break;
+                case 'vue':
+                    parsers.add('vue-template-compiler');
                     break;
                 default:
                     break;
             }
         });
-        const percentOfECMAScriptFiles = (ECMAScriptFiles * 100) / this.parsedFiles.length;
-        if (percentOfECMAScriptFiles >= 75) {
-            parser = 'tsquery';
-        }
-        const percentOfJavaFiles = (JavaFiles * 100) / this.parsedFiles.length;
-        if (percentOfJavaFiles >= 75) {
-            parser = 'javaast';
-        }
-        return parser;
+
+        return parsers;
     }
 
-    loadParserForFiles() {
-        return new Promise((resolve, reject) => {
-            const parserToLoad = this.detectParser();
-            if (!window[parserToLoad]) {
-                const script = document.createElement('script');
-                script.addEventListener('load', () => {
-                    console.log(`${parserToLoad} parser finished loading and executing`);
-                    resolve();
-                    StatusbarManager.displayMessage('');
-                });
-                script.addEventListener('error', () => {
-                    console.log(`${parserToLoad} parser error loading`);
-                    reject();
-                });
-                script.src = `scripts/${parserToLoad}.js`;
-                script.async = true;
-                StatusbarManager.displayMessage(MESSAGES.DOWNLOADING_PARSER, true);
-                document.body.appendChild(script);
-            } else {
-                resolve();
-            }
+    loadParsersForFiles() {
+        return new Promise((resolveLoadingParsers, rejectLoadingParsers) => {
+            const parsersToLoad = this.detectParsers();
+            const parsersPromiseLoading: any = [];
+            console.log(parsersToLoad);
+
+            parsersToLoad.forEach(parser => {
+                if (!window[parser]) {
+                    parsersPromiseLoading.push(new Promise((resolveLoadingParser, rejectLoadingParser) => {
+                        const script = document.createElement('script');
+                        script.addEventListener('load', () => {
+                            console.log(`${parser} parser finished loading and executing`);
+                            resolveLoadingParser();
+                            StatusbarManager.displayMessage('');
+                        });
+                        script.addEventListener('error', () => {
+                            console.log(`${parser} parser error loading`);
+                            rejectLoadingParser();
+                        });
+                        script.src = `scripts/${parser}.js`;
+                        script.async = true;
+                        StatusbarManager.displayMessage(MESSAGES.DOWNLOADING_PARSER, true);
+                        document.body.appendChild(script);
+                    }));
+                }
+            });
+
+            Promise.all(parsersPromiseLoading).then(() => {
+                console.log('All parsers loaded');
+                resolveLoadingParsers();
+            }, () => {
+                rejectLoadingParsers();
+            });
         });
     }
 

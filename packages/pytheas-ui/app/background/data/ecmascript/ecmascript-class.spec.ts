@@ -9,7 +9,7 @@ describe('should create an instance of ECMAScriptClass', () => {
     const simpleClassASTClassNode = tsquery.tsquery(simpleClassAST, 'ClassDeclaration')[0];
 
     test('ECMAScriptClass created', () => {
-        const simpleClassECMAScriptClass = new ECMAScriptClass(simpleClassASTClassNode);
+        const simpleClassECMAScriptClass = new ECMAScriptClass(simpleClassASTClassNode, null);
         expect(simpleClassECMAScriptClass.name).toBe('Rule');
         expect(simpleClassECMAScriptClass.methodDeclarations.length).toBe(2);
         expect(simpleClassECMAScriptClass.methodDeclarations[0].name).toBe('init');

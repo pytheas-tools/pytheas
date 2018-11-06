@@ -69,6 +69,12 @@ http://zuudo.github.io/helios.js/
 -   C# : https://github.com/sebastienros/esprima-dotnet
 
 - Vue.js files : https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme
+- react : 
+    - detect jsx in js file ?
+    - jsx ast 
+        https://esprima.readthedocs.io/en/latest/syntactic-analysis.html#jsx-syntax-support
+        https://github.com/facebook/jsx/blob/master/AST.md
+        Typescript ? -> astexplorer
 
 ## Stackoverflow survey 2018
 

@@ -134,7 +134,7 @@ export class GraphOverview {
         } else {
             return (
                 <ul class="graph-overview__types-list">
-                    {this.data.file ? (
+                    {this.data.file.length > 0 ? (
                         <li
                             class="graph-overview__type file"
                             data-badge={this.data.file.length}
@@ -147,7 +147,7 @@ export class GraphOverview {
                     ) : (
                         ''
                     )}
-                    {this.data.class ? (
+                    {this.data.class.length > 0 ? (
                         <li
                             class="graph-overview__type class"
                             data-badge={this.data.class.length}
@@ -160,7 +160,7 @@ export class GraphOverview {
                     ) : (
                         ''
                     )}
-                    {this.data.function ? (
+                    {this.data.function.length > 0 ? (
                         <li
                             class="graph-overview__type function"
                             data-badge={this.data.function.length}

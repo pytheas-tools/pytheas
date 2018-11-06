@@ -20,7 +20,7 @@ class StatusbarManager {
         this.$element = document.querySelector('.app-container__status-bar span');
     }
 
-    displayMessage(message, permanent: boolean) {
+    displayMessage(message: string, permanent?: boolean) {
         if (this.$element) {
             this.$element.innerHTML = message;
             if (!permanent) {

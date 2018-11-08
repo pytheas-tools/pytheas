@@ -11,11 +11,11 @@ class ECMAScriptParser {
     }
 
     parseFile(sourcecode: string) {
-        return tsquery.tsquery.ast(sourcecode);
+        return tsquery.tsquery.ast(sourcecode, '', 2); // ScriptKind.TSX
     }
 
-    getImportsStatements(sourcecode: string) {
-        return tsquery.tsquery(sourcecode, 'ImportDeclaration');
+    getImportsStatements(sourceast: any) {
+        return tsquery.tsquery(sourceast, 'ImportDeclaration');
     }
 
     getClassDeclarations(sourceast: any) {

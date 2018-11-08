@@ -36,7 +36,7 @@ class FilesParser {
                             case 'js':
                             case 'ts':
                                 file.ast = ECMAScriptParser.parseFile(file.sourcecode);
-                                file.importStatements = ECMAScriptParser.getImportsStatements(file.sourcecode);
+                                file.importStatements = ECMAScriptParser.getImportsStatements(file.ast);
                                 break;
                             case 'java':
                                 file.ast = JavaParser.parseFile(file.sourcecode);

@@ -15,9 +15,9 @@ function init() {
         height: 768
     }));
 
-    let url = isDev
-        ? 'http://localhost/Projets/open-source/pytheas/pytheas/packages/pytheas-ui-wc/.tmp/'
-        : `file://${__dirname}/dist-ui/index.html`;
+    let url = isDev ?
+        'http://localhost:8383/' :
+        `file://${__dirname}/dist-ui/index.html`;
 
     win.loadURL(url);
 

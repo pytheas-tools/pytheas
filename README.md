@@ -40,6 +40,10 @@ https://www.theia-ide.org
 
 https://github.com/jagenjo/webglstudio.js
 
+http://www.glyphrstudio.com/online/
+
+https://www.photopea.com/
+
 ## Ressources
 
 https://blog.dcpos.ch/how-to-make-your-electron-app-sexy

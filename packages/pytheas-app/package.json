@@ -38,8 +38,8 @@
         "npm": ">= 3"
     },
     "devDependencies": {
-        "electron": "^2.0.9",
-        "electron-packager": "^12.1.2"
+        "electron": "^3.0.8",
+        "electron-packager": "^12.2.0"
     },
     "dependencies": {
         "walker": "^1.0.7"

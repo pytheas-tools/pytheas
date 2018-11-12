@@ -47,19 +47,18 @@ class DropWindow {
         /**
          * Start listening if available from electron wrapper which
          */
-        /*if (typeof require !== 'undefined') {
+        if (typeof require !== 'undefined') {
             const ipc = require('electron').ipcRenderer;
             ipc.on('folder-selected', (event: ElectronEvent, path: string) => {
-                console.log('folder-selected from electron wrapper: ', event, path);
                 FilesScanner.scanFilesFromElectron(path).then((scannedFiles: any[]) => {
                     FilesReader.readFilesFromElectron(scannedFiles).then(readedFiles => {
-                        FilesParser.parseFiles(readedFiles).then(() => {
-                            console.log('files parsed');
+                        FilesParser.parseFiles(readedFiles).then(parsedFiles => {
+                            pubsub.publish(EVENTS.FILES_PARSED, parsedFiles);
                         });
                     });
                 });
             });
-        }*/
+        }
     }
 
     test() {

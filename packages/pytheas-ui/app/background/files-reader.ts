@@ -130,7 +130,15 @@ class FilesReader {
                 }
                 const path = require('path');
 
-                const readedFile: ReadedFile = { path: file.path, name: path.basename(file.path), sourcecode: contents };
+                const fileExtension = path.extname(file.path).replace('.', '');
+
+                const readedFile: ReadedFile = {
+                    path: file.path,
+                    name: path.basename(file.path),
+                    extension: fileExtension,
+                    language: extensionToLanguage(fileExtension),
+                    sourcecode: contents
+                };
                 resolve(readedFile);
             });
         });

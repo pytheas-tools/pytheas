@@ -63,15 +63,16 @@ http://zuudo.github.io/helios.js/
 -   JS
 -   TS
 -   Java ? : https://github.com/urish/java-ast / https://github.com/tunnelvisionlabs/antlr4ts#readme
--   Python ? : https://github.com/differentmatt/filbert
+-   Python ? : https://github.com/differentmatt/filbert + https://python-ast-explorer.com/
 -   PHP ? : https://github.com/glayzzle/php-parser
 -   Kotlin ? : https://github.com/antlr/grammars-v4/tree/master/kotlin
 -   C# : https://github.com/sebastienros/esprima-dotnet
+-   Go : https://github.com/gopherjs/gopherjs + https://dmitri.shuralyov.com/projects/AST-explorer/ + https://golang.org/src/go/ast/example_test.go + https://medium.com/@kentquirk/how-to-use-gopherjs-to-turn-go-code-into-a-javascript-library-1e947703db7a + https://zupzup.org/go-ast-traversal/
 
-- Vue.js files : https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme
-- react : 
-    - detect jsx in js file ?
-    - jsx ast 
+-   Vue.js files : https://github.com/vuejs/vue/tree/dev/packages/vue-template-compiler#readme
+-   react :
+    -   detect jsx in js file ?
+    -   jsx ast
         https://esprima.readthedocs.io/en/latest/syntactic-analysis.html#jsx-syntax-support
         https://github.com/facebook/jsx/blob/master/AST.md
         Typescript ? -> astexplorer
@@ -100,4 +101,3 @@ https://github.com/angelozerr/CodeMirror-Extension
 http://localhost/TMP/pytheas/CodeMirror-Extension/demo/token-hover.html
 
 https://discuss.codemirror.net/t/hover-over-symbol-idea/245
-

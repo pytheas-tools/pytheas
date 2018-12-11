@@ -5,10 +5,12 @@ import { Graph } from '../components/dist/types/components/graph/graph';
 
 ApplicationManager.init();
 
+const { Split } = <any>window;
+
 /**
  * Init split.js inside main window
  */
-(<any>window).Split(['.graph-window', '.code-window'], {
+Split(['.graph-window', '.code-window'], {
     sizes: [50, 50],
     gutterSize: 5,
     onDrag: () => {

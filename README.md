@@ -32,6 +32,14 @@ https://github.com/meetfranz/franz
 
 https://github.com/pojala/electrino
 
+## Vscode extension
+
+https://code.visualstudio.com/docs/extensions/samples
+
+https://code.visualstudio.com/docs/extensions/webview
+
+https://github.com/Microsoft/vscode-extension-samples/tree/master/webview-sample
+
 ## Online IDE for ideas
 
 https://github.com/styfle/awesome-online-ide
@@ -43,6 +51,8 @@ https://github.com/jagenjo/webglstudio.js
 http://www.glyphrstudio.com/online/
 
 https://www.photopea.com/
+
+https://play.nativescript.org/
 
 ## Ressources
 

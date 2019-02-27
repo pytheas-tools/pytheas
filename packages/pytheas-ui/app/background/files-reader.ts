@@ -1,4 +1,5 @@
 import { extensionToLanguage } from '../utils/extension-to-language';
+import { getExtension, getName } from '../utils/fs';
 
 export interface FileFromElectron {
     path: string;
@@ -64,6 +65,39 @@ class FilesReader {
             loopFiles();
         });
     }
+
+    /**
+     * Read a list of files from fetch calls
+     * @param files Array List of files
+     */
+    readFilesFromFetchCall(files: FileEntry[]): Promise<ReadedFile[]> {
+        let i = 0;
+        const len = files.length,
+            readedFiles: ReadedFile[] = [];
+        return new Promise((resolve, reject) => {
+            for (i; i < len; i++) {
+                readedFiles.push(this.readFileFromFetchCall(files[i]));
+            }
+            resolve(readedFiles);
+        });
+    }
+
+    /**
+     * Read a file from fetch call
+     * @param file Json data for file
+     * @returns Promise
+     */
+    private readFileFromFetchCall(file: any): ReadedFile {
+        const fileExtension = getExtension(file.path);
+        return {
+            path: file.path,
+            name: getName(file.path),
+            extension: fileExtension,
+            language: extensionToLanguage(fileExtension),
+            sourcecode: file.data
+        };
+    }
+
     /**
      * Read a file from browser drop using FileReader
      * @param file FileEntry File to read
@@ -87,6 +121,7 @@ class FilesReader {
             this.browserReader.readAsText(file);
         });
     }
+
     /**
      * Read a list of files from Electron using fs
      * @param files Array List of files

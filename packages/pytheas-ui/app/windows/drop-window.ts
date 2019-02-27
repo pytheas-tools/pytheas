@@ -4,6 +4,7 @@ import FilesParser from '../background/files-parser';
 import { EventEmitter } from 'events';
 import { pubsub } from '../utils/pubsub';
 import { EVENTS } from '../utils/events';
+import DemosManager from '../background/managers/demos-manager';
 
 interface ElectronEvent {
     sender: EventEmitter;
@@ -29,6 +30,21 @@ class DropWindow {
             pubsub.publish(EVENTS.FILES_COMING);
             FilesScanner.scanFilesFromBrowser(ev).then((scannedFiles: any[]) => {
                 FilesReader.readFilesFromBrowser(scannedFiles).then(readedFiles => {
+                    FilesParser.parseFiles(readedFiles).then(parsedFiles => {
+                        pubsub.publish(EVENTS.FILES_PARSED, parsedFiles);
+                    });
+                });
+            });
+        });
+        /**
+         * Listen for select input on welcome page
+         */
+        document.querySelector('#demo-projects-selector').addEventListener('change', (ev: Event) => {
+            pubsub.publish(EVENTS.FILES_COMING);
+            const project = ev.target.value;
+            DemosManager.getDemoProjectFiles(project).then(scannedFiles => {
+                console.log(scannedFiles);
+                FilesReader.readFilesFromFetchCall(scannedFiles).then(readedFiles => {
                     FilesParser.parseFiles(readedFiles).then(parsedFiles => {
                         pubsub.publish(EVENTS.FILES_PARSED, parsedFiles);
                     });

@@ -27,6 +27,7 @@ script:
     - npm run build:dev:test
     - npm run test:unit
     - npm run test:e2e
+    - npm run build
     - bash ./deploy.sh
 branches:
     only:

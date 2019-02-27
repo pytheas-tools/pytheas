@@ -1,6 +1,17 @@
 {
     "name": "pytheas-ui-wc",
     "version": "0.1.0",
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vogloblinsky/pytheas.git"
+    },
+    "author": "Vincent Ogloblinsky",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/vogloblinsky/pytheas/issues"
+    },
+    "homepage": "https://github.com/vogloblinsky/pytheas#readme",
     "scripts": {
         "BUILD-EXTERNAL-DEPENDENCIES": "",
         "build-tsquery": "npx browserify node_modules/@phenomnomnominal/tsquery/dist/src/index.js -s tsquery -o output/scripts/tsquery.js",

@@ -1,68 +1,68 @@
 <!DOCTYPE html>
 <html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>Pytheas - Your codebase explorer</title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="manifest" href="./manifest.json" />
-        <link rel="stylesheet" href="styles/app.css" />
-    </head>
 
-    <body class="theme-dark">
-        <div class="app-container">
-            <div class="app-container__top-bar">
-                <div class="app-container__top-bar__infos">
-                    <img src="assets/logo.svg" width="40px" height="100%" />
-                    <h1>Pytheas</h1>
-                    <h2>&nbsp;-&nbsp;Your codebase explorer</h2>
-                </div>
-                <div class="app-container__top-bar__settings">
-                    <select id="theme-selector">
-                        <option value="theme-dark" selected>Dark theme</option>
-                        <option value="theme-light">Light theme</option>
-                    </select>
-                </div>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Pytheas - Your codebase explorer</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="stylesheet" href="styles/app.css" />
+</head>
+
+<body class="theme-light">
+    <div class="app-container">
+        <div class="app-container__top-bar">
+            <div class="app-container__top-bar__infos">
+                <img src="assets/logo.svg" width="40px" height="100%" />
+                <h1>Pytheas</h1>
+                <h2>&nbsp;-&nbsp;Your codebase explorer</h2>
             </div>
-            <div class="windows">
-                <div class="split split-horizontal graph-window">
-                    <py-navigation-bar></py-navigation-bar>
-                    <div class="graph-container"><div class="graph-container__zoomable"></div></div>
-                    <div class="graph-controls">
-                        <div class="graph-controls__buttons"><button>+</button> <button>-</button></div>
-                        <div class="graph-controls_level-message"></div>
-                    </div>
-                </div>
-                <div class="split split-horizontal code-window"></div>
-            </div>
-            <div class="app-container__status-bar">
-                <span></span>
-                <span class="app-container__status-bar_general-infos"
-                    >Created with <ion-icon name="heart"></ion-icon> by <a href="https://twitter.com/vogloblinsky" target="_blank">@vogloblinsky</a>•<a
-                        target="_blank"
-                        href="https://github.com/vogloblinsky/pytheas/issues/new"
-                        >Feedback ?</a
-                    ></span
-                >
+            <div class="app-container__top-bar__settings">
+                <select id="theme-selector">
+                    <option value="theme-dark">Dark theme</option>
+                    <option value="theme-light" selected>Light theme</option>
+                </select>
             </div>
         </div>
-        <div class="refresh-toaster">
-            <span class="refresh-toaster__message">A new version of Pytheas is available</span>
-            <button class="refresh-toaster__refresh-button">REFRESH</button> <button class="refresh-toaster__close-button">X</button>
+        <div class="windows">
+            <div class="split split-horizontal graph-window">
+                <py-navigation-bar></py-navigation-bar>
+                <div class="graph-container">
+                    <div class="graph-container__zoomable"></div>
+                </div>
+                <div class="graph-controls">
+                    <div class="graph-controls__buttons"><button>+</button> <button>-</button></div>
+                    <div class="graph-controls_level-message"></div>
+                </div>
+            </div>
+            <div class="split split-horizontal code-window"></div>
         </div>
-        <ul class="jctx jctx-id-foo">
-            <li data-action="saveasimage">Save as image</li>
-        </ul>
+        <div class="app-container__status-bar">
+            <span></span>
+            <span class="app-container__status-bar_general-infos">Created with <ion-icon name="heart"></ion-icon> by <a
+                    href="https://twitter.com/vogloblinsky" target="_blank">@vogloblinsky</a>•<a target="_blank" href="https://github.com/vogloblinsky/pytheas/issues/new">Feedback
+                    ?</a></span>
+        </div>
+    </div>
+    <div class="refresh-toaster">
+        <span class="refresh-toaster__message">A new version of Pytheas is available</span>
+        <button class="refresh-toaster__refresh-button">REFRESH</button> <button class="refresh-toaster__close-button">X</button>
+    </div>
+    <ul class="jctx jctx-id-foo">
+        <li data-action="saveasimage">Save as image</li>
+    </ul>
 
-        <script src="scripts/split.min.js"></script>
+    <script src="scripts/split.min.js"></script>
 
-        <script src="scripts/codemirror.js" async></script>
+    <script src="scripts/codemirror.js" async></script>
 
-        <script src="web-components/dist/pytheas.js"></script>
+    <script src="web-components/dist/pytheas.js"></script>
 
-        <script src="libs/ionicons/ionicons.js"></script>
+    <script src="libs/ionicons/ionicons.js"></script>
 
-        <script src="scripts/app.js"></script>
-    </body>
+    <script src="scripts/app.js"></script>
+</body>
+
 </html>

@@ -15,7 +15,7 @@ class SettingsManager {
     }
 
     settings = {
-        theme: 'theme-dark'
+        theme: 'theme-light'
     };
 
     init() {

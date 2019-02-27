@@ -8,7 +8,7 @@ import globals from 'rollup-plugin-node-globals';
 export default [{
     input: './app/app.ts',
     output: {
-        file: 'output/scripts/app_0.js',
+        file: (process.env.NODE_ENV && process.env.NODE_ENV === 'development') ? 'output/scripts/app.js' : 'output/scripts/app_0.js',
         format: 'cjs',
         name: 'App',
         sourcemap: (process.env.NODE_ENV && process.env.NODE_ENV === 'development') ? true : false

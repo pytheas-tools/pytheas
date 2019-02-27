@@ -63,3 +63,7 @@ https://github.com/kristianmandrup/wheel-of-fate
 https://github.com/sindresorhus/awesome-electron
 
 https://github.com/cancerberoSgx/typescript-in-the-browser
+
+## Design
+
+https://www.uplabs.com/challenges/coding-editor-challenge/results

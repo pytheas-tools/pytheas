@@ -10,8 +10,6 @@ interface ElectronEvent {
 }
 
 class DropWindow {
-    $element: HTMLElement;
-
     dropped = false;
 
     private static instance: DropWindow;
@@ -25,11 +23,25 @@ class DropWindow {
 
     init() {
         /**
+         * Listen for browse input on welcome page
+         */
+        document.querySelector('#welcome-folder-selector').addEventListener('change', (ev: Event) => {
+            pubsub.publish(EVENTS.FILES_COMING);
+            FilesScanner.scanFilesFromBrowser(ev).then((scannedFiles: any[]) => {
+                FilesReader.readFilesFromBrowser(scannedFiles).then(readedFiles => {
+                    FilesParser.parseFiles(readedFiles).then(parsedFiles => {
+                        pubsub.publish(EVENTS.FILES_PARSED, parsedFiles);
+                    });
+                });
+            });
+        });
+        /**
          * Listen drop event, and manage files/folder dropped
          */
         document.addEventListener('drop', (ev: DragEvent) => {
             ev.preventDefault();
             this.dropped = true;
+            pubsub.publish(EVENTS.FILES_COMING);
             FilesScanner.scanFilesFromBrowser(ev).then((scannedFiles: any[]) => {
                 FilesReader.readFilesFromBrowser(scannedFiles).then(readedFiles => {
                     FilesParser.parseFiles(readedFiles).then(parsedFiles => {

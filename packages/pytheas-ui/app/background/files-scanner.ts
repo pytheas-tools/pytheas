@@ -58,6 +58,8 @@ class FilesScanner {
                 this.parseFiles(ev.dataTransfer.items);
             } else if (ev.dataTransfer && ev.dataTransfer.files) {
                 this.parseFiles(ev.dataTransfer.files);
+            } else if (ev.target && ev.target.files) {
+                this.parseFiles(ev.target.files);
             }
         });
         return this.scanPromise;

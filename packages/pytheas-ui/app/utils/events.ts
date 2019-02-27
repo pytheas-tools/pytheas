@@ -1,4 +1,5 @@
 export const EVENTS = {
+    FILES_COMING: 'files-coming',
     FILES_PARSED: 'files-parsed',
     CODEBLOCK_MAXIMIZED: 'codeblockMaximized',
     CODEBLOCK_UNMAXIMIZED: 'codeblockUnmaximized',

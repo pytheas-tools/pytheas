@@ -38,6 +38,29 @@
                 </div>
             </div>
             <div class="split split-horizontal code-window"></div>
+            <div class="windows_welcome">
+                <div class="windows_welcome_selectors-container">
+                    <span class="windows_welcome_selectors-container_message">
+                        <ion-icon name="folder-open"></ion-icon>
+                        Drag & drop your source code folder here
+                    </span>
+                    <span>or</span>
+                    <div class="windows_welcome_selectors-container_input">
+                        <label for="welcome-folder-selector" class="windows_welcome_selectors-container_input_label-file">Browse
+                            files</label>
+                        <input type="file" id="welcome-folder-selector" webkitdirectory mozdirectory msdirectory
+                            odirectory directory multiple />
+                    </div>
+                    <span>or</span>
+                    <span class="windows_welcome_selectors-container_demos_projects">
+                        <select id="demo-projects-selector">
+                            <option>Select a demo project</option>
+                            <option value="typescript">TypeScript</option>
+                            <option value="es6">JavaScript</option>
+                        </select>
+                    </span>
+                </div>
+            </div>
         </div>
         <div class="app-container__status-bar">
             <span></span>

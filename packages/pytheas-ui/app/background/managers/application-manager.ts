@@ -1,6 +1,7 @@
 import CodeWindowManager from '../../windows/code-window';
 import DropWindowManager from '../../windows/drop-window';
 import GraphWindowManager from '../../windows/graph-window';
+import WelcomeWindowManager from '../../windows/welcome-window';
 import NavigationBarManager from '../../windows/navigation-bar-manager';
 
 import DataManager from '../data/data-manager';
@@ -31,6 +32,7 @@ class ApplicationManager {
         CodeWindowManager.init(document.querySelector('.code-window'));
         GraphWindowManager.init(document.querySelector('.graph-window'));
         NavigationBarManager.init(document.querySelector('py-navigation-bar'));
+        WelcomeWindowManager.init(document.querySelector('.windows_welcome'));
         DropWindowManager.init();
         SettingsManager.init();
         ContextmenuManager.init();

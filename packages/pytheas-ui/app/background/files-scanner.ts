@@ -97,7 +97,17 @@ class FilesScanner {
     }
 
     private getAllNotSupportedExtensions(): string {
-        return Array.from(this.notSupportedExtensions).join(', ');
+        const extensions = Array.from(this.notSupportedExtensions);
+        let result;
+        if (extensions.length > 10) {
+            result = extensions
+                .slice(0, 10)
+                .concat(['...'])
+                .join(', ');
+        } else {
+            result = extensions.join(', ');
+        }
+        return result;
     }
 
     private updateCounter(quantity: number) {

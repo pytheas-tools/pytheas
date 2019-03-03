@@ -1,0 +1,35 @@
+{
+  "name": "pytheas-vscode",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Vincent Ogloblinsky",
+  "license": "MIT",
+  "publisher": "Vincent Ogloblinsky",
+  "engines": {
+    "vscode": "^1.31.0"
+  },
+  "activationEvents": [
+    "onCommand:pytheas.start"
+  ],
+  "main": "./out/extension",
+  "contributes": {
+    "commands": [{
+      "command": "pytheas.start",
+      "title": "Start new Pytheas exploration session",
+      "category": "Pytheas"
+    }]
+  },
+  "scripts": {
+    "vscode:prepublish": "tsc -p ./",
+    "compile": "tsc -p ./",
+    "watch": "tsc -w -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install"
+  },
+  "dependencies": {
+    "vscode": "^1.1.30"
+  },
+  "devDependencies": {
+    "@types/node": "^11.10.4",
+    "typescript": "^3.3.3333"
+  }
+}

@@ -1,22 +1,15 @@
 import { ECMAScriptClass } from './ecmascript/ecmascript-class';
 import ECMAScriptParser from './ecmascript/ecmascript-parser';
+import { JavaClass } from './java/java-class';
+import JavaParser from './java/java-parser';
 import RelationManager from './relation-manager';
 import VueParser from './vue/vue-parser';
-import JavaParser from './java/java-parser';
-import { JavaClass } from './java/java-class';
 
 /**
  * Manage the data layer
  */
 class DataManager {
     private static instance: DataManager;
-    private constructor() {}
-    static getInstance() {
-        if (!DataManager.instance) {
-            DataManager.instance = new DataManager();
-        }
-        return DataManager.instance;
-    }
 
     database = new Set();
 
@@ -26,7 +19,15 @@ class DataManager {
 
     functions = <any>[];
 
-    init(parsedFiles) {
+    private constructor() {}
+    static getInstance() {
+        if (!DataManager.instance) {
+            DataManager.instance = new DataManager();
+        }
+        return DataManager.instance;
+    }
+
+    init(parsedFiles: any) {
         this.reset();
         this.filesToProcess = parsedFiles;
         this.processElements();
@@ -39,7 +40,7 @@ class DataManager {
     }
 
     processElements() {
-        this.filesToProcess.forEach(element => {
+        this.filesToProcess.forEach((element: any) => {
             let classesNodesForFile = [];
             let functionsForFile = [];
 
@@ -47,19 +48,20 @@ class DataManager {
                 case 'js':
                 case 'ts':
                     classesNodesForFile = ECMAScriptParser.getClassDeclarations(element.ast);
-                    classesNodesForFile = classesNodesForFile.map(classeNode => {
+                    classesNodesForFile = classesNodesForFile.map((classeNode: any) => {
                         return new ECMAScriptClass(classeNode, element);
                     });
                     functionsForFile = ECMAScriptParser.getFunctionDeclarations(element.ast);
                     break;
                 case 'java':
                     classesNodesForFile = JavaParser.getClassDeclarations(element.ast);
-                    classesNodesForFile = classesNodesForFile.map(classeNode => {
+                    classesNodesForFile = classesNodesForFile.map((classeNode: any) => {
                         return new JavaClass(classeNode, element);
                     });
                     break;
                 case 'vue':
                     classesNodesForFile = VueParser.getClassDeclarations(element.ast);
+                    break;
                 default:
                     break;
             }

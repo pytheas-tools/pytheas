@@ -20,9 +20,10 @@ export interface ReadedFile {
  * - in electron, use Node.js native fs package
  */
 class FilesReader {
+    private static instance: FilesReader;
+
     browserReader = new FileReader();
     electronReader: any;
-    private static instance: FilesReader;
     private constructor() {}
     static getInstance() {
         if (!FilesReader.instance) {
@@ -43,8 +44,9 @@ class FilesReader {
      */
     readFilesFromBrowser(files: FileEntry[]): Promise<ReadedFile[]> {
         let i = 0;
-        const len = files.length,
-            readedFiles: ReadedFile[] = [];
+        const len = files.length;
+        const readedFiles: ReadedFile[] = [];
+
         return new Promise((resolve, reject) => {
             const loopFiles = () => {
                 const fileToRead = files[i];
@@ -72,8 +74,9 @@ class FilesReader {
      */
     readFilesFromFetchCall(files: FileEntry[]): Promise<ReadedFile[]> {
         let i = 0;
-        const len = files.length,
-            readedFiles: ReadedFile[] = [];
+        const len = files.length;
+        const readedFiles: ReadedFile[] = [];
+
         return new Promise((resolve, reject) => {
             for (i; i < len; i++) {
                 readedFiles.push(this.readFileFromFetchCall(files[i]));
@@ -129,8 +132,9 @@ class FilesReader {
      */
     readFilesFromElectron(files: FileFromElectron[]): Promise<ReadedFile[]> {
         let i = 0;
-        const len = files.length,
-            readedFiles: ReadedFile[] = [];
+        const len = files.length;
+        const readedFiles: ReadedFile[] = [];
+
         return new Promise((resolve, reject) => {
             const loopFiles = () => {
                 const fileToRead = files[i];

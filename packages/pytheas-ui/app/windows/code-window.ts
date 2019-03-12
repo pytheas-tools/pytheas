@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
-import { pubsub } from '../utils/pubsub';
 import { EVENTS } from '../utils/events';
+import { pubsub } from '../utils/pubsub';
 
 import Parser from '../background/files-parser';
 import SettingsManager from '../background/managers/settings-manager';
@@ -11,11 +11,12 @@ import SettingsManager from '../background/managers/settings-manager';
  * Proxy events from codeblocks for AM
  */
 class CodeWindow {
+    private static instance: CodeWindow;
+
     $element: HTMLElement;
 
     lastScrollPosition = 0;
 
-    private static instance: CodeWindow;
     private constructor() {}
     static getInstance() {
         if (!CodeWindow.instance) {

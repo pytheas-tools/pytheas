@@ -1,5 +1,5 @@
-import { FileFromElectron } from './files-reader';
 import { getExtension } from '../utils/fs';
+import { FileFromElectron } from './files-reader';
 
 import Notifier from '../utils/notifier';
 
@@ -21,6 +21,8 @@ if (typeof require !== 'undefined') {
  * - in electron, use Node.js package 'walker'
  */
 class FilesScanner {
+    private static instance: FilesScanner;
+
     countFiles = 0;
     scannedFiles: any = [];
 
@@ -30,7 +32,6 @@ class FilesScanner {
 
     notSupportedExtensions = new Set();
 
-    private static instance: FilesScanner;
     private constructor() {}
     static getInstance() {
         if (!FilesScanner.instance) {
@@ -140,7 +141,8 @@ class FilesScanner {
         const loopFiles = () => {
             if (i < len) {
                 const file: any = files[i];
-                let entry: any, reader: any;
+                let entry: any;
+                let reader: any;
 
                 if (file.isFile || file.isDirectory) {
                     entry = file;

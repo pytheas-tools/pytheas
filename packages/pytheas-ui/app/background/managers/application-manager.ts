@@ -1,24 +1,27 @@
 import CodeWindowManager from '../../windows/code-window';
 import DropWindowManager from '../../windows/drop-window';
 import GraphWindowManager from '../../windows/graph-window';
-import WelcomeWindowManager from '../../windows/welcome-window';
 import NavigationBarManager from '../../windows/navigation-bar-manager';
+import WelcomeWindowManager from '../../windows/welcome-window';
 
 import DataManager from '../data/data-manager';
 import SettingsManager from './settings-manager';
 
-import { pubsub } from '../../utils/pubsub';
 import { EVENTS } from '../../utils/events';
-import PWAManager from './pwa-manager';
+import { pubsub } from '../../utils/pubsub';
 import ContextmenuManager from './contextmenu-manager';
-import StatusbarManager from './statusbar-manager';
 import DemosManager from './demos-manager';
+import PWAManager from './pwa-manager';
+import StatusbarManager from './statusbar-manager';
 
 /**
  * Manage all application state, main orchestrator
  */
 class ApplicationManager {
     private static instance: ApplicationManager;
+
+    filesReady = false;
+
     private constructor() {}
     static getInstance() {
         if (!ApplicationManager.instance) {
@@ -26,8 +29,6 @@ class ApplicationManager {
         }
         return ApplicationManager.instance;
     }
-
-    filesReady = false;
 
     init() {
         CodeWindowManager.init(document.querySelector('.code-window'));
@@ -58,7 +59,9 @@ class ApplicationManager {
         });
 
         pubsub.subscribe(EVENTS.NAVIGATIONBAR_HOME, () => {
-            if (!this.filesReady) return;
+            if (!this.filesReady) {
+                return;
+            }
             console.log('ApplicationManager NAVIGATIONBAR_HOME notify everybody');
             pubsub.publish(EVENTS.INIT_VIEW);
         });

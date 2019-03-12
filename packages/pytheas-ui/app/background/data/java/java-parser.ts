@@ -1,9 +1,11 @@
+import { ReadedFile } from '../../files-reader';
+
 let javaast: any;
 
 class JavaParser {
+    private static instance: JavaParser;
     parsedFiles: ReadedFile[] = [];
 
-    private static instance: JavaParser;
     private constructor() {}
     static getInstance() {
         if (!JavaParser.instance) {

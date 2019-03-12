@@ -1,17 +1,18 @@
-import { pubsub } from '../utils/pubsub';
 import { EVENTS } from '../utils/events';
+import { pubsub } from '../utils/pubsub';
 
 /**
  * Manage navigation bar, display informations from application manager.
  * Proxy events from NB for AM
  */
 class NavigationBar {
+    private static instance: NavigationBar;
+
     $element: HTMLElement;
 
-    history;
+    history: any;
     historyIndex = 0;
 
-    private static instance: NavigationBar;
     private constructor() {}
     static getInstance() {
         if (!NavigationBar.instance) {

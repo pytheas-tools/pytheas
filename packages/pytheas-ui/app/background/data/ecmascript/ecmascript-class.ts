@@ -1,12 +1,12 @@
 import { PyElement } from '../py-element';
-import tsAstFinder, { NodeObject } from './ts-ast-finder';
-import { ECMAScriptProperty } from './ecmascript-property';
-import { ECMAScriptMethod } from './ecmascript-method';
+import { RelationTypes } from '../py-relation';
 import { ECMAScriptConstructor } from './ecmascript-constructor';
+import { ECMAScriptMethod } from './ecmascript-method';
+import { ECMAScriptNewExpression } from './ecmascript-new-expression';
+import { ECMAScriptProperty } from './ecmascript-property';
+import tsAstFinder, { NodeObject } from './ts-ast-finder';
 
 import ECMAScriptParser from './ecmascript-parser';
-import { RelationTypes } from '../py-relation';
-import { ECMAScriptNewExpression } from './ecmascript-new-expression';
 
 export class ECMAScriptClass extends PyElement {
     ast: NodeObject;
@@ -14,8 +14,8 @@ export class ECMAScriptClass extends PyElement {
     methodDeclarations: ECMAScriptMethod[];
     constructorDeclaration: ECMAScriptConstructor;
 
-    publicElements = [];
-    privateElements = [];
+    publicElements: any = [];
+    privateElements: any = [];
 
     constructor(classeNode: NodeObject, file: any) {
         super();

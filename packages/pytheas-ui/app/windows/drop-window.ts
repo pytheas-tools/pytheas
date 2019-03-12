@@ -1,19 +1,20 @@
-import FilesScanner from '../background/files-scanner';
-import FilesReader from '../background/files-reader';
-import FilesParser from '../background/files-parser';
 import { EventEmitter } from 'events';
-import { pubsub } from '../utils/pubsub';
-import { EVENTS } from '../utils/events';
+import FilesParser from '../background/files-parser';
+import FilesReader from '../background/files-reader';
+import FilesScanner from '../background/files-scanner';
 import DemosManager from '../background/managers/demos-manager';
+import { EVENTS } from '../utils/events';
+import { pubsub } from '../utils/pubsub';
 
 interface ElectronEvent {
     sender: EventEmitter;
 }
 
 class DropWindow {
+    private static instance: DropWindow;
+
     dropped = false;
 
-    private static instance: DropWindow;
     private constructor() {}
     static getInstance() {
         if (!DropWindow.instance) {

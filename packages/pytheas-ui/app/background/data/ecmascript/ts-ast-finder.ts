@@ -1,4 +1,4 @@
-import { Node, Identifier, TypeReference, Token } from 'typescript';
+import { Identifier, Node } from 'typescript';
 
 export interface TypeReferenceObject {
     text: string;

@@ -70,15 +70,15 @@ class ContextmenuManager {
                     k.style.display = 'none';
                 });
                 event.preventDefault();
-                var mID = '';
+                let mID = '';
                 Array.from(graphContainer.classList).forEach((y, i) => {
                     if (~y.indexOf('jctx-id-')) {
                         mID = '.' + y;
                     }
                 });
-                let x = document.querySelector('.jctx' + mID);
-                let maxLeft = (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) - 10 - x.getBoundingClientRect().width;
-                let maxTop =
+                const x = document.querySelector('.jctx' + mID);
+                const maxLeft = (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) - 10 - x.getBoundingClientRect().width;
+                const maxTop =
                     (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight) - 10 - x.getBoundingClientRect().height;
                 fadeElement(x, 'show');
                 (x.style.left = (event.pageX > maxLeft ? maxLeft : event.pageX) + 'px'), (x.style.top = (event.pageY > maxTop ? maxTop : event.pageY) + 'px');

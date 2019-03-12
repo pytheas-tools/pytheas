@@ -1,11 +1,11 @@
-import { pubsub } from '../../utils/pubsub';
-import { EVENTS } from '../../utils/events';
-
 /**
- * Manage settings
+ * Manage status bar
  */
 class StatusbarManager {
     private static instance: StatusbarManager;
+
+    $element: HTMLElement;
+
     private constructor() {}
     static getInstance() {
         if (!StatusbarManager.instance) {
@@ -13,8 +13,6 @@ class StatusbarManager {
         }
         return StatusbarManager.instance;
     }
-
-    $element: HTMLElement;
 
     init() {
         this.$element = document.querySelector('.app-container__status-bar span');

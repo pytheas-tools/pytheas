@@ -14,9 +14,9 @@ class PWAManager {
     init() {
         if ('serviceWorker' in navigator) {
             function showRefreshUI(registration) {
-                let $refreshToaster = document.querySelector('.refresh-toaster');
+                const $refreshToaster = document.querySelector('.refresh-toaster');
                 $refreshToaster.style.display = 'flex';
-                let $refreshToaster_Refresh_button = $refreshToaster.querySelector('.refresh-toaster__refresh-button');
+                const $refreshToaster_Refresh_button = $refreshToaster.querySelector('.refresh-toaster__refresh-button');
                 if ($refreshToaster_Refresh_button) {
                     $refreshToaster_Refresh_button.addEventListener('click', () => {
                         if (!registration.waiting) {
@@ -28,7 +28,7 @@ class PWAManager {
                         registration.waiting.postMessage('skipWaiting');
                     });
                 }
-                let $refreshToaster_Close_button = $refreshToaster.querySelector('.refresh-toaster__close-button');
+                const $refreshToaster_Close_button = $refreshToaster.querySelector('.refresh-toaster__close-button');
                 if ($refreshToaster_Close_button) {
                     $refreshToaster_Close_button.addEventListener('click', () => {
                         $refreshToaster.style.display = 'none';
@@ -73,7 +73,9 @@ class PWAManager {
                     navigator.serviceWorker.addEventListener('controllerchange', event => {
                         // Ensure refresh is only called once.
                         // This works around a bug in "force update on reload".
-                        if (preventDevToolsReloadLoop) return;
+                        if (preventDevToolsReloadLoop) {
+                            return;
+                        }
                         preventDevToolsReloadLoop = true;
                         window.location.reload();
                     });

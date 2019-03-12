@@ -3,6 +3,9 @@
  */
 class DemosManager {
     private static instance: DemosManager;
+
+    demosData: any;
+
     private constructor() {}
     static getInstance() {
         if (!DemosManager.instance) {
@@ -10,8 +13,6 @@ class DemosManager {
         }
         return DemosManager.instance;
     }
-
-    demosData: any;
 
     init() {
         fetch('./demos/demos.json')

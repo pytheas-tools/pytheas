@@ -1,11 +1,16 @@
-import { pubsub } from '../../utils/pubsub';
 import { EVENTS } from '../../utils/events';
+import { pubsub } from '../../utils/pubsub';
 
 /**
  * Manage settings
  */
 class SettingsManager {
     private static instance: SettingsManager;
+
+    settings = {
+        theme: 'theme-light'
+    };
+
     private constructor() {}
     static getInstance() {
         if (!SettingsManager.instance) {
@@ -13,10 +18,6 @@ class SettingsManager {
         }
         return SettingsManager.instance;
     }
-
-    settings = {
-        theme: 'theme-light'
-    };
 
     init() {
         const $themeSelector = document.getElementById('theme-selector');

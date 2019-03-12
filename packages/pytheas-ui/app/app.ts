@@ -1,22 +1,8 @@
-// import Split from 'split.js';
-
 import ApplicationManager from './background/managers/application-manager';
-import { Graph } from '../components/dist/types/components/graph/graph';
 
 ApplicationManager.init();
 
 const { Split } = <any>window;
-
-/**
- * Init split.js inside main window
- */
-Split(['.graph-window', '.code-window'], {
-    sizes: [50, 50],
-    gutterSize: 5,
-    onDrag: () => {
-        syncGraphWithResize();
-    }
-});
 
 let $graph: any = null;
 
@@ -28,5 +14,16 @@ const syncGraphWithResize = () => {
         $graph.onExternalDragEvent();
     }
 };
+
+/**
+ * Init split.js inside main window
+ */
+Split(['.graph-window', '.code-window'], {
+    sizes: [50, 50],
+    gutterSize: 5,
+    onDrag: () => {
+        syncGraphWithResize();
+    }
+});
 
 window.addEventListener('resize', syncGraphWithResize, false);

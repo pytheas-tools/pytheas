@@ -1,8 +1,8 @@
 import domtoimage from 'dom-to-image';
 import panzoom from 'panzoom';
 
-import { pubsub } from '../utils/pubsub';
 import { EVENTS } from '../utils/events';
+import { pubsub } from '../utils/pubsub';
 
 import DataManager from '../background/data/data-manager';
 import ContextmenuManager from '../background/managers/contextmenu-manager';
@@ -14,6 +14,8 @@ import * as downloadjs from 'downloadjs';
  * Proxy events from graph for AM
  */
 class GraphWindow {
+    private static instance: GraphWindow;
+
     $element: HTMLElement;
 
     $graphContainer: HTMLElement;
@@ -21,10 +23,9 @@ class GraphWindow {
     $graph: HTMLElement;
     $graphOverview: HTMLElement;
 
-    panZoomInstance;
+    panZoomInstance: any;
     panZoomMessage: HTMLElement;
 
-    private static instance: GraphWindow;
     private constructor() {}
     static getInstance() {
         if (!GraphWindow.instance) {
@@ -110,7 +111,7 @@ class GraphWindow {
     }
 
     displayZoomLevel() {
-        let scale = Math.ceil(this.panZoomInstance.getTransform().scale * 100);
+        const scale = Math.ceil(this.panZoomInstance.getTransform().scale * 100);
         this.panZoomMessage.style.display = 'block';
         this.panZoomMessage.innerHTML = `${scale}%`;
         const pygraph = document.querySelector('py-graph');

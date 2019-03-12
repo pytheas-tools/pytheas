@@ -158,7 +158,7 @@ p {
 }
 
 .graph-container {
-    overflow: auto;
+    overflow: hidden;
 
     &:focus {
         outline: none;

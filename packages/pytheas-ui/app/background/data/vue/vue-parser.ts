@@ -1,4 +1,4 @@
-const { vuetemplatecompiler } = <any>window;
+let vuetemplatecompiler: any;
 
 class VueParser {
     private static instance: VueParser;
@@ -8,6 +8,10 @@ class VueParser {
             VueParser.instance = new VueParser();
         }
         return VueParser.instance;
+    }
+
+    init() {
+        vuetemplatecompiler = (<any>window).vuetemplatecompiler;
     }
 
     parseFile(sourcecode: string) {

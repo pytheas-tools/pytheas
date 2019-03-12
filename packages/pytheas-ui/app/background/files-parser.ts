@@ -8,11 +8,12 @@ import { MESSAGES } from '../utils/messages';
 import VueParser from './data/vue/vue-parser';
 
 /**
- * Parse file for their AST using ts-simpe-ast
+ * Parse file for their AST
  * TODO : make it language agnostic, or with a layer that makes easy to support others languages !== .js & .ts
  */
 class FilesParser {
     parsedFiles: ReadedFile[] = [];
+    parsers: Set<string>;
 
     private static instance: FilesParser;
     private constructor() {}
@@ -63,35 +64,52 @@ class FilesParser {
     }
 
     detectParsers(): Set<string> {
-        const parsers = new Set();
+        this.parsers = new Set();
 
         this.parsedFiles.forEach(file => {
             switch (file.extension) {
                 case 'js':
                 case 'ts':
-                    parsers.add('tsquery');
+                    this.parsers.add('tsquery');
                     break;
                 case 'java':
-                    parsers.add('javaast');
+                    this.parsers.add('javaast');
                     break;
                 case 'vue':
-                    parsers.add('vue-template-compiler');
+                    this.parsers.add('vue-template-compiler');
                     break;
                 default:
                     break;
             }
         });
 
-        return parsers;
+        return this.parsers;
+    }
+
+    initParsersInstances() {
+        this.parsers.forEach(parser => {
+            switch (parser) {
+                case 'tsquery':
+                    ECMAScriptParser.init();
+                    break;
+                case 'javaast':
+                    JavaParser.init();
+                    break;
+                case 'vue-template-compiler':
+                    VueParser.init();
+                    break;
+            }
+        });
     }
 
     loadParsersForFiles() {
         return new Promise((resolveLoadingParsers, rejectLoadingParsers) => {
             const parsersToLoad = this.detectParsers();
+
             const parsersPromiseLoading: any = [];
 
             parsersToLoad.forEach(parser => {
-                if (!window[parser]) {
+                if (!(<any>window)[parser]) {
                     parsersPromiseLoading.push(
                         new Promise((resolveLoadingParser, rejectLoadingParser) => {
                             const script = document.createElement('script');
@@ -116,6 +134,7 @@ class FilesParser {
             Promise.all(parsersPromiseLoading).then(
                 () => {
                     console.log('All parsers loaded');
+                    this.initParsersInstances();
                     resolveLoadingParsers();
                 },
                 () => {

@@ -1,4 +1,4 @@
-const { tsquery } = <any>window;
+let tsquery: any;
 
 class ECMAScriptParser {
     private static instance: ECMAScriptParser;
@@ -8,6 +8,10 @@ class ECMAScriptParser {
             ECMAScriptParser.instance = new ECMAScriptParser();
         }
         return ECMAScriptParser.instance;
+    }
+
+    init() {
+        tsquery = (<any>window).tsquery;
     }
 
     parseFile(sourcecode: string) {

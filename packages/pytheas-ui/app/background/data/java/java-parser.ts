@@ -1,4 +1,4 @@
-const { javaast } = <any>window;
+let javaast: any;
 
 class JavaParser {
     parsedFiles: ReadedFile[] = [];
@@ -10,6 +10,10 @@ class JavaParser {
             JavaParser.instance = new JavaParser();
         }
         return JavaParser.instance;
+    }
+
+    init() {
+        javaast = (<any>window).javaast;
     }
 
     parseFile(sourcecode: string) {

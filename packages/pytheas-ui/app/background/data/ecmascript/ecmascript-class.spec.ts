@@ -2,9 +2,9 @@ import { ECMAScriptClass } from './ecmascript-class';
 
 import { simpleClass } from './ecmascript-class.fixture';
 
-const { tsquery } = <any>window;
-
 describe('should create an instance of ECMAScriptClass', () => {
+    const { tsquery } = <any>window;
+
     const simpleClassAST = tsquery.tsquery.ast(simpleClass);
     const simpleClassASTClassNode = tsquery.tsquery(simpleClassAST, 'ClassDeclaration')[0];
 

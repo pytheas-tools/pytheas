@@ -19,6 +19,9 @@ export class ECMAScriptClass extends PyElement {
 
     constructor(classeNode: NodeObject, file: any) {
         super();
+        if (!ECMAScriptParser.initialized) {
+            ECMAScriptParser.init();
+        }
         this.ast = classeNode;
         this.file = file;
         this.name = tsAstFinder.getName(classeNode);

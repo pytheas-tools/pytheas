@@ -2,6 +2,9 @@ let tsquery: any;
 
 class ECMAScriptParser {
     private static instance: ECMAScriptParser;
+
+    initialized = false;
+
     private constructor() {}
     static getInstance() {
         if (!ECMAScriptParser.instance) {
@@ -12,6 +15,7 @@ class ECMAScriptParser {
 
     init() {
         tsquery = (<any>window).tsquery;
+        this.initialized = true;
     }
 
     parseFile(sourcecode: string) {

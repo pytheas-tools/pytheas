@@ -63,10 +63,11 @@
             </div>
         </div>
         <div class="app-container__status-bar">
-            <span></span>
-            <span class="app-container__status-bar_general-infos">Created with <ion-icon name="heart"></ion-icon> by <a
-                    href="https://twitter.com/vogloblinsky" target="_blank">@vogloblinsky</a>•<a target="_blank" href="https://github.com/vogloblinsky/pytheas/issues/new">Feedback
-                    ?</a></span>
+            <div></div>
+            <div class="app-container__status-bar_general-infos">Created with <ion-icon name="heart"></ion-icon> by <a
+                    href="https://twitter.com/vogloblinsky" target="_blank" rel="noopener">@vogloblinsky</a>•<a href="https://github.com/vogloblinsky/pytheas/issues/new"
+                    target="_blank" rel="noopener">Feedback
+                    ?</a>&nbsp;•&nbsp;<span>Version __VERSION__</span></div>
         </div>
     </div>
     <div class="refresh-toaster">
@@ -85,7 +86,8 @@
 
     <script src="libs/ionicons/ionicons.js"></script>
 
-    <script src="scripts/app.js"></script>
+    <script src="scripts/app.js" nomodule></script>
+    <script src="scripts/app_es6.js" type="module"></script>
 </body>
 
 </html>

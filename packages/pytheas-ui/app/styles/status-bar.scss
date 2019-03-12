@@ -4,16 +4,16 @@
     display: flex;
     font-size: 14px;
 
-    &>span {
+    &>div {
         padding: 10px;
         display: flex;
     }
 
-    span:first-child {
+    div:first-child {
         flex-grow: 1;
     }
 
-    span:last-child {
+    div:last-child {
         ion-icon {
             color: red;
         }

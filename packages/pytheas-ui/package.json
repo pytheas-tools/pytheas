@@ -39,7 +39,7 @@
         "clean-prod-file-es6": "npx strip-debug output/scripts/app_es6_0.js > output/scripts/app_es6.js && rm output/scripts/app_es6_0.js",
         "postcompile-ts:prod": "run-s clean-prod-file clean-prod-file-es6 build-codemirror",
         "MINIFICATION": "",
-        "minify-js": "npx uglifyjs output/scripts/app.js --output output/scripts/app.js npx uglifyjs output/scripts/app_es6.js --output output/scripts/app_es6.js && npx uglifyjs output/scripts/codemirror.js --output output/scripts/codemirror.js",
+        "minify-js": "npx uglifyjs output/scripts/app.js --output output/scripts/app.js && npx uglifyjs output/scripts/app_es6.js --output output/scripts/app_es6.js && npx uglifyjs output/scripts/codemirror.js --output output/scripts/codemirror.js",
         "minify-css": "npx uglifycss output/styles/app.css --output output/styles/app.css",
         "COPIES": "",
         "copy-all": "run-s copy-index replace-ionicons copy-assets",

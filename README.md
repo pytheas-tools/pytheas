@@ -1,71 +1,12 @@
-# Pytheas
+<h1 align="center">
+  <a href="https://vogloblinsky.github.io/pytheas/" target="_blank">Welcome to Pytheas</a>
+</h1>
 
-Pytheas is an exploration tool for your (Type|Java)Script codebase
+<p align="center">Pytheas is an exploration tool for your (Type|Java)Script codebase</p>
+<img align="center" src="https://github.com/vogloblinsky/pytheas/raw/develop/packages/pytheas-website/screenshot.png?raw=true"/>
 
-## Architecture / WIP
+## Want to help?
 
--   web interface
+Want to file a bug, contribute some code, or improve documentation? Excellent!
 
--   desktop wrapper using electron
-
-## Technologies
-
--   UI with vanilla JS + webcomponents
-
--   CSS with BEM methodology
-
-## Alternatives
-
-https://scitools.com/feature-category/graphing/
-
-https://www.sourcetrail.com/documentation/#CodeView60
-
-http://stan4j.com/about/
-
-https://tylermcginnis.com/javascript-visualizer/
-
-## Electron examples
-
-https://github.com/meetfranz/franz
-
-## Electron alternatives
-
-https://github.com/pojala/electrino
-
-## Vscode extension
-
-https://code.visualstudio.com/docs/extensions/samples
-
-https://code.visualstudio.com/docs/extensions/webview
-
-https://github.com/Microsoft/vscode-extension-samples/tree/master/webview-sample
-
-## Online IDE for ideas
-
-https://github.com/styfle/awesome-online-ide
-
-https://www.theia-ide.org
-
-https://github.com/jagenjo/webglstudio.js
-
-http://www.glyphrstudio.com/online/
-
-https://www.photopea.com/
-
-https://play.nativescript.org/
-
-https://stackblitz.com/
-
-## Ressources
-
-https://blog.dcpos.ch/how-to-make-your-electron-app-sexy
-
-https://github.com/kristianmandrup/wheel-of-fate
-
-https://github.com/sindresorhus/awesome-electron
-
-https://github.com/cancerberoSgx/typescript-in-the-browser
-
-## Design
-
-https://www.uplabs.com/challenges/coding-editor-challenge/results
+Read up on our guidelines for [contributing](https://github.com/vogloblinsky/pytheas/blob/develop/CONTRIBUTING.md) and then check out one of our issues in the hotlist : [community-help](https://github.com/vogloblinsky/pytheas/issues).

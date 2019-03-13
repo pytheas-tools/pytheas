@@ -15,7 +15,7 @@
   "contributes": {
     "commands": [{
       "command": "pytheas.start",
-      "title": "Start new Pytheas exploration session",
+      "title": "Start new exploration session",
       "category": "Pytheas"
     }]
   },

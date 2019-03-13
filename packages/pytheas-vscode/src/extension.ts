@@ -12,7 +12,7 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 /**
- * Manages cat coding webview panels
+ * Manages pytheas webview panels
  */
 class PytheasPanel {
     /**
@@ -80,13 +80,7 @@ class PytheasPanel {
         this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
 
         // Update the content based on view changes
-        this._panel.onDidChangeViewState(
-            e => {
-                
-            },
-            null,
-            this._disposables
-        );
+        this._panel.onDidChangeViewState(e => {}, null, this._disposables);
     }
 
     public dispose() {
@@ -104,37 +98,23 @@ class PytheasPanel {
     }
 
     private _getHtmlForWebview() {
-        // Local path to main script run in the webview
-        const scriptPathOnDisk = vscode.Uri.file(
-            path.join(this._extensionPath, 'media', 'main.js')
-        );
-
-        // And the uri we use to load this script in the webview
-        const scriptUri = scriptPathOnDisk.with({ scheme: 'vscode-resource' });
-
-        // Use a nonce to whitelist which scripts can be run
-        const nonce = getNonce();
-
         return `<!DOCTYPE html>
             <html lang="en">
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Pytheas exploration tool</title>
+                <style>
+                    body {
+                        background-color: white !important;
+                    }                    
+                </style>
             </head>
             <body>
-                HELLO WORLD
+                <p>HELLO WORLD</p>
+                <nova-badge score="1"></nova-badge>
+                <script src="https://unpkg.com/@nutrition-web-components/nova@0.0.1/dist/nova.js"></script>
             </body>
             </html>`;
     }
-}
-
-function getNonce() {
-    let text = '';
-    const possible =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (let i = 0; i < 32; i++) {
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-    return text;
 }

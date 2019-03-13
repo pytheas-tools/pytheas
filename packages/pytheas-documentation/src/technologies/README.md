@@ -1,4 +1,6 @@
-## Technologies
+# Technologies
+
+## Main parts
 
 -   UI with vanilla JS + webcomponents
 
@@ -61,3 +63,17 @@ https://github.com/jacomyal/sigma.js
 https://ialab.it.monash.edu/webcola/
 
 https://github.com/cytoscape/cytoscape.js
+
+## Hover statements codemirror
+
+https://github.com/angelozerr/CodeMirror-Extension
+
+http://localhost/TMP/pytheas/CodeMirror-Extension/demo/token-hover.html
+
+https://discuss.codemirror.net/t/hover-over-symbol-idea/245
+
+## Drag'n'drop
+
+https://www.html5rocks.com/en/tutorials/file/filesystem
+
+https://github.com/leonadler/drag-and-drop-across-browsers

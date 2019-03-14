@@ -1,4 +1,5 @@
 import * as path from 'path';
+import * as fs from 'fs';
 import * as vscode from 'vscode';
 
 export function activate(context: vscode.ExtensionContext) {
@@ -7,8 +8,6 @@ export function activate(context: vscode.ExtensionContext) {
             PytheasPanel.createOrShow(context.extensionPath);
         })
     );
-
-    console.log('ACTIVATE');
 }
 
 /**
@@ -66,12 +65,12 @@ class PytheasPanel {
 
         this._panel.webview.html = this._getHtmlForWebview();
 
-        console.log(vscode.workspace.textDocuments);
+        //console.log(vscode.workspace.textDocuments);
 
         vscode.workspace.findFiles('**/*').then(files => {
-            console.log(files);
+            //console.log(files);
             vscode.workspace.openTextDocument(files[0].path).then(file => {
-                console.log(file);
+                //console.log(file);
             });
         });
 
@@ -98,23 +97,59 @@ class PytheasPanel {
     }
 
     private _getHtmlForWebview() {
-        return `<!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Pytheas exploration tool</title>
-                <style>
-                    body {
-                        background-color: white !important;
-                    }                    
-                </style>
-            </head>
-            <body>
-                <p>HELLO WORLD</p>
-                <nova-badge score="1"></nova-badge>
-                <script src="https://unpkg.com/@nutrition-web-components/nova@0.0.1/dist/nova.js"></script>
-            </body>
-            </html>`;
+        const filePath: vscode.Uri = vscode.Uri.file(
+            path.join(this._extensionPath, 'media', 'index.html')
+        );
+        let rawHTMl = fs.readFileSync(filePath.fsPath, 'utf8');
+
+        const CSSFilePath = vscode.Uri.file(
+            path.join(this._extensionPath, 'media', 'styles/app.css')
+        );
+        const CSSFileFinalPath = CSSFilePath.with({
+            scheme: 'vscode-resource'
+        });
+
+        // TODO : make this generic/dynamic
+
+        const AppJSFilePath = vscode.Uri.file(
+            path.join(this._extensionPath, 'media', 'scripts/app.js')
+        );
+        const AppJSFileFinalPath = AppJSFilePath.with({
+            scheme: 'vscode-resource'
+        });
+
+        const AppJSES6FilePath = vscode.Uri.file(
+            path.join(this._extensionPath, 'media', 'scripts/app_es6.js')
+        );
+        const AppJSES6FileFinalPath = AppJSES6FilePath.with({
+            scheme: 'vscode-resource'
+        });
+
+        const AppJSSplitFilePath = vscode.Uri.file(
+            path.join(this._extensionPath, 'media', 'scripts/split.min.js')
+        );
+        const AppJSSplitFileFinalPath = AppJSSplitFilePath.with({
+            scheme: 'vscode-resource'
+        });
+
+        const AppJSCodemirrorFilePath = vscode.Uri.file(
+            path.join(this._extensionPath, 'media', 'scripts/codemirror.js')
+        );
+        const AppJSCodemirrorFileFinalPath = AppJSCodemirrorFilePath.with({
+            scheme: 'vscode-resource'
+        });
+
+        rawHTMl = rawHTMl.replace('styles/app.css', CSSFileFinalPath);
+        rawHTMl = rawHTMl.replace('scripts/app.js', AppJSFileFinalPath);
+        rawHTMl = rawHTMl.replace('scripts/app_es6.js', AppJSES6FileFinalPath);
+        rawHTMl = rawHTMl.replace(
+            'scripts/split.min.js',
+            AppJSSplitFileFinalPath
+        );
+        rawHTMl = rawHTMl.replace(
+            'scripts/codemirror.js',
+            AppJSCodemirrorFileFinalPath
+        );
+        return rawHTMl;
     }
 }

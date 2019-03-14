@@ -53,6 +53,8 @@
         "copy-wc": "npx rimraf output/web-components && mkdir output/web-components && cp -R ./components/dist output/web-components",
         "start-wc": "stencil build --dev --watch --serve --es5 --config ./components/stencil.config.ts",
         "PRODUCTION": "",
+        "prebuild-dev": "npx rimraf output",
+        "build-dev": "run-s compile-ts build-wc copy-wc copy-all copy-demos compile-scss build-browser-dependencies",
         "prebuild": "npx rimraf output",
         "build": "run-s compile-ts:prod build-wc-prod copy-wc copy-all copy-demos minify-js compile-scss minify-css build-browser-dependencies:prod workbox",
         "PWA": "",
@@ -126,7 +128,7 @@
         "panzoom": "^7.1.2",
         "sloc": "^0.2.1",
         "split.js": "^1.5.10",
-        "vue-template-compiler": "2.6.8"
+        "vue-template-compiler": "2.6.9"
     },
     "devDependencies": {
         "@babel/core": "^7.3.4",
@@ -143,7 +145,7 @@
         "filesize-cli": "0.0.3",
         "fs-extra": "^7.0.1",
         "google-closure-compiler": "^20190301.0.0",
-        "jest": "^24.4.0",
+        "jest": "^24.5.0",
         "madge": "^3.4.4",
         "node-sass": "^4.11.0",
         "nodemon": "^1.18.10",
@@ -167,11 +169,12 @@
         "testcafe-browser-provider-saucelabs": "^1.6.1",
         "ts-jest": "^24.0.0",
         "tslib": "^1.9.3",
-        "tslint": "^5.13.1",
+        "tslint": "^5.14.0",
         "typedoc": "^0.14.2",
         "typescript": "^3.2.4",
         "uglify-es": "3.3.9",
         "uglifycss": "0.0.29",
+        "useref": "^1.4.1",
         "workbox-cli": "^4.1.0"
     }
 }

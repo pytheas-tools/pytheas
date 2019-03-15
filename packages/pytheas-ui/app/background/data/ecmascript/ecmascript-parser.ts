@@ -49,6 +49,10 @@ class ECMAScriptParser {
     getNewExpressions(sourceast: any) {
         return tsquery.tsquery(sourceast, 'NewExpression');
     }
+
+    getSyntaxKindName(index: number): string {
+        return tsquery.tsquery.syntaxKindName(index);
+    }
 }
 
 export default ECMAScriptParser.getInstance();

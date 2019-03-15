@@ -53,9 +53,9 @@ export class ECMAScriptClass extends PyElement {
             this.addRelation(this, propertyDeclaration.type, propertyDeclaration.typeKind, RelationTypes.Out);
             if (propertyDeclaration.modifiers && propertyDeclaration.modifiers.length > 0) {
                 propertyDeclaration.modifiers.forEach(modifier => {
-                    if (modifier === 'public') {
+                    if (modifier === 'PublicKeyword') {
                         this.publicElements.push(propertyDeclaration);
-                    } else if (modifier === 'private') {
+                    } else if (modifier === 'PrivateKeyword') {
                         this.privateElements.push(propertyDeclaration);
                     }
                 });
@@ -67,9 +67,9 @@ export class ECMAScriptClass extends PyElement {
         this.methodDeclarations.forEach(methodDeclaration => {
             if (methodDeclaration.modifiers && methodDeclaration.modifiers.length > 0) {
                 methodDeclaration.modifiers.forEach(modifier => {
-                    if (modifier === 'public') {
+                    if (modifier === 'PublicKeyword') {
                         this.publicElements.push(methodDeclaration);
-                    } else if (modifier === 'private') {
+                    } else if (modifier === 'PrivateKeyword') {
                         this.privateElements.push(methodDeclaration);
                     }
                 });

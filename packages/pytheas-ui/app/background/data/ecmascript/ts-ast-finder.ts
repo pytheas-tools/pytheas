@@ -13,7 +13,7 @@ export interface IdentifierObject {
 }
 
 export interface TokenObject {
-    text: string;
+    kind: number;
 }
 
 export declare type NodeObject = Node & {

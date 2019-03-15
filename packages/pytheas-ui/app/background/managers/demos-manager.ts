@@ -15,17 +15,20 @@ class DemosManager {
     }
 
     init() {
-        fetch('./demos/demos.json')
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-                this.demosData = data;
-                console.log(this.demosData);
-            })
-            .catch(error => {
-                console.log('Error with fetch: ' + error.message);
-            });
+        const { PYTHEAS_CONTEXT } = <any>window;
+        if (PYTHEAS_CONTEXT && PYTHEAS_CONTEXT !== 'vscode') {
+            fetch('./demos/demos.json')
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    this.demosData = data;
+                    console.log(this.demosData);
+                })
+                .catch(error => {
+                    console.log('Error with fetch: ' + error.message);
+                });
+        }
     }
 
     getDemoProjectFiles(project: string) {

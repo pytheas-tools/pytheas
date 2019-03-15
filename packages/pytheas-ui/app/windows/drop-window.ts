@@ -91,6 +91,17 @@ class DropWindow {
                     });
                 });
             }
+        } else if (PYTHEAS_CONTEXT && PYTHEAS_CONTEXT === 'vscode') {
+            window.addEventListener('message', event => {
+                const message = event.data;
+                switch (message.command) {
+                    case 'readedFiles':
+                        FilesParser.parseFiles(message.files).then(parsedFiles => {
+                            pubsub.publish(EVENTS.FILES_PARSED, parsedFiles);
+                        });
+                        break;
+                }
+            });
         }
     }
 

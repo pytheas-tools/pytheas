@@ -1,0 +1,40 @@
+@import './variables';
+
+.app-container__top-bar {
+    width: 100%;
+    height: $topBarHeight;
+    display: flex;
+
+    h1 {
+        font-size: 16px;
+        color: $blue;
+    }
+
+    h2 {
+        font-size: 14px;
+    }
+
+    .app-container__top-bar__infos {
+        flex-grow: 1;
+        display: flex;
+
+        img {
+            margin: 0 5px;
+        }
+
+        .app-container__top-bar__infos_status {
+            font-size: 11px;
+            display: block;
+            padding: 2px 4px;
+            border-radius: 2px;
+            height: 12px;
+            line-height: 13px;
+            margin-left: 5px;
+            margin-top: 4px;
+        }
+    }
+
+    .app-container__top-bar__settings {
+        padding: 10px;
+    }
+}

@@ -19,9 +19,14 @@ class WelcomeWindow {
 
     init(element: HTMLElement) {
         this.$element = element;
-        pubsub.subscribe(EVENTS.FILES_COMING, () => {
-            this.hide();
-        });
+        const { PYTHEAS_CONTEXT } = <any>window;
+        if (PYTHEAS_CONTEXT && PYTHEAS_CONTEXT === 'vscode') {
+            this.$element.parentElement.removeChild(this.$element);
+        } else {
+            pubsub.subscribe(EVENTS.FILES_COMING, () => {
+                this.hide();
+            });
+        }
     }
 
     hide() {

@@ -65,13 +65,37 @@ class PytheasPanel {
 
         this._panel.webview.html = this._getHtmlForWebview();
 
-        //console.log(vscode.workspace.textDocuments);
+        const readedFiles = [];
 
         vscode.workspace.findFiles('**/*').then(files => {
-            //console.log(files);
-            vscode.workspace.openTextDocument(files[0].path).then(file => {
-                //console.log(file);
-            });
+            let i = 0,
+                len = files.length;
+
+            const loop = () => {
+                if (i < len) {
+                    vscode.workspace
+                        .openTextDocument(files[i].path)
+                        .then(file => {
+                            readedFiles.push({
+                                extension: '',
+                                language: file.languageId,
+                                name: '',
+                                path: file.fileName,
+                                sourcecode: file.getText(),
+                                sloc: ''
+                            });
+                            i++;
+                            loop();
+                        });
+                } else {
+                    console.log('end read: ', readedFiles);
+                    this._panel.webview.postMessage({
+                        command: 'readedFiles',
+                        files: readedFiles
+                    });
+                }
+            };
+            loop();
         });
 
         // Listen for when the panel is disposed

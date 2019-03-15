@@ -2,6 +2,8 @@ import * as path from 'path';
 import * as fs from 'fs';
 import * as vscode from 'vscode';
 
+import { getExtension, getName } from './fs';
+
 export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(
         vscode.commands.registerCommand('pytheas.start', () => {
@@ -77,9 +79,9 @@ class PytheasPanel {
                         .openTextDocument(files[i].path)
                         .then(file => {
                             readedFiles.push({
-                                extension: '',
+                                extension: getExtension(file.fileName),
                                 language: file.languageId,
-                                name: '',
+                                name: getName(file.fileName),
                                 path: file.fileName,
                                 sourcecode: file.getText(),
                                 sloc: ''
@@ -132,6 +134,7 @@ class PytheasPanel {
         const CSSFileFinalPath = CSSFilePath.with({
             scheme: 'vscode-resource'
         });
+        rawHTMl = rawHTMl.replace('styles/app.css', CSSFileFinalPath);
 
         // TODO : make this generic/dynamic
 
@@ -141,6 +144,7 @@ class PytheasPanel {
         const AppJSFileFinalPath = AppJSFilePath.with({
             scheme: 'vscode-resource'
         });
+        rawHTMl = rawHTMl.replace('scripts/app.js', AppJSFileFinalPath);
 
         const AppJSES6FilePath = vscode.Uri.file(
             path.join(this._extensionPath, 'media', 'scripts/app_es6.js')
@@ -148,6 +152,7 @@ class PytheasPanel {
         const AppJSES6FileFinalPath = AppJSES6FilePath.with({
             scheme: 'vscode-resource'
         });
+        rawHTMl = rawHTMl.replace('scripts/app_es6.js', AppJSES6FileFinalPath);
 
         const AppJSSplitFilePath = vscode.Uri.file(
             path.join(this._extensionPath, 'media', 'scripts/split.min.js')
@@ -155,6 +160,10 @@ class PytheasPanel {
         const AppJSSplitFileFinalPath = AppJSSplitFilePath.with({
             scheme: 'vscode-resource'
         });
+        rawHTMl = rawHTMl.replace(
+            'scripts/split.min.js',
+            AppJSSplitFileFinalPath
+        );
 
         const AppJSCodemirrorFilePath = vscode.Uri.file(
             path.join(this._extensionPath, 'media', 'scripts/codemirror.js')
@@ -162,18 +171,41 @@ class PytheasPanel {
         const AppJSCodemirrorFileFinalPath = AppJSCodemirrorFilePath.with({
             scheme: 'vscode-resource'
         });
-
-        rawHTMl = rawHTMl.replace('styles/app.css', CSSFileFinalPath);
-        rawHTMl = rawHTMl.replace('scripts/app.js', AppJSFileFinalPath);
-        rawHTMl = rawHTMl.replace('scripts/app_es6.js', AppJSES6FileFinalPath);
-        rawHTMl = rawHTMl.replace(
-            'scripts/split.min.js',
-            AppJSSplitFileFinalPath
-        );
         rawHTMl = rawHTMl.replace(
             'scripts/codemirror.js',
             AppJSCodemirrorFileFinalPath
         );
+
+        // Parsers
+
+        const AppJSTsqueryFilePath = vscode.Uri.file(
+            path.join(this._extensionPath, 'media', 'scripts/tsquery.js')
+        );
+        const AppJSTsqueryFileFinalPath = AppJSTsqueryFilePath.with({
+            scheme: 'vscode-resource'
+        });
+        rawHTMl = rawHTMl.replace(
+            '</body>',
+            `<script src="${AppJSTsqueryFileFinalPath}"></script></body>`
+        );
+
+        // Web components pytheas
+
+        const AppJSWCPytheasFilePath = vscode.Uri.file(
+            path.join(
+                this._extensionPath,
+                'media',
+                'web-components/dist/pytheas.js'
+            )
+        );
+        const AppJSWCPytheasFileFinalPath = AppJSWCPytheasFilePath.with({
+            scheme: 'vscode-resource'
+        });
+        rawHTMl = rawHTMl.replace(
+            'web-components/dist/pytheas.js',
+            AppJSWCPytheasFileFinalPath
+        );
+
         return rawHTMl;
     }
 }

@@ -43,7 +43,7 @@
         "minify-css": "npx uglifycss output/styles/app.css --output output/styles/app.css",
         "COPIES": "",
         "copy-all": "run-s copy-index replace-ionicons copy-assets",
-        "copy-index": "npx copyfiles -u 1 -a app/index.html app/manifest.json output/",
+        "copy-index": "npx copyfiles -u 1 -a app/index.html app/manifest.json app/favicon.ico output/",
         "postcopy-index": "node scripts/update-version-during-build.js",
         "copy-assets": "npx rimraf output/assets && mkdir output/assets && cp -R app/assets/* output/assets",
         "replace-ionicons": "replace \"libs/ionicons/ionicons.js\" \"https://unpkg.com/ionicons@4.4.4/dist/ionicons.js\" output/index.html output/index.html",

@@ -20,6 +20,7 @@ const syncGraphWithResize = () => {
  */
 Split(['.graph-window', '.code-window'], {
     sizes: [50, 50],
+    minSize: [700, 500],
     gutterSize: 5,
     onDrag: () => {
         syncGraphWithResize();

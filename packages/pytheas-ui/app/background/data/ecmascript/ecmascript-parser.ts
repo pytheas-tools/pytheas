@@ -53,6 +53,18 @@ class ECMAScriptParser {
     getSyntaxKindName(index: number): string {
         return tsquery.tsquery.syntaxKindName(index);
     }
+
+    getCallExpressions(sourceast: any) {
+        return tsquery.tsquery(sourceast, 'CallExpression');
+    }
+
+    getBinaryExpressions(sourceast: any) {
+        return tsquery.tsquery(sourceast, 'BinaryExpression');
+    }
+
+    getPropertyAccessExpressions(sourceast: any) {
+        return tsquery.tsquery(sourceast, 'PropertyAccessExpression');
+    }
 }
 
 export default ECMAScriptParser.getInstance();

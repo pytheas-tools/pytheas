@@ -77,5 +77,15 @@ export class ECMAScriptClass extends PyElement {
                 this.publicElements.push(methodDeclaration);
             }
         });
+
+        // console.log(ECMAScriptParser.getCallExpressions(this.ast));
+
+        // Find relations for internal functions : this.mymethod is a PropertyAccessExpression inside a CallExpression inside an ExpressionStatement
+
+        // console.log(ECMAScriptParser.getBinaryExpressions(this.ast));
+        // or find with property directly ?
+        console.log(ECMAScriptParser.getPropertyAccessExpressions(this.ast));
+
+        // Find relations for internal properties : this.myprop = ... is a PropertyAccessExpression inside the left property of a BinaryExpression inside an ExpressionStatement
     }
 }

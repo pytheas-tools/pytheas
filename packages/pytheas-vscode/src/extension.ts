@@ -28,6 +28,8 @@ class PytheasPanel {
     private _disposables: vscode.Disposable[] = [];
 
     public static createOrShow(extensionPath: string) {
+        console.log('createOrShow');
+
         const column = vscode.window.activeTextEditor
             ? vscode.window.activeTextEditor.viewColumn
             : undefined;
@@ -109,6 +111,7 @@ class PytheasPanel {
     }
 
     public dispose() {
+        console.log('dispose');
         PytheasPanel.currentPanel = undefined;
 
         // Clean up our resources
@@ -123,6 +126,7 @@ class PytheasPanel {
     }
 
     private _getHtmlForWebview() {
+        console.log('_getHtmlForWebview');
         const filePath: vscode.Uri = vscode.Uri.file(
             path.join(this._extensionPath, 'media', 'index.html')
         );
@@ -134,7 +138,7 @@ class PytheasPanel {
         const CSSFileFinalPath = CSSFilePath.with({
             scheme: 'vscode-resource'
         });
-        rawHTMl = rawHTMl.replace('styles/app.css', CSSFileFinalPath);
+        rawHTMl = rawHTMl.replace('styles/app.css', String(CSSFileFinalPath));
 
         // TODO : make this generic/dynamic
 
@@ -144,7 +148,7 @@ class PytheasPanel {
         const AppJSFileFinalPath = AppJSFilePath.with({
             scheme: 'vscode-resource'
         });
-        rawHTMl = rawHTMl.replace('scripts/app.js', AppJSFileFinalPath);
+        rawHTMl = rawHTMl.replace('scripts/app.js', String(AppJSFileFinalPath));
 
         const AppJSES6FilePath = vscode.Uri.file(
             path.join(this._extensionPath, 'media', 'scripts/app_es6.js')
@@ -152,7 +156,10 @@ class PytheasPanel {
         const AppJSES6FileFinalPath = AppJSES6FilePath.with({
             scheme: 'vscode-resource'
         });
-        rawHTMl = rawHTMl.replace('scripts/app_es6.js', AppJSES6FileFinalPath);
+        rawHTMl = rawHTMl.replace(
+            'scripts/app_es6.js',
+            String(AppJSES6FileFinalPath)
+        );
 
         const AppJSSplitFilePath = vscode.Uri.file(
             path.join(this._extensionPath, 'media', 'scripts/split.min.js')
@@ -162,7 +169,7 @@ class PytheasPanel {
         });
         rawHTMl = rawHTMl.replace(
             'scripts/split.min.js',
-            AppJSSplitFileFinalPath
+            String(AppJSSplitFileFinalPath)
         );
 
         const AppJSCodemirrorFilePath = vscode.Uri.file(
@@ -173,7 +180,7 @@ class PytheasPanel {
         });
         rawHTMl = rawHTMl.replace(
             'scripts/codemirror.js',
-            AppJSCodemirrorFileFinalPath
+            String(AppJSCodemirrorFileFinalPath)
         );
 
         // Parsers
@@ -203,8 +210,29 @@ class PytheasPanel {
         });
         rawHTMl = rawHTMl.replace(
             'web-components/dist/pytheas.js',
-            AppJSWCPytheasFileFinalPath
+            String(AppJSWCPytheasFileFinalPath)
         );
+
+        // VsCode theme detection
+
+        const VSCodeThemeDetectionScript = `
+            const body = document.querySelector('body');
+            const hasDarkTheme = body.classList.contains('vscode-dark');
+            const hasLightTheme = body.classList.contains('vscode-light');
+            document.querySelector('body').classList.remove('theme-dark');
+            document.querySelector('body').classList.remove('theme-light');
+            if (hasDarkTheme) {
+                document.querySelector('body').classList.add('theme-dark');
+            }
+            if (hasLightTheme) {
+                document.querySelector('body').classList.add('theme-light');
+            }
+        `;
+        rawHTMl = rawHTMl.replace(
+            '</body>',
+            `<script>${VSCodeThemeDetectionScript}</script></body>`
+        );
+        rawHTMl = rawHTMl.replace('<body class="theme-light">', `<body>`);
 
         return rawHTMl;
     }

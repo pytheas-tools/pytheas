@@ -1,0 +1,14 @@
+.vscode-dark,
+.vscode-light {
+    .app-container__top-bar__settings {
+        display: none;
+    }
+
+    .windows_welcome {
+        display: none;
+    }
+
+    .app-container__top-bar {
+        display: none;
+    }
+}

@@ -9,6 +9,7 @@ import SettingsManager from './settings-manager';
 
 import { EVENTS } from '../../utils/events';
 import { pubsub } from '../../utils/pubsub';
+import ContextManager from './context-manager';
 import ContextmenuManager from './contextmenu-manager';
 import DemosManager from './demos-manager';
 import PWAManager from './pwa-manager';
@@ -40,6 +41,7 @@ class ApplicationManager {
         ContextmenuManager.init();
         StatusbarManager.init();
         DemosManager.init();
+        ContextManager.init();
         // PWAManager.init();
 
         pubsub.subscribe(EVENTS.FILES_PARSED, parsedFiles => {

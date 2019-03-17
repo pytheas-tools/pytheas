@@ -70,7 +70,7 @@ ${lines} lines of code`
         });
     }
 
-    addCodeBlock(file) {
+    addCodeBlock(file: any) {
         const $codeBlock = document.createElement('py-codeblock');
         $codeBlock.setAttribute('filename', file.name);
         $codeBlock.setAttribute('code', file.sourcecode);
@@ -101,7 +101,7 @@ ${lines} lines of code`
         this.$element.scrollTop = this.lastScrollPosition;
     }
 
-    onCodeblockStatementClicked(ev) {
+    onCodeblockStatementClicked(ev: Event) {
         console.log('onCodeblockStatementClicked: ', ev);
         pubsub.publish(EVENTS.CODEBLOCK_STATEMENT_CLICKED);
     }

@@ -65,7 +65,8 @@
         "prebuild": "npm run clean-output",
         "build": "run-s compile-ts:prod build-wc-prod copy-wc copy-all copy-demos minify-js compile-scss minify-css build-browser-dependencies:prod update-context:browser workbox",
         "prebuild:vcode": "npm run clean-output",
-        "build:vscode": "",
+        "build:vscode": "run-s compile-ts:prod build-wc-prod copy-wc copy-all copy-demos minify-js compile-scss minify-css build-browser-dependencies:prod update-context:vscode",
+        "copy-for-vscode": "npx rimraf ../pytheas-vscode/media && mkdir ../pytheas-vscode/media && cp -R output/ ../pytheas-vscode/media",
         "prebuild:electron": "npm run clean-output",
         "build:electron": "",
         "---PWA---": "",
@@ -142,7 +143,7 @@
     },
     "devDependencies": {
         "@babel/core": "^7.3.4",
-        "@stencil/core": "0.18.0",
+        "@stencil/core": "0.18.1",
         "@stencil/sass": "^0.1.1",
         "@types/filesystem": "0.0.29",
         "@types/jest": "^24.0.11",
@@ -171,7 +172,7 @@
         "rollup-plugin-node-globals": "^1.4.0",
         "rollup-plugin-node-resolve": "4.0.1",
         "rollup-plugin-typescript": "^1.0.0",
-        "source-map-explorer": "^1.7.0",
+        "source-map-explorer": "^1.8.0",
         "stencil-strip-debug": "^1.0.0",
         "strip-debug-cli": "^2.0.0",
         "superstatic": "^6.0.4",
@@ -185,6 +186,6 @@
         "uglify-es": "3.3.9",
         "uglifycss": "0.0.29",
         "useref": "^1.4.1",
-        "workbox-cli": "^4.1.0"
+        "workbox-cli": "^4.1.1"
     }
 }

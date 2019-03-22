@@ -128,8 +128,8 @@
     },
     "dependencies": {
         "@phenomnomnominal/tsquery": "^3.0.0",
-        "codemirror": "^5.44.0",
-        "dayjs": "^1.8.10",
+        "codemirror": "^5.45.0",
+        "dayjs": "^1.8.11",
         "dom-to-image": "^2.6.0",
         "downloadjs": "^1.4.7",
         "ionicons": "^4.5.5",
@@ -139,10 +139,10 @@
         "panzoom": "^7.1.2",
         "sloc": "^0.2.1",
         "split.js": "^1.5.10",
-        "vue-template-compiler": "2.6.9"
+        "vue-template-compiler": "2.6.10"
     },
     "devDependencies": {
-        "@babel/core": "^7.3.4",
+        "@babel/core": "^7.4.0",
         "@stencil/core": "0.18.1",
         "@stencil/sass": "^0.1.1",
         "@types/filesystem": "0.0.29",
@@ -165,7 +165,7 @@
         "recursive-readdir": "^2.2.2",
         "replace": "^1.1.0",
         "rimraf": "^2.6.3",
-        "rollup": "^1.6.0",
+        "rollup": "^1.7.0",
         "rollup-plugin-babel": "^4.3.2",
         "rollup-plugin-commonjs": "^9.2.1",
         "rollup-plugin-node-builtins": "^2.1.2",

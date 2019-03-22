@@ -10,7 +10,9 @@ export class Game {
 
     private rule: Rule;
 
-    constructor() {}
+    constructor() {
+        this.start();
+    }
 
     public start() {
         this.player1 = new Player('Eric');
@@ -21,5 +23,7 @@ export class Game {
 
     private clearUI() {}
 
-    simpleMethod() {}
+    simpleMethod() {
+        this.clearUI();
+    }
 }

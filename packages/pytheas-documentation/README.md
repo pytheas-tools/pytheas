@@ -11,4 +11,7 @@ npm docs:dev
 
 # Build the documentation
 npm run docs:build
+
+# Build madge map
+npm run madge
 ```

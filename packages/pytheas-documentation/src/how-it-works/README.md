@@ -2,13 +2,21 @@
 
 ## Loading Pytheas
 
-TODO
+The application is splited in one main JavaScript file, `app.js` or `app_es6.js`, and severals vendors files :
+
+-   split.js for the split of main windows
+-   codemirror as a dependency for codeblock Web Component
+-   ionicons
+
+The last JavaScript files loaded at runtime are parser for files :
+
+-   tsquery for JavaScript & Typescript files
+-   javaast for Java files
+-   vue-template-compiler for Vue files
 
 ## Project parsing
 
-After Files dropped, folder selected with Electron or workspace in VSCode :
-
-TODO
+After files dropped, demo selected, folder selected with Electron or workspace in VSCode :
 
 ## Orchestration
 

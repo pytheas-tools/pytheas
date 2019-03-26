@@ -28,3 +28,7 @@ The source code is split in packages :
     -   code editor in reading mode for each file used inside the current graph view
 
 -   status bar : left part for messages, right part for miscellaneous informations
+
+## Source code map
+
+![Madge](/madge.png)

@@ -1,8 +1,8 @@
 import ApplicationManager from './background/managers/application-manager';
 
-ApplicationManager.init();
+import Split from 'split.js';
 
-const { Split } = <any>window;
+ApplicationManager.init();
 
 let $graph: any = null;
 

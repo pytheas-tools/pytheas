@@ -4,7 +4,6 @@
 
 The application is splited in one main JavaScript file, `app.js` or `app_es6.js`, and severals vendors files :
 
--   split.js for the split of main windows
 -   codemirror as a dependency for codeblock Web Component
 -   ionicons
 

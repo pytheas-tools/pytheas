@@ -1,13 +1,13 @@
 let vuetemplatecompiler: any;
 
-class VueParser {
-    private static instance: VueParser;
+class VueParserSingleton {
+    private static instance: VueParserSingleton;
     private constructor() {}
     static getInstance() {
-        if (!VueParser.instance) {
-            VueParser.instance = new VueParser();
+        if (!VueParserSingleton.instance) {
+            VueParserSingleton.instance = new VueParserSingleton();
         }
-        return VueParser.instance;
+        return VueParserSingleton.instance;
     }
 
     init() {
@@ -23,4 +23,4 @@ class VueParser {
     }
 }
 
-export default VueParser.getInstance();
+export const VueParser = VueParserSingleton.getInstance();

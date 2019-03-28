@@ -1,28 +1,27 @@
 import { ReadedFile } from './files-reader';
 
-import { getSlocInformations } from '../../utils/file-sloc';
-import { MESSAGES } from '../../utils/messages';
-import ECMAScriptParser from '../data/ecmascript/ecmascript-parser';
-import JavaParser from '../data/java/java-parser';
-import VueParser from '../data/vue/vue-parser';
-import StatusbarManager from '../managers/statusbar-manager';
+import { getSlocInformations, MESSAGES } from '../../utils';
+import { ECMAScriptParser } from '../data/ecmascript/ecmascript-parser';
+import { JavaParser } from '../data/java/java-parser';
+import { VueParser } from '../data/vue/vue-parser';
+import { StatusbarManager } from '../managers/statusbar-manager';
 
 /**
  * Parse file for their AST
  * TODO : make it language agnostic, or with a layer that makes easy to support others languages !== .js & .ts
  */
-class FilesParser {
-    private static instance: FilesParser;
+class FilesParserSingleton {
+    private static instance: FilesParserSingleton;
 
     parsedFiles: ReadedFile[] = [];
     parsers: Set<string>;
 
     private constructor() {}
     static getInstance() {
-        if (!FilesParser.instance) {
-            FilesParser.instance = new FilesParser();
+        if (!FilesParserSingleton.instance) {
+            FilesParserSingleton.instance = new FilesParserSingleton();
         }
-        return FilesParser.instance;
+        return FilesParserSingleton.instance;
     }
 
     parseFiles(files: any[]) {
@@ -159,4 +158,4 @@ class FilesParser {
     }
 }
 
-export default FilesParser.getInstance();
+export const FilesParser = FilesParserSingleton.getInstance();

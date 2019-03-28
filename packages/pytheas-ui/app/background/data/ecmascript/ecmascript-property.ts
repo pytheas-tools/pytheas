@@ -1,7 +1,7 @@
 import { PyElement } from '../py-element';
-import tsAstFinder, { NodeObject, TokenObject } from './ts-ast-finder';
+import { NodeObject, TokenObject, TsAstFinder } from './ts-ast-finder';
 
-import ECMAScriptParser from './ecmascript-parser';
+import { ECMAScriptParser } from './ecmascript-parser';
 
 export class ECMAScriptProperty extends PyElement {
     type: string;
@@ -10,10 +10,10 @@ export class ECMAScriptProperty extends PyElement {
 
     constructor(propertyNode: NodeObject) {
         super();
-        this.name = tsAstFinder.getName(propertyNode);
+        this.name = TsAstFinder.getName(propertyNode);
         if (propertyNode.type) {
-            this.type = tsAstFinder.getType(propertyNode.type);
-            this.typeKind = tsAstFinder.getTypeKind(propertyNode.type);
+            this.type = TsAstFinder.getType(propertyNode.type);
+            this.typeKind = TsAstFinder.getTypeKind(propertyNode.type);
         }
         if (propertyNode.modifiers && propertyNode.modifiers.length > 0) {
             this.modifiers = propertyNode.modifiers.map((modifier: TokenObject) => {

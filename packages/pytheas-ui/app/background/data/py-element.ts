@@ -1,4 +1,4 @@
-import { uniqId } from '../../utils/uniqid';
+import { uniqId } from '../../utils';
 import { PyRelation, RelationTypes } from './py-relation';
 
 enum BasicTypes {

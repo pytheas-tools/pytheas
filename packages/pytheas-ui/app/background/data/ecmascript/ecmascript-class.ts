@@ -4,9 +4,9 @@ import { ECMAScriptConstructor } from './ecmascript-constructor';
 import { ECMAScriptMethod } from './ecmascript-method';
 import { ECMAScriptNewExpression } from './ecmascript-new-expression';
 import { ECMAScriptProperty } from './ecmascript-property';
-import tsAstFinder, { NodeObject } from './ts-ast-finder';
+import { NodeObject, TsAstFinder } from './ts-ast-finder';
 
-import ECMAScriptParser from './ecmascript-parser';
+import { ECMAScriptParser } from './ecmascript-parser';
 
 export class ECMAScriptClass extends PyElement {
     ast: NodeObject;
@@ -24,7 +24,7 @@ export class ECMAScriptClass extends PyElement {
         }
         this.ast = classeNode;
         this.file = file;
-        this.name = tsAstFinder.getName(classeNode);
+        this.name = TsAstFinder.getName(classeNode);
 
         const propertyDeclarationsNodesForFile = ECMAScriptParser.getPropertyDeclaration(this.ast);
         this.propertyDeclarations = propertyDeclarationsNodesForFile.map((propertyDeclaration: NodeObject) => {

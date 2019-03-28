@@ -3,14 +3,14 @@ import { RelationTypes } from './py-relation';
 /**
  * Manage the relations between elements
  */
-class RelationManager {
-    private static instance: RelationManager;
+class RelationSingleton {
+    private static instance: RelationSingleton;
     private constructor() {}
     static getInstance() {
-        if (!RelationManager.instance) {
-            RelationManager.instance = new RelationManager();
+        if (!RelationSingleton.instance) {
+            RelationSingleton.instance = new RelationSingleton();
         }
-        return RelationManager.instance;
+        return RelationSingleton.instance;
     }
 
     findInListByName(list, name) {
@@ -36,4 +36,4 @@ class RelationManager {
     }
 }
 
-export default RelationManager.getInstance();
+export const RelationManager = RelationSingleton.getInstance();

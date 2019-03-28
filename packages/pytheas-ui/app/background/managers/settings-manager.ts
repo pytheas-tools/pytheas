@@ -1,11 +1,10 @@
-import { EVENTS } from '../../utils/events';
-import { pubsub } from '../../utils/pubsub';
+import { pubsub, EVENTS } from '../../utils';
 
 /**
  * Manage settings
  */
-class SettingsManager {
-    private static instance: SettingsManager;
+class SettingsSingleton {
+    private static instance: SettingsSingleton;
 
     settings = {
         theme: 'theme-light'
@@ -13,10 +12,10 @@ class SettingsManager {
 
     private constructor() {}
     static getInstance() {
-        if (!SettingsManager.instance) {
-            SettingsManager.instance = new SettingsManager();
+        if (!SettingsSingleton.instance) {
+            SettingsSingleton.instance = new SettingsSingleton();
         }
-        return SettingsManager.instance;
+        return SettingsSingleton.instance;
     }
 
     init() {
@@ -36,4 +35,4 @@ class SettingsManager {
     }
 }
 
-export default SettingsManager.getInstance();
+export const SettingsManager = SettingsSingleton.getInstance();

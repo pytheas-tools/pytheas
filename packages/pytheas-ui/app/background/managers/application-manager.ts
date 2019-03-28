@@ -1,34 +1,31 @@
-import CodeWindowManager from '../../windows/code-window';
-import DropWindowManager from '../../windows/drop-window';
-import GraphWindowManager from '../../windows/graph-window';
-import NavigationBarManager from '../../windows/navigation-bar-manager';
-import WelcomeWindowManager from '../../windows/welcome-window';
+import { CodeWindowManager, DropWindowManager, GraphWindowManager, WelcomeWindowManager } from '../../windows';
 
-import DataManager from '../data/data-manager';
-import SettingsManager from './settings-manager';
+import { DataManager } from '../data/data-manager';
+import { SettingsManager } from './settings-manager';
 
-import { EVENTS } from '../../utils/events';
-import { pubsub } from '../../utils/pubsub';
-import ContextManager from './context-manager';
-import ContextmenuManager from './contextmenu-manager';
-import DemosManager from './demos-manager';
-import PWAManager from './pwa-manager';
-import StatusbarManager from './statusbar-manager';
+import { pubsub, EVENTS } from '../../utils';
+
+import { ContextManager } from './context-manager';
+import { ContextmenuManager } from './contextmenu-manager';
+import { DemosManager } from './demos-manager';
+import { NavigationBarManager } from './navigation-bar-manager';
+import { PWAManager } from './pwa-manager';
+import { StatusbarManager } from './statusbar-manager';
 
 /**
  * Manage all application state, main orchestrator
  */
-class ApplicationManager {
-    private static instance: ApplicationManager;
+class ApplicationSingleton {
+    private static instance: ApplicationSingleton;
 
     filesReady = false;
 
     private constructor() {}
     static getInstance() {
-        if (!ApplicationManager.instance) {
-            ApplicationManager.instance = new ApplicationManager();
+        if (!ApplicationSingleton.instance) {
+            ApplicationSingleton.instance = new ApplicationSingleton();
         }
-        return ApplicationManager.instance;
+        return ApplicationSingleton.instance;
     }
 
     init() {
@@ -74,4 +71,4 @@ class ApplicationManager {
     }
 }
 
-export default ApplicationManager.getInstance();
+export const ApplicationManager = ApplicationSingleton.getInstance();

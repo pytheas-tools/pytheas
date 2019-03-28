@@ -26,14 +26,14 @@ export declare type NodeObject = Node & {
 /**
  * Manage the AST for (Type|Java)Script
  */
-class TsAstFinder {
-    private static instance: TsAstFinder;
+class TsAstFinderSingleton {
+    private static instance: TsAstFinderSingleton;
     private constructor() {}
     static getInstance() {
-        if (!TsAstFinder.instance) {
-            TsAstFinder.instance = new TsAstFinder();
+        if (!TsAstFinderSingleton.instance) {
+            TsAstFinderSingleton.instance = new TsAstFinderSingleton();
         }
-        return TsAstFinder.instance;
+        return TsAstFinderSingleton.instance;
     }
 
     getName(node: NodeObject): string {
@@ -59,4 +59,4 @@ class TsAstFinder {
     }
 }
 
-export default TsAstFinder.getInstance();
+export const TsAstFinder = TsAstFinderSingleton.getInstance();

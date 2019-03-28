@@ -1,15 +1,15 @@
 /**
  * Manage the AST for Java files
  */
-class JavaAstFinder {
-    private static instance: JavaAstFinder;
+class JavaAstFinderSingleton {
+    private static instance: JavaAstFinderSingleton;
     private constructor() {}
     static getInstance() {
-        if (!JavaAstFinder.instance) {
-            JavaAstFinder.instance = new JavaAstFinder();
+        if (!JavaAstFinderSingleton.instance) {
+            JavaAstFinderSingleton.instance = new JavaAstFinderSingleton();
         }
-        return JavaAstFinder.instance;
+        return JavaAstFinderSingleton.instance;
     }
 }
 
-export default JavaAstFinder.getInstance();
+export const JavaAstFinder = JavaAstFinderSingleton.getInstance();

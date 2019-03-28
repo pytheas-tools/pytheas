@@ -1,20 +1,19 @@
-import { EVENTS } from '../../utils/events';
-import { pubsub } from '../../utils/pubsub';
+import { pubsub, EVENTS } from '../../utils';
 
 /**
  * Manage application context execution
  */
-class ContextManager {
-    private static instance: ContextManager;
+class ContextSingleton {
+    private static instance: ContextSingleton;
 
     current_context: string;
 
     private constructor() {}
     static getInstance() {
-        if (!ContextManager.instance) {
-            ContextManager.instance = new ContextManager();
+        if (!ContextSingleton.instance) {
+            ContextSingleton.instance = new ContextSingleton();
         }
-        return ContextManager.instance;
+        return ContextSingleton.instance;
     }
 
     init() {
@@ -36,4 +35,4 @@ class ContextManager {
     }
 }
 
-export default ContextManager.getInstance();
+export const ContextManager = ContextSingleton.getInstance();

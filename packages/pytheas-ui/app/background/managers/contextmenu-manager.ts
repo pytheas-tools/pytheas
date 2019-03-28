@@ -1,5 +1,4 @@
-import { EVENTS } from '../../utils/events';
-import { pubsub } from '../../utils/pubsub';
+import { pubsub, EVENTS } from '../../utils';
 
 function fadeElement(a, b) {
     if (b !== 'show') {
@@ -25,14 +24,14 @@ function isNotBatman(a, h) {
 /**
  * Manage settings
  */
-class ContextmenuManager {
-    private static instance: ContextmenuManager;
+class ContextmenuSingleton {
+    private static instance: ContextmenuSingleton;
     private constructor() {}
     static getInstance() {
-        if (!ContextmenuManager.instance) {
-            ContextmenuManager.instance = new ContextmenuManager();
+        if (!ContextmenuSingleton.instance) {
+            ContextmenuSingleton.instance = new ContextmenuSingleton();
         }
-        return ContextmenuManager.instance;
+        return ContextmenuSingleton.instance;
     }
 
     init() {
@@ -87,4 +86,4 @@ class ContextmenuManager {
     }
 }
 
-export default ContextmenuManager.getInstance();
+export const ContextmenuManager = ContextmenuSingleton.getInstance();

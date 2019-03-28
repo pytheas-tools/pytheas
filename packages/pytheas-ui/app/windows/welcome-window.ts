@@ -1,5 +1,4 @@
-import { EVENTS } from '../utils/events';
-import { pubsub } from '../utils/pubsub';
+import { pubsub, EVENTS } from '../utils';
 
 /**
  * Manage welcome window
@@ -34,4 +33,4 @@ class WelcomeWindow {
     }
 }
 
-export default WelcomeWindow.getInstance();
+export const WelcomeWindowManager = WelcomeWindow.getInstance();

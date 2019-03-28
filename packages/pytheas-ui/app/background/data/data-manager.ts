@@ -1,15 +1,15 @@
 import { ECMAScriptClass } from './ecmascript/ecmascript-class';
-import ECMAScriptParser from './ecmascript/ecmascript-parser';
+import { ECMAScriptParser } from './ecmascript/ecmascript-parser';
 import { JavaClass } from './java/java-class';
-import JavaParser from './java/java-parser';
-import RelationManager from './relation-manager';
-import VueParser from './vue/vue-parser';
+import { JavaParser } from './java/java-parser';
+import { RelationManager } from './relation-manager';
+import { VueParser } from './vue/vue-parser';
 
 /**
  * Manage the data layer
  */
-class DataManager {
-    private static instance: DataManager;
+class DataSingleton {
+    private static instance: DataSingleton;
 
     database = new Set();
 
@@ -21,10 +21,10 @@ class DataManager {
 
     private constructor() {}
     static getInstance() {
-        if (!DataManager.instance) {
-            DataManager.instance = new DataManager();
+        if (!DataSingleton.instance) {
+            DataSingleton.instance = new DataSingleton();
         }
-        return DataManager.instance;
+        return DataSingleton.instance;
     }
 
     init(parsedFiles: any) {
@@ -91,4 +91,4 @@ class DataManager {
     }
 }
 
-export default DataManager.getInstance();
+export const DataManager = DataSingleton.getInstance();

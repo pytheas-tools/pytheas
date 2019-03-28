@@ -1,5 +1,4 @@
-import { extensionToLanguage } from '../../utils/extension-to-language';
-import { getExtension, getName } from '../../utils/fs';
+import { extensionToLanguage, getExtension, getName } from '../../utils';
 
 export interface FileFromElectron {
     path: string;
@@ -19,23 +18,23 @@ export interface ReadedFile {
  * - in browser use FileReader API
  * - in electron, use Node.js native fs package
  */
-class FilesReader {
-    private static instance: FilesReader;
+class FilesReaderSingleton {
+    private static instance: FilesReaderSingleton;
 
     browserReader = new FileReader();
     electronReader: any;
     private constructor() {}
     static getInstance() {
-        if (!FilesReader.instance) {
-            FilesReader.instance = new FilesReader();
+        if (!FilesReaderSingleton.instance) {
+            FilesReaderSingleton.instance = new FilesReaderSingleton();
             /**
              * Init reader, get reference in Electron of fs module
              */
             if (typeof require !== 'undefined') {
-                FilesReader.instance.electronReader = require('fs');
+                FilesReaderSingleton.instance.electronReader = require('fs');
             }
         }
-        return FilesReader.instance;
+        return FilesReaderSingleton.instance;
     }
 
     /**
@@ -184,4 +183,4 @@ class FilesReader {
     }
 }
 
-export default FilesReader.getInstance();
+export const FilesReader = FilesReaderSingleton.getInstance();

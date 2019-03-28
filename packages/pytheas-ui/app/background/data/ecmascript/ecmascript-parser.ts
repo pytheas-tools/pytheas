@@ -1,16 +1,16 @@
 let tsquery: any;
 
-class ECMAScriptParser {
-    private static instance: ECMAScriptParser;
+class ECMAScriptParserSingleton {
+    private static instance: ECMAScriptParserSingleton;
 
     initialized = false;
 
     private constructor() {}
     static getInstance() {
-        if (!ECMAScriptParser.instance) {
-            ECMAScriptParser.instance = new ECMAScriptParser();
+        if (!ECMAScriptParserSingleton.instance) {
+            ECMAScriptParserSingleton.instance = new ECMAScriptParserSingleton();
         }
-        return ECMAScriptParser.instance;
+        return ECMAScriptParserSingleton.instance;
     }
 
     init() {
@@ -67,4 +67,4 @@ class ECMAScriptParser {
     }
 }
 
-export default ECMAScriptParser.getInstance();
+export const ECMAScriptParser = ECMAScriptParserSingleton.getInstance();

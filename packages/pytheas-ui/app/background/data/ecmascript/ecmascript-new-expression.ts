@@ -1,5 +1,5 @@
 import { PyElement } from '../py-element';
-import tsAstFinder, { NodeObject, TokenObject } from './ts-ast-finder';
+import { NodeObject, TsAstFinder } from './ts-ast-finder';
 
 export class ECMAScriptNewExpression extends PyElement {
     type: string;
@@ -8,7 +8,7 @@ export class ECMAScriptNewExpression extends PyElement {
 
     constructor(newExpressionNode: NodeObject) {
         super();
-        this.name = tsAstFinder.getExpressionName(newExpressionNode.expression);
+        this.name = TsAstFinder.getExpressionName(newExpressionNode.expression);
         this.type = this.name;
     }
 }

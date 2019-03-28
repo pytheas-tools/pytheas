@@ -1,20 +1,20 @@
+import { getExtension } from '../../utils';
 import { isFileSupported } from '../files/files.utils';
-import { getExtension } from '../../utils/fs';
 
 /**
  * Manage demos
  */
-class DemosManager {
-    private static instance: DemosManager;
+class DemosSingleton {
+    private static instance: DemosSingleton;
 
     demosData: any;
 
     private constructor() {}
     static getInstance() {
-        if (!DemosManager.instance) {
-            DemosManager.instance = new DemosManager();
+        if (!DemosSingleton.instance) {
+            DemosSingleton.instance = new DemosSingleton();
         }
-        return DemosManager.instance;
+        return DemosSingleton.instance;
     }
 
     init() {
@@ -74,4 +74,4 @@ class DemosManager {
     }
 }
 
-export default DemosManager.getInstance();
+export const DemosManager = DemosSingleton.getInstance();

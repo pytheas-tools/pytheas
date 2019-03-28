@@ -1,5 +1,4 @@
-import { EVENTS } from '../utils/events';
-import { pubsub } from '../utils/pubsub';
+import { pubsub, EVENTS } from '../../utils';
 
 /**
  * Manage navigation bar, display informations from application manager.
@@ -108,4 +107,4 @@ class NavigationBar {
     }
 }
 
-export default NavigationBar.getInstance();
+export const NavigationBarManager = NavigationBar.getInstance();

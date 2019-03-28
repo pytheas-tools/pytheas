@@ -1,17 +1,17 @@
 /**
  * Manage status bar
  */
-class StatusbarManager {
-    private static instance: StatusbarManager;
+class StatusbarSingleton {
+    private static instance: StatusbarSingleton;
 
     $element: HTMLElement;
 
     private constructor() {}
     static getInstance() {
-        if (!StatusbarManager.instance) {
-            StatusbarManager.instance = new StatusbarManager();
+        if (!StatusbarSingleton.instance) {
+            StatusbarSingleton.instance = new StatusbarSingleton();
         }
-        return StatusbarManager.instance;
+        return StatusbarSingleton.instance;
     }
 
     init() {
@@ -30,4 +30,4 @@ class StatusbarManager {
     }
 }
 
-export default StatusbarManager.getInstance();
+export const StatusbarManager = StatusbarSingleton.getInstance();

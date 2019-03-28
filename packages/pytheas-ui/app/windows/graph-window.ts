@@ -1,13 +1,11 @@
 import domtoimage from 'dom-to-image';
+import * as downloadjs from 'downloadjs';
 import panzoom from 'panzoom';
 
-import { EVENTS } from '../utils/events';
-import { pubsub } from '../utils/pubsub';
+import { pubsub, EVENTS } from '../utils';
 
-import DataManager from '../background/data/data-manager';
-import ContextmenuManager from '../background/managers/contextmenu-manager';
-
-import * as downloadjs from 'downloadjs';
+import { DataManager } from '../background/data/data-manager';
+import { ContextmenuManager } from '../background/managers/contextmenu-manager';
 
 /**
  * Manage graph window, display and instanciate a graph WC with informations from application manager.
@@ -161,4 +159,4 @@ class GraphWindow {
     }
 }
 
-export default GraphWindow.getInstance();
+export const GraphWindowManager = GraphWindow.getInstance();

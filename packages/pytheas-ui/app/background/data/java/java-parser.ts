@@ -2,16 +2,16 @@ import { ReadedFile } from '../../files/files-reader';
 
 let javaast: any;
 
-class JavaParser {
-    private static instance: JavaParser;
+class JavaParserSingleton {
+    private static instance: JavaParserSingleton;
     parsedFiles: ReadedFile[] = [];
 
     private constructor() {}
     static getInstance() {
-        if (!JavaParser.instance) {
-            JavaParser.instance = new JavaParser();
+        if (!JavaParserSingleton.instance) {
+            JavaParserSingleton.instance = new JavaParserSingleton();
         }
-        return JavaParser.instance;
+        return JavaParserSingleton.instance;
     }
 
     init() {
@@ -40,4 +40,4 @@ class JavaParser {
     }
 }
 
-export default JavaParser.getInstance();
+export const JavaParser = JavaParserSingleton.getInstance();

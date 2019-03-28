@@ -1,10 +1,9 @@
 import dayjs from 'dayjs';
 
-import { EVENTS } from '../utils/events';
-import { pubsub } from '../utils/pubsub';
+import { pubsub, EVENTS } from '../utils';
 
-import Parser from '../background/files/files-parser';
-import SettingsManager from '../background/managers/settings-manager';
+import { FilesParser } from '../background/files';
+import { SettingsManager } from '../background/managers/settings-manager';
 
 /**
  * Manage code window, display and instanciate codeblock WCs with informations from application manager.
@@ -56,7 +55,7 @@ class CodeWindow {
 
     displayInitialParsingInformations() {
         let lines = 0;
-        const files = Parser.getParsedFiles();
+        const files = FilesParser.getParsedFiles();
         files.forEach(file => {
             lines += file.sloc.total;
         });
@@ -107,4 +106,4 @@ ${lines} lines of code`
     }
 }
 
-export default CodeWindow.getInstance();
+export const CodeWindowManager = CodeWindow.getInstance();

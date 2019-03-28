@@ -1,9 +1,8 @@
-import { getExtension } from '../../utils/fs';
+import { getExtension } from '../../utils';
 import { FileFromElectron } from './files-reader';
 
-import Notifier from '../../utils/notifier';
+import { NotifierManager } from '../managers/notifier-manager';
 
-import { SUPPORTED_FILES } from './supported-files';
 import { isFileSupported } from './files.utils';
 
 let Walker: any;
@@ -16,8 +15,8 @@ if (typeof require !== 'undefined') {
  * - in browser use File API
  * - in electron, use Node.js package 'walker'
  */
-class FilesScanner {
-    private static instance: FilesScanner;
+class FilesScannerSingleton {
+    private static instance: FilesScannerSingleton;
 
     countFiles = 0;
     scannedFiles: any = [];
@@ -30,10 +29,10 @@ class FilesScanner {
 
     private constructor() {}
     static getInstance() {
-        if (!FilesScanner.instance) {
-            FilesScanner.instance = new FilesScanner();
+        if (!FilesScannerSingleton.instance) {
+            FilesScannerSingleton.instance = new FilesScannerSingleton();
         }
-        return FilesScanner.instance;
+        return FilesScannerSingleton.instance;
     }
 
     clearInternals() {
@@ -118,7 +117,7 @@ class FilesScanner {
         if (this.scannedFiles.length === this.countFiles) {
             const extensionsNotSupported = this.getAllNotSupportedExtensions();
             if (extensionsNotSupported.length > 0) {
-                Notifier.info(`${extensionsNotSupported} files not supported`);
+                NotifierManager.info(`${extensionsNotSupported} files not supported`);
             }
             this.scanResolve(this.scannedFiles);
         }
@@ -198,4 +197,4 @@ class FilesScanner {
     }
 }
 
-export default FilesScanner.getInstance();
+export const FilesScanner = FilesScannerSingleton.getInstance();

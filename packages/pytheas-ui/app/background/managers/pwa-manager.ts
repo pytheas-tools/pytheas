@@ -1,14 +1,14 @@
 /**
  * Manage PWA service worker
  */
-class PWAManager {
-    private static instance: PWAManager;
+class PWASingleton {
+    private static instance: PWASingleton;
     private constructor() {}
     static getInstance() {
-        if (!PWAManager.instance) {
-            PWAManager.instance = new PWAManager();
+        if (!PWASingleton.instance) {
+            PWASingleton.instance = new PWASingleton();
         }
-        return PWAManager.instance;
+        return PWASingleton.instance;
     }
 
     init() {
@@ -89,4 +89,4 @@ class PWAManager {
     }
 }
 
-export default PWAManager.getInstance();
+export const PWAManager = PWASingleton.getInstance();

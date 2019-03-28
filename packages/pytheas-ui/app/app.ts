@@ -1,4 +1,4 @@
-import ApplicationManager from './background/managers/application-manager';
+import { ApplicationManager } from './background/managers';
 
 import Split from 'split.js';
 

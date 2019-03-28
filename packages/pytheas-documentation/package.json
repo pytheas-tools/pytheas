@@ -4,6 +4,7 @@
   "description": "Architectural documentation of Pytheas",
   "main": "index.js",
   "scripts": {
+    "start": "npm run docs:dev",
     "docs:dev": "vuepress dev src",
     "docs:build": "vuepress build src",
     "madge": "npx madge --warning -i src/.vuepress/public/madge.png ../pytheas-ui/app/**/*.ts"

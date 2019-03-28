@@ -69,10 +69,20 @@ py-graph {
 
 .method {
     background: #f9bb43;
+    border: 1px solid #f9bb43;
+
+    &:hover {
+        border-color: #a77e2e;
+    }
 }
 
 .property {
     background: #6fb4d3;
+    border: 1px solid #6fb4d3;
+
+    &:hover {
+        border-color: #4e7f96;
+    }
 }
 
 .method,
@@ -81,6 +91,7 @@ py-graph {
     border-radius: 6px;
     margin: 3px 0;
     color: #232323;
+    cursor: default;
 }
 
 .outer-relations,

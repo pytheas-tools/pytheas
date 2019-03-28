@@ -1,5 +1,6 @@
 import { Player } from './player/player';
 import { Rule } from './rule/rule';
+import { Settings } from './settings';
 
 export class Game {
     player1: Player;
@@ -9,6 +10,8 @@ export class Game {
     morePlayers: Array<Player>;
 
     private rule: Rule;
+
+    private settings: Settings = new Settings();
 
     constructor() {
         this.start();

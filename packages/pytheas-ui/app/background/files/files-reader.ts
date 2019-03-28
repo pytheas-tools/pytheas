@@ -1,5 +1,5 @@
-import { extensionToLanguage } from '../utils/extension-to-language';
-import { getExtension, getName } from '../utils/fs';
+import { extensionToLanguage } from '../../utils/extension-to-language';
+import { getExtension, getName } from '../../utils/fs';
 
 export interface FileFromElectron {
     path: string;

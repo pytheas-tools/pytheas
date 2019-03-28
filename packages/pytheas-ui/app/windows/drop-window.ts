@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
-import FilesParser from '../background/files-parser';
-import FilesReader from '../background/files-reader';
-import FilesScanner from '../background/files-scanner';
+import FilesParser from '../background/files/files-parser';
+import FilesReader from '../background/files/files-reader';
+import FilesScanner from '../background/files/files-scanner';
 import DemosManager from '../background/managers/demos-manager';
 import { EVENTS } from '../utils/events';
 import { pubsub } from '../utils/pubsub';

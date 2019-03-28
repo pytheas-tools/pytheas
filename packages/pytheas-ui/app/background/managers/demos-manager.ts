@@ -1,3 +1,6 @@
+import { isFileSupported } from '../files/files.utils';
+import { getExtension } from '../../utils/fs';
+
 /**
  * Manage demos
  */
@@ -43,10 +46,12 @@ class DemosManager {
                         return response.text();
                     })
                     .then(dataFile => {
-                        resolvedFiles.push({
-                            path: filesToResolve[i],
-                            data: dataFile
-                        });
+                        if (isFileSupported(getExtension(filesToResolve[i]))) {
+                            resolvedFiles.push({
+                                path: filesToResolve[i],
+                                data: dataFile
+                            });
+                        }
                         if (i < len - 1) {
                             i++;
                             return resolveFile();

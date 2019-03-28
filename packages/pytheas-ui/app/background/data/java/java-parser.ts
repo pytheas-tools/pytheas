@@ -1,4 +1,4 @@
-import { ReadedFile } from '../../files-reader';
+import { ReadedFile } from '../../files/files-reader';
 
 let javaast: any;
 

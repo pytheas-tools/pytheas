@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 import { EVENTS } from '../utils/events';
 import { pubsub } from '../utils/pubsub';
 
-import Parser from '../background/files-parser';
+import Parser from '../background/files/files-parser';
 import SettingsManager from '../background/managers/settings-manager';
 
 /**

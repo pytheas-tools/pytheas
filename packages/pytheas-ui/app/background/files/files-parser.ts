@@ -1,11 +1,11 @@
 import { ReadedFile } from './files-reader';
 
-import { getSlocInformations } from '../utils/file-sloc';
-import { MESSAGES } from '../utils/messages';
-import ECMAScriptParser from './data/ecmascript/ecmascript-parser';
-import JavaParser from './data/java/java-parser';
-import VueParser from './data/vue/vue-parser';
-import StatusbarManager from './managers/statusbar-manager';
+import { getSlocInformations } from '../../utils/file-sloc';
+import { MESSAGES } from '../../utils/messages';
+import ECMAScriptParser from '../data/ecmascript/ecmascript-parser';
+import JavaParser from '../data/java/java-parser';
+import VueParser from '../data/vue/vue-parser';
+import StatusbarManager from '../managers/statusbar-manager';
 
 /**
  * Parse file for their AST

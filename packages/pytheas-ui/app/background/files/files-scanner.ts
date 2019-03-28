@@ -1,14 +1,10 @@
-import { getExtension } from '../utils/fs';
+import { getExtension } from '../../utils/fs';
 import { FileFromElectron } from './files-reader';
 
-import Notifier from '../utils/notifier';
+import Notifier from '../../utils/notifier';
 
-enum SUPPORTED_FILES {
-    js = 'js',
-    ts = 'ts',
-    java = 'java',
-    vue = 'vue'
-}
+import { SUPPORTED_FILES } from './supported-files';
+import { isFileSupported } from './files.utils';
 
 let Walker: any;
 if (typeof require !== 'undefined') {
@@ -93,10 +89,6 @@ class FilesScanner {
         return this.scanPromise;
     }
 
-    private isFileSupported(extension: string): boolean {
-        return extension in SUPPORTED_FILES;
-    }
-
     private getAllNotSupportedExtensions(): string {
         const extensions = Array.from(this.notSupportedExtensions);
         let result;
@@ -116,7 +108,7 @@ class FilesScanner {
     }
 
     private handleFile(file: FileEntry | File) {
-        if (this.isFileSupported(file.extension)) {
+        if (isFileSupported(file.extension)) {
             this.scannedFiles.push(file);
         } else {
             this.notSupportedExtensions.add(file.extension);

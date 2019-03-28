@@ -1,6 +1,6 @@
 import DropWindowManager from './drop-window';
 
-import FilesParser from '../background/files-parser';
+import FilesParser from '../background/files/files-parser';
 
 import dragMock from '../../test/vendors/drag-mock/src';
 

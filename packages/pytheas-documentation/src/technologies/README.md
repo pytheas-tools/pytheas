@@ -61,8 +61,18 @@ http://visjs.org/network_examples.html
 https://github.com/jacomyal/sigma.js
 
 https://ialab.it.monash.edu/webcola/
+https://ialab.it.monash.edu/webcola/examples/SucroseBreakdown.html
 
 https://github.com/cytoscape/cytoscape.js
+https://github.com/cytoscape/cytoscape.js-klay
+https://github.com/OpenKieler/elkjs
+https://github.com/eclipse/sprotty-layout
+
+https://github.com/jgraph/mxgraph
+
+https://github.com/bpmn-io/diagram-js | pas de doc
+
+https://libraries.io/search?keywords=diagram&languages=JavaScript
 
 ## Hover statements codemirror
 

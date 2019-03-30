@@ -1,6 +1,6 @@
 import { JavaClass } from './java-class';
 
-import JavaParser from './java-parser';
+import { JavaParser } from './java-parser';
 
 import { simpleClass } from './java-class.fixture';
 

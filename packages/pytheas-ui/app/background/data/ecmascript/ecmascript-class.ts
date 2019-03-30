@@ -83,7 +83,7 @@ export class ECMAScriptClass extends PyElement {
         // inside a CallExpression/191
         // inside an ExpressionStatement/221
         // inside a Block/218 with statements
-        console.log(ECMAScriptParser.getCallExpressions(this.ast));
+        // console.log(ECMAScriptParser.getCallExpressions(this.ast));
 
         // or find with property directly ?
 

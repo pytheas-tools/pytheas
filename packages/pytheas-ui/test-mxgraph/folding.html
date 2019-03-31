@@ -63,7 +63,9 @@
 				style[mxConstants.STYLE_STROKECOLOR] = 'none';
 				style[mxConstants.STYLE_FILLCOLOR] = 'none';
 				style[mxConstants.STYLE_FOLDABLE] = false;
+				style[mxConstants.STYLE_VERTICAL_ALIGN] = 'middle';
 				graph.getStylesheet().putCellStyle('column', style);
+
 				style = [];
 				style[mxConstants.STYLE_FOLDABLE] = false;
 				graph.getStylesheet().putCellStyle('public', style);
@@ -88,7 +90,7 @@
 				layout.border = graph.border;
 
 				var layoutMgr = new mxLayoutManager(graph);
-				layoutMgr.getLayout = function(cell) {
+				layoutMgr.getLayout = function (cell) {
 
 					if (!cell.collapsed) {
 						if (cell.parent != graph.model.root) {
@@ -121,18 +123,19 @@
 					var mainBackup = graph.insertVertex(colMainBackup, null, 'mainBackup', 0, 0, 100, 30, 'public');
 					mainBackup.collapsed = false;
 					var mainBackupPublic = graph.insertVertex(mainBackup, null, 'Public', 0, 0, 80, 30, 'public');
-					var mainBackupPublicGame = graph.insertVertex(mainBackupPublic, null, 'game', 0, 0, 60, 30);
-					var mainBackupPublicStart = graph.insertVertex(mainBackupPublic, null, 'start', 0, 0, 60, 30);
+					var mainBackupPublicGame = graph.insertVertex(mainBackupPublic, null, 'game', 0, 0, 60, 30, 'variable');
+					var mainBackupPublicStart = graph.insertVertex(mainBackupPublic, null, 'start', 0, 0, 60, 30, 'method');
 
 					var main = graph.insertVertex(colMainBackup, null, 'main', 0, 0, 100, 30, 'public');
 					main.collapsed = false;
 					var mainPublic = graph.insertVertex(main, null, 'Public', 0, 0, 80, 30, 'public');
-					var mainPublicGame = graph.insertVertex(mainPublic, null, 'game', 0, 0, 60, 30);
-					var mainPublicStart = graph.insertVertex(mainPublic, null, 'start', 0, 0, 60, 30);
+					var mainPublicGame = graph.insertVertex(mainPublic, null, 'game', 0, 0, 60, 30, 'variable');
+					var mainPublicStart = graph.insertVertex(mainPublic, null, 'start', 0, 0, 60, 30, 'method');
 
 
 
 					var col1 = graph.insertVertex(parent, null, '', 0, 0, 120, 0, 'column');
+					window.col1 = col1;
 
 					var game = graph.insertVertex(col1, null, 'game', 0, 0, 100, 30, 'public');
 					game.collapsed = false;
@@ -149,40 +152,45 @@
 
 					var col2 = graph.insertVertex(parent, null, '', 0, 0, 120, 0, 'column');
 
-					var v2 = graph.insertVertex(col2, null, '2', 0, 0, 100, 30, 'public');
+					var v2 = graph.insertVertex(col2, null, 'player', 0, 0, 100, 30, 'public');
 					v2.collapsed = false;
 
-					var v21 = graph.insertVertex(v2, null, '2.1', 0, 0, 80, 30, 'public');
+					var v21 = graph.insertVertex(v2, null, 'Public', 0, 0, 80, 30, 'public');
 					v21.collapsed = false;
 
-					var v211 = graph.insertVertex(v21, null, '2.1.1', 0, 0, 60, 30);
-					var v212 = graph.insertVertex(v21, null, '2.1.2', 0, 0, 60, 30);
-
-					var v22 = graph.insertVertex(v2, null, '2.2', 0, 0, 80, 30);
+					var v211 = graph.insertVertex(v21, null, 'name', 0, 0, 60, 30, 'variable');
+					var v212 = graph.insertVertex(v21, null, 'init', 0, 0, 60, 30, 'method');
 
 
 
-					var v3 = graph.insertVertex(col2, null, '3', 0, 0, 100, 30, 'public');
+					var v3 = graph.insertVertex(col2, null, 'rule', 0, 0, 100, 30, 'public');
 					v3.collapsed = false;
 
-					var v31 = graph.insertVertex(v3, null, '3.1', 0, 0, 80, 30, 'public');
+					var v31 = graph.insertVertex(v3, null, 'Public', 0, 0, 80, 30, 'public');
 					v31.collapsed = false;
 					v31.foldable = false;
 
-					var v311 = graph.insertVertex(v31, null, '3.1.1', 0, 0, 60, 30);
-					var v312 = graph.insertVertex(v31, null, '3.1.2', 0, 0, 60, 30);
+					var v311 = graph.insertVertex(v31, null, 'sentence', 0, 0, 60, 30, 'variable');
 
-					var v32 = graph.insertVertex(v3, null, '3.2', 0, 0, 80, 30);
+					var v4 = graph.insertVertex(col2, null, 'settings', 0, 0, 100, 30, 'public');
+					v4.collapsed = false;
+
+					var v41 = graph.insertVertex(v4, null, 'Public', 0, 0, 80, 30, 'public');
+					v41.collapsed = false;
+					v41.foldable = false;
+
+					var v411 = graph.insertVertex(v41, null, 'sentence', 0, 0, 60, 30, 'variable');
 
 
 
 					graph.insertEdge(parent, null, '', v111, v211);
 					graph.insertEdge(parent, null, '', v112, v212);
-					graph.insertEdge(parent, null, '', v112, v22);
 
 
 					graph.insertEdge(parent, null, '', mainBackup, game);
 					graph.insertEdge(parent, null, '', main, game);
+
+					graph.alignCells(mxConstants.ALIGN_MIDDLE, col1);
 
 				} finally {
 					// Updates the display

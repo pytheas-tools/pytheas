@@ -90,7 +90,7 @@
 				layout.border = graph.border;
 
 				var layoutMgr = new mxLayoutManager(graph);
-				layoutMgr.getLayout = function (cell) {
+				layoutMgr.getLayout = function(cell) {
 
 					if (!cell.collapsed) {
 						if (cell.parent != graph.model.root) {
@@ -180,6 +180,7 @@
 					v41.foldable = false;
 
 					var v411 = graph.insertVertex(v41, null, 'sentence', 0, 0, 60, 30, 'variable');
+					var v511long = graph.insertVertex(v41, null, 'sentenceVeryLong', 0, 0, 100, 30, 'variable');
 
 
 

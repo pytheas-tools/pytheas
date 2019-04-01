@@ -19,7 +19,7 @@
 
     <!-- Example code -->
     <script type="text/javascript">
-        var graph
+        var graph;
         // Program starts here. Creates a sample graph in the
         // DOM node with the specified ID. This function is invoked
         // from the onLoad event handler of the document (see below).
@@ -51,37 +51,53 @@
                     //graph.setCellsMovable(false);
                 }
             }
-        };
+        }
 
         mkGraphWithGroups = () => {
-            vAB = graph.insertVertex(graph.getDefaultParent(), "vAB", "vAB", 0, 0, 200, 200);
-            vCD = graph.insertVertex(graph.getDefaultParent(), "vCD", "vCD", 0, 0, 200, 200);
-            vDE = graph.insertVertex(graph.getDefaultParent(), "vDE", "vDE", 0, 0, 200, 200);
+            vAB = graph.insertVertex(graph.getDefaultParent(), 'vAB', 'vAB', 0, 0, 200, 200);
+            vCD = graph.insertVertex(graph.getDefaultParent(), 'vCD', 'vCD', 0, 0, 200, 200);
 
-            graph.insertEdge(graph.getDefaultParent(), null, "", vAB, vCD);
-            graph.insertEdge(graph.getDefaultParent(), null, "", vAB, vDE);
+            vDE = graph.insertVertex(graph.getDefaultParent(), 'vDE', 'vDE', 0, 0, 50, 200);
+
+            graph.insertEdge(graph.getDefaultParent(), null, '', vAB, vCD);
+            graph.insertEdge(graph.getDefaultParent(), null, '', vAB, vDE);
 
             layoutGraph(graph.getDefaultParent());
 
-            vA = graph.insertVertex(vAB, "vA", "vA", 0, 0, 50, 50);
-            vB = graph.insertVertex(vAB, "vB", "vB", 0, 0, 50, 50);
-            vC = graph.insertVertex(vCD, "vC", "vC", 0, 0, 50, 50);
-            vD = graph.insertVertex(vCD, "vD", "vD", 0, 0, 50, 50);
-            vX = graph.insertVertex(vCD, "vC", "vC", 0, 0, 50, 50);
-            vY = graph.insertVertex(vCD, "vD", "vD", 0, 0, 50, 50);
+            vA = graph.insertVertex(vAB, 'vA', 'vA', 0, 0, 50, 50);
+            vB = graph.insertVertex(vAB, 'vB', 'vB', 0, 0, 50, 50);
+            vC = graph.insertVertex(vCD, 'vC', 'vC', 0, 0, 50, 50);
+            vD = graph.insertVertex(vCD, 'vD', 'vD', 0, 0, 50, 50);
+            vX = graph.insertVertex(vCD, 'vC', 'vC', 0, 0, 50, 50);
+            vY = graph.insertVertex(vCD, 'vD', 'vD', 0, 0, 50, 50);
 
-            graph.insertEdge(vAB, null, "", vA, vB);
-            graph.insertEdge(vCD, null, "", vC, vD);
-            graph.insertEdge(vAB, null, "", vX, vY);
+            v1 = graph.insertVertex(vDE, null, 'v1', 0, 0, 75, 50);
+            v2 = graph.insertVertex(vDE, null, 'v2', 0, 0, 75, 50);
+
+            graph.insertEdge(vAB, null, '', vA, vB);
+            graph.insertEdge(vCD, null, '', vC, vD);
+            graph.insertEdge(vAB, null, '', vX, vY);
 
             layoutGraph(vCD);
-        }
+            layoutColumn(vDE);
+        };
 
-        layoutGraph = (objects) => {
-            let direction = (objects.value && objects.value === 'vCD') ? mxConstants.DIRECTION_NORTH : mxConstants
+        layoutGraph = objects => {
+            let direction = objects.value && objects.value === 'vCD' ? mxConstants.DIRECTION_NORTH : mxConstants
                 .DIRECTION_WEST;
 
             layout = new mxHierarchicalLayout(graph, direction);
+
+            graph.getModel().beginUpdate();
+            try {
+                layout.execute(objects);
+            } finally {
+                graph.getModel().endUpdate();
+            }
+        };
+
+        layoutColumn = objects => {
+            layout = new mxStackLayout(graph, false, 10);
 
             graph.getModel().beginUpdate();
             try {
@@ -96,10 +112,8 @@
 <!-- Page passes the container for the graph to the program -->
 
 <body onload="main(document.getElementById('graphContainer'))">
-
     <!-- Creates a container for the graph with a grid wallpaper -->
-    <div id="graphContainer">
-    </div>
+    <div id="graphContainer"></div>
 </body>
 
 </html>

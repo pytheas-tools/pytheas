@@ -90,7 +90,7 @@
 				layout.border = graph.border;
 
 				var layoutMgr = new mxLayoutManager(graph);
-				layoutMgr.getLayout = function(cell) {
+				layoutMgr.getLayout = function (cell) {
 
 					if (!cell.collapsed) {
 						if (cell.parent != graph.model.root) {
@@ -131,7 +131,17 @@
 					var mainPublic = graph.insertVertex(main, null, 'Public', 0, 0, 80, 30, 'public');
 					var mainPublicGame = graph.insertVertex(mainPublic, null, 'game', 0, 0, 60, 30, 'variable');
 					var mainPublicStart = graph.insertVertex(mainPublic, null, 'start', 0, 0, 60, 30, 'method');
+					var mainPublicStartLong = graph.insertVertex(mainPublic, null, 'startVeryLongVeryLong', 0, 0, 60, 30,
+						'method');
 
+					// Test resize
+					var mainPublicG = mainPublic.getGeometry();
+					var mainPublicStartLongG = mainPublicStartLong.getGeometry();
+					var preferredMainPublicStartLong = graph.getPreferredSizeForCell(mainPublicStartLong);
+					console.log(preferredMainPublicStartLong);
+					mainPublicStartLongG.width = preferredMainPublicStartLong.width + 10;
+					mainPublicG.width = mainPublicStartLongG.width + 20;
+					main.getGeometry().width = mainPublicG.width + 20;
 
 
 					var col1 = graph.insertVertex(parent, null, '', 0, 0, 120, 0, 'column');
@@ -182,11 +192,15 @@
 					var v411 = graph.insertVertex(v41, null, 'sentence', 0, 0, 60, 30, 'variable');
 					var v511long = graph.insertVertex(v41, null, 'sentenceVeryLong', 0, 0, 100, 30, 'variable');
 
-
+					// Test resize
+					var geom41 = v41.getGeometry();
+					var geom511 = v511long.getGeometry();
+					geom41.width = geom511.width + 20;
+					var geom4 = v4.getGeometry();
+					geom4.width = v41.getGeometry().width + 20;
 
 					graph.insertEdge(parent, null, '', v111, v211);
 					graph.insertEdge(parent, null, '', v112, v212);
-
 
 					graph.insertEdge(parent, null, '', mainBackup, game);
 					graph.insertEdge(parent, null, '', main, game);

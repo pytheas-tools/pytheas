@@ -1,0 +1,98 @@
+<!--
+  Copyright (c) 2006-2013, JGraph Ltd
+  
+  Folding example for mxGraph. This example demonstrates
+  using a layout to implement a nested group structure.
+-->
+<html>
+
+<head>
+    <title>Hierarchical example for mxGraph</title>
+
+    <!-- Sets the basepath for the library if not in same directory -->
+    <script type="text/javascript">
+        mxBasePath = 'mxgraph';
+    </script>
+
+    <!-- Loads and initializes the library -->
+    <script type="text/javascript" src="mxClient.js"></script>
+
+    <!-- Example code -->
+    <script type="text/javascript">
+        // Program starts here. Creates a sample graph in the
+        // DOM node with the specified ID. This function is invoked
+        // from the onLoad event handler of the document (see below).
+        function main(container) {
+            // Checks if the browser is supported
+            if (!mxClient.isBrowserSupported()) {
+                // Displays an error message if the browser is not supported.
+                mxUtils.error('Browser is not supported!', 200, false);
+            } else {
+                // Fixes ignored clipping if foreignObject used in Webkit
+                mxClient.NO_FO = mxClient.NO_FO || mxClient.IS_SF || mxClient.IS_GC;
+
+                // Creates the graph inside the given container
+                var graph = new mxGraph(container);
+                graph.cellsSelectable = false;
+                graph.htmlLabels = true;
+
+                // Autosize labels on insert where autosize=1
+                graph.autoSizeCellsOnAdd = true;
+
+                // Gets the default parent for inserting new cells. This
+                // is normally the first child of the root (ie. layer 0).
+                var parent = graph.getDefaultParent();
+
+                // Adds cells to the model in a single step
+                graph.getModel().beginUpdate();
+                try {
+                    var v1 = graph.insertVertex(parent, null, 'vertexLabelsMovable', 20, 20, 80, 30);
+
+                    // Places sublabels inside the vertex
+                    var label11 = graph.insertVertex(v1, null, 'Label1', 0.5, 1, 0, 0, null, true);
+                    var label12 = graph.insertVertex(v1, null, 'Label2', 0.5, 0, 0, 0, null, true);
+
+                    var v2 = graph.insertVertex(parent, null,
+                        'Wrapping and clipping is enabled only if the cell is collapsed, otherwise the label is truncated if there is no manual offset.',
+                        200, 150, 80, 30);
+                    v2.geometry.alternateBounds = new mxRectangle(0, 0, 80, 30);
+
+                    var e1 = graph.insertEdge(parent, null, null, v1, v2);
+
+                    // Places sublabels inside the vertex
+                    var label21 = graph.insertVertex(v2, null, 'Label1', 0.5, 1, 0, 0, null, true);
+                    var label22 = graph.insertVertex(v2, null, 'Label2', 0.5, 0, 0, 0, null, true);
+
+                    // graph.updateCellSize(v1, true);
+                    var geom = v2.getGeometry();
+                    console.log(geom);
+                    var preferred = graph.getPreferredSizeForCell(v2);
+                    console.log(preferred);
+                    geom.width = preferred.width;
+                    geom.height = preferred.height;
+
+                    var geom = v1.getGeometry();
+                    console.log(geom);
+                    var preferred = graph.getPreferredSizeForCell(v1);
+                    console.log(preferred);
+                    geom.width = preferred.width;
+                    geom.height = preferred.height;
+
+                } finally {
+                    // Updates the display
+                    graph.getModel().endUpdate();
+                    graph.setCellsMovable(false);
+                }
+            }
+        };
+    </script>
+</head>
+
+<!-- Page passes the container for the graph to the program -->
+
+<body onload="main(document.getElementById('graphContainer'))">
+    <!-- Creates a container for the graph with a grid wallpaper -->
+    <div id="graphContainer"></div>
+</body>
+
+</html>

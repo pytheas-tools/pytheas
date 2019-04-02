@@ -48,37 +48,42 @@
                     mkGraphWithGroups();
                 } finally {
                     graph.getModel().endUpdate();
-                    //graph.setCellsMovable(false);
+                    graph.setCellsMovable(false);
                 }
             }
         }
 
         mkGraphWithGroups = () => {
-            vAB = graph.insertVertex(graph.getDefaultParent(), 'vAB', 'vAB', 0, 0, 200, 200);
-            vCD = graph.insertVertex(graph.getDefaultParent(), 'vCD', 'vCD', 0, 0, 200, 200);
+            main = graph.insertVertex(graph.getDefaultParent(), null, 'main', 0, 0, 200, 200);
+            mainBackup = graph.insertVertex(graph.getDefaultParent(), null, 'mainBackup', 0, 0, 200, 200);
+            game = graph.insertVertex(graph.getDefaultParent(), null, 'game', 0, 0, 200, 200);
+            vCD = graph.insertVertex(graph.getDefaultParent(), null, 'player', 0, 0, 200, 200);
 
             vDE = graph.insertVertex(graph.getDefaultParent(), 'vDE', 'vDE', 0, 0, 50, 200);
 
-            graph.insertEdge(graph.getDefaultParent(), null, '', vAB, vCD);
-            graph.insertEdge(graph.getDefaultParent(), null, '', vAB, vDE);
+            graph.insertEdge(graph.getDefaultParent(), null, '', main, game);
+            graph.insertEdge(graph.getDefaultParent(), null, '', mainBackup, game);
+            graph.insertEdge(graph.getDefaultParent(), null, '', game, vCD);
+            graph.insertEdge(graph.getDefaultParent(), null, '', game, vDE);
 
             layoutGraph(graph.getDefaultParent());
 
-            vA = graph.insertVertex(vAB, 'vA', 'vA', 0, 0, 50, 50);
-            vB = graph.insertVertex(vAB, 'vB', 'vB', 0, 0, 50, 50);
-            vC = graph.insertVertex(vCD, 'vC', 'vC', 0, 0, 50, 50);
-            vD = graph.insertVertex(vCD, 'vD', 'vD', 0, 0, 50, 50);
-            vX = graph.insertVertex(vCD, 'vC', 'vC', 0, 0, 50, 50);
-            vY = graph.insertVertex(vCD, 'vD', 'vD', 0, 0, 50, 50);
+            v1 = graph.insertVertex(vDE, null, 'v1', 10, 0, 75, 50);
+            v2 = graph.insertVertex(vDE, null, 'startVeryLongVeryLongstartVeryLongVeryLongstartVeryLongVeryLong',
+                10,
+                0, 75, 50);
 
-            v1 = graph.insertVertex(vDE, null, 'v1', 0, 0, 75, 50);
-            v2 = graph.insertVertex(vDE, null, 'v2', 0, 0, 75, 50);
+            var v2G = v2.getGeometry();
+            var vDEG = vDE.getGeometry();
+            var v2Gp = graph.getPreferredSizeForCell(v2);
+            console.log(v2Gp);
+            v2G.width = v2Gp.width + 20;
+            vDEG.width = v2G.width + 20;
 
-            graph.insertEdge(vAB, null, '', vA, vB);
-            graph.insertEdge(vCD, null, '', vC, vD);
-            graph.insertEdge(vAB, null, '', vX, vY);
+            //layoutColumn(vDE);
 
-            layoutGraph(vCD);
+            layoutGraph(graph.getDefaultParent());
+
             layoutColumn(vDE);
         };
 

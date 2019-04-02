@@ -52,27 +52,29 @@ https://github.com/joaompneves/tsviz/blob/master/src/ts-analyser.ts
 
 -   graph
 
-https://github.com/anvaka/VivaGraphJS
+https://github.com/anvaka/VivaGraphJS : dur de faire un noeud custom
 
-https://github.com/HelikarLab/ccNetViz
+https://github.com/HelikarLab/ccNetViz : dur de faire un noeud custom
 
-http://visjs.org/network_examples.html
+http://visjs.org/network_examples.html : dur de faire un noeud custom
 
-https://github.com/jacomyal/sigma.js
+https://github.com/jacomyal/sigma.js : dur de faire un noeud custom
 
 https://ialab.it.monash.edu/webcola/
 https://ialab.it.monash.edu/webcola/examples/SucroseBreakdown.html
 
-https://github.com/cytoscape/cytoscape.js
+https://github.com/cytoscape/cytoscape.js : setup trop compliqué
 https://github.com/cytoscape/cytoscape.js-klay
 https://github.com/OpenKieler/elkjs
 https://github.com/eclipse/sprotty-layout
 
-https://github.com/jgraph/mxgraph
+https://github.com/jgraph/mxgraph : dur de gérer les tailles
 
 https://github.com/bpmn-io/diagram-js | pas de doc
 
 https://libraries.io/search?keywords=diagram&languages=JavaScript
+
+https://github.com/jgraph/mxgraph : pb de taille
 
 ## Hover statements codemirror
 
@@ -87,3 +89,11 @@ https://discuss.codemirror.net/t/hover-over-symbol-idea/245
 https://www.html5rocks.com/en/tutorials/file/filesystem
 
 https://github.com/leonadler/drag-and-drop-across-browsers
+
+## Dependencies graph tools
+
+https://github.com/dyatko/arkit
+
+https://github.com/sverweij/dependency-cruiser
+
+https://github.com/auchenberg/dependo

@@ -12,10 +12,11 @@
     <!-- Sets the basepath for the library if not in same directory -->
     <script type="text/javascript">
         mxBasePath = 'mxgraph';
+        mxLoadResources = false;
     </script>
 
     <!-- Loads and initializes the library -->
-    <script type="text/javascript" src="mxClient.js"></script>
+    <script type="text/javascript" src="mxClient.min.js"></script>
 
     <!-- Example code -->
     <script type="text/javascript">
@@ -37,11 +38,119 @@
 
                 // Disables global features
                 graph.collapseToPreferredSize = false;
-                graph.constrainChildren = true;
+                graph.constrainChildren = false;
                 graph.cellsSelectable = false;
                 graph.extendParentsOnAdd = false;
                 graph.extendParents = true;
                 graph.border = 10;
+
+                var style = graph.getStylesheet().getDefaultEdgeStyle();
+                style[mxConstants.STYLE_EDGE] = mxEdgeStyle.EntityRelation;
+                style[mxConstants.STYLE_ROUNDED] = true;
+
+                style = graph.getStylesheet().getDefaultVertexStyle();
+                style[mxConstants.STYLE_FILLCOLOR] = '#ffffff';
+                style[mxConstants.STYLE_SHAPE] = 'swimlane';
+                style[mxConstants.STYLE_STARTSIZE] = 30;
+                style[mxConstants.STYLE_ROUNDED] = true;
+                style[mxConstants.STYLE_FOLDABLE] = false;
+
+                style = [];
+                style[mxConstants.STYLE_FOLDABLE] = false;
+                graph.getStylesheet().putCellStyle('public', style);
+
+                style = [];
+                style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_RECTANGLE;
+                style[mxConstants.STYLE_ROUNDED] = true;
+                style[mxConstants.STYLE_FILLCOLOR] = "#6fb4d3";
+                style[mxConstants.STYLE_FONTCOLOR] = "#232323";
+                graph.getStylesheet().putCellStyle('variable', style);
+
+                style = [];
+                style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_RECTANGLE;
+                style[mxConstants.STYLE_ROUNDED] = true;
+                style[mxConstants.STYLE_FILLCOLOR] = "#f9bb43";
+                style[mxConstants.STYLE_FONTCOLOR] = "#232323";
+                graph.getStylesheet().putCellStyle('method', style);
+
+                function updateStyle(state, hover) {
+                    if (hover) {
+                        state.style[mxConstants.STYLE_FILLCOLOR] = '#ff0000';
+                    }
+                };
+
+                // Changes fill color to red on mouseover
+                graph.addMouseListener({
+                    currentState: null,
+                    previousStyle: null,
+                    mouseDown: function (sender, me) {
+                        if (this.currentState != null) {
+                            this.dragLeave(me.getEvent(), this.currentState);
+                            this.currentState = null;
+                        }
+                    },
+                    mouseMove: function (sender, me) {
+                        if (this.currentState != null && me.getState() == this.currentState) {
+                            return;
+                        }
+
+                        var tmp = graph.view.getState(me.getCell());
+
+                        // Ignores everything but vertices
+                        if (graph.isMouseDown || (tmp != null && !
+                                graph.getModel().isVertex(tmp.cell))) {
+                            tmp = null;
+                        }
+
+                        if (tmp != this.currentState) {
+                            if (this.currentState != null) {
+                                this.dragLeave(me.getEvent(), this.currentState);
+                            }
+
+                            this.currentState = tmp;
+
+                            if (this.currentState != null) {
+                                this.dragEnter(me.getEvent(), this.currentState);
+                            }
+                        }
+                    },
+                    mouseUp: function (sender, me) {},
+                    dragEnter: function (evt, state) {
+                        if (state != null) {
+                            this.previousStyle = state.style;
+                            state.style = mxUtils.clone(state.style);
+                            updateStyle(state, true);
+                            state.shape.apply(state);
+                            state.shape.redraw();
+
+                            if (state.text != null) {
+                                state.text.apply(state);
+                                state.text.redraw();
+                            }
+                        }
+                    },
+                    dragLeave: function (evt, state) {
+                        if (state != null) {
+                            state.style = this.previousStyle;
+                            updateStyle(state, false);
+                            state.shape.apply(state);
+                            state.shape.redraw();
+
+                            if (state.text != null) {
+                                state.text.apply(state);
+                                state.text.redraw();
+                            }
+                        }
+                    }
+                });
+
+                graph.addListener(mxEvent.CLICK, function (sender, evt) {
+                    var cell = evt.getProperty('cell');
+
+                    if (cell != null) {
+                        console.log('click: ', cell);
+                    }
+                });
 
                 graph.getModel().beginUpdate();
                 try {
@@ -57,41 +166,56 @@
             main = graph.insertVertex(graph.getDefaultParent(), null, 'main', 0, 0, 200, 200);
             mainBackup = graph.insertVertex(graph.getDefaultParent(), null, 'mainBackup', 0, 0, 200, 200);
             game = graph.insertVertex(graph.getDefaultParent(), null, 'game', 0, 0, 200, 200);
-            vCD = graph.insertVertex(graph.getDefaultParent(), null, 'player', 0, 0, 200, 200);
-
-            vDE = graph.insertVertex(graph.getDefaultParent(), 'vDE', 'vDE', 0, 0, 50, 200);
+            player = graph.insertVertex(graph.getDefaultParent(), null, 'player', 0, 0, 200, 200);
+            rule = graph.insertVertex(graph.getDefaultParent(), null, 'rule', 0, 0, 30, 200);
 
             graph.insertEdge(graph.getDefaultParent(), null, '', main, game);
             graph.insertEdge(graph.getDefaultParent(), null, '', mainBackup, game);
-            graph.insertEdge(graph.getDefaultParent(), null, '', game, vCD);
-            graph.insertEdge(graph.getDefaultParent(), null, '', game, vDE);
+            graph.insertEdge(graph.getDefaultParent(), null, '', game, player);
+            graph.insertEdge(graph.getDefaultParent(), null, '', game, rule);
 
             layoutGraph(graph.getDefaultParent());
 
-            v1 = graph.insertVertex(vDE, null, 'v1', 10, 0, 75, 50);
-            v2 = graph.insertVertex(vDE, null, 'startVeryLongVeryLongstartVeryLongVeryLongstartVeryLongVeryLong',
-                10,
-                0, 75, 50);
+            playerPublic = graph.insertVertex(player, null, 'Public', 0, 0, 80, 30, 'public');
+            playerPublicSentence = graph.insertVertex(playerPublic, null, 'name', 0, 0, 60, 30, 'variable');
 
-            var v2G = v2.getGeometry();
-            var vDEG = vDE.getGeometry();
-            var v2Gp = graph.getPreferredSizeForCell(v2);
-            console.log(v2Gp);
-            v2G.width = v2Gp.width + 20;
-            vDEG.width = v2G.width + 20;
+            var playerPublicG = playerPublic.getGeometry();
+            var playerG = player.getGeometry();
+            playerG.width = playerPublicG.width + 20;
 
-            //layoutColumn(vDE);
+
+            gamePublic = graph.insertVertex(game, null, 'Public', 0, 0, 80, 30, 'public');
+            gamePublicSentence = graph.insertVertex(gamePublic, null, 'player1', 0, 0, 60, 30, 'variable');
+
+            var gamePublicG = gamePublic.getGeometry();
+            var gameG = game.getGeometry();
+            gameG.width = gamePublicG.width + 20;
+
+
+            rulePublic = graph.insertVertex(rule, null, 'Public', 0, 0, 80, 30, 'public');
+            rulePublicInit = graph.insertVertex(rulePublic, null, 'init', 0, 0, 60, 30, 'method');
+            rulePublicSentence = graph.insertVertex(rulePublic, null, 'sentence', 0, 0, 60, 30, 'variable');
+
+            var rulePublicG = rulePublic.getGeometry();
+            var ruleG = rule.getGeometry();
+            ruleG.width = rulePublicG.width + 20;
 
             layoutGraph(graph.getDefaultParent());
 
-            layoutColumn(vDE);
+            graph.insertEdge(graph.getDefaultParent(), null, '', gamePublicSentence, playerPublicSentence);
+
+            layoutColumn(rulePublic);
+            layoutColumn(rule);
+
+            layoutColumn(gamePublic);
+            layoutColumn(game);
+
+            layoutColumn(playerPublic);
+            layoutColumn(player);
         };
 
         layoutGraph = objects => {
-            let direction = objects.value && objects.value === 'vCD' ? mxConstants.DIRECTION_NORTH : mxConstants
-                .DIRECTION_WEST;
-
-            layout = new mxHierarchicalLayout(graph, direction);
+            layout = new mxHierarchicalLayout(graph, mxConstants.DIRECTION_WEST);
 
             graph.getModel().beginUpdate();
             try {
@@ -103,6 +227,12 @@
 
         layoutColumn = objects => {
             layout = new mxStackLayout(graph, false, 10);
+            layout.resizeParent = true;
+
+            layout.marginTop = 10;
+            layout.marginRight = 10;
+            layout.marginBottom = 10;
+            layout.marginLeft = 10;
 
             graph.getModel().beginUpdate();
             try {

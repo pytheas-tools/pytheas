@@ -138,14 +138,12 @@
 					var mainPublicG = mainPublic.getGeometry();
 					var mainPublicStartLongG = mainPublicStartLong.getGeometry();
 					var preferredMainPublicStartLong = graph.getPreferredSizeForCell(mainPublicStartLong);
-					console.log(preferredMainPublicStartLong);
 					mainPublicStartLongG.width = preferredMainPublicStartLong.width + 10;
 					mainPublicG.width = mainPublicStartLongG.width + 20;
 					main.getGeometry().width = mainPublicG.width + 20;
 
 
 					var col1 = graph.insertVertex(parent, null, '', 0, 0, 120, 0, 'column');
-					window.col1 = col1;
 
 					var game = graph.insertVertex(col1, null, 'game', 0, 0, 100, 30, 'public');
 					game.collapsed = false;
@@ -205,7 +203,7 @@
 					graph.insertEdge(parent, null, '', mainBackup, game);
 					graph.insertEdge(parent, null, '', main, game);
 
-					graph.alignCells(mxConstants.ALIGN_MIDDLE, col1);
+					// graph.alignCells(mxConstants.ALIGN_MIDDLE, col1);
 
 				} finally {
 					// Updates the display

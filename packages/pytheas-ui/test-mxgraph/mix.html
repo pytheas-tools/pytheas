@@ -5,250 +5,271 @@
   using a layout to implement a nested group structure.
 -->
 <html>
+    <head>
+        <title>Hierarchical example for mxGraph</title>
 
-<head>
-    <title>Hierarchical example for mxGraph</title>
+        <!-- Sets the basepath for the library if not in same directory -->
+        <script type="text/javascript">
+            mxBasePath = 'mxgraph';
+            mxLoadResources = false;
+        </script>
 
-    <!-- Sets the basepath for the library if not in same directory -->
-    <script type="text/javascript">
-        mxBasePath = 'mxgraph';
-        mxLoadResources = false;
-    </script>
+        <!-- Loads and initializes the library -->
+        <script type="text/javascript" src="mxClient.min.js"></script>
 
-    <!-- Loads and initializes the library -->
-    <script type="text/javascript" src="mxClient.min.js"></script>
+        <!-- Example code -->
+        <script type="text/javascript">
+            var graph;
+            // Program starts here. Creates a sample graph in the
+            // DOM node with the specified ID. This function is invoked
+            // from the onLoad event handler of the document (see below).
+            function main(container) {
+                // Checks if the browser is supported
+                if (!mxClient.isBrowserSupported()) {
+                    // Displays an error message if the browser is not supported.
+                    mxUtils.error('Browser is not supported!', 200, false);
+                } else {
+                    // Enables crisp rendering of rectangles in SVG
+                    mxConstants.ENTITY_SEGMENT = 20;
 
-    <!-- Example code -->
-    <script type="text/javascript">
-        var graph;
-        // Program starts here. Creates a sample graph in the
-        // DOM node with the specified ID. This function is invoked
-        // from the onLoad event handler of the document (see below).
-        function main(container) {
-            // Checks if the browser is supported
-            if (!mxClient.isBrowserSupported()) {
-                // Displays an error message if the browser is not supported.
-                mxUtils.error('Browser is not supported!', 200, false);
-            } else {
-                // Enables crisp rendering of rectangles in SVG
-                mxConstants.ENTITY_SEGMENT = 20;
+                    // Creates the graph inside the given container
+                    graph = new mxGraph(container);
 
-                // Creates the graph inside the given container
-                graph = new mxGraph(container);
+                    // Disables global features
+                    graph.collapseToPreferredSize = false;
+                    graph.constrainChildren = false;
+                    graph.cellsSelectable = false;
+                    graph.extendParentsOnAdd = false;
+                    graph.extendParents = true;
+                    graph.border = 10;
 
-                // Disables global features
-                graph.collapseToPreferredSize = false;
-                graph.constrainChildren = false;
-                graph.cellsSelectable = false;
-                graph.extendParentsOnAdd = false;
-                graph.extendParents = true;
-                graph.border = 10;
+                    var styleEdge = graph.getStylesheet().getDefaultEdgeStyle();
+                    styleEdge[mxConstants.STYLE_EDGE] = mxEdgeStyle.EntityRelation;
+                    styleEdge[mxConstants.STYLE_STROKECOLOR] = '#c8c7c7';
+                    styleEdge[mxConstants.STYLE_STROKEWIDTH] = '2';
+                    styleEdge[mxConstants.STYLE_ROUNDED] = true;
 
-                var style = graph.getStylesheet().getDefaultEdgeStyle();
-                style[mxConstants.STYLE_EDGE] = mxEdgeStyle.EntityRelation;
-                style[mxConstants.STYLE_ROUNDED] = true;
+                    var styleCommonCell = graph.getStylesheet().getDefaultVertexStyle();
+                    styleCommonCell[mxConstants.STYLE_FONTSIZE] = '16';
 
-                style = graph.getStylesheet().getDefaultVertexStyle();
-                style[mxConstants.STYLE_FILLCOLOR] = '#ffffff';
-                style[mxConstants.STYLE_SHAPE] = 'swimlane';
-                style[mxConstants.STYLE_STARTSIZE] = 30;
-                style[mxConstants.STYLE_ROUNDED] = true;
-                style[mxConstants.STYLE_FOLDABLE] = false;
+                    var styleColumn = []; //graph.getStylesheet().getDefaultVertexStyle();
+                    styleColumn[mxConstants.STYLE_FILLCOLOR] = '#e5e5e5';
+                    styleColumn[mxConstants.STYLE_SWIMLANE_FILLCOLOR] = '#e5e5e5';
+                    styleColumn[mxConstants.STYLE_SWIMLANE_LINE] = '0';
+                    styleColumn[mxConstants.STYLE_FONTCOLOR] = '#000000';
+                    styleColumn[mxConstants.STYLE_STROKECOLOR] = '#c8c7c7';
+                    styleColumn[mxConstants.STYLE_FONTSIZE] = '16';
+                    styleColumn[mxConstants.STYLE_SHAPE] = 'swimlane';
+                    styleColumn[mxConstants.STYLE_STARTSIZE] = 30;
+                    styleColumn[mxConstants.STYLE_ROUNDED] = true;
+                    styleColumn[mxConstants.STYLE_FOLDABLE] = false;
+                    styleColumn[mxConstants.STYLE_FONTSTYLE] = mxConstants.FONT_BOLD;
+                    graph.getStylesheet().putCellStyle('column', styleColumn);
 
-                style = [];
-                style[mxConstants.STYLE_FOLDABLE] = false;
-                graph.getStylesheet().putCellStyle('public', style);
+                    var stylePublicGroup = [];
+                    stylePublicGroup[mxConstants.STYLE_FOLDABLE] = false;
+                    stylePublicGroup[mxConstants.STYLE_FONTCOLOR] = '#000000';
+                    stylePublicGroup[mxConstants.STYLE_FILLCOLOR] = '#fff';
+                    stylePublicGroup[mxConstants.STYLE_SWIMLANE_FILLCOLOR] = '#fff';
+                    stylePublicGroup[mxConstants.STYLE_FONTSTYLE] = mxConstants.FONT_BOLD;
+                    stylePublicGroup[mxConstants.STYLE_STROKECOLOR] = '#fff';
+                    stylePublicGroup[mxConstants.STYLE_SHAPE] = 'swimlane';
+                    stylePublicGroup[mxConstants.STYLE_ROUNDED] = true;
+                    graph.getStylesheet().putCellStyle('public', stylePublicGroup);
 
-                style = [];
-                style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_RECTANGLE;
-                style[mxConstants.STYLE_ROUNDED] = true;
-                style[mxConstants.STYLE_FILLCOLOR] = "#6fb4d3";
-                style[mxConstants.STYLE_FONTCOLOR] = "#232323";
-                graph.getStylesheet().putCellStyle('variable', style);
+                    var styleVariable = [];
+                    styleVariable[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_RECTANGLE;
+                    styleVariable[mxConstants.STYLE_ROUNDED] = true;
+                    styleVariable[mxConstants.STYLE_FILLCOLOR] = '#6fb4d3';
+                    styleVariable[mxConstants.STYLE_FONTCOLOR] = '#232323';
+                    styleVariable[mxConstants.STYLE_STROKECOLOR] = '#6fb4d3';
+                    graph.getStylesheet().putCellStyle('variable', styleVariable);
 
-                style = [];
-                style[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_RECTANGLE;
-                style[mxConstants.STYLE_ROUNDED] = true;
-                style[mxConstants.STYLE_FILLCOLOR] = "#f9bb43";
-                style[mxConstants.STYLE_FONTCOLOR] = "#232323";
-                graph.getStylesheet().putCellStyle('method', style);
+                    var styleMethod = [];
+                    styleMethod[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_RECTANGLE;
+                    styleMethod[mxConstants.STYLE_ROUNDED] = true;
+                    styleMethod[mxConstants.STYLE_FILLCOLOR] = '#f9bb43';
+                    styleMethod[mxConstants.STYLE_FONTCOLOR] = '#232323';
+                    styleMethod[mxConstants.STYLE_STROKECOLOR] = '#f9bb43';
+                    graph.getStylesheet().putCellStyle('method', styleMethod);
 
-                function updateStyle(state, hover) {
-                    if (hover) {
-                        state.style[mxConstants.STYLE_FILLCOLOR] = '#ff0000';
+                    function updateStyle(state, hover) {
+                        if (hover) {
+                            if (state.cell.style === 'public') {
+                                stylePublicGroup[mxConstants.STYLE_SWIMLANE_FILLCOLOR] = '#fff';
+                                state.style[mxConstants.STYLE_STROKECOLOR] = '#fff';
+                            } else {
+                                state.style[mxConstants.STYLE_STROKECOLOR] = '#707070';
+                            }
+                        }
                     }
-                };
 
-                // Changes fill color to red on mouseover
-                graph.addMouseListener({
-                    currentState: null,
-                    previousStyle: null,
-                    mouseDown: function (sender, me) {
-                        if (this.currentState != null) {
-                            this.dragLeave(me.getEvent(), this.currentState);
-                            this.currentState = null;
-                        }
-                    },
-                    mouseMove: function (sender, me) {
-                        if (this.currentState != null && me.getState() == this.currentState) {
-                            return;
-                        }
-
-                        var tmp = graph.view.getState(me.getCell());
-
-                        // Ignores everything but vertices
-                        if (graph.isMouseDown || (tmp != null && !
-                                graph.getModel().isVertex(tmp.cell))) {
-                            tmp = null;
-                        }
-
-                        if (tmp != this.currentState) {
+                    // Changes fill color to red on mouseover
+                    graph.addMouseListener({
+                        currentState: null,
+                        previousStyle: null,
+                        mouseDown: function(sender, me) {
                             if (this.currentState != null) {
                                 this.dragLeave(me.getEvent(), this.currentState);
+                                this.currentState = null;
+                            }
+                        },
+                        mouseMove: function(sender, me) {
+                            if (this.currentState != null && me.getState() == this.currentState) {
+                                return;
                             }
 
-                            this.currentState = tmp;
+                            var tmp = graph.view.getState(me.getCell());
 
-                            if (this.currentState != null) {
-                                this.dragEnter(me.getEvent(), this.currentState);
+                            // Ignores everything but vertices
+                            if (graph.isMouseDown || (tmp != null && !graph.getModel().isVertex(tmp.cell))) {
+                                tmp = null;
+                            }
+
+                            if (tmp != this.currentState) {
+                                if (this.currentState != null) {
+                                    this.dragLeave(me.getEvent(), this.currentState);
+                                }
+
+                                this.currentState = tmp;
+
+                                if (this.currentState != null) {
+                                    this.dragEnter(me.getEvent(), this.currentState);
+                                }
+                            }
+                        },
+                        mouseUp: function(sender, me) {},
+                        dragEnter: function(evt, state) {
+                            if (state != null) {
+                                this.previousStyle = state.style;
+                                state.style = mxUtils.clone(state.style);
+                                updateStyle(state, true);
+                                state.shape.apply(state);
+                                state.shape.redraw();
+
+                                if (state.text != null) {
+                                    state.text.apply(state);
+                                    state.text.redraw();
+                                }
+                            }
+                        },
+                        dragLeave: function(evt, state) {
+                            if (state != null) {
+                                state.style = this.previousStyle;
+                                updateStyle(state, false);
+                                state.shape.apply(state);
+                                state.shape.redraw();
+
+                                if (state.text != null) {
+                                    state.text.apply(state);
+                                    state.text.redraw();
+                                }
                             }
                         }
-                    },
-                    mouseUp: function (sender, me) {},
-                    dragEnter: function (evt, state) {
-                        if (state != null) {
-                            this.previousStyle = state.style;
-                            state.style = mxUtils.clone(state.style);
-                            updateStyle(state, true);
-                            state.shape.apply(state);
-                            state.shape.redraw();
+                    });
 
-                            if (state.text != null) {
-                                state.text.apply(state);
-                                state.text.redraw();
-                            }
-                        }
-                    },
-                    dragLeave: function (evt, state) {
-                        if (state != null) {
-                            state.style = this.previousStyle;
-                            updateStyle(state, false);
-                            state.shape.apply(state);
-                            state.shape.redraw();
+                    graph.addListener(mxEvent.CLICK, function(sender, evt) {
+                        var cell = evt.getProperty('cell');
 
-                            if (state.text != null) {
-                                state.text.apply(state);
-                                state.text.redraw();
-                            }
+                        if (cell != null) {
+                            console.log('click: ', cell);
                         }
+                    });
+
+                    graph.getModel().beginUpdate();
+                    try {
+                        mkGraphWithGroups();
+                    } finally {
+                        graph.getModel().endUpdate();
+                        graph.setCellsMovable(false);
                     }
-                });
+                }
+            }
 
-                graph.addListener(mxEvent.CLICK, function (sender, evt) {
-                    var cell = evt.getProperty('cell');
+            mkGraphWithGroups = () => {
+                main = graph.insertVertex(graph.getDefaultParent(), null, 'Main', 0, 0, 200, 200, 'column');
+                mainBackup = graph.insertVertex(graph.getDefaultParent(), null, 'MainBackup', 0, 0, 200, 200, 'column');
+                game = graph.insertVertex(graph.getDefaultParent(), null, 'Game', 0, 0, 200, 200, 'column');
+                player = graph.insertVertex(graph.getDefaultParent(), null, 'Player', 0, 0, 200, 200, 'column');
+                rule = graph.insertVertex(graph.getDefaultParent(), null, 'Rule', 0, 0, 30, 200, 'column');
 
-                    if (cell != null) {
-                        console.log('click: ', cell);
-                    }
-                });
+                graph.insertEdge(graph.getDefaultParent(), null, '', main, game);
+                graph.insertEdge(graph.getDefaultParent(), null, '', mainBackup, game);
+                graph.insertEdge(graph.getDefaultParent(), null, '', game, player);
+                graph.insertEdge(graph.getDefaultParent(), null, '', game, rule);
+
+                layoutGraph(graph.getDefaultParent());
+
+                playerPublic = graph.insertVertex(player, null, 'Public', 0, 0, 80, 30, 'public');
+                playerPublicSentence = graph.insertVertex(playerPublic, null, 'name', 0, 0, 60, 30, 'variable');
+
+                var playerPublicG = playerPublic.getGeometry();
+                var playerG = player.getGeometry();
+                playerG.width = playerPublicG.width + 20;
+
+                gamePublic = graph.insertVertex(game, null, 'Public', 0, 0, 80, 30, 'public');
+                gamePublicSentence = graph.insertVertex(gamePublic, null, 'player1', 0, 0, 60, 30, 'variable');
+
+                var gamePublicG = gamePublic.getGeometry();
+                var gameG = game.getGeometry();
+                gameG.width = gamePublicG.width + 20;
+
+                rulePublic = graph.insertVertex(rule, null, 'Public', 0, 0, 80, 30, 'public');
+                rulePublicInit = graph.insertVertex(rulePublic, null, 'init', 0, 0, 60, 30, 'method');
+                rulePublicSentence = graph.insertVertex(rulePublic, null, 'sentence', 0, 0, 60, 30, 'variable');
+
+                var rulePublicG = rulePublic.getGeometry();
+                var ruleG = rule.getGeometry();
+                ruleG.width = rulePublicG.width + 20;
+
+                layoutGraph(graph.getDefaultParent());
+
+                graph.insertEdge(graph.getDefaultParent(), null, '', gamePublicSentence, playerPublicSentence);
+
+                layoutColumn(rulePublic);
+                layoutColumn(rule);
+
+                layoutColumn(gamePublic);
+                layoutColumn(game);
+
+                layoutColumn(playerPublic);
+                layoutColumn(player);
+            };
+
+            layoutGraph = objects => {
+                layout = new mxHierarchicalLayout(graph, mxConstants.DIRECTION_WEST);
 
                 graph.getModel().beginUpdate();
                 try {
-                    mkGraphWithGroups();
+                    layout.execute(objects);
                 } finally {
                     graph.getModel().endUpdate();
-                    graph.setCellsMovable(false);
                 }
-            }
-        }
+            };
 
-        mkGraphWithGroups = () => {
-            main = graph.insertVertex(graph.getDefaultParent(), null, 'main', 0, 0, 200, 200);
-            mainBackup = graph.insertVertex(graph.getDefaultParent(), null, 'mainBackup', 0, 0, 200, 200);
-            game = graph.insertVertex(graph.getDefaultParent(), null, 'game', 0, 0, 200, 200);
-            player = graph.insertVertex(graph.getDefaultParent(), null, 'player', 0, 0, 200, 200);
-            rule = graph.insertVertex(graph.getDefaultParent(), null, 'rule', 0, 0, 30, 200);
+            layoutColumn = objects => {
+                layout = new mxStackLayout(graph, false, 10);
+                layout.resizeParent = true;
 
-            graph.insertEdge(graph.getDefaultParent(), null, '', main, game);
-            graph.insertEdge(graph.getDefaultParent(), null, '', mainBackup, game);
-            graph.insertEdge(graph.getDefaultParent(), null, '', game, player);
-            graph.insertEdge(graph.getDefaultParent(), null, '', game, rule);
+                layout.marginTop = 10;
+                layout.marginRight = 10;
+                layout.marginBottom = 10;
+                layout.marginLeft = 10;
 
-            layoutGraph(graph.getDefaultParent());
+                graph.getModel().beginUpdate();
+                try {
+                    layout.execute(objects);
+                } finally {
+                    graph.getModel().endUpdate();
+                }
+            };
+        </script>
+    </head>
 
-            playerPublic = graph.insertVertex(player, null, 'Public', 0, 0, 80, 30, 'public');
-            playerPublicSentence = graph.insertVertex(playerPublic, null, 'name', 0, 0, 60, 30, 'variable');
+    <!-- Page passes the container for the graph to the program -->
 
-            var playerPublicG = playerPublic.getGeometry();
-            var playerG = player.getGeometry();
-            playerG.width = playerPublicG.width + 20;
-
-
-            gamePublic = graph.insertVertex(game, null, 'Public', 0, 0, 80, 30, 'public');
-            gamePublicSentence = graph.insertVertex(gamePublic, null, 'player1', 0, 0, 60, 30, 'variable');
-
-            var gamePublicG = gamePublic.getGeometry();
-            var gameG = game.getGeometry();
-            gameG.width = gamePublicG.width + 20;
-
-
-            rulePublic = graph.insertVertex(rule, null, 'Public', 0, 0, 80, 30, 'public');
-            rulePublicInit = graph.insertVertex(rulePublic, null, 'init', 0, 0, 60, 30, 'method');
-            rulePublicSentence = graph.insertVertex(rulePublic, null, 'sentence', 0, 0, 60, 30, 'variable');
-
-            var rulePublicG = rulePublic.getGeometry();
-            var ruleG = rule.getGeometry();
-            ruleG.width = rulePublicG.width + 20;
-
-            layoutGraph(graph.getDefaultParent());
-
-            graph.insertEdge(graph.getDefaultParent(), null, '', gamePublicSentence, playerPublicSentence);
-
-            layoutColumn(rulePublic);
-            layoutColumn(rule);
-
-            layoutColumn(gamePublic);
-            layoutColumn(game);
-
-            layoutColumn(playerPublic);
-            layoutColumn(player);
-        };
-
-        layoutGraph = objects => {
-            layout = new mxHierarchicalLayout(graph, mxConstants.DIRECTION_WEST);
-
-            graph.getModel().beginUpdate();
-            try {
-                layout.execute(objects);
-            } finally {
-                graph.getModel().endUpdate();
-            }
-        };
-
-        layoutColumn = objects => {
-            layout = new mxStackLayout(graph, false, 10);
-            layout.resizeParent = true;
-
-            layout.marginTop = 10;
-            layout.marginRight = 10;
-            layout.marginBottom = 10;
-            layout.marginLeft = 10;
-
-            graph.getModel().beginUpdate();
-            try {
-                layout.execute(objects);
-            } finally {
-                graph.getModel().endUpdate();
-            }
-        }
-    </script>
-</head>
-
-<!-- Page passes the container for the graph to the program -->
-
-<body onload="main(document.getElementById('graphContainer'))">
-    <!-- Creates a container for the graph with a grid wallpaper -->
-    <div id="graphContainer"></div>
-</body>
-
+    <body onload="main(document.getElementById('graphContainer'))">
+        <!-- Creates a container for the graph with a grid wallpaper -->
+        <div id="graphContainer"></div>
+    </body>
 </html>

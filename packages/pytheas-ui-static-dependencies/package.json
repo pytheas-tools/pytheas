@@ -1,0 +1,37 @@
+{
+  "name": "pytheas-ui-static-dependencies",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "---BUILD-EXTERNAL-DEPENDENCIES---": "",
+    "build-tsquery": "npx browserify node_modules/@phenomnomnominal/tsquery/dist/src/index.js -s tsquery -o output/tsquery.js",
+    "build-tsquery:prepare-analyse": "npx browserify node_modules/@phenomnomnominal/tsquery/dist/src/index.js -s tsquery --debug | exorcist output/tsquery.js.map > output/tsquery.js",
+    "build-tsquery:analyse": "npx source-map-explorer --html output/tsquery.js output/tsquery.js.map > output/tsquery.html",
+    "build-tsquery:prod": "npm run build-tsquery && npx google-closure-compiler --warning_level=QUIET --js=output/tsquery.js --js_output_file=output/tsquery.min.js && mv output/tsquery.min.js output/tsquery.js",
+    "build-java-ast": "npx browserify node_modules/java-ast/dist/index.js -s javaast -o output/javaast.js",
+    "build-java-ast:prod": "npx browserify node_modules/java-ast/dist/index.js -s javaast | uglifyjs -c > output/javaast.js",
+    "build-vue-compiler": "npx browserify node_modules/vue-template-compiler/browser.js -s vuetemplatecompiler -o output/vue-template-compiler.js",
+    "build-vue-compiler:prod": "npx browserify node_modules/java-ast/dist/index.js -s vuetemplatecompiler | uglifyjs -c > output/vue-template-compiler.js",
+    "clean-output": "npx rimraf output",
+    "prebuild": "npm run clean-output",
+    "build": "run-s build-tsquery build-java-ast build-vue-compiler",
+    "prebuild:prod": "npm run clean-output",
+    "build:prod": "run-s build-tsquery:prod build-java-ast:prod build-vue-compiler:prod"
+  },
+  "author": "vogloblinsky-sii <vogloblinsky@sii.fr>",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^16.2.3",
+    "google-closure-compiler": "^20190325.0.0",
+    "npm-run-all": "^4.1.5",
+    "source-map-support": "^0.5.12",
+    "tslib": "^1.9.3",
+    "typescript": "^3.4.2"
+  },
+  "dependencies": {
+    "@phenomnomnominal/tsquery": "^3.0.0",
+    "java-ast": "^0.1.0",
+    "vue-template-compiler": "^2.6.10"
+  }
+}

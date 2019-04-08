@@ -12,7 +12,8 @@
         "build:app:ui": "cd packages/pytheas-ui/ && npm run build",
         "package:app:osx": "npm run build:app:ui && cd ./packages/pytheas-app/ && npm run package:osx",
         "package:app:linux": "npm run build:app:ui && cd ./packages/pytheas-app/ && npm run package:linux",
-        "package:app:win": "npm run build:app:ui && cd ./packages/pytheas-app/ && npm run package:win"
+        "package:app:win": "npm run build:app:ui && cd ./packages/pytheas-app/ && npm run package:win",
+        "postinstall": "cd packages/pytheas-ui-static-dependencies/ && npm run build"
     },
     "author": "Vincent Ogloblinsky <vincent.ogloblinsky@gmail.com>",
     "license": "MIT"

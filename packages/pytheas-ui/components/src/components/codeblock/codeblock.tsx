@@ -46,6 +46,7 @@ export class CodeBlock {
                 viewportMargin: Infinity,
                 lineWrapping: true,
                 foldGutter: true,
+                readOnly: true,
                 theme: this.theme && this.theme === 'theme-dark' ? 'monokai' : 'default',
                 gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
             });

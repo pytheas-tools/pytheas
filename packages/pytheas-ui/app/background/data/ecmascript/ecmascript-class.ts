@@ -28,7 +28,7 @@ export class ECMAScriptClass extends PyElement {
 
         const propertyDeclarationsNodesForFile = ECMAScriptParser.getPropertyDeclaration(this.ast);
         this.propertyDeclarations = propertyDeclarationsNodesForFile.map((propertyDeclaration: NodeObject) => {
-            return new ECMAScriptProperty(propertyDeclaration);
+            return new ECMAScriptProperty(propertyDeclaration, this.file);
         });
 
         const methodDeclarationsNodesForFile = ECMAScriptParser.getMethodDeclaration(this.ast);

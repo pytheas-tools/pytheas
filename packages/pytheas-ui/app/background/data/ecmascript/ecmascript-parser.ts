@@ -5,6 +5,8 @@ class ECMAScriptParserSingleton {
 
     initialized = false;
 
+    ts: any;
+
     private constructor() {}
     static getInstance() {
         if (!ECMAScriptParserSingleton.instance) {
@@ -15,6 +17,7 @@ class ECMAScriptParserSingleton {
 
     init() {
         tsquery = (<any>window).tsquery;
+        this.ts = tsquery.tsquery.ts;
         this.initialized = true;
     }
 

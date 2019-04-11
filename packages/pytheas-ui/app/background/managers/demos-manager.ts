@@ -26,10 +26,10 @@ class DemosSingleton {
                 })
                 .then(data => {
                     this.demosData = data;
-                    console.log(this.demosData);
+                    // console.log(this.demosData);
                 })
                 .catch(error => {
-                    console.log('Error with fetch: ' + error.message);
+                    // console.log('Error with fetch: ' + error.message);
                 });
         }
     }
@@ -60,7 +60,7 @@ class DemosSingleton {
                         }
                     })
                     .catch(error => {
-                        console.log('Error with fetch: ' + error.message);
+                        // console.log('Error with fetch: ' + error.message);
                     });
             };
             resolveFile()

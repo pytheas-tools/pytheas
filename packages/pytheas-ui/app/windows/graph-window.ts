@@ -49,14 +49,14 @@ class GraphWindow {
         });
 
         pubsub.subscribe(EVENTS.SOMETHING_SELECTED, selectedElement => {
-            console.log('GraphWindow something selected, display graph: ', selectedElement);
+            // console.log('GraphWindow something selected, display graph: ', selectedElement);
             this.clearWindow();
             this.addGraph(selectedElement);
             ContextmenuManager.updateHost();
         });
 
         pubsub.subscribe(EVENTS.NAVIGATIONBAR_ONUPDATE, item => {
-            console.log('GraphWindow NAVIGATIONBAR_ONUPDATE: ', item);
+            // console.log('GraphWindow NAVIGATIONBAR_ONUPDATE: ', item);
 
             if (item) {
                 if (item.type === 'overview' && !item.subtype) {
@@ -149,12 +149,12 @@ class GraphWindow {
     }
 
     onGraphOverviewDetailSelected(ev) {
-        console.log('onGraphOverviewDetailSelected: ', ev.detail);
+        // console.log('onGraphOverviewDetailSelected: ', ev.detail);
         pubsub.publish(EVENTS.GRAPH_OVERVIEW_DETAIL_SELECTED, ev.detail);
     }
 
     onGraphElementSelected(ev) {
-        console.log('onGraphElementClicked: ', ev.detail);
+        // console.log('onGraphElementClicked: ', ev.detail);
         pubsub.publish(EVENTS.GRAPH_ELEMENT_SELECTED, ev.detail);
     }
 }

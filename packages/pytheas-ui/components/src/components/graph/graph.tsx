@@ -41,7 +41,7 @@ export class Graph {
     graphElementSelected: EventEmitter;
 
     componentWillLoad() {
-        console.log('Graph is about to be rendered..: ', this.data);
+        // console.log('Graph is about to be rendered..: ', this.data);
 
         this.centralElement = this.data;
         this.centralElement.relations.forEach(relation => {
@@ -55,7 +55,7 @@ export class Graph {
     }
 
     componentDidLoad() {
-        console.log('Graph is rendered : ', this);
+        // console.log('Graph is rendered : ', this);
         this.jsPlumbInstance = jsPlumb.getInstance({
             Container: document.querySelector('.graph-container__zoomable'),
             Connector: [

@@ -25,7 +25,7 @@ class FilesParserSingleton {
     }
 
     parseFiles(files: any[]) {
-        console.log('Readed files: ', files);
+        // console.log('Readed files: ', files);
 
         this.parsedFiles = files;
 
@@ -57,7 +57,7 @@ class FilesParserSingleton {
                     resolve(files);
                 },
                 e => {
-                    console.log('error: ', e);
+                    // console.log('error: ', e);
                     reject();
                 }
             );
@@ -107,7 +107,7 @@ class FilesParserSingleton {
         return new Promise((resolveLoadingParsers, rejectLoadingParsers) => {
             const { PYTHEAS_CONTEXT } = <any>window;
             if (PYTHEAS_CONTEXT && PYTHEAS_CONTEXT === 'vscode') {
-                console.log('All parsers already loaded');
+                // console.log('All parsers already loaded');
                 this.detectParsers();
                 this.initParsersInstances();
                 resolveLoadingParsers();
@@ -122,12 +122,12 @@ class FilesParserSingleton {
                             new Promise((resolveLoadingParser, rejectLoadingParser) => {
                                 const script = document.createElement('script');
                                 script.addEventListener('load', () => {
-                                    console.log(`${parser} parser finished loading and executing`);
+                                    // console.log(`${parser} parser finished loading and executing`);
                                     resolveLoadingParser();
                                     StatusbarManager.displayMessage('');
                                 });
                                 script.addEventListener('error', () => {
-                                    console.log(`${parser} parser error loading`);
+                                    // console.log(`${parser} parser error loading`);
                                     rejectLoadingParser();
                                 });
                                 script.src = `scripts/${parser}.js`;
@@ -141,7 +141,7 @@ class FilesParserSingleton {
 
                 Promise.all(parsersPromiseLoading).then(
                     () => {
-                        console.log('All parsers loaded');
+                        // console.log('All parsers loaded');
                         this.initParsersInstances();
                         resolveLoadingParsers();
                     },

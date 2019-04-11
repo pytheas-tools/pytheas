@@ -54,7 +54,7 @@ class ContextmenuSingleton {
     }
 
     handleMenuAction(evt) {
-        console.log('Action required: ' + evt);
+        // console.log('Action required: ' + evt);
         if (evt === 'saveasimage') {
             pubsub.publish(EVENTS.SAVEGRAPHASIMAGE);
         }

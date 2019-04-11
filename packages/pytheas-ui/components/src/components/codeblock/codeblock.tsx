@@ -1,4 +1,4 @@
-import { Component, Prop, Element, Event, EventEmitter, Method } from '@stencil/core';
+import { Component, Element, Event, EventEmitter, Method, Prop } from '@stencil/core';
 
 @Component({
     tag: 'py-codeblock',

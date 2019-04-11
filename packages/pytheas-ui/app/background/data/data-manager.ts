@@ -73,9 +73,9 @@ class DataSingleton {
                 this.functions = [...this.functions, ...functionsForFile];
             }
         });
-        console.log(this.classes);
+        // console.log(this.classes);
         RelationManager.mergeInRelations(this.classes);
-        console.log(this.classes);
+        // console.log(this.classes);
     }
 
     getFiles() {

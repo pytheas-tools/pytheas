@@ -23,7 +23,7 @@ export class GraphOverview {
     graphElementSelected: EventEmitter;
 
     componentWillLoad() {
-        console.log('GraphOverview is about to be rendered..: ', this.data);
+        // console.log('GraphOverview is about to be rendered..: ', this.data);
         this.dataOrderedByFirstLetter = this.orderByLetter(this.data);
     }
 
@@ -60,13 +60,13 @@ export class GraphOverview {
     }
 
     componentDidLoad() {
-        console.log('GraphOverview is rendered : ', this.data);
+        // console.log('GraphOverview is rendered : ', this.data);
     }
 
     @Method()
     selectType(ev, notify) {
         this.selectedType = ev.target ? ev.target.dataset.type : ev;
-        console.log('selectType: ', this.selectedType);
+        // console.log('selectType: ', this.selectedType);
         if (this.dataOrderedByFirstLetter[this.selectedType]) {
             this.inDetailList = true;
             if (typeof notify === 'undefined') {

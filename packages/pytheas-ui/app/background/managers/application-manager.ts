@@ -48,12 +48,12 @@ class ApplicationSingleton {
         });
 
         pubsub.subscribe(EVENTS.CODEBLOCK_STATEMENT_CLICKED, () => {
-            console.log('ApplicationManager CODEBLOCK_STATEMENT_CLICKED notify everybody');
+            // console.log('ApplicationManager CODEBLOCK_STATEMENT_CLICKED notify everybody');
             this.onSomethingSelected();
         });
 
         pubsub.subscribe(EVENTS.GRAPH_ELEMENT_SELECTED, element => {
-            console.log('ApplicationManager GRAPH_ELEMENT_SELECTED notify everybody');
+            // console.log('ApplicationManager GRAPH_ELEMENT_SELECTED notify everybody');
             this.onSomethingSelected(element);
         });
 
@@ -61,7 +61,7 @@ class ApplicationSingleton {
             if (!this.filesReady) {
                 return;
             }
-            console.log('ApplicationManager NAVIGATIONBAR_HOME notify everybody');
+            // console.log('ApplicationManager NAVIGATIONBAR_HOME notify everybody');
             pubsub.publish(EVENTS.INIT_VIEW);
         });
     }

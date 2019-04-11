@@ -27,7 +27,7 @@ class NavigationBar {
 
     initListeners() {
         this.$element.addEventListener(EVENTS.NAVIGATIONBAR_BACK, () => {
-            console.log('backEvent listener: ', this);
+            // console.log('backEvent listener: ', this);
             pubsub.publish(EVENTS.NAVIGATIONBAR_BACK);
             if (this.canGoBack()) {
                 const item = this.history[--this.historyIndex];
@@ -37,12 +37,12 @@ class NavigationBar {
         });
 
         this.$element.addEventListener(EVENTS.NAVIGATIONBAR_HOME, () => {
-            console.log('homeEvent listener');
+            // console.log('homeEvent listener');
             pubsub.publish(EVENTS.NAVIGATIONBAR_HOME);
         });
 
         this.$element.addEventListener(EVENTS.NAVIGATIONBAR_NEXT, () => {
-            console.log('nextEvent listener');
+            // console.log('nextEvent listener');
             pubsub.publish(EVENTS.NAVIGATIONBAR_NEXT);
             if (this.canGoNext()) {
                 const item = this.history[++this.historyIndex];
@@ -52,22 +52,22 @@ class NavigationBar {
         });
 
         pubsub.subscribe(EVENTS.GRAPH_OVERVIEW_DETAIL_SELECTED, type => {
-            console.log('NavigationBar GRAPH_OVERVIEW_DETAIL_SELECTED: ', this);
+            // console.log('NavigationBar GRAPH_OVERVIEW_DETAIL_SELECTED: ', this);
             this.history.push({
                 type: 'overview',
                 subtype: type
             });
             this.historyIndex++;
             this.$element.setAttribute('back-disabled', 'false');
-            console.log(this);
+            // console.log(this);
         });
 
         pubsub.subscribe(EVENTS.SOMETHING_SELECTED, () => {
-            console.log('NavigationBar something selected, update bar value');
+            // console.log('NavigationBar something selected, update bar value');
         });
 
         pubsub.subscribe(EVENTS.INIT_VIEW, () => {
-            console.log('NavigationBar init view');
+            // console.log('NavigationBar init view');
             this.$element.setAttribute('current', 'Overview');
             this.$element.setAttribute('back-disabled', 'true');
             this.$element.setAttribute('next-disabled', 'true');

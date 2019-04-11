@@ -45,7 +45,7 @@ class DropWindow {
                 pubsub.publish(EVENTS.FILES_COMING);
                 const project = ev.target.value;
                 DemosManager.getDemoProjectFiles(project).then(scannedFiles => {
-                    console.log(scannedFiles);
+                    // console.log(scannedFiles);
                     FilesReader.readFilesFromFetchCall(scannedFiles).then(readedFiles => {
                         FilesParser.parseFiles(readedFiles).then(parsedFiles => {
                             pubsub.publish(EVENTS.FILES_PARSED, parsedFiles);

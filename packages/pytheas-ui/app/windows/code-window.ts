@@ -31,7 +31,7 @@ class CodeWindow {
             this.displayInitialParsingInformations();
         });
         pubsub.subscribe(EVENTS.SOMETHING_SELECTED, selectedElement => {
-            console.log('CodeWindow something selected, display related blocks: ', selectedElement);
+            // console.log('CodeWindow something selected, display related blocks: ', selectedElement);
             this.clearWindow();
             this.addCodeBlock(selectedElement.file);
             selectedElement.getInRelations().forEach(relation => {
@@ -39,13 +39,13 @@ class CodeWindow {
             });
         });
         pubsub.subscribe(EVENTS.THEME_CHANGED, theme => {
-            const codeBlocks = document.querySelectorAll('py-codeblock');
+            const codeBlocks = document.querySelectorAll('py-codeblock-rennesjs');
             codeBlocks.forEach(codeBlock => {
                 codeBlock.updateTheme(theme);
             });
         });
         pubsub.subscribe(EVENTS.NAVIGATIONBAR_ONUPDATE, item => {
-            console.log('CodeWindow NAVIGATIONBAR_ONUPDATE: ', item);
+            // console.log('CodeWindow NAVIGATIONBAR_ONUPDATE: ', item);
 
             if (item && item.type === 'overview') {
                 this.clearWindow();
@@ -71,6 +71,7 @@ ${lines} lines of code`
 
     addCodeBlock(file: any) {
         const $codeBlock = document.createElement('py-codeblock');
+
         $codeBlock.setAttribute('filename', file.name);
         $codeBlock.setAttribute('code', file.sourcecode);
         $codeBlock.setAttribute('language', file.language);
@@ -101,7 +102,7 @@ ${lines} lines of code`
     }
 
     onCodeblockStatementClicked(ev: Event) {
-        console.log('onCodeblockStatementClicked: ', ev);
+        // console.log('onCodeblockStatementClicked: ', ev);
         pubsub.publish(EVENTS.CODEBLOCK_STATEMENT_CLICKED);
     }
 }

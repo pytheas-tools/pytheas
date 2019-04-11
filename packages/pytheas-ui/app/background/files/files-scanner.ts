@@ -77,7 +77,7 @@ class FilesScannerSingleton {
                         this.scannedFiles.push(fileFromElectron);
                     })
                     .on('error', (error: string) => {
-                        console.log(error);
+                        // console.log(error);
                         this.scanReject(error);
                     })
                     .on('end', () => {

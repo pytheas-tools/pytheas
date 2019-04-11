@@ -13,482 +13,61 @@
   <script src="/libs/codemirror.min.js"></script>
   <script src="/libs/split.min.js"></script>
 
-  <style>
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      font-family: Arial, sans-serif;
-    }
 
-    p {
-      margin: 0;
-    }
-
-    /** SPLIT WINDOWS **/
-
-    .app-container {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .windows {
-      display: flex;
-      width: 100%;
-      height: calc(100% - 75px);
-    }
-
-    .app-container__top-bar {
-      width: 100%;
-      height: 40px;
-      display: flex;
-    }
-
-    .app-container__top-bar h1 {
-      font-size: 16px;
-    }
-
-    .app-container__top-bar h2 {
-      font-size: 14px;
-    }
-
-    .app-container__top-bar .app-container__top-bar__infos {
-      flex-grow: 1;
-      display: flex;
-    }
-
-    .app-container__top-bar .app-container__top-bar__infos img {
-      margin: 0 5px;
-    }
-
-    .app-container__top-bar .app-container__top-bar__settings {
-      padding: 10px;
-    }
-
-    .split {
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
-
-    .split.split-horizontal,
-    .gutter.gutter-horizontal {
-      height: 100%;
-      position: relative;
-    }
-
-    .gutter {
-      background-color: #eee;
-      background-repeat: no-repeat;
-      background-position: 50%;
-    }
-
-    .gutter.gutter-horizontal {
-      background-image:
-        url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
-      cursor: ew-resize;
-    }
-
-    .app-container__status-bar {
-      width: 100%;
-      height: 35px;
-      display: flex;
-    }
-
-    .app-container__status-bar>span {
-      padding: 10px;
-      display: flex;
-    }
-
-    .app-container__status-bar span:first-child {
-      flex-grow: 1;
-    }
-
-    .app-container__status-bar span:last-child ion-icon {
-      color: red;
-    }
-
-    .app-container__status-bar span:last-child ion-icon,
-    .app-container__status-bar span:last-child a {
-      margin: 0 5px;
-    }
-
-    .app-container__status-bar span:last-child a {
-      color: #3897fb;
-      text-decoration: none;
-    }
-
-    /** WINDOWS **/
-
-    .code-window {
-      padding: 10px;
-    }
-
-    .code-window.codeblock-maximized {
-      overflow-y: hidden;
-      padding: 0;
-    }
-
-    .graph-window {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .graph-container {
-      overflow: auto;
-      flex: auto;
-    }
-
-    .graph-container:focus {
-      outline: none;
-    }
-
-    .graph-container,
-    .graph-container__zoomable {
-      width: 100%;
-      height: 100%;
-      display: flex;
-    }
-  </style>
 </head>
 
 <body>
 
-  <div class="app-container">
-    <div class="app-container__top-bar">
-      <div class="app-container__top-bar__infos">
-        <h1>Pytheas</h1>
-        <h2>&nbsp;-&nbsp;Your codebase explorer</h2>
-      </div>
-      <div class="app-container__top-bar__settings">
-        <select id="theme-selector">
-          <option value="theme-dark" selected>Dark theme</option>
-          <option value="theme-light">Light theme</option>
-        </select>
-      </div>
-    </div>
-    <div class="windows">
-      <div class="split split-horizontal graph-window">
-        <py-navigation-bar current="TicTacToe" next-disabled="false" back-disabled="false"></py-navigation-bar>
-        <div class="graph-container">
-          <py-graph-overview></py-graph-overview>
-          <!--<py-graph></py-graph>-->
-        </div>
-      </div>
-      <div class="split split-horizontal code-window">
-        <py-codeblock filename="Stencil" code="import { Player } from './player';
-class Game {
-    player1;
-    player2;
-    constructor() {}
-    start() {
+
+  <py-codeblock filename="Stencil" code="import { Player } from './player/player';
+import { Rule } from './rule/rule';
+import { Settings } from './settings';
+
+export class Game {
+    player1: Player;
+    public player2: Player;
+
+    players: Player[];
+    morePlayers: Array<Player>;
+
+    private rule: Rule;
+
+    private settings: Settings = new Settings();
+
+    constructor() {
+        this.start();
+    }
+
+    public start() {
         this.player1 = new Player('Eric');
         this.player2 = new Player('Henry');
+        this.rule = new Rule('An important rule');
         this.clearUI();
     }
-    clearUI() {}
-}
-new Game();"></py-codeblock>
-      </div>
-    </div>
-    <div class="app-container__status-bar">
-      <span></span>
-      <span>Created with <ion-icon name="heart"></ion-icon> by <a href="https://twitter.com/vogloblinsky" target="_blank">@vogloblinsky</a></span>
-    </div>
-  </div>
 
-  <script>
-    Split(['.graph-window', '.code-window'], {
-      sizes: [50, 50],
-      onDrag: function() {
-        document.querySelector('py-graph').onExternalDragEvent();
-      },
-      onDragStart: function() {
-        console.log('onDragStart splitjs');
-      },
-      onDragEnd: function() {
-        console.log('onDragEnd splitjs');
-      }
-    });
-    var overviewData = {
-      'file': [{
-        'name': 'manager.ts'
-      }, {
-        'name': 'event.ts'
-      }, {
-        'name': 'player.ts'
-      }],
-      'class': [{
-        'name': 'Manager'
-      }, {
-        'name': 'Event'
-      }, {
-        'name': 'Player'
-      }, {
-        'name': 'Player1'
-      }, {
-        'name': 'Player2'
-      }, {
-        'name': 'Player3'
-      }, {
-        'name': 'Player4'
-      }, {
-        'name': 'Player5'
-      }, {
-        'name': 'Player6'
-      }, {
-        'name': 'Player7'
-      }, {
-        'name': 'Player8'
-      }, {
-        'name': 'Player9'
-      }, {
-        'name': 'Player10'
-      }, {
-        'name': 'Player11'
-      }, {
-        'name': 'Player12'
-      }, {
-        'name': 'Player13'
-      }],
-      function: []
-    };
-    document.querySelector('py-graph-overview').data = overviewData;
-    var MainClass = {
-      "id": "jnsnh17v",
-      "publicElements": [{
-        "relations": [],
-        "id": "jnsnh17w",
-        "name": "game",
-        "type": "Game",
-        "kind": "property",
-        "typeKind": "TypeReference"
-      }, {
-        "relations": [],
-        "id": "jnsnh17x",
-        "name": "start",
-        "kind": "method",
-        "modifiers": ["public"]
-      }],
-      "privateElements": [],
-      "name": "Main",
-      "propertyDeclarations": [{
-        "relations": [],
-        "id": "jnsnh17w",
-        "name": "game",
-        "type": "Game",
-        "typeKind": "TypeReference"
-      }],
-      "methodDeclarations": [{
-        "relations": [],
-        "id": "jnsnh17x",
-        "name": "start",
-        "modifiers": ["public"]
-      }],
-      "constructorDeclaration": {
-        "relations": [],
-        "id": "jnsnh17y"
-      }
-    };
-    var RuleClass = {
-      "id": "jnsnh17d",
-      "publicElements": [],
-      "privateElements": [],
-      "name": "Rule",
-      "propertyDeclarations": [{
-        "relations": [],
-        "id": "jnsnh17f",
-        "name": "sentence",
-        "type": "string",
-        "typeKind": "StringKeyword"
-      }],
-      "methodDeclarations": [],
-      "constructorDeclaration": {
-        "relations": [],
-        "id": "jnsnh17g"
-      }
-    };
-    var PlayerClass = {
-      "id": "jnsnh17h",
-      "publicElements": [{
-        "relations": [],
-        "id": "jnsnh17i",
-        "name": "name",
-        "type": "string",
-        "kind": "property",
-        "typeKind": "StringKeyword"
-      }, {
-        "relations": [],
-        "id": "jnsnh17j",
-        "name": "power",
-        "type": "number",
-        "kind": "property",
-        "typeKind": "NumberKeyword"
-      }, {
-        "relations": [],
-        "id": "jnsnh17k",
-        "name": "type",
-        "kind": "property"
-      }, {
-        "relations": [],
-        "id": "jnsnh17l",
-        "name": "init",
-        "kind": "method"
-      }],
-      "privateElements": [],
-      "name": "Player",
-      "propertyDeclarations": [{
-        "relations": [],
-        "id": "jnsnh17i",
-        "name": "name",
-        "type": "string",
-        "typeKind": "StringKeyword"
-      }, {
-        "relations": [],
-        "id": "jnsnh17j",
-        "name": "power",
-        "type": "number",
-        "typeKind": "NumberKeyword"
-      }, {
-        "relations": [],
-        "id": "jnsnh17k",
-        "name": "type"
-      }],
-      "methodDeclarations": [{
-        "relations": [],
-        "id": "jnsnh17l",
-        "name": "init"
-      }],
-      "constructorDeclaration": {
-        "relations": [],
-        "id": "jnsnh17m"
-      }
-    };
-    var GameClass = {
-      "id": "jnsnh17n",
-      "publicElements": [{
-        "relations": [],
-        "id": "jnsnh17o",
-        "name": "player1",
-        "type": "Player",
-        "kind": "property",
-        "typeKind": "TypeReference"
-      }, {
-        "relations": [],
-        "id": "jnsnh17p",
-        "name": "player2",
-        "type": "Player",
-        "kind": "property",
-        "typeKind": "TypeReference",
-        "modifiers": ["public"]
-      }, {
-        "relations": [],
-        "id": "jnsnh17r",
-        "name": "start",
-        "kind": "method",
-        "modifiers": ["public"]
-      }, {
-        "relations": [],
-        "id": "jnsnh17t",
-        "kind": "method",
-        "name": "simpleMethod"
-      }],
-      "privateElements": [{
-        "relations": [],
-        "id": "jnsnh17q",
-        "name": "rule",
-        "type": "Rule",
-        "kind": "property",
-        "typeKind": "TypeReference",
-        "modifiers": ["private"]
-      }, {
-        "relations": [],
-        "id": "jnsnh17s",
-        "name": "clearUI",
-        "kind": "method",
-        "modifiers": ["private"]
-      }],
-      "name": "Game",
-      "propertyDeclarations": [{
-        "relations": [],
-        "id": "jnsnh17o",
-        "name": "player1",
-        "type": "Player",
-        "typeKind": "TypeReference"
-      }, {
-        "relations": [],
-        "id": "jnsnh17p",
-        "name": "player2",
-        "type": "Player",
-        "typeKind": "TypeReference",
-        "modifiers": ["public"]
-      }, {
-        "relations": [],
-        "id": "jnsnh17q",
-        "name": "rule",
-        "type": "Rule",
-        "typeKind": "TypeReference",
-        "modifiers": ["private"]
-      }],
-      "methodDeclarations": [{
-        "relations": [],
-        "id": "jnsnh17r",
-        "name": "start",
-        "modifiers": ["public"]
-      }, {
-        "relations": [],
-        "id": "jnsnh17s",
-        "name": "clearUI",
-        "modifiers": ["private"]
-      }, {
-        "relations": [],
-        "id": "jnsnh17t",
-        "name": "simpleMethod"
-      }],
-      "constructorDeclaration": {
-        "relations": [],
-        "id": "jnsnh17u"
-      }
-    };
-    GameClass.relations = [{
-      type: 'out',
-      from: GameClass,
-      to: PlayerClass
-    }, {
-      type: 'out',
-      from: GameClass,
-      to: RuleClass
-    }, {
-      type: 'in',
-      from: MainClass,
-      to: GameClass
-    }]
-    //document.querySelector('py-graph').data = GameClass;
-  </script>
+    private clearUI() {}
 
-
-  <script>
-    if ('serviceWorker' in navigator && location.protocol !== 'file:') {
-      // auto-unregister service worker during dev mode
-      navigator.serviceWorker.getRegistration().then(function(registration) {
-        if (registration) {
-          registration.unregister().then(function() {
-            location.reload(true)
-          });
-        }
-      });
+    simpleMethod() {
+        this.clearUI();
     }
-  </script>
+}"></py-codeblock>
 
+  <script>
+    let codeBlock = document.querySelector('py-codeblock');
+
+    console.dir(codeBlock);
+
+    codeBlock.componentOnReady().then(() => {
+
+      codeBlock.highlight([142, 149]);
+
+      let codeMirrorEditor = codeBlock.codeMirrorEditor;
+      console.dir(codeMirrorEditor);
+
+      console.log(codeBlock.querySelectorAll('.cm-property'));
+
+    });
+  </script>
 
 
 </body>

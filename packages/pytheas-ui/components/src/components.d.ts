@@ -17,13 +17,16 @@ export namespace Components {
 
   interface PyCodeblock {
     'code': string;
+    'codeMirrorEditor': any;
     'filename': string;
+    'highlight': (range: any) => void;
     'language': string;
     'theme': string;
     'updateTheme': (theme: string) => void;
   }
   interface PyCodeblockAttributes extends StencilHTMLAttributes {
     'code'?: string;
+    'codeMirrorEditor'?: any;
     'filename'?: string;
     'language'?: string;
     'onCodeblockMaximized'?: (event: CustomEvent) => void;

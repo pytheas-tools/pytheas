@@ -47,6 +47,22 @@ py-codeblock {
         height: auto;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
+
+        .marked {
+            border-radius: 2px;
+            background-color: rgba(255, 240, 6, 0.4);
+            border: 1px solid #d0c303;
+        }
+
+        .cm-property {
+            border: 1px solid #ffffff;
+            border-radius: 2px;
+        }
+
+        .cm-property:hover {
+            border: 1px solid #686868;
+            cursor: pointer;
+        }
     }
 
     .icon-file {

@@ -15,6 +15,7 @@ export class CodeBlock {
     language: string;
 
     maximized = false;
+    @Prop({ mutable: true })
     codeMirrorEditor;
 
     @Event()
@@ -39,7 +40,8 @@ export class CodeBlock {
     componentDidLoad() {
         // console.log('CodeBlock is rendered..');
         if (window['CodeMirror']) {
-            this.codeMirrorEditor = window['CodeMirror'](this.el.querySelector('.py-codeblock__code-view'), {
+            const cm = window['CodeMirror'];
+            this.codeMirrorEditor = cm(this.el.querySelector('.py-codeblock__code-view'), {
                 value: this.code,
                 mode: this.language ? 'text/' + this.language : 'javascript',
                 lineNumbers: true,
@@ -50,6 +52,20 @@ export class CodeBlock {
                 theme: this.theme && this.theme === 'theme-dark' ? 'monokai' : 'default',
                 gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
             });
+
+            /*cm.on(this.codeMirrorEditor.getWrapperElement(), 'mouseover', event => {
+                console.log(event);
+                const node = event.target || event.srcElement;
+                console.log(node);
+                if (node) {
+                    const pos = this.codeMirrorEditor.coordsChar({
+                        left: event.clientX,
+                        top: event.clientY
+                    });
+                    const token = this.codeMirrorEditor.getTokenAt(pos);
+                    console.log(token);
+                }
+            });*/
         }
         this.topBar = this.el.querySelector('.py-codeblock__top-bar');
         this.codeView = this.el.querySelector('.py-codeblock__code-view');
@@ -66,6 +82,18 @@ export class CodeBlock {
     updateTheme(theme: string) {
         const localTheme = theme === 'theme-dark' ? 'monokai' : 'default';
         this.codeMirrorEditor.setOption('theme', localTheme);
+    }
+
+    @Method()
+    highlight(range) {
+        const positionFromIndex = (doc, index) => {
+            return doc.posFromIndex(index);
+        };
+        const [start, end] = range.map(index => positionFromIndex(this.codeMirrorEditor.doc, index));
+
+        this.codeMirrorEditor.markText(start, end, {
+            className: 'marked'
+        });
     }
 
     reduce() {

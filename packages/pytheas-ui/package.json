@@ -125,7 +125,7 @@
         "ionicons": "^4.5.6",
         "jsplumb": "^2.9.0",
         "notifier-js": "^1.0.0",
-        "panzoom": "^7.2.0",
+        "panzoom": "^7.2.2",
         "sloc": "^0.2.1",
         "split.js": "^1.5.10"
     },
@@ -143,7 +143,7 @@
         "exorcist": "^1.0.1",
         "filesize-cli": "0.0.3",
         "fs-extra": "^7.0.1",
-        "google-closure-compiler": "^20190325.0.0",
+        "google-closure-compiler": "^20190415.0.0",
         "jest": "^24.7.1",
         "live-server": "^1.2.1",
         "node-sass": "^4.11.0",
@@ -153,7 +153,7 @@
         "recursive-readdir": "^2.2.2",
         "replace": "^1.1.0",
         "rimraf": "^2.6.3",
-        "rollup": "^1.10.0",
+        "rollup": "^1.10.1",
         "rollup-plugin-babel": "^4.3.2",
         "rollup-plugin-commonjs": "^9.3.4",
         "rollup-plugin-node-builtins": "^2.1.2",
@@ -164,16 +164,16 @@
         "stencil-strip-debug": "^1.0.0",
         "strip-debug-cli": "^2.0.0",
         "superstatic": "^6.0.4",
-        "testcafe": "^1.1.2",
-        "testcafe-browser-provider-saucelabs": "^1.6.1",
+        "testcafe": "^1.1.3",
+        "testcafe-browser-provider-saucelabs": "^1.7.0",
         "ts-jest": "^24.0.2",
         "tslib": "^1.9.3",
-        "tslint": "^5.15.0",
+        "tslint": "^5.16.0",
         "typedoc": "^0.14.2",
-        "typescript": "^3.4.3",
+        "typescript": "^3.4.4",
         "uglify-es": "3.3.9",
         "uglifycss": "0.0.29",
         "useref": "^1.4.1",
-        "workbox-cli": "^4.2.0"
+        "workbox-cli": "^4.3.0"
     }
 }

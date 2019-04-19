@@ -54,12 +54,16 @@ py-codeblock {
             border: 1px solid #d0c303;
         }
 
-        .cm-property {
+        .cm-property,
+        .cm-def,
+        .cm-variable {
             border: 1px solid #ffffff;
             border-radius: 2px;
         }
 
-        .cm-property:hover {
+        .cm-property:hover,
+        .cm-def:hover,
+        .cm-variable:hover {
             border: 1px solid #686868;
             cursor: pointer;
         }

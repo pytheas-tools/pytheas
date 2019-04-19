@@ -31,6 +31,7 @@ export namespace Components {
     'language'?: string;
     'onCodeblockMaximized'?: (event: CustomEvent) => void;
     'onCodeblockUnmaximized'?: (event: CustomEvent) => void;
+    'onTokenHovered'?: (event: CustomEvent) => void;
     'theme'?: string;
   }
 

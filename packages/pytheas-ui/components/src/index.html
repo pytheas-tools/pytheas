@@ -66,6 +66,10 @@ export class Game {
 
       console.log(codeBlock.querySelectorAll('.cm-property'));
 
+      codeBlock.addEventListener('tokenHovered', (data) => {
+        console.log(data.detail);
+      });
+
     });
   </script>
 

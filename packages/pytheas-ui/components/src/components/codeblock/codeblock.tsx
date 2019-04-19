@@ -22,6 +22,8 @@ export class CodeBlock {
     codeblockMaximized: EventEmitter;
     @Event()
     codeblockUnmaximized: EventEmitter;
+    @Event()
+    tokenHovered: EventEmitter;
 
     @Element()
     el: HTMLElement;
@@ -53,19 +55,21 @@ export class CodeBlock {
                 gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
             });
 
-            /*cm.on(this.codeMirrorEditor.getWrapperElement(), 'mouseover', event => {
-                console.log(event);
+            cm.on(this.codeMirrorEditor.getWrapperElement(), 'mouseover', event => {
                 const node = event.target || event.srcElement;
-                console.log(node);
                 if (node) {
-                    const pos = this.codeMirrorEditor.coordsChar({
+                    /*const pos = this.codeMirrorEditor.coordsChar({
                         left: event.clientX,
                         top: event.clientY
                     });
                     const token = this.codeMirrorEditor.getTokenAt(pos);
-                    console.log(token);
+                    console.log(token);*/
+                    this.tokenHovered.emit({
+                        filename: this.filename,
+                        text: node.innerText
+                    });
                 }
-            });*/
+            });
         }
         this.topBar = this.el.querySelector('.py-codeblock__top-bar');
         this.codeView = this.el.querySelector('.py-codeblock__code-view');

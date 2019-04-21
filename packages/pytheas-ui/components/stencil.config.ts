@@ -12,8 +12,8 @@ if (process.env.NODE_ENV && process.env.NODE_ENV === 'production') {
 
 export const config: Config = {
     namespace: 'pytheas',
-    minifyJs: true,
-    minifyCss: true,
+    minifyJs: (process.env.NODE_ENV && process.env.NODE_ENV === 'production') ? true : false,
+    minifyCss: (process.env.NODE_ENV && process.env.NODE_ENV === 'production') ? true : false,
     outputTargets: [
         {
             type: 'dist'

@@ -95,7 +95,7 @@
             "patterns": [
                 "components"
             ],
-            "extensions": "tsx, scss"
+            "extensions": "tsx"
         },
         "compile-ts": {
             "patterns": [

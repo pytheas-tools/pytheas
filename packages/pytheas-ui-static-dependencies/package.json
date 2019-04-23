@@ -13,11 +13,12 @@
     "build-java-ast:prod": "npx browserify node_modules/java-ast/dist/index.js -s javaast | uglifyjs -c > output/javaast.js",
     "build-vue-compiler": "npx browserify node_modules/vue-template-compiler/browser.js -s vuetemplatecompiler -o output/vue-template-compiler.js",
     "build-vue-compiler:prod": "npx browserify node_modules/java-ast/dist/index.js -s vuetemplatecompiler | uglifyjs -c > output/vue-template-compiler.js",
+    "build-mxgraph": "cp -R vendor/* output",
     "clean-output": "npx rimraf output",
     "prebuild": "npm run clean-output",
-    "build": "run-s build-tsquery build-java-ast build-vue-compiler",
+    "build": "run-s build-tsquery build-java-ast build-vue-compiler build-mxgraph",
     "prebuild:prod": "npm run clean-output",
-    "build:prod": "run-s build-tsquery:prod build-java-ast:prod build-vue-compiler:prod"
+    "build:prod": "run-s build-tsquery:prod build-java-ast:prod build-vue-compiler:prod build-mxgraph"
   },
   "author": "vogloblinsky-sii <vogloblinsky@sii.fr>",
   "license": "MIT",

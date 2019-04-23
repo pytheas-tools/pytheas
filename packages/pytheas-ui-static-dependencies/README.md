@@ -9,3 +9,7 @@ npm install
 # Build
 npm run build
 ```
+
+## mxgraph
+
+mxgraph JavaScript file is extracted for mxgraph sources and compiled without unecessary source code.

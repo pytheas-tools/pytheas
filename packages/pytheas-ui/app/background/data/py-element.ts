@@ -33,7 +33,7 @@ export class PyElement {
     }
 
     addRelation(from: any, to: any, toType: string, type: RelationTypes) {
-        if (!this.hasRelation(from, to, type) && !(to in BasicTypes)) {
+        if (!this.hasRelation(from, to, type) && to && !(to in BasicTypes)) {
             this.relations.push(new PyRelation(from, to, toType, type));
         }
     }

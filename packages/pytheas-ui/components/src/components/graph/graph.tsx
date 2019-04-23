@@ -7,6 +7,7 @@ declare global {
         mxEdgeStyle: any;
         mxHierarchicalLayout: any;
         mxStackLayout: any;
+        mxEvent: any;
     }
 }
 
@@ -14,7 +15,7 @@ const MARGIN_CELL = 20;
 
 @Component({
     tag: 'py-graph',
-    styleUrl: 'this.graph.scss'
+    styleUrl: 'graph.scss'
 })
 export class Graph {
     @Prop()
@@ -37,6 +38,16 @@ export class Graph {
         this.graph = new window.mxGraph(this.graphElement.querySelector('#graphContainer'));
         console.log(this.graph);
         this.setupGraphStyles();
+
+        this.graph.addListener(window.mxEvent.CLICK, (_sender, evt) => {
+            const cell = evt.getProperty('cell');
+
+            if (cell != null && cell.pytheasElement) {
+                console.log('click: ', cell);
+                this.graphElementSelected.emit(cell.pytheasElement);
+            }
+        });
+
         this.graph.getModel().beginUpdate();
         try {
             this.buildGraphBlocks();
@@ -47,10 +58,6 @@ export class Graph {
     }
 
     componentDidUnload() {}
-
-    openElement(element) {
-        this.graphElementSelected.emit(element);
-    }
 
     render() {
         return <div id="graphContainer" />;
@@ -125,6 +132,7 @@ export class Graph {
     buildMainGraphBlock(element) {
         const mxGraphVertexElement = this.graph.insertVertex(this.graph.getDefaultParent(), null, element.name, 0, 0, 200, 200, 'column');
         element.mxElement = mxGraphVertexElement;
+        mxGraphVertexElement.pytheasElement = element;
 
         const mxGraphVertexElementGeometry = mxGraphVertexElement.getGeometry();
 

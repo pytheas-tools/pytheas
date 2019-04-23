@@ -100,7 +100,7 @@
                 styleMethod[mxConstants.STYLE_STROKECOLOR] = '#f9bb43';
                 graph.getStylesheet().putCellStyle('method', styleMethod);
 
-                function updateStyle(state, hover) {
+                /*function updateStyle(state, hover) {
                     if (hover) {
                         if (state.cell.style === 'public') {
                             stylePublicGroup[mxConstants.STYLE_SWIMLANE_FILLCOLOR] = '#fff';
@@ -115,13 +115,13 @@
                 graph.addMouseListener({
                     currentState: null,
                     previousStyle: null,
-                    mouseDown: function (sender, me) {
+                    mouseDown: function(sender, me) {
                         if (this.currentState != null) {
                             this.dragLeave(me.getEvent(), this.currentState);
                             this.currentState = null;
                         }
                     },
-                    mouseMove: function (sender, me) {
+                    mouseMove: function(sender, me) {
                         if (this.currentState != null && me.getState() == this.currentState) {
                             return;
                         }
@@ -145,8 +145,8 @@
                             }
                         }
                     },
-                    mouseUp: function (sender, me) {},
-                    dragEnter: function (evt, state) {
+                    mouseUp: function(sender, me) {},
+                    dragEnter: function(evt, state) {
                         if (state != null) {
                             this.previousStyle = state.style;
                             state.style = mxUtils.clone(state.style);
@@ -160,7 +160,7 @@
                             }
                         }
                     },
-                    dragLeave: function (evt, state) {
+                    dragLeave: function(evt, state) {
                         if (state != null) {
                             state.style = this.previousStyle;
                             updateStyle(state, false);
@@ -175,13 +175,13 @@
                     }
                 });
 
-                graph.addListener(mxEvent.CLICK, function (sender, evt) {
+                graph.addListener(mxEvent.CLICK, function(sender, evt) {
                     var cell = evt.getProperty('cell');
 
                     if (cell != null) {
                         console.log('click: ', cell);
                     }
-                });
+                });*/
 
                 graph.getModel().beginUpdate();
                 try {
@@ -214,8 +214,14 @@
             var mainG = main.getGeometry();
             mainG.width = mainPublicG.width + 20;
 
+
+
+
+
+
+
             playerPublic = graph.insertVertex(player, null, 'Public', 0, 0, 80, 30, 'public');
-            playerPublicSentence = graph.insertVertex(playerPublic, null, 'name', 0, 0, 60, 30, 'variable');
+            graph.insertVertex(playerPublic, null, 'name', 0, 0, 60, 30, 'variable');
             graph.insertVertex(playerPublic, null, 'power', 0, 0, 60, 30, 'variable');
             graph.insertVertex(playerPublic, null, 'weapon', 0, 0, 60, 30, 'variable');
             graph.insertVertex(playerPublic, null, 'type', 0, 0, 60, 30, 'variable');
@@ -229,7 +235,7 @@
 
 
             gamePublic = graph.insertVertex(game, null, 'Public', 0, 0, 80, 30, 'public');
-            gamePublicSentence = graph.insertVertex(gamePublic, null, 'player1', 0, 0, 60, 30, 'variable');
+            graph.insertVertex(gamePublic, null, 'player1', 0, 0, 60, 30, 'variable');
             graph.insertVertex(gamePublic, null, 'player2', 0, 0, 60, 30, 'variable');
             graph.insertVertex(gamePublic, null, 'players', 0, 0, 60, 30, 'variable');
             graph.insertVertex(gamePublic, null, 'morePlayers', 0, 0, 60, 30, 'variable');
@@ -246,9 +252,11 @@
             rulePublic = graph.insertVertex(rule, null, 'Public', 0, 0, 80, 30, 'public');
             rulePublicSentence = graph.insertVertex(rulePublic, null, 'sentence', 0, 0, 60, 30, 'variable');
 
-            var rulePublicG = rulePublic.getGeometry();
             var ruleG = rule.getGeometry();
+            var rulePublicG = rulePublic.getGeometry();
+
             var rulePublicSentenceG = rulePublicSentence.getGeometry();
+
             var rulePublicSentencePG = graph.getPreferredSizeForCell(rulePublicSentence);
 
             rulePublicSentenceG.width = rulePublicSentencePG.width + 20;
@@ -286,7 +294,7 @@
             layoutColumn(playerPublic);
             layoutColumn(player);
 
-            graph.insertEdge(graph.getDefaultParent(), null, '', gamePublicSentence, playerPublicSentence);
+            //graph.insertEdge(graph.getDefaultParent(), null, '', gamePublicSentence, playerPublicSentence);
         };
 
         layoutGraph = objects => {

@@ -18,6 +18,12 @@
         flex-grow: 1;
         display: flex;
 
+        .logo,
+        h1,
+        span {
+            cursor: pointer;
+        }
+
         .logo {
             margin: 0 5px;
             width: 38px;

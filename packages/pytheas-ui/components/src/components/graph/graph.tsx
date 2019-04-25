@@ -141,7 +141,7 @@ export class Graph {
         const mxGraphVertexElementGeometry = mxGraphVertexElement.getGeometry();
 
         if (element.publicElements.length > 0) {
-            const mxGraphVertexElementPublic = this.graph.insertVertex(mxGraphVertexElement, null, 'Public', 0, 0, 80, 30, 'public');
+            const mxGraphVertexElementPublic = this.graph.insertVertex(mxGraphVertexElement, null, 'Public', 0, 0, 80, 30, 'whiteColumn');
             element.mxPublicElement = mxGraphVertexElementPublic;
 
             const mxGraphVertexElementPublicGeometry = mxGraphVertexElementPublic.getGeometry();
@@ -240,10 +240,13 @@ export class Graph {
     };
 
     setupHoverCells() {
+        const mainGraph = this.graph;
+        const styleWhiteColumnGroup = this.styleWhiteColumnGroup;
+
         function updateStyle(state, hover) {
             if (hover) {
-                if (state.cell.style === 'public') {
-                    this.stylePublicGroup[window.mxConstants.STYLE_SWIMLANE_FILLCOLOR] = '#fff';
+                if (state.cell.style === 'whiteColumn') {
+                    styleWhiteColumnGroup[window.mxConstants.STYLE_SWIMLANE_FILLCOLOR] = '#fff';
                     state.style[window.mxConstants.STYLE_STROKECOLOR] = '#fff';
                 } else {
                     state.style[window.mxConstants.STYLE_STROKECOLOR] = '#707070';
@@ -251,19 +254,17 @@ export class Graph {
             }
         }
 
-        const mainGraph = this.graph;
-
         // Changes fill color to red on mouseover
         this.graph.addMouseListener({
             currentState: null,
             previousStyle: null,
-            mouseDown(sender: any, me) {
+            mouseDown(sender, me) {
                 if (this.currentState != null) {
                     this.dragLeave(me.getEvent(), this.currentState);
                     this.currentState = null;
                 }
             },
-            mouseMove(sender: any, me) {
+            mouseMove(sender, me) {
                 if (this.currentState != null && me.getState() === this.currentState) {
                     return;
                 }
@@ -287,7 +288,7 @@ export class Graph {
                     }
                 }
             },
-            dragEnter(evt: any, state) {
+            dragEnter(evt, state) {
                 if (state != null) {
                     this.previousStyle = state.style;
                     state.style = window.mxUtils.clone(state.style);

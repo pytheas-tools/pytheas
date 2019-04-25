@@ -4,6 +4,10 @@ py-graph {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    svg text:hover {
+        cursor: default;
+    }
 }
 
 .container {

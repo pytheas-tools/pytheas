@@ -100,7 +100,7 @@
                 styleMethod[mxConstants.STYLE_STROKECOLOR] = '#f9bb43';
                 graph.getStylesheet().putCellStyle('method', styleMethod);
 
-                /*function updateStyle(state, hover) {
+                function updateStyle(state, hover) {
                     if (hover) {
                         if (state.cell.style === 'public') {
                             stylePublicGroup[mxConstants.STYLE_SWIMLANE_FILLCOLOR] = '#fff';
@@ -115,13 +115,13 @@
                 graph.addMouseListener({
                     currentState: null,
                     previousStyle: null,
-                    mouseDown: function(sender, me) {
+                    mouseDown: function (sender, me) {
                         if (this.currentState != null) {
                             this.dragLeave(me.getEvent(), this.currentState);
                             this.currentState = null;
                         }
                     },
-                    mouseMove: function(sender, me) {
+                    mouseMove: function (sender, me) {
                         if (this.currentState != null && me.getState() == this.currentState) {
                             return;
                         }
@@ -145,8 +145,8 @@
                             }
                         }
                     },
-                    mouseUp: function(sender, me) {},
-                    dragEnter: function(evt, state) {
+                    mouseUp: function (sender, me) {},
+                    dragEnter: function (evt, state) {
                         if (state != null) {
                             this.previousStyle = state.style;
                             state.style = mxUtils.clone(state.style);
@@ -160,7 +160,7 @@
                             }
                         }
                     },
-                    dragLeave: function(evt, state) {
+                    dragLeave: function (evt, state) {
                         if (state != null) {
                             state.style = this.previousStyle;
                             updateStyle(state, false);
@@ -175,13 +175,13 @@
                     }
                 });
 
-                graph.addListener(mxEvent.CLICK, function(sender, evt) {
+                graph.addListener(mxEvent.CLICK, function (sender, evt) {
                     var cell = evt.getProperty('cell');
 
                     if (cell != null) {
                         console.log('click: ', cell);
                     }
-                });*/
+                });
 
                 graph.getModel().beginUpdate();
                 try {

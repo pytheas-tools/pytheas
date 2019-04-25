@@ -8,6 +8,7 @@ declare global {
         mxHierarchicalLayout: any;
         mxStackLayout: any;
         mxEvent: any;
+        mxUtils: any;
     }
 }
 
@@ -29,6 +30,8 @@ export class Graph {
 
     graph;
 
+    styleWhiteColumnGroup;
+
     componentWillLoad() {
         console.log('Graph is about to be rendered..: ', this.data);
     }
@@ -38,6 +41,7 @@ export class Graph {
         this.graph = new window.mxGraph(this.graphElement.querySelector('#graphContainer'));
         console.log(this.graph);
         this.setupGraphStyles();
+        this.setupHoverCells();
 
         this.graph.addListener(window.mxEvent.CLICK, (_sender, evt) => {
             const cell = evt.getProperty('cell');
@@ -170,7 +174,7 @@ export class Graph {
         }
 
         if (element.privateElements.length > 0) {
-            const mxGraphVertexElementPrivate = this.graph.insertVertex(mxGraphVertexElement, null, 'Private', 0, 0, 80, 30, 'public');
+            const mxGraphVertexElementPrivate = this.graph.insertVertex(mxGraphVertexElement, null, 'Private', 0, 0, 80, 30, 'whiteColumn');
             element.mxPrivateElement = mxGraphVertexElementPrivate;
 
             const mxGraphVertexElementPublicGeometry = mxGraphVertexElementPrivate.getGeometry();
@@ -235,6 +239,84 @@ export class Graph {
         }
     };
 
+    setupHoverCells() {
+        function updateStyle(state, hover) {
+            if (hover) {
+                if (state.cell.style === 'public') {
+                    this.stylePublicGroup[window.mxConstants.STYLE_SWIMLANE_FILLCOLOR] = '#fff';
+                    state.style[window.mxConstants.STYLE_STROKECOLOR] = '#fff';
+                } else {
+                    state.style[window.mxConstants.STYLE_STROKECOLOR] = '#707070';
+                }
+            }
+        }
+
+        const mainGraph = this.graph;
+
+        // Changes fill color to red on mouseover
+        this.graph.addMouseListener({
+            currentState: null,
+            previousStyle: null,
+            mouseDown(sender: any, me) {
+                if (this.currentState != null) {
+                    this.dragLeave(me.getEvent(), this.currentState);
+                    this.currentState = null;
+                }
+            },
+            mouseMove(sender: any, me) {
+                if (this.currentState != null && me.getState() === this.currentState) {
+                    return;
+                }
+
+                var tmp = mainGraph.view.getState(me.getCell());
+
+                // Ignores everything but vertices
+                if (mainGraph.isMouseDown || (tmp != null && !mainGraph.getModel().isVertex(tmp.cell))) {
+                    tmp = null;
+                }
+
+                if (tmp !== this.currentState) {
+                    if (this.currentState != null) {
+                        this.dragLeave(me.getEvent(), this.currentState);
+                    }
+
+                    this.currentState = tmp;
+
+                    if (this.currentState != null) {
+                        this.dragEnter(me.getEvent(), this.currentState);
+                    }
+                }
+            },
+            dragEnter(evt: any, state) {
+                if (state != null) {
+                    this.previousStyle = state.style;
+                    state.style = window.mxUtils.clone(state.style);
+                    updateStyle(state, true);
+                    state.shape.apply(state);
+                    state.shape.redraw();
+
+                    if (state.text != null) {
+                        state.text.apply(state);
+                        state.text.redraw();
+                    }
+                }
+            },
+            dragLeave(evt, state) {
+                if (state != null) {
+                    state.style = this.previousStyle;
+                    updateStyle(state, false);
+                    state.shape.apply(state);
+                    state.shape.redraw();
+
+                    if (state.text != null) {
+                        state.text.apply(state);
+                        state.text.redraw();
+                    }
+                }
+            }
+        });
+    }
+
     setupGraphStyles() {
         // Disables global features
         this.graph.collapseToPreferredSize = false;
@@ -267,16 +349,17 @@ export class Graph {
         styleColumn[window.mxConstants.STYLE_FONTSTYLE] = window.mxConstants.FONT_BOLD;
         this.graph.getStylesheet().putCellStyle('column', styleColumn);
 
-        const stylePublicGroup = [];
-        stylePublicGroup[window.mxConstants.STYLE_FOLDABLE] = false;
-        stylePublicGroup[window.mxConstants.STYLE_FONTCOLOR] = '#000000';
-        stylePublicGroup[window.mxConstants.STYLE_FILLCOLOR] = '#ffffff';
-        stylePublicGroup[window.mxConstants.STYLE_SWIMLANE_FILLCOLOR] = '#fff';
-        stylePublicGroup[window.mxConstants.STYLE_FONTSTYLE] = window.mxConstants.FONT_BOLD;
-        stylePublicGroup[window.mxConstants.STYLE_STROKECOLOR] = '#fff';
-        stylePublicGroup[window.mxConstants.STYLE_SHAPE] = 'swimlane';
-        stylePublicGroup[window.mxConstants.STYLE_ROUNDED] = true;
-        this.graph.getStylesheet().putCellStyle('public', stylePublicGroup);
+        const styleWhiteColumnGroup = [];
+        styleWhiteColumnGroup[window.mxConstants.STYLE_FOLDABLE] = false;
+        styleWhiteColumnGroup[window.mxConstants.STYLE_FONTCOLOR] = '#000000';
+        styleWhiteColumnGroup[window.mxConstants.STYLE_FILLCOLOR] = '#ffffff';
+        styleWhiteColumnGroup[window.mxConstants.STYLE_SWIMLANE_FILLCOLOR] = '#fff';
+        styleWhiteColumnGroup[window.mxConstants.STYLE_FONTSTYLE] = window.mxConstants.FONT_BOLD;
+        styleWhiteColumnGroup[window.mxConstants.STYLE_STROKECOLOR] = '#fff';
+        styleWhiteColumnGroup[window.mxConstants.STYLE_SHAPE] = 'swimlane';
+        styleWhiteColumnGroup[window.mxConstants.STYLE_ROUNDED] = true;
+        this.styleWhiteColumnGroup = styleWhiteColumnGroup;
+        this.graph.getStylesheet().putCellStyle('whiteColumn', styleWhiteColumnGroup);
 
         const styleVariable = [];
         styleVariable[window.mxConstants.STYLE_SHAPE] = window.mxConstants.SHAPE_RECTANGLE;

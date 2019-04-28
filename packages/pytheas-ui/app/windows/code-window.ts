@@ -75,6 +75,7 @@ ${lines} lines of code`
         $codeBlock.setAttribute('filename', file.name);
         $codeBlock.setAttribute('code', file.sourcecode);
         $codeBlock.setAttribute('language', file.language);
+        $codeBlock.setAttribute('codemirror-path', 'scripts/codemirror.js');
         $codeBlock.setAttribute('theme', SettingsManager.getSettings().theme);
 
         $codeBlock.addEventListener(EVENTS.CODEBLOCK_MAXIMIZED, this.onCodeblockMaximized.bind(this));

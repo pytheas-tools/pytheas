@@ -6,13 +6,15 @@ import { Component, Element, Event, EventEmitter, Method, Prop } from '@stencil/
 })
 export class CodeBlock {
     @Prop()
-    code: string;
+    code = '';
     @Prop()
     filename: string;
     @Prop()
     theme: string;
     @Prop()
     language: string;
+    @Prop()
+    codemirrorPath: string;
 
     maximized = false;
     @Prop({ mutable: true })
@@ -36,39 +38,16 @@ export class CodeBlock {
     codeView: HTMLElement;
 
     componentWillLoad() {
-        // console.log('CodeBlock is about to be rendered..');
+        // console.log('CodeBlock is about to be rendered..: ', this.codemirrorPath);
     }
 
     componentDidLoad() {
         // console.log('CodeBlock is rendered..');
         if (window['CodeMirror']) {
-            const cm = window['CodeMirror'];
-            this.codeMirrorEditor = cm(this.el.querySelector('.py-codeblock__code-view'), {
-                value: this.code,
-                mode: this.language ? 'text/' + this.language : 'javascript',
-                lineNumbers: true,
-                viewportMargin: Infinity,
-                lineWrapping: true,
-                foldGutter: true,
-                readOnly: true,
-                theme: this.theme && this.theme === 'theme-dark' ? 'monokai' : 'default',
-                gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
-            });
-
-            cm.on(this.codeMirrorEditor.getWrapperElement(), 'mouseover', event => {
-                const node = event.target || event.srcElement;
-                if (node) {
-                    /*const pos = this.codeMirrorEditor.coordsChar({
-                        left: event.clientX,
-                        top: event.clientY
-                    });
-                    const token = this.codeMirrorEditor.getTokenAt(pos);
-                    console.log(token);*/
-                    this.tokenHovered.emit({
-                        filename: this.filename,
-                        text: node.innerText
-                    });
-                }
+            this.bootstrapEditor();
+        } else {
+            this.injectEditorDependency().then(() => {
+                this.bootstrapEditor();
             });
         }
         this.topBar = this.el.querySelector('.py-codeblock__top-bar');
@@ -97,6 +76,52 @@ export class CodeBlock {
 
         this.codeMirrorEditor.markText(start, end, {
             className: 'marked'
+        });
+    }
+
+    injectEditorDependency() {
+        return new Promise((resolveInjection, rejectInjection) => {
+            const script = document.createElement('script');
+            script.setAttribute('src', this.codemirrorPath);
+            script.setAttribute('type', 'text/javascript');
+            script.onload = () => {
+                resolveInjection();
+            };
+            script.onerror = () => {
+                rejectInjection();
+            };
+            document.body.appendChild(script);
+        });
+    }
+
+    async bootstrapEditor() {
+        const cm = window['CodeMirror'];
+        this.codeMirrorEditor = cm(this.el.querySelector('.py-codeblock__code-view'), {
+            value: this.code,
+            mode: this.language ? 'text/' + this.language : 'javascript',
+            lineNumbers: true,
+            viewportMargin: Infinity,
+            lineWrapping: true,
+            foldGutter: true,
+            readOnly: true,
+            theme: this.theme && this.theme === 'theme-dark' ? 'monokai' : 'default',
+            gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+        });
+
+        cm.on(this.codeMirrorEditor.getWrapperElement(), 'mouseover', event => {
+            const node = event.target || event.srcElement;
+            if (node) {
+                /*const pos = this.codeMirrorEditor.coordsChar({
+                        left: event.clientX,
+                        top: event.clientY
+                    });
+                    const token = this.codeMirrorEditor.getTokenAt(pos);
+                    console.log(token);*/
+                this.tokenHovered.emit({
+                    filename: this.filename,
+                    text: node.innerText
+                });
+            }
         });
     }
 

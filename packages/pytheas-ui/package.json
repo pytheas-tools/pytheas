@@ -19,7 +19,7 @@
         "serve": "live-server output --port=8383 --host=localhost --quiet",
         "watch": "npm-watch",
         "---BUILD-EXTERNAL-DEPENDENCIES---": "",
-        "build-browser-dependencies": "cp -R ../pytheas-ui-static-dependencies/output/ output/scripts",
+        "build-browser-dependencies": "cp -R ../pytheas-ui-static-dependencies/output/* output/scripts",
         "build-browser-dependencies:prod": "cd ../pytheas-ui-static-dependencies && npm run build:prod && cd ../pytheas-ui && npm run build-browser-dependencies",
         "compile-dragmock": "npx rollup -c test/vendors/drag-mock/rollup.config.js",
         "concat-app-dragmock": "npx concat -o output/scripts/app_es6.js output/scripts/app_es6.js output/scripts/dragmock.js test/mock-drag.js",

@@ -26,6 +26,7 @@ install:
     - cd ../pytheas-ui
     - npm ci
 script:
+    - mkdir output && mkdir output/scripts
     - npm run build-browser-dependencies
     - npm run test:wc
     - npm run build:dev:test

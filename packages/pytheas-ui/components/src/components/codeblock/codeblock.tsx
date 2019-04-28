@@ -18,7 +18,7 @@ export class CodeBlock {
 
     maximized = false;
     @Prop({ mutable: true })
-    codeMirrorEditor;
+    codeMirrorEditor: HTMLElement;
 
     @Event()
     codeblockMaximized: EventEmitter;

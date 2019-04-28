@@ -34,5 +34,5 @@ branches:
         - develop
 env:
     global:
-        - GH_REF: github.com/vogloblinsky/pytheas.git
+        - GH_REF: github.com/pytheas-tools/pytheas.git
         - secure: n1/3erMgaPDX8ha2zfUNv204MTor7R7/+mMQdsScde8ZLE89UcDIz/ODUrRe+Ixqwy0N4PFEiZjk5cmzcJRrF2rIn6BE68bZKMjtwTbKt7CdPQWWxuIYnDjZXAbba7jIYuYzs0X3Iliuq0mHa7LoYXfyffDWHWimkfbia2l3V+DwrUb4EYzrsL1gphhiN6yLhnzLx4n1cbStt6yH6Uaz/Kb0Qfz5+YX6hhJHxqu4R5I8cJNMDvDtroD0Fbki0/AOlTBKVj1AaxAHaofruZA0Btbvu39Rhz2X+zUqVU9nibkeOZJAhMJuz/Au0GhUT5l5lEiUXs676pzrIU+eDrFHWVhdyh1ljzeauTCxLTFdkhNy1BTJas2CvOR2BQ99LQlHT0fNECvhk4xLGeDBYXZVmC2K1Tg40TgVGnZyh/Ff7xKKnfzJOIW/i0N+wsd3aHUbHHv6k7fPDsk0bfh2M2KNCmHtkugW+qFeRxwoUh50TntfMkL6I3M88mOW2hFBdKZESW4F1PZhW4/pe+k3WvlnjQcS37tlvIvrRQn+0kz360c2zbSM6PmQoU6pto8C04kUqIViNHCQf0SeOB1FlfNfoZkOJ3Mx/fz4vOrIeeRvzc5pyOEqwO1J02i0AAEKOB6IyP61BendRW2PghGkX7dR8edPAckgn9nypZbEU9TuxPw=

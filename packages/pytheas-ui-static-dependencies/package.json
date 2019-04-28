@@ -14,6 +14,8 @@
     "build-vue-compiler": "npx browserify node_modules/vue-template-compiler/browser.js -s vuetemplatecompiler -o output/vue-template-compiler.js",
     "build-vue-compiler:prod": "npx browserify node_modules/java-ast/dist/index.js -s vuetemplatecompiler | uglifyjs -c > output/vue-template-compiler.js",
     "build-mxgraph": "cp -R vendor/* output",
+    "build-codemirror": "npx concat -o output/codemirror.js ./node_modules/codemirror/lib/codemirror.js ./node_modules/codemirror/mode/javascript/javascript.js ./node_modules/codemirror/addon/fold/foldcode.js ./node_modules/codemirror/addon/fold/foldgutter.js ./node_modules/codemirror/addon/fold/brace-fold.js",
+    "postbuild-codemirror": "npx google-closure-compiler --warning_level=QUIET --js=output/codemirror.js --js_output_file=output/codemirror.min.js && mv output/codemirror.min.js output/codemirror.js && npx uglifyjs output/codemirror.js --output output/codemirror.js",
     "clean-output": "npx rimraf output",
     "prebuild": "npm run clean-output",
     "build": "run-s build-tsquery build-java-ast build-vue-compiler build-mxgraph",
@@ -33,6 +35,7 @@
   },
   "dependencies": {
     "@phenomnomnominal/tsquery": "^3.0.0",
+    "codemirror": "^5.46.0",
     "java-ast": "^0.1.0",
     "vue-template-compiler": "^2.6.10"
   }

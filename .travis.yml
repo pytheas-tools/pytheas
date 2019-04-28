@@ -28,13 +28,11 @@ install:
 script:
     - mkdir output && mkdir output/scripts
     - npm run build-browser-dependencies
-    - ls -al output/scripts
     - npm run test:wc
     - npm run build:dev:test
     - npm run test:unit
     - npm run test:e2e
     - npm run build
-    - ls -al output/scripts
     - bash ./deploy.sh
 branches:
     only:

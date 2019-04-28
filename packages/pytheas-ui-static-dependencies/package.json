@@ -18,9 +18,9 @@
     "postbuild-codemirror": "npx google-closure-compiler --warning_level=QUIET --js=output/codemirror.js --js_output_file=output/codemirror.min.js && mv output/codemirror.min.js output/codemirror.js && npx uglifyjs output/codemirror.js --output output/codemirror.js",
     "clean-output": "npx rimraf output",
     "prebuild": "npm run clean-output",
-    "build": "run-s build-tsquery build-java-ast build-vue-compiler build-mxgraph",
+    "build": "run-s build-tsquery build-java-ast build-vue-compiler build-mxgraph build-codemirror",
     "prebuild:prod": "npm run clean-output",
-    "build:prod": "run-s build-tsquery:prod build-java-ast:prod build-vue-compiler:prod build-mxgraph"
+    "build:prod": "run-s build-tsquery:prod build-java-ast:prod build-vue-compiler:prod build-mxgraph build-codemirror"
   },
   "author": "vogloblinsky-sii <vogloblinsky@sii.fr>",
   "license": "MIT",

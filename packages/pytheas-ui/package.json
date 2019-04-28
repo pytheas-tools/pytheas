@@ -20,7 +20,7 @@
         "watch": "npm-watch",
         "---BUILD-EXTERNAL-DEPENDENCIES---": "",
         "build-browser-dependencies": "cp -R ../pytheas-ui-static-dependencies/output/ output/scripts",
-        "build-browser-dependencies:prod": "cd ../pytheas-ui-static-dependencies && npm run build:prod && cp -R ../pytheas-ui-static-dependencies/output/ output/scripts",
+        "build-browser-dependencies:prod": "cd ../pytheas-ui-static-dependencies && npm run build:prod && cd ../pytheas-ui && npm run build-browser-dependencies",
         "build-codemirror": "npx concat -o output/scripts/codemirror.js ./node_modules/codemirror/lib/codemirror.js ./node_modules/codemirror/mode/javascript/javascript.js ./node_modules/codemirror/addon/fold/foldcode.js ./node_modules/codemirror/addon/fold/foldgutter.js ./node_modules/codemirror/addon/fold/brace-fold.js",
         "postbuild-codemirror": "npx google-closure-compiler --warning_level=QUIET --js=output/scripts/codemirror.js --js_output_file=output/scripts/codemirror.min.js && mv output/scripts/codemirror.min.js output/scripts/codemirror.js",
         "compile-dragmock": "npx rollup -c test/vendors/drag-mock/rollup.config.js",

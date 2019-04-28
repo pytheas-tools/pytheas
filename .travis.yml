@@ -23,7 +23,7 @@ install:
     - cd packages/pytheas-ui-static-dependencies
     - npm i
     - npm run build:prod
-    - cd ../packages/pytheas-ui
+    - cd ../pytheas-ui
     - npm ci
 script:
     - npm run test:wc

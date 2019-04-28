@@ -20,7 +20,10 @@ before_install:
     - stty cols 80
 install:
     - npm install npm@latest -g
-    - cd packages/pytheas-ui
+    - cd packages/pytheas-ui-static-dependencies
+    - npm i
+    - npm run build:prod
+    - cd ../packages/pytheas-ui
     - npm ci
 script:
     - npm run test:wc

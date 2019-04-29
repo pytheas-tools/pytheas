@@ -134,8 +134,8 @@ export class GraphOverview {
         } else {
             return (
                 <ul class="graph-overview__types-list">
-                    {this.data.file.length > 0 ? (
-                        <li
+                    {this.data.file.length > 0
+                        ? /*<li
                             class="graph-overview__type file"
                             data-badge={this.data.file.length}
                             onClick={this.selectType.bind(this)}
@@ -143,10 +143,8 @@ export class GraphOverview {
                             data-type="file"
                         >
                             Files{' '}
-                        </li>
-                    ) : (
-                        ''
-                    )}
+                        </li>*/ ''
+                        : ''}
                     {this.data.class.length > 0 ? (
                         <li
                             class="graph-overview__type class"
@@ -160,8 +158,8 @@ export class GraphOverview {
                     ) : (
                         ''
                     )}
-                    {this.data.function.length > 0 ? (
-                        <li
+                    {this.data.function.length > 0
+                        ? /*<li
                             class="graph-overview__type function"
                             data-badge={this.data.function.length}
                             onClick={this.selectType.bind(this)}
@@ -169,10 +167,8 @@ export class GraphOverview {
                             data-type="function"
                         >
                             Functions
-                        </li>
-                    ) : (
-                        ''
-                    )}
+                        </li>*/ ''
+                        : ''}
                 </ul>
             );
         }

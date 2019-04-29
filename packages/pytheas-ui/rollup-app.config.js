@@ -19,8 +19,7 @@ const createConfig = (type) => {
             globals(),
             builtins(),
             nodeResolve({
-                jsnext: true,
-                main: true
+                mainFields: ['module', 'main']
             }),
             commonjs({
                 include: 'node_modules/**'

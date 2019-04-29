@@ -121,6 +121,7 @@ class GraphWindow {
         this.$graph = document.createElement('py-graph');
         this.$graph.data = element;
         this.$graph.addEventListener(EVENTS.GRAPH_ELEMENT_SELECTED, this.onGraphElementSelected.bind(this));
+        this.$graph.addEventListener(EVENTS.GRAPH_SUBELEMENT_SELECTED, this.onGraphSubElementSelected.bind(this));
         this.$graphContainerZoomable.appendChild(this.$graph);
     }
 
@@ -145,8 +146,12 @@ class GraphWindow {
         pubsub.publish(EVENTS.GRAPH_OVERVIEW_DETAIL_SELECTED, ev.detail);
     }
 
+    onGraphSubElementSelected(ev) {
+        console.log('onGraphSubElementSelected: ', ev.detail);
+    }
+
     onGraphElementSelected(ev) {
-        // console.log('onGraphElementClicked: ', ev.detail);
+        console.log('onGraphElementClicked: ', ev.detail);
         pubsub.publish(EVENTS.GRAPH_ELEMENT_SELECTED, ev.detail);
     }
 }

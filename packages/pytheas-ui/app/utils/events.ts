@@ -9,6 +9,7 @@ export const EVENTS = {
     NAVIGATIONBAR_NEXT: 'navigationBarNextEvent',
     NAVIGATIONBAR_ONUPDATE: 'navigationBarOnUpdate',
     GRAPH_ELEMENT_SELECTED: 'graphElementSelected',
+    GRAPH_SUBELEMENT_SELECTED: 'graphSubElementSelected',
     GRAPH_OVERVIEW_DETAIL_SELECTED: 'graphOverviewDetailSelected',
     SOMETHING_SELECTED: 'somethingSelected',
     INIT_VIEW: 'initView',

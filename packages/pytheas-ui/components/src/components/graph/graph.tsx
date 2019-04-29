@@ -28,6 +28,9 @@ export class Graph {
     @Event()
     graphElementSelected: EventEmitter;
 
+    @Event()
+    graphSubElementSelected: EventEmitter;
+
     graph;
 
     styleWhiteColumnGroup;
@@ -45,10 +48,18 @@ export class Graph {
 
         this.graph.addListener(window.mxEvent.CLICK, (_sender, evt) => {
             const cell = evt.getProperty('cell');
-
-            if (cell != null && cell.pytheasElement) {
-                console.log('click: ', cell);
+            console.log('click: ', cell);
+            if (cell && cell.style === 'column') {
+                console.log('click main : ', cell);
                 this.graphElementSelected.emit(cell.pytheasElement);
+            }
+            if (cell && (cell.style === 'property' || cell.style === 'method')) {
+                console.log('click submain : ', cell);
+                this.graphSubElementSelected.emit({
+                    value: cell.value,
+                    type: cell.style,
+                    element: cell.pytheasElement
+                });
             }
         });
 
@@ -69,7 +80,7 @@ export class Graph {
 
     buildGraphBlocks() {
         console.log('buildGraphBlocks: ', this.data);
-        this.buildMainGraphBlock(this.data);
+        this.buildMainGraphBlock(this.data, true);
 
         this.data.relations.forEach(relation => {
             if (relation.type === 'in') {
@@ -133,8 +144,9 @@ export class Graph {
         });
     }
 
-    buildMainGraphBlock(element) {
-        const mxGraphVertexElement = this.graph.insertVertex(this.graph.getDefaultParent(), null, element.name, 0, 0, 200, 200, 'column');
+    buildMainGraphBlock(element, mainSelection?) {
+        const mxGraphVertexElementStyle = mainSelection ? 'columnSelection' : 'column';
+        const mxGraphVertexElement = this.graph.insertVertex(this.graph.getDefaultParent(), null, element.name, 0, 0, 200, 200, mxGraphVertexElementStyle);
         element.mxElement = mxGraphVertexElement;
         mxGraphVertexElement.pytheasElement = element;
 
@@ -158,6 +170,7 @@ export class Graph {
                     30,
                     publicElement.kind
                 );
+                mxGraphVertexElementPublicChild.pytheasElement = element;
                 // Resize it
                 const mxGraphVertexElementPublicChildGeometry = mxGraphVertexElementPublicChild.getGeometry();
                 const mxGraphVertexElementPublicChildPreferredGeometry = this.graph.getPreferredSizeForCell(mxGraphVertexElementPublicChild);
@@ -177,11 +190,11 @@ export class Graph {
             const mxGraphVertexElementPrivate = this.graph.insertVertex(mxGraphVertexElement, null, 'Private', 0, 0, 80, 30, 'whiteColumn');
             element.mxPrivateElement = mxGraphVertexElementPrivate;
 
-            const mxGraphVertexElementPublicGeometry = mxGraphVertexElementPrivate.getGeometry();
+            const mxGraphVertexElementPrivateGeometry = mxGraphVertexElementPrivate.getGeometry();
 
             let maxWidthForElements = 0;
             element.privateElements.forEach(privateElement => {
-                const mxGraphVertexElementPublicChild = this.graph.insertVertex(
+                const mxGraphVertexElementPrivateChild = this.graph.insertVertex(
                     mxGraphVertexElementPrivate,
                     null,
                     privateElement.name,
@@ -191,20 +204,21 @@ export class Graph {
                     30,
                     privateElement.kind
                 );
+                mxGraphVertexElementPrivateChild.pytheasElement = element;
                 // Resize it
-                const mxGraphVertexElementPublicChildGeometry = mxGraphVertexElementPublicChild.getGeometry();
-                const mxGraphVertexElementPublicChildPreferredGeometry = this.graph.getPreferredSizeForCell(mxGraphVertexElementPublicChild);
+                const mxGraphVertexElementPrivateChildGeometry = mxGraphVertexElementPrivateChild.getGeometry();
+                const mxGraphVertexElementPrivateChildPreferredGeometry = this.graph.getPreferredSizeForCell(mxGraphVertexElementPrivateChild);
 
-                if (mxGraphVertexElementPublicChildPreferredGeometry.width > maxWidthForElements) {
-                    maxWidthForElements = mxGraphVertexElementPublicChildPreferredGeometry.width;
+                if (mxGraphVertexElementPrivateChildPreferredGeometry.width > maxWidthForElements) {
+                    maxWidthForElements = mxGraphVertexElementPrivateChildPreferredGeometry.width;
                 }
-                mxGraphVertexElementPublicChildGeometry.width = mxGraphVertexElementPublicChildPreferredGeometry.width + MARGIN_CELL;
+                mxGraphVertexElementPrivateChildGeometry.width = mxGraphVertexElementPrivateChildPreferredGeometry.width + MARGIN_CELL;
             });
 
             // Resize private column
-            mxGraphVertexElementPublicGeometry.width = maxWidthForElements + MARGIN_CELL * 2;
-            if (mxGraphVertexElementPublicGeometry.width > mxGraphVertexElementGeometry.width) {
-                mxGraphVertexElementGeometry.width = mxGraphVertexElementPublicGeometry.width + MARGIN_CELL;
+            mxGraphVertexElementPrivateGeometry.width = maxWidthForElements + MARGIN_CELL * 2;
+            if (mxGraphVertexElementPrivateGeometry.width > mxGraphVertexElementGeometry.width) {
+                mxGraphVertexElementGeometry.width = mxGraphVertexElementPrivateGeometry.width + MARGIN_CELL;
             }
         }
 
@@ -288,6 +302,7 @@ export class Graph {
                     }
                 }
             },
+            mouseUp: function(sender, me) {},
             dragEnter(evt, state) {
                 if (state != null) {
                     this.previousStyle = state.style;
@@ -349,6 +364,10 @@ export class Graph {
         styleColumn[window.mxConstants.STYLE_FOLDABLE] = false;
         styleColumn[window.mxConstants.STYLE_FONTSTYLE] = window.mxConstants.FONT_BOLD;
         this.graph.getStylesheet().putCellStyle('column', styleColumn);
+
+        const styleColumnSelection = Object.assign({}, styleColumn);
+        styleColumnSelection[window.mxConstants.STYLE_STROKECOLOR] = '#454545';
+        this.graph.getStylesheet().putCellStyle('columnSelection', styleColumnSelection);
 
         const styleWhiteColumnGroup = [];
         styleWhiteColumnGroup[window.mxConstants.STYLE_FOLDABLE] = false;

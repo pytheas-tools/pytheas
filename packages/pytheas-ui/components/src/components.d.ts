@@ -53,6 +53,7 @@ export namespace Components {
   interface PyGraphAttributes extends StencilHTMLAttributes {
     'data'?: any;
     'onGraphElementSelected'?: (event: CustomEvent) => void;
+    'onGraphSubElementSelected'?: (event: CustomEvent) => void;
   }
 
   interface PyNavigationBar {

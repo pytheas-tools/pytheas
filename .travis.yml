@@ -33,7 +33,6 @@ script:
     - npm run test:wc
     - echo -e "\n**********\nBUILDING UNIT TESTING DEPENDENCIES\n**********\n"
     - npm run build:dev:test
-    - ls -al output/scripts
     - echo -e "\n**********\nUNIT TESTING APP\n**********\n"
     - npm run test:unit
     - echo -e "\n**********\nE2E TESTING APP\n**********\n"

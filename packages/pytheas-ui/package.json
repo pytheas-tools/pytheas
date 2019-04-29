@@ -14,7 +14,7 @@
     "homepage": "https://github.com/vogloblinsky/pytheas#readme",
     "scripts": {
         "---DEVELOPMENT---": "",
-        "prestart": "npm run clean-output && mkdir output",
+        "prestart": "npm run clean-output && mkdir output && mkdir output/scripts",
         "start": "npm-run-all -p serve watch build-browser-dependencies copy-demos",
         "serve": "live-server output --port=8383 --host=localhost --quiet",
         "watch": "npm-watch",

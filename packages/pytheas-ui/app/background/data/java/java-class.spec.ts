@@ -6,7 +6,7 @@ import { simpleClass } from './java-class.fixture';
 
 const { javaast } = <any>window;
 
-describe('should create an instance of JavaClass', () => {
+describe.skip('should create an instance of JavaClass', () => {
     const simpleClassAST = javaast.parse(simpleClass);
     const simpleClassASTClassNode = JavaParser.getClassDeclarations(simpleClassAST)[0];
 

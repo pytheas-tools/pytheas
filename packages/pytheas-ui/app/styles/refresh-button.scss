@@ -6,6 +6,7 @@
     border-radius: 5px;
     display: none;
     align-items: center;
+    z-index: 10;
 
     .refresh-toaster__refresh-button,
     .refresh-toaster__close-button {

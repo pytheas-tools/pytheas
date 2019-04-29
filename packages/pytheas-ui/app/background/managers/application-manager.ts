@@ -39,7 +39,7 @@ class ApplicationSingleton {
         StatusbarManager.init();
         DemosManager.init();
         ContextManager.init();
-        // PWAManager.init();
+        PWAManager.init();
 
         pubsub.subscribe(EVENTS.FILES_PARSED, parsedFiles => {
             this.filesReady = true;

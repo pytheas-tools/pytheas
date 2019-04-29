@@ -1,5 +1,6 @@
-import { getExtension } from '../../utils';
+import { getExtension, MESSAGES } from '../../utils';
 import { isFileSupported } from '../files/files.utils';
+import { StatusbarManager } from './statusbar-manager';
 
 /**
  * Manage demos
@@ -39,6 +40,9 @@ class DemosSingleton {
         const filesToResolve = this.demosData[project];
         let i = 0;
         const len = filesToResolve.length;
+
+        StatusbarManager.displayMessage(MESSAGES.DOWNLOADING_DEMOS, true);
+
         return new Promise((resolve, reject) => {
             const resolveFile = (): Promise<any> => {
                 return fetch(`./demos/${project}/${filesToResolve[i]}`)

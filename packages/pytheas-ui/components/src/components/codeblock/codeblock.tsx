@@ -69,6 +69,27 @@ export class CodeBlock {
 
     @Method()
     highlight(range) {
+        this._highlight(range);
+    }
+
+    @Method()
+    highlights(ranges) {
+        ranges.forEach(range => {
+            this._highlight(range);
+        });
+    }
+
+    @Method()
+    unHighlight() {
+        // this.codeMirrorEditor.setValue(this.code);
+        console.log(this.codeMirrorEditor.getAllMarks());
+        this.codeMirrorEditor.getAllMarks().forEach(mark => {
+            mark.clear();
+        });
+        console.log(this.codeMirrorEditor.getAllMarks());
+    }
+
+    _highlight(range) {
         const positionFromIndex = (doc, index) => {
             return doc.posFromIndex(index);
         };

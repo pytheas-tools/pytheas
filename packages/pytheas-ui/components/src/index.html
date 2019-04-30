@@ -21,29 +21,64 @@
 
 <body>
 
-  <py-codeblock codemirror-path="/libs/codemirror.min.js" language="typescript"></py-codeblock>
+  <py-codeblock codemirror-path="/libs/codemirror.min.js" language="typescript" filename="Stencil" code="import { Player } from './player/player';
+import { Rule } from './rule/rule';
+import { Settings } from './settings';
+export class Game {
+    player1: Player;
+    public player2: Player;
+    players: Player[];
+    morePlayers: Array<Player>;
+    private rule: Rule;
+    private settings: Settings = new Settings();
+    constructor() {
+        this.start();
+    }
+    public start() {
+        this.player1 = new Player('Eric');
+        this.player2 = new Player('Henry');
+        this.rule = new Rule('An important rule');
+        this.clearUI();
+    }
+    private clearUI() {}
+    simpleMethod() {
+        this.clearUI();
+    }
+}"></py-codeblock>
 
-  <py-graph></py-graph>
+  <!--<py-graph></py-graph>-->
 
   <script>
-    /*let codeBlock = document.querySelector('py-codeblock');
+    let codeBlock = document.querySelector('py-codeblock');
 
     console.dir(codeBlock);
 
     codeBlock.componentOnReady().then(() => {
+      console.log('codeBlock.componentOnReady');
 
-      codeBlock.highlight([142, 149]);
+      setTimeout(() => {
+        codeBlock.highlight([141, 148]);
 
-      let codeMirrorEditor = codeBlock.codeMirrorEditor;
-      console.dir(codeMirrorEditor);
+        codeBlock.highlights([
+          [169, 176],
+          [439, 446]
+        ]);
 
-      console.log(codeBlock.querySelectorAll('.cm-property'));
+        let codeMirrorEditor = codeBlock.codeMirrorEditor;
+        console.dir(codeMirrorEditor);
 
-      codeBlock.addEventListener('tokenHovered', (data) => {
-        console.log(data.detail);
-      });
+        console.log(codeBlock.querySelectorAll('.cm-property'));
 
-    });*/
+        codeBlock.addEventListener('tokenHovered', (data) => {
+          console.log(data.detail);
+        });
+      }, 1000);
+
+      setTimeout(() => {
+        codeBlock.unHighlight();
+      }, 3000);
+
+    });
     var MainClass = {
       "id": "jnsnh17v",
       "publicElements": [{
@@ -258,7 +293,7 @@
       from: MainClass,
       to: GameClass
     }]
-    document.querySelector('py-graph').data = GameClass;
+    // document.querySelector('py-graph').data = GameClass;
   </script>
 
 

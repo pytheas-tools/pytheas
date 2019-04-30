@@ -21,8 +21,10 @@ export namespace Components {
     'codemirrorPath': string;
     'filename': string;
     'highlight': (range: any) => void;
+    'highlights': (ranges: any) => void;
     'language': string;
     'theme': string;
+    'unHighlight': () => void;
     'updateTheme': (theme: string) => void;
   }
   interface PyCodeblockAttributes extends StencilHTMLAttributes {

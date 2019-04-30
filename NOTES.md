@@ -40,6 +40,8 @@ https://play.nativescript.org/
 
 https://stackblitz.com/
 
+https://codesandbox.io/s/svelte?from-embed
+
 ## Ressources
 
 https://blog.dcpos.ch/how-to-make-your-electron-app-sexy

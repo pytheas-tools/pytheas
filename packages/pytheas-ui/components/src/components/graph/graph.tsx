@@ -9,6 +9,8 @@ declare global {
         mxStackLayout: any;
         mxEvent: any;
         mxUtils: any;
+        mxLoadResources: any;
+        mxBasePath: any;
     }
 }
 
@@ -21,6 +23,9 @@ const MARGIN_CELL = 20;
 export class Graph {
     @Prop()
     data: any;
+
+    @Prop()
+    mxclientPath: string;
 
     @Element()
     graphElement: HTMLElement;
@@ -36,11 +41,39 @@ export class Graph {
     styleWhiteColumnGroup;
 
     componentWillLoad() {
-        console.log('Graph is about to be rendered..: ', this.data);
+        console.log('Graph is about to be rendered..: ', this.data, this.mxclientPath);
     }
 
     componentDidLoad() {
         console.log('Graph is rendered : ', this);
+        if (window['mxGraph']) {
+            this.bootstrapGraph();
+        } else {
+            this.injectGraphDependency().then(() => {
+                this.bootstrapGraph();
+            });
+        }
+    }
+
+    injectGraphDependency() {
+        return new Promise((resolveInjection, rejectInjection) => {
+            const script = document.createElement('script');
+            script.setAttribute('src', this.mxclientPath + '/mxClient.min.js');
+            script.setAttribute('type', 'text/javascript');
+            script.onload = () => {
+                resolveInjection();
+            };
+            script.onerror = () => {
+                rejectInjection();
+            };
+            // Configure mxClient loading
+            window['mxLoadResources'] = false;
+            window['mxBasePath'] = this.mxclientPath;
+            document.body.appendChild(script);
+        });
+    }
+
+    async bootstrapGraph() {
         this.graph = new window.mxGraph(this.graphElement.querySelector('#graphContainer'));
         console.log(this.graph);
         this.setupGraphStyles();

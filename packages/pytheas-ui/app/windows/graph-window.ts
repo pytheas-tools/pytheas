@@ -119,6 +119,7 @@ class GraphWindow {
 
     addGraph(element) {
         this.$graph = document.createElement('py-graph');
+        this.$graph.setAttribute('mxclient-path', '/scripts/mxgraph');
         this.$graph.data = element;
         this.$graph.addEventListener(EVENTS.GRAPH_ELEMENT_SELECTED, this.onGraphElementSelected.bind(this));
         this.$graph.addEventListener(EVENTS.GRAPH_SUBELEMENT_SELECTED, this.onGraphSubElementSelected.bind(this));

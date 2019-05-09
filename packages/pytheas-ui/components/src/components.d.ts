@@ -51,9 +51,11 @@ export namespace Components {
 
   interface PyGraph {
     'data': any;
+    'mxclientPath': string;
   }
   interface PyGraphAttributes extends StencilHTMLAttributes {
     'data'?: any;
+    'mxclientPath'?: string;
     'onGraphElementSelected'?: (event: CustomEvent) => void;
     'onGraphSubElementSelected'?: (event: CustomEvent) => void;
   }

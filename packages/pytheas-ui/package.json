@@ -24,7 +24,7 @@
         "compile-dragmock": "npx rollup -c test/vendors/drag-mock/rollup.config.js",
         "concat-app-dragmock": "npx concat -o output/scripts/app_es6.js output/scripts/app_es6.js output/scripts/dragmock.js test/mock-drag.js",
         "---SASS---": "",
-        "compile-scss": "npx node-sass app/styles/app.scss output/styles/app.css",
+        "compile-scss": "npx node-sass src/styles/app.scss output/styles/app.css",
         "---TYPESCRIPT---": "",
         "compile-ts": "NODE_ENV=development npx rollup -c rollup-app.config.js",
         "compile-ts:prod": "NODE_ENV=production npx rollup -c rollup-app.config.js",
@@ -36,9 +36,9 @@
         "minify-css": "npx uglifycss output/styles/app.css --output output/styles/app.css",
         "---COPIES---": "",
         "copy-all": "run-s copy-index replace-ionicons copy-assets",
-        "copy-index": "npx copyfiles -u 1 -a app/index.html app/manifest.json app/favicon.ico output/",
+        "copy-index": "npx copyfiles -u 1 -a src/index.html src/manifest.json src/favicon.ico output/",
         "postcopy-index": "node scripts/update-version-during-build.js",
-        "copy-assets": "npx rimraf output/assets && mkdir output/assets && cp -R app/assets/* output/assets",
+        "copy-assets": "npx rimraf output/assets && mkdir output/assets && cp -R src/assets/* output/assets",
         "replace-ionicons": "replace \"libs/ionicons/ionicons.js\" \"https://unpkg.com/ionicons@4.4.4/dist/ionicons.js\" output/index.html output/index.html",
         "---WEB-COMPONENTS---": "",
         "build-wc": "stencil build --config ./components/stencil.config.ts && npm run copy-wc",
@@ -70,7 +70,7 @@
         "build:electron": "",
         "---PWA---": "",
         "workbox": "npx workbox generateSW workbox-config.js",
-        "postworkbox": "npx concat -o output/sw.js output/sw.js app/sw.js",
+        "postworkbox": "npx concat -o output/sw.js output/sw.js src/sw.js",
         "---DEMOS---": "",
         "precopy-demos": "mkdir output/demos && mkdir output/demos/typescript && mkdir output/demos/javascript",
         "copy-demos": "run-p copy-demos-typescript copy-demos-javascript",
@@ -78,10 +78,10 @@
         "copy-demos-typescript": "cp -r ../../test-sources/typescript/ output/demos/typescript",
         "copy-demos-javascript": "cp -r ../../test-sources/es6/ output/demos/javascript",
         "---DOCUMENTATION---": "",
-        "doc:code": "npx typedoc --out code-documentation --module commonjs --ignoreCompilerErrors app",
+        "doc:code": "npx typedoc --out code-documentation --module commonjs --ignoreCompilerErrors src",
         "doc:code:serve": "live-server code-documentation",
         "---CODEQUALITY---": "",
-        "lint": "npx tslint -p tsconfig.json -c tslint.json 'app/**/*.ts'",
+        "lint": "npx tslint -p tsconfig.json -c tslint.json 'src/**/*.ts'",
         "source-explore": "npx source-map-explorer --html output/scripts/app.js > output/tree.html",
         "---TESTS---": "",
         "test:e2e": "run-p --race serve test:testcafe:remote",
@@ -89,7 +89,7 @@
         "test:e2e:saucelabs": "run-p --race serve test:testcafe:saucelabs",
         "test:testcafe:local": "npx testcafe chromium test/testcafe/test.js",
         "test:testcafe:remote": "npx testcafe chrome,firefox test/testcafe/test.js",
-        "test:testcafe:saucelabs": "npx testcafe \"saucelabs:Chrome@48.0:Linux\" test/testcafe/test.js --app \"http-server output -p 8383\"",
+        "test:testcafe:saucelabs": "npx testcafe \"saucelabs:Chrome@48.0:Linux\" test/testcafe/test.js --src \"http-server output -p 8383\"",
         "test:unit": "jest --config jest.config.js --coverage",
         "test:wc": "jest --config jest.wc.config.js --coverage"
     },
@@ -102,19 +102,19 @@
         },
         "compile-ts": {
             "patterns": [
-                "app"
+                "src"
             ],
             "extensions": "ts"
         },
         "copy-all": {
             "patterns": [
-                "app"
+                "src"
             ],
             "extensions": "html"
         },
         "compile-scss": {
             "patterns": [
-                "app"
+                "src"
             ],
             "extensions": "scss"
         }

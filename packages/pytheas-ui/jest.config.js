@@ -2,17 +2,17 @@ let tsJest = require('ts-jest/utils');
 let config = tsJest.createJestPreset();
 
 config.testEnvironment = 'jsdom';
-config.testMatch = ['**/app/**/*.spec.ts'];
+config.testMatch = ['**/src/**/*.spec.ts'];
 
 config.globals = {
     'ts-jest': {
         diagnostics: false
     }
 };
-config.collectCoverageFrom = ['**/app/**/*.ts', '!**/test'];
+config.collectCoverageFrom = ['**/src/**/*.ts', '!**/test'];
 
 config.setupFiles = ['./test/setup-jest.js'];
 
-config.coveragePathIgnorePatterns = ['./app/app.ts', './app/web-components.ts', './app/utils/events.ts', './app/utils/pubsub.ts'];
+config.coveragePathIgnorePatterns = ['./src/app.ts', './src/web-components.ts', './src/utils/events.ts', './src/utils/pubsub.ts'];
 
 module.exports = config;

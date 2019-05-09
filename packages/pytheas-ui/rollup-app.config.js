@@ -6,7 +6,7 @@ import globals from 'rollup-plugin-node-globals';
 
 const createConfig = (type) => {
     let MAIN_CONFIG = {
-        input: './app/app.ts',
+        input: './src/app.ts',
         output: {
             file: (process.env.NODE_ENV && process.env.NODE_ENV === 'development') ? 'output/scripts/app.js' : 'output/scripts/app_0.js',
             format: 'cjs',

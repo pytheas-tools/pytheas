@@ -45,7 +45,7 @@
         "build-wc-prod": "NODE_ENV=production stencil build --config ./components/stencil.config.ts && npm run copy-wc",
         "copy-wc": "npx rimraf output/web-components && mkdir output/web-components && cp -R ./components/dist output/web-components",
         "start-wc": "stencil build --dev --watch --serve --es5 --config ./components/stencil.config.ts",
-        "---BUILD---": "",
+        "---BUILD-UTILS--": "",
         "clean-output": "npx rimraf output",
         "update-context:vscode": "replace \"__PYTHEAS_CONTEXT__\" \"vscode\" output/index.html output/index.html",
         "update-context:browser": "replace \"__PYTHEAS_CONTEXT__\" \"web\" output/index.html output/index.html",

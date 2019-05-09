@@ -18,8 +18,8 @@ class GraphWindow {
 
     $graphContainer: HTMLElement;
     $graphContainerZoomable: HTMLElement;
-    $graph: HTMLElement;
-    $graphOverview: HTMLElement;
+    $graph: HTMLPyGraphElement;
+    $graphOverview: HTMLPyGraphOverviewElement;
 
     panZoomInstance: any;
     panZoomMessage: HTMLElement;

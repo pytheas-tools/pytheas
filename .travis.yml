@@ -1,7 +1,8 @@
 os:
-    - osx
+    - linux
 language: node_js
 node_js: stable
+dist: trusty
 sudo: required
 addons:
     firefox: latest-beta
@@ -10,16 +11,12 @@ addons:
             - google-chrome
         packages:
             - google-chrome-stable fluxbox
-before_script:
-    - export DISPLAY=:99.0
-    - sh -e /etc/init.d/xvfb start
-    - sleep 3
-    - fluxbox >/dev/null 2>&1 &
 before_install:
     - stty cols 80
+    - yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
     - brew update
+    - brew options graphviz
     - brew install graphviz
-
 install:
     - npm install npm@latest -g
     - echo -e "\n**********\nBUILDING STATIC DEPENDENCIES\n**********\n"
@@ -28,6 +25,11 @@ install:
     - npm run build:prod
     - cd ../pytheas-ui
     - npm ci
+before_script:
+    - export DISPLAY=:99.0
+    - sh -e /etc/init.d/xvfb start
+    - sleep 3
+    - fluxbox >/dev/null 2>&1 &
 script:
     - mkdir output && mkdir output/scripts
     - npm run build-browser-dependencies

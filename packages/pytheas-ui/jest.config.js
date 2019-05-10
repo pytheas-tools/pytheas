@@ -2,7 +2,7 @@ let tsJest = require('ts-jest/utils');
 let config = tsJest.createJestPreset();
 
 config.testEnvironment = 'jsdom';
-config.testMatch = ['**/src/**/*.spec.ts'];
+config.testMatch = ['<rootDir>/src/**/*.spec.ts'];
 
 config.globals = {
     'ts-jest': {

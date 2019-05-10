@@ -15,8 +15,7 @@ export default {
     plugins: [
         rollupTypescript(),
         nodeResolve({
-            jsnext: true,
-            main: true
+            mainFields: ['module', 'main']
         }),
         commonjs()
         /*,

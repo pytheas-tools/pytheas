@@ -40,7 +40,7 @@ class GraphWindow {
         this.initPanzoom();
 
         pubsub.subscribe(EVENTS.INIT_VIEW, data => {
-            this.clearWindow();
+            this.resetWindow();
             this.displayInitView();
         });
 
@@ -50,7 +50,7 @@ class GraphWindow {
 
         pubsub.subscribe(EVENTS.SOMETHING_SELECTED, selectedElement => {
             // console.log('GraphWindow something selected, display graph: ', selectedElement);
-            this.clearWindow();
+            this.resetWindow();
             this.addGraph(selectedElement);
             ContextmenuManager.updateHost();
         });
@@ -60,7 +60,7 @@ class GraphWindow {
 
             if (item) {
                 if (item.type === 'overview' && !item.subtype) {
-                    this.clearWindow();
+                    this.resetWindow();
                     this.displayInitView();
                 } else if (item.type === 'overview' && item.subtype) {
                     if (this.$graphOverview) {
@@ -69,6 +69,12 @@ class GraphWindow {
                 }
             }
         });
+    }
+
+    resetWindow() {
+        this.clearWindow();
+        this.panZoomInstance.dispose();
+        this.initPanzoom();
     }
 
     saveasimage() {

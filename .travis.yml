@@ -14,6 +14,8 @@ addons:
 before_install:
     - stty cols 80
     - yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+    - echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >>~/.profile
+    - eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
     - brew update
     - brew options graphviz
     - brew install graphviz

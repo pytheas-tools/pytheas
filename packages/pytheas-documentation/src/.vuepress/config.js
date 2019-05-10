@@ -14,6 +14,7 @@ const sidebar = [
 ]
 module.exports = {
     title: 'Pytheas',
+    base: '/pytheas/',
     description: 'Architectural & contributors documentation',
     themeConfig: {
         logo: '/logo.png',

@@ -78,7 +78,7 @@
         "copy-demos-typescript": "cp -r ../../test-sources/typescript/ output/demos/typescript",
         "copy-demos-javascript": "cp -r ../../test-sources/es6/ output/demos/javascript",
         "---DOCUMENTATION---": "",
-        "doc:code": "npx typedoc --out code-documentation --module commonjs --ignoreCompilerErrors src",
+        "doc:code": "npx typedoc --out code-documentation --mode file --module commonjs --ignoreCompilerErrors src",
         "doc:code:serve": "live-server code-documentation",
         "---CODEQUALITY---": "",
         "lint": "npx tslint -p tsconfig.json -c tslint.json 'src/**/*.ts'",

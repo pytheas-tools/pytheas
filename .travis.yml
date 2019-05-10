@@ -40,7 +40,11 @@ script:
     - echo -e "\n**********\nBUILD PROD APP\n**********\n"
     - npm run build
     - echo -e "\n**********\nBUILD DOC\n**********\n"
-    - cd ../pytheas-documentation && npm run madge && npm run docs:build && cp -R src/.vuepress/dist ../pytheas-ui/output/contributors-documentation
+    - cd ../pytheas-documentation
+    - npm ci
+    - npm run madge
+    - npm run docs:build
+    - cp -R src/.vuepress/dist ../pytheas-ui/output/contributors-documentation
     - cd ../pytheas-ui
     - npm run doc:code
     - cp -R code-documentation ./output/code-documentation

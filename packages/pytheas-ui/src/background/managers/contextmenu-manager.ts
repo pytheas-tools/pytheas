@@ -63,7 +63,7 @@ class ContextmenuSingleton {
     updateHost() {
         const graphContainer = document.querySelector('.graph-container');
         if (graphContainer && document.querySelector('py-graph')) {
-            graphContainer.addEventListener('contextmenu', () => {
+            graphContainer.addEventListener('contextmenu', event => {
                 /** COPYRIGHT https://github.com/turbo/justContext.js */
                 Array.from(document.querySelectorAll('.jctx')).forEach((k, i) => {
                     k.style.display = 'none';

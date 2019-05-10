@@ -17,6 +17,7 @@ before_script:
     - fluxbox >/dev/null 2>&1 &
 before_install:
     - stty cols 80
+    - brew update
     - brew install graphviz --with-gts
 
 install:

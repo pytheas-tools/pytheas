@@ -6,7 +6,7 @@
     "display": "fullscreen",
     "orientation": "landscape",
     "Scope": "/",
-    "start_url": "/",
+    "start_url": "./",
     "icons": [{
             "src": "assets/icons/icon-72x72.png",
             "sizes": "72x72",

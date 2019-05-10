@@ -18,7 +18,18 @@ before_script:
     - fluxbox >/dev/null 2>&1 &
 before_install:
     - stty cols 80
-    - sudo apt-get install graphviz
+    - sudo apt purge graphviz
+    - sudo apt install libgts-dev
+    - sudo pkg-config --libs gts
+    - sudo pkg-config --cflags gts
+    - sudo curl https://graphviz.gitlab.io/pub/graphviz/stable/SOURCES/graphviz.tar.gz --output graphviz.tar.gz
+    - ls
+    - sudo tar -xvf graphviz.tar.gz
+    - cd graphviz
+    - sudo ./configure --with-gts
+    - sudo make
+    - sudo make install
+
 install:
     - npm install npm@latest -g
     - echo -e "\n**********\nBUILDING STATIC DEPENDENCIES\n**********\n"

@@ -25,7 +25,7 @@ before_install:
     - sudo curl https://graphviz.gitlab.io/pub/graphviz/stable/SOURCES/graphviz.tar.gz --output graphviz.tar.gz
     - ls
     - sudo tar -xvf graphviz.tar.gz
-    - cd graphviz
+    - cd graphviz-2.40.1
     - sudo ./configure --with-gts
     - sudo make
     - sudo make install

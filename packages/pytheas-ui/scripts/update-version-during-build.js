@@ -4,6 +4,6 @@ const pkg = require('../package.json');
 
 replace({
     regex: '__VERSION__',
-    replacement: `${pkg.version} - ${dayjs().format('DD-MM-YYYY HH:mm')}`,
+    replacement: `${pkg.version} • ${dayjs().format('DD-MM-YYYY HH:mm')}`,
     paths: ['./output/index.html']
 });

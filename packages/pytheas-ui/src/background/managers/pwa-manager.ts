@@ -13,6 +13,9 @@ class PWASingleton {
 
     init() {
         if ('serviceWorker' in navigator) {
+            if (window.location.host.indexOf('localhost') !== -1) {
+                return;
+            }
             function showRefreshUI(registration) {
                 const $refreshToaster = document.querySelector('.refresh-toaster');
                 $refreshToaster.style.display = 'flex';

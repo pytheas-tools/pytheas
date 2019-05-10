@@ -27,7 +27,7 @@ before_install:
     - sudo tar -xf graphviz.tar.gz
     - cd graphviz-2.40.1
     - sudo ./configure --with-gts
-    - sudo make >/dev/null || sudo make
+    - sudo make 2>&1
     - sudo make install -s
 
 install:

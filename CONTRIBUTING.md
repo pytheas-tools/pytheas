@@ -50,13 +50,13 @@ We will be insisting on a minimal reproduce scenario in order to save maintainer
 
 Unfortunately we are not able to investigate / fix bugs without a minimal reproduction, so if we don't hear back from you we are going to close an issue that don't have enough info to be reproduced.
 
-You can file new issues by filling out our [new issue form](https://github.com/vogloblinsky/pytheas/issues/new).
+You can file new issues by filling out our [new issue form](https://github.com/pytheas-tools/pytheas/issues/new).
 
 ### <a name="submit-pr"></a> Submitting a Pull Request (PR)
 
 Before you submit your Pull Request (PR) consider the following guidelines:
 
--   Search [GitHub](https://github.com/vogloblinsky/pytheas/pulls) for an open or closed PR
+-   Search [GitHub](https://github.com/pytheas-tools/pytheas/pulls) for an open or closed PR
     that relates to your submission. You don't want to duplicate effort.
 -   Make your changes in a new git branch:
 
@@ -220,5 +220,5 @@ A detailed explanation can be found in this [document][commit-message-format].
 [coc]: https://github.com/angular/code-of-conduct/blob/master/CODE_OF_CONDUCT.md
 [commit-message-format]: https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#
 [dev-doc]: https://github.com/angular/angular-cli#development-hints-for-working-on-angular-cli
-[github]: https://github.com/vogloblinsky/pytheas
+[github]: https://github.com/pytheas-tools/pytheas
 [js-style-guide]: https://google.github.io/styleguide/jsguide.html

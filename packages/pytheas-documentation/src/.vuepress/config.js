@@ -14,7 +14,7 @@ const sidebar = [
 ]
 module.exports = {
     title: 'Pytheas',
-    description: 'Architectural documentation',
+    description: 'Architectural & contributors documentation',
     themeConfig: {
         logo: '/logo.png',
         sidebar: {
@@ -32,7 +32,7 @@ module.exports = {
                 link: '/guide/'
             }
         ],
-        repo: 'vogloblinsky/pytheas',
+        repo: 'pytheas-tools/pytheas',
         displayAllHeaders: false,
         docsDir: 'packages/pytheas-documentation',
         docsBranch: 'develop',
@@ -40,5 +40,6 @@ module.exports = {
         editLinkText: 'Edit Page',
         lastUpdated: 'Last Updated',
         sidebarDepth: 2
-    }
+    },
+    plugins: ['@vuepress/medium-zoom']
 }

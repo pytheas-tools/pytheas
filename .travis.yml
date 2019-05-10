@@ -39,6 +39,11 @@ script:
     - npm run test:e2e
     - echo -e "\n**********\nBUILD PROD APP\n**********\n"
     - npm run build
+    - echo -e "\n**********\nBUILD DOC\n**********\n"
+    - cd ../pytheas-documentation && npm run madge && npm run docs:build && cp -R src/.vuepress/dist ../pytheas-ui/output/contributors-documentation
+    - cd ../pytheas-ui
+    - npm run doc:code
+    - cp -R code-documentation ./output/code-documentation
     - echo -e "\n**********\nDEPLOY\n**********\n"
     - bash ./deploy.sh
 branches:

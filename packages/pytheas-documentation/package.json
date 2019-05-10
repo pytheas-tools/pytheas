@@ -7,7 +7,7 @@
     "start": "npm run docs:dev",
     "docs:dev": "vuepress dev src",
     "docs:build": "vuepress build src",
-    "madge": "npx madge --warning -i src/.vuepress/public/madge.png ../pytheas-ui/app/**/*.ts"
+    "madge": "npx madge --warning -i src/.vuepress/public/madge.png ../pytheas-ui/src/**/*.ts"
   },
   "repository": {
     "type": "git",
@@ -20,8 +20,9 @@
   },
   "homepage": "https://github.com/vogloblinsky/pytheas#readme",
   "devDependencies": {
+    "@vuepress/plugin-medium-zoom": "^1.0.0-alpha.47",
     "madge": "^3.4.4",
-    "vuepress": "^0.14.10",
-    "webpack-dev-middleware": "^3.6.0"
+    "vuepress": "^0.14.11",
+    "webpack-dev-middleware": "^3.6.2"
   }
 }

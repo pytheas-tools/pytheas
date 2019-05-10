@@ -2,21 +2,17 @@
 
 ## Main parts
 
--   UI with vanilla JS + webcomponents
+-   UI : vanilla JS + webcomponents
 
--   CSS with BEM methodology http://getbem.com/
+-   CSS : with BEM methodology http://getbem.com/
 
--   graph : HTML + CSS + JSPlumb libray for network rendering (https://jsplumbtoolkit.com/)
+-   Graph view : mxGraph https://github.com/jgraph/mxgraph
 
-    -   TODO : validate global layout with css grid
+-   Codebase view : codemirror
 
--   codebase view : codemirror
+-   Codebase parsing : ts-query
 
-TODO : loaded by custom WC, like https://github.com/atomicojs/atom-google-map/blob/master/src/import-google-map.js
-
--   codebase parsing : ts-simple-ast
-
--   dependency tree : start with https://github.com/dependents/node-dependency-tree ?
+-   Dependency tree : start with https://github.com/dependents/node-dependency-tree ?
 
 https://github.com/dependents/node-precinct
 
@@ -49,51 +45,3 @@ UML TypeScript :
 https://github.com/joaompneves/tsviz
 
 https://github.com/joaompneves/tsviz/blob/master/src/ts-analyser.ts
-
--   graph
-
-https://github.com/anvaka/VivaGraphJS : dur de faire un noeud custom
-
-https://github.com/HelikarLab/ccNetViz : dur de faire un noeud custom
-
-http://visjs.org/network_examples.html : dur de faire un noeud custom
-
-https://github.com/jacomyal/sigma.js : dur de faire un noeud custom
-
-https://ialab.it.monash.edu/webcola/
-https://ialab.it.monash.edu/webcola/examples/SucroseBreakdown.html
-
-https://github.com/cytoscape/cytoscape.js : setup trop compliqué
-https://github.com/cytoscape/cytoscape.js-klay
-https://github.com/OpenKieler/elkjs
-https://github.com/eclipse/sprotty-layout
-
-https://github.com/jgraph/mxgraph : dur de gérer les tailles
-
-https://github.com/bpmn-io/diagram-js | pas de doc
-
-https://libraries.io/search?keywords=diagram&languages=JavaScript
-
-https://github.com/jgraph/mxgraph : pb de taille
-
-## Hover statements codemirror
-
-https://github.com/angelozerr/CodeMirror-Extension
-
-http://localhost/TMP/pytheas/CodeMirror-Extension/demo/token-hover.html
-
-https://discuss.codemirror.net/t/hover-over-symbol-idea/245
-
-## Drag'n'drop
-
-https://www.html5rocks.com/en/tutorials/file/filesystem
-
-https://github.com/leonadler/drag-and-drop-across-browsers
-
-## Dependencies graph tools
-
-https://github.com/dyatko/arkit
-
-https://github.com/sverweij/dependency-cruiser
-
-https://github.com/auchenberg/dependo

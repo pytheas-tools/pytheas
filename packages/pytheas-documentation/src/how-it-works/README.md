@@ -2,9 +2,10 @@
 
 ## Loading Pytheas
 
-The application is splited in one main JavaScript file, `app.js` or `app_es6.js`, and severals vendors files :
+The application is splitted in one main JavaScript file, `app.js` or `app_es6.js`, and severals vendors files :
 
--   codemirror as a dependency for codeblock Web Component
+-   codemirror as a dependency for codeblock Web Component, and lazy loaded by the WC
+-   mxgraph as a dependency for Graph Web Component, and lazy loaded by the WC
 -   ionicons
 
 The last JavaScript files loaded at runtime are parser for files :

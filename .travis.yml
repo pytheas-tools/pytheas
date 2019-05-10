@@ -18,7 +18,7 @@ before_script:
 before_install:
     - stty cols 80
     - brew update
-    - brew install graphviz --with-gts
+    - brew install graphviz
 
 install:
     - npm install npm@latest -g

@@ -27,8 +27,8 @@ before_install:
     - sudo tar -xvf graphviz.tar.gz
     - cd graphviz-2.40.1
     - sudo ./configure --with-gts
-    - sudo make
-    - sudo make install
+    - sudo make -s
+    - sudo make install -s
 
 install:
     - npm install npm@latest -g

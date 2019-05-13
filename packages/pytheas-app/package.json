@@ -18,7 +18,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+ssh://git@github.com/vogloblinsky/pytheas.git"
+        "url": "git+ssh://git@github.com/pytheas-tools/pytheas.git"
     },
     "keywords": [
         "pytheas",
@@ -30,16 +30,16 @@
     "author": "Vincent Ogloblinsky <vincent.ogloblinsky@gmail.com>",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/vogloblinsky/pytheas/issues"
+        "url": "https://github.com/pytheas-tools/pytheas/issues"
     },
-    "homepage": "https://github.com/vogloblinsky/pytheas#readme",
+    "homepage": "https://github.com/pytheas-tools/pytheas#readme",
     "engines": {
         "node": ">= 6 <= 8",
         "npm": ">= 3"
     },
     "devDependencies": {
         "electron": "^4.0.6",
-        "electron-packager": "^13.1.0"
+        "electron-packager": "^13.1.1"
     },
     "dependencies": {
         "walker": "^1.0.7"

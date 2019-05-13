@@ -13,11 +13,13 @@
   ],
   "main": "./out/extension",
   "contributes": {
-    "commands": [{
-      "command": "pytheas.start",
-      "title": "Start new exploration session",
-      "category": "Pytheas"
-    }]
+    "commands": [
+      {
+        "command": "pytheas.start",
+        "title": "Start new exploration session",
+        "category": "Pytheas"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "tsc -p ./",
@@ -26,10 +28,10 @@
     "postinstall": "node ./node_modules/vscode/bin/install"
   },
   "dependencies": {
-    "vscode": "^1.1.30"
+    "vscode": "^1.1.34"
   },
   "devDependencies": {
-    "@types/node": "^11.10.4",
-    "typescript": "^3.3.3333"
+    "@types/node": "^12.0.0",
+    "typescript": "^3.4.5"
   }
 }

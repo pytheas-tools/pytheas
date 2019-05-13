@@ -13,8 +13,12 @@
         "package:app:osx": "npm run build:app:ui && cd ./packages/pytheas-app/ && npm run package:osx",
         "package:app:linux": "npm run build:app:ui && cd ./packages/pytheas-app/ && npm run package:linux",
         "package:app:win": "npm run build:app:ui && cd ./packages/pytheas-app/ && npm run package:win",
-        "postinstall": "cd packages/pytheas-ui-static-dependencies/ && npm run build"
+        "postinstall": "cd packages/pytheas-ui-static-dependencies/ && npm run build",
+        "outdated": "npx lerna exec --no-bail -- npm outdated"
     },
     "author": "Vincent Ogloblinsky <vincent.ogloblinsky@gmail.com>",
-    "license": "MIT"
+    "license": "MIT",
+    "devDependencies": {
+        "lerna": "^3.13.4"
+    }
 }

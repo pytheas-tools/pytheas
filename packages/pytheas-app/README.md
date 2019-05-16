@@ -2,9 +2,14 @@
 
 Sourcecode of the Electron wrapper
 
-```bash
-# Install dependencies
-npm install
-# Run the app
-npm start
-```
+## Install dependencies
+
+`npm install`
+
+## Run the app
+
+`npm start`
+
+## Run the app in development mode
+
+`npm run start:dev`

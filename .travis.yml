@@ -11,14 +11,15 @@ addons:
             - google-chrome
         packages:
             - google-chrome-stable fluxbox
+            - graphviz
 before_install:
     - stty cols 80
-    - #yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-    - #echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >>~/.profile
-    - #eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-    - #brew update
-    - #brew options graphviz
-    - #brew install graphviz
+    -  #yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+    -  #echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >>~/.profile
+    -  #eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+    -  #brew update
+    -  #brew options graphviz
+    -  #brew install graphviz
 install:
     - npm install npm@latest -g
     - echo -e "\n**********\nBUILDING STATIC DEPENDENCIES\n**********\n"
@@ -48,7 +49,7 @@ script:
     - echo -e "\n**********\nBUILD DOC\n**********\n"
     - cd ../pytheas-documentation
     - npm ci
-    - #npm run madge
+    -  #npm run madge
     - npm run docs:build
     - cp -R src/.vuepress/dist ../pytheas-ui/output/contributors-documentation
     - cd ../pytheas-ui

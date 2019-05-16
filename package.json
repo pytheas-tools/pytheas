@@ -3,16 +3,6 @@
     "version": "0.1.0",
     "description": "Pytheas core",
     "scripts": {
-        "start:ui": "cd packages/pytheas-ui/ && npm start",
-        "start:app": "cd packages/pytheas-app && npm run start",
-        "prestart:app:dev": "rm -rf packages/pytheas-app/dist-ui/node_modules && mkdir packages/pytheas-app/dist-ui/node_modules && cp -R packages/pytheas-app/node_modules/walker packages/pytheas-app/dist-ui/node_modules",
-        "start:app:dev": "cd packages/pytheas-app && npm run start:dev",
-        "build:website": "cd packages/pytheas-website/ && npm run build",
-        "copy:app:ui-to-app": "rm -rf ./packages/pytheas-app/dist-ui && cp -R ./packages/pytheas-ui/output ./packages/pytheas-app/dist-ui",
-        "build:app:ui": "cd packages/pytheas-ui/ && npm run build",
-        "package:app:osx": "npm run build:app:ui && cd ./packages/pytheas-app/ && npm run package:osx",
-        "package:app:linux": "npm run build:app:ui && cd ./packages/pytheas-app/ && npm run package:linux",
-        "package:app:win": "npm run build:app:ui && cd ./packages/pytheas-app/ && npm run package:win",
         "postinstall": "cd packages/pytheas-ui-static-dependencies/ && npm run build",
         "outdated": "npx lerna exec --no-bail -- npm outdated"
     },

@@ -49,7 +49,7 @@ script:
     - echo -e "\n**********\nBUILD DOC\n**********\n"
     - cd ../pytheas-documentation
     - npm ci
-    -  #npm run madge
+    - npm run madge
     - npm run docs:build
     - cp -R src/.vuepress/dist ../pytheas-ui/output/contributors-documentation
     - cd ../pytheas-ui

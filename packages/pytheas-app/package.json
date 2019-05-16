@@ -12,6 +12,7 @@
     "scripts": {
         "start": "electron .",
         "start:dev": "PYTHEAS_ENV=DEV electron .",
+        "copy:app:ui-to-app": "rm -rf dist-ui && cp -R ../pytheas-ui/output dist-ui",
         "package:osx": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=$npm_package_config_pytheasMacIcon --prune=true --out=$npm_package_config_releaseBuildsPath",
         "package:win": "electron-packager . pytheas --overwrite --asar=true --platform=win32 --arch=ia32 --icon=$npm_package_config_pytheasWinIcon --prune=true --out=$npm_package_config_releaseBuildsPath",
         "package:linux": "electron-packager . pytheas --overwrite --asar=true --platform=linux --arch=x64 --icon=$npm_package_config_pytheasLinuxIcon --prune=true --out=$npm_package_config_releaseBuildsPath"
@@ -38,7 +39,7 @@
         "npm": ">= 3"
     },
     "devDependencies": {
-        "electron": "^4.0.6",
+        "electron": "^5.0.1",
         "electron-packager": "^13.1.1"
     },
     "dependencies": {

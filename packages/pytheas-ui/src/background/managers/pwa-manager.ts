@@ -13,7 +13,8 @@ class PWASingleton {
 
     init() {
         if ('serviceWorker' in navigator) {
-            if (window.location.host.indexOf('localhost') !== -1) {
+            const { PYTHEAS_CONTEXT } = <any>window;
+            if (window.location.host.indexOf('localhost') !== -1 || (PYTHEAS_CONTEXT && PYTHEAS_CONTEXT === 'electron')) {
                 return;
             }
             function showRefreshUI(registration) {

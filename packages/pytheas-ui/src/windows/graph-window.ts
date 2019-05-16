@@ -73,7 +73,9 @@ class GraphWindow {
 
     resetWindow() {
         this.clearWindow();
-        this.panZoomInstance.dispose();
+        if (this.panZoomInstance) {
+            this.panZoomInstance.dispose();
+        }
         this.initPanzoom();
     }
 
@@ -91,27 +93,33 @@ class GraphWindow {
     }
 
     initPanzoom() {
-        this.panZoomInstance = panzoom(this.$graphContainerZoomable, {
-            maxZoom: 1.25,
-            minZoom: 0.25
-        });
-        this.panZoomMessage = document.querySelector('.graph-controls_level-message');
-        const zoomPlusButton = document.querySelectorAll('.graph-controls__buttons button')[0];
-        const zoomMinButton = document.querySelectorAll('.graph-controls__buttons button')[1];
-        zoomPlusButton.addEventListener('click', () => {
-            const e = document.createEvent('HTMLEvents');
-            e.keyCode = 107;
-            e.initEvent('keydown', false, true);
-            this.$graphContainer.dispatchEvent(e);
-            this.displayZoomLevel();
-        });
-        zoomMinButton.addEventListener('click', () => {
-            const e = document.createEvent('HTMLEvents');
-            e.keyCode = 109;
-            e.initEvent('keydown', false, true);
-            this.$graphContainer.dispatchEvent(e);
-            this.displayZoomLevel();
-        });
+        const zoomPlusButton: any = document.querySelectorAll('.graph-controls__buttons button')[0];
+        const zoomMinButton: any = document.querySelectorAll('.graph-controls__buttons button')[1];
+        try {
+            this.panZoomInstance = panzoom(this.$graphContainerZoomable, {
+                maxZoom: 1.25,
+                minZoom: 0.25
+            });
+            this.panZoomMessage = document.querySelector('.graph-controls_level-message');
+            zoomPlusButton.addEventListener('click', () => {
+                const e = document.createEvent('HTMLEvents');
+                e.keyCode = 107;
+                e.initEvent('keydown', false, true);
+                this.$graphContainer.dispatchEvent(e);
+                this.displayZoomLevel();
+            });
+            zoomMinButton.addEventListener('click', () => {
+                const e = document.createEvent('HTMLEvents');
+                e.keyCode = 109;
+                e.initEvent('keydown', false, true);
+                this.$graphContainer.dispatchEvent(e);
+                this.displayZoomLevel();
+            });
+        } catch (e) {
+            // If issue in electron
+            zoomPlusButton.style.display = 'none';
+            zoomMinButton.style.display = 'none';
+        }
     }
 
     displayZoomLevel() {

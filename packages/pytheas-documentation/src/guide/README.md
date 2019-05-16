@@ -1,6 +1,6 @@
 # Introduction
 
-![Screenshot](/screenshot.png)
+![Screenshot](/pytheas/contributors-documentation/screenshot.png)
 
 Pytheas is a visual source explorer.
 

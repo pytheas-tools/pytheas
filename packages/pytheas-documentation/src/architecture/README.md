@@ -12,7 +12,7 @@ The source code is split in packages :
 
 ## User Interface
 
-![Screenshot](/screenshot.png)
+![Screenshot](/pytheas/contributors-documentation/screenshot.png)
 
 -   top file menu : only for desktop version (electron)
 
@@ -33,4 +33,4 @@ The source code is split in packages :
 
 Here is the main relations graph between TypeScript sources of the project.
 
-![Madge](/madge.png)
+![Madge](/pytheas/contributors-documentation/madge.png)

@@ -27,7 +27,7 @@
   "devDependencies": {
     "browserify": "^16.2.3",
     "concat": "^1.0.3",
-    "google-closure-compiler": "^20190415.0.0",
+    "google-closure-compiler": "^20190513.0.0",
     "npm-run-all": "^4.1.5",
     "source-map-support": "^0.5.12",
     "tslib": "^1.9.3",
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@phenomnomnominal/tsquery": "^3.0.0",
-    "codemirror": "^5.46.0",
+    "codemirror": "^5.47.0",
     "java-ast": "^0.1.0",
     "vue-template-compiler": "^2.6.10"
   }

@@ -1,7 +1,7 @@
-@import '../../../../node_modules/codemirror/lib/codemirror';
-@import '../../../../node_modules/codemirror/addon/fold/foldgutter';
+@import '../../../../../pytheas-ui-static-dependencies/node_modules/codemirror/lib/codemirror';
+@import '../../../../../pytheas-ui-static-dependencies/node_modules/codemirror/addon/fold/foldgutter';
 
-@import '../../../../node_modules/codemirror/theme/monokai';
+@import '../../../../../pytheas-ui-static-dependencies/node_modules/codemirror/theme/monokai';
 
 py-codeblock.maximize {
     width: 100%;

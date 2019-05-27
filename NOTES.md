@@ -42,6 +42,8 @@ https://stackblitz.com/
 
 https://codesandbox.io/s/svelte?from-embed
 
+https://cables.gl/home
+
 ## Ressources
 
 https://blog.dcpos.ch/how-to-make-your-electron-app-sexy

@@ -14,9 +14,13 @@ The last JavaScript files loaded at runtime are parser for files :
 -   javaast for Java files
 -   vue-template-compiler for Vue files
 
+## PWA
+
+Workbox is configured with a local cache strategy which match all these file extensions : svg, html, css, js, ts, json
+
 ## Project parsing
 
-After files dropped, demo selected, folder selected with Electron or workspace in VSCode :
+After some files are dropped by the user, or demo selected, or folder selected with Electron or workspace in VSCode, the files enter a reading/parsing workflow.
 
 ## Orchestration
 

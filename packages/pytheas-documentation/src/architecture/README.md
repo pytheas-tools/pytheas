@@ -2,11 +2,12 @@
 
 ## Packages
 
-The source code is split in packages :
+The source code is splitted in packages :
 
 -   **app** : Electron App wrapper
 -   **documentation** : technical documentation
 -   **ui** : core UI injected in Electron or Visual Studio
+-   **ui-static-dependencies** : core UI dependencies
 -   **vscode** : Visual Studio Code wrapper
 -   **website** : source code of public website, coming soon
 

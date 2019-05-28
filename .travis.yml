@@ -39,7 +39,10 @@ before_script:
     - sleep 3
     - fluxbox >/dev/null 2>&1 &
 script:
+    - mkdir output
+    - mkdir output/web-components
     - mkdir output/scripts
+    - npm run copy-wc
     - npm run build-browser-dependencies
     - echo -e "\n**********\nBUILDING UNIT TESTING DEPENDENCIES\n**********\n"
     - npm run build:dev:test
@@ -48,10 +51,8 @@ script:
     -  #echo -e "\n**********\nE2E TESTING APP\n**********\n"
     -  #npm run test:e2e
     - echo -e "\n**********\nBUILD PROD APP\n**********\n"
-    - cd ../pytheas-components
-    - npm run copy-wc
-    - cd ../pytheas-ui
     - npm run build
+    - npm run copy-wc
     - echo -e "\n**********\nBUILD DOC\n**********\n"
     - cd ../pytheas-documentation
     - npm ci

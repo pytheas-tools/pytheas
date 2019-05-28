@@ -1,0 +1,133 @@
+@import '../../../../pytheas-ui-static-dependencies/node_modules/codemirror/lib/codemirror';
+@import '../../../../pytheas-ui-static-dependencies/node_modules/codemirror/addon/fold/foldgutter';
+
+@import '../../../../pytheas-ui-static-dependencies/node_modules/codemirror/theme/monokai';
+
+py-codeblock.maximize {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    z-index: 5;
+
+    &>div {
+        height: 100%;
+        border: none;
+    }
+
+    .py-codeblock__top-bar {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    .CodeMirror {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        height: auto;
+    }
+
+    .py-codeblock__code-view {
+        height: 100%;
+        background: white;
+    }
+}
+
+py-codeblock {
+
+    &>div {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #d0d0d0;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .CodeMirror {
+        height: auto;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+
+        .marked {
+            border-radius: 2px;
+            background-color: rgba(255, 240, 6, 0.4);
+            border: 1px solid #d0c303;
+        }
+
+        .cm-property,
+        .cm-def,
+        .cm-variable {
+            border: 1px solid #ffffff;
+            border-radius: 2px;
+        }
+
+        .cm-property:hover,
+        .cm-def:hover,
+        .cm-variable:hover {
+            border: 1px solid #686868;
+            cursor: pointer;
+        }
+    }
+
+    .icon-file {
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iICAgICB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIiAgICAgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIiAgICAgeG1sbnM6c3ZnPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgICAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgICAgIHhtbG5zOnNvZGlwb2RpPSJodHRwOi8vc29kaXBvZGkuc291cmNlZm9yZ2UubmV0L0RURC9zb2RpcG9kaS0wLmR0ZCIgICAgIHhtbG5zOmlua3NjYXBlPSJodHRwOi8vd3d3Lmlua3NjYXBlLm9yZy9uYW1lc3BhY2VzL2lua3NjYXBlIiAgICAgdmVyc2lvbj0iMS4xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDgwIDEwMCI+ICAgIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMCwtOTUyLjM2MjE4KSI+PHBhdGggZD0ibSAxNyw5NjAuMzYyMTUgMCwzIDAsNzguMDAwMDUgMCwzIDMsMCA2MCwwIDMsMCAwLC0zIGMgMCwtMjEuMDgzNCAwLC0zOC4xNjY3IDAsLTU5LjI1MDA4IC03LjcwMzEsLTcuNzAzMDQgLTE1LjAzMTEsLTE1LjAzMTA4IC0yMS43NSwtMjEuNzQ5OTcgLTEzLjc1LDAgLTI3LjUsMCAtNDEuMjUsMCB6IG0gNiw2IDM0LDAgMCwxNi45OTk5NyAwLDMgMywwIDE3LDAgMCw1Mi4wMDAwOCAtNTQsMCB6IG0gNDAsNC4yMTg3NSA5Ljc4MTIsOS43ODEyNSAtOS43ODEyLDAgeiIgc3R5bGU9InRleHQtaW5kZW50OjA7dGV4dC10cmFuc2Zvcm06bm9uZTtkaXJlY3Rpb246bHRyO2Jsb2NrLXByb2dyZXNzaW9uOnRiO2Jhc2VsaW5lLXNoaWZ0OmJhc2VsaW5lO2NvbG9yOiMwMDAwMDA7ZW5hYmxlLWJhY2tncm91bmQ6YWNjdW11bGF0ZTsiIGZpbGw9IiMwMDAwMDAiIGZpbGwtb3BhY2l0eT0iMSIgZmlsbC1ydWxlPSJub256ZXJvIiBzdHJva2U9Im5vbmUiIG1hcmtlcj0ibm9uZSIgdmlzaWJpbGl0eT0idmlzaWJsZSIgZGlzcGxheT0iaW5saW5lIiBvdmVyZmxvdz0idmlzaWJsZSIvPjwvZz48L3N2Zz4=);
+        width: 13px;
+        height: 15px;
+        display: inline-block;
+        margin: 0px 4px 0 0;
+    }
+
+    .py-codeblock__top-bar {
+        display: flex;
+        background: #d0d0d0;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        padding: 5px 10px;
+
+        .py-codeblock__top-bar__filename {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+
+            ion-icon {
+                margin-right: 5px;
+            }
+        }
+
+        &.reduced {
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+    }
+
+    .button {
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        padding: 0;
+        font-weight: bold;
+        font-size: 12px;
+        cursor: pointer;
+        border: 1px solid #afaeae;
+        margin-left: 2px;
+
+        &:focus {
+            outline: none;
+        }
+
+        &:hover {
+            border-color: #8b8a8a;
+        }
+
+        &.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    }
+
+    .py-codeblock__code-view {
+        &.reduced {
+            display: none;
+        }
+    }
+}

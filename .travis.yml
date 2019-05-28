@@ -39,7 +39,7 @@ before_script:
     - sleep 3
     - fluxbox >/dev/null 2>&1 &
 script:
-    - mkdir output && mkdir output/scripts
+    - mkdir output/scripts
     - npm run build-browser-dependencies
     - echo -e "\n**********\nBUILDING UNIT TESTING DEPENDENCIES\n**********\n"
     - npm run build:dev:test

@@ -48,6 +48,9 @@ script:
     -  #echo -e "\n**********\nE2E TESTING APP\n**********\n"
     -  #npm run test:e2e
     - echo -e "\n**********\nBUILD PROD APP\n**********\n"
+    - cd ../pytheas-components
+    - npm run copy-wc
+    - cd ../pytheas-ui
     - npm run build
     - echo -e "\n**********\nBUILD DOC\n**********\n"
     - cd ../pytheas-documentation

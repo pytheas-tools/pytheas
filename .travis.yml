@@ -30,7 +30,7 @@ install:
     - npm ci
     - npm run build:prod
     - echo -e "\n**********\nTESTING WEB COMPONENTS\n**********\n"
-    - npm run test:wc
+    - npm run test
     - cd ../pytheas-ui
     - npm ci
 before_script:

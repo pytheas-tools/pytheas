@@ -23,7 +23,7 @@ install:
     - npm install npm@latest -g
     - echo -e "\n**********\nBUILDING STATIC DEPENDENCIES\n**********\n"
     - cd packages/pytheas-ui-static-dependencies
-    - npm i
+    - npm ci
     - npm run build:prod
     - echo -e "\n**********\nBUILDING WEB COMPONENTS\n**********\n"
     - cd ../pytheas-components

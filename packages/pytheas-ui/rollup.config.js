@@ -1,4 +1,3 @@
-import rollupTypescript from 'rollup-plugin-typescript';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import builtins from 'rollup-plugin-node-builtins';
@@ -6,7 +5,7 @@ import globals from 'rollup-plugin-node-globals';
 
 const createConfig = (type) => {
     let MAIN_CONFIG = {
-        input: './src/app.ts',
+        input: './es/app.js',
         output: {
             file: (process.env.NODE_ENV && process.env.NODE_ENV === 'development') ? 'output/scripts/app.js' : 'output/scripts/app_0.js',
             format: 'cjs',
@@ -15,7 +14,6 @@ const createConfig = (type) => {
         },
         context: 'window',
         plugins: [
-            rollupTypescript(),
             globals(),
             builtins(),
             nodeResolve({
@@ -28,9 +26,6 @@ const createConfig = (type) => {
     };
     if (type === 'es6') {
         MAIN_CONFIG.output.file = (process.env.NODE_ENV && process.env.NODE_ENV === 'development') ? 'output/scripts/app_es6.js' : 'output/scripts/app_es6_0.js';
-        MAIN_CONFIG.plugins[0] = rollupTypescript({
-            target: "es6"
-        });
     }
     return MAIN_CONFIG;
 }

@@ -41,10 +41,10 @@ class DropWindow {
             /**
              * Listen for select input on welcome page
              */
-            document.querySelector('#demo-projects-selector').addEventListener('change', (ev: Event) => {
+            document.querySelector('#demo-projects-selector').addEventListener('change', (ev: any) => {
                 pubsub.publish(EVENTS.FILES_COMING);
                 const project = ev.target.value;
-                DemosManager.getDemoProjectFiles(project).then(scannedFiles => {
+                DemosManager.getDemoProjectFiles(project).then((scannedFiles: any) => {
                     // console.log(scannedFiles);
                     FilesReader.readFilesFromFetchCall(scannedFiles).then(readedFiles => {
                         FilesParser.parseFiles(readedFiles).then(parsedFiles => {

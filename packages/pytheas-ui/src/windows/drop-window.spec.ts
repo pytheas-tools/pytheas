@@ -2,7 +2,7 @@ import { DropWindowManager } from './drop-window';
 
 import { FilesParser } from '../background/files/files-parser';
 
-import dragMock from '../../test/vendors/drag-mock/src';
+// import dragMock from '../../test/vendors/drag-mock/src';
 
 beforeAll(() => {
     // DropWindowManager.init();

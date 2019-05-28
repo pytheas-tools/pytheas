@@ -34,13 +34,13 @@ class CodeWindow {
             // console.log('CodeWindow something selected, display related blocks: ', selectedElement);
             this.clearWindow();
             this.addCodeBlock(selectedElement.file);
-            selectedElement.getInRelations().forEach(relation => {
+            selectedElement.getInRelations().forEach((relation: any) => {
                 this.addCodeBlock(relation.from.file);
             });
         });
         pubsub.subscribe(EVENTS.THEME_CHANGED, theme => {
             const codeBlocks = document.querySelectorAll('py-codeblock-rennesjs');
-            codeBlocks.forEach(codeBlock => {
+            codeBlocks.forEach((codeBlock: any) => {
                 codeBlock.updateTheme(theme);
             });
         });
@@ -56,7 +56,7 @@ class CodeWindow {
     displayInitialParsingInformations() {
         let lines = 0;
         const files = FilesParser.getParsedFiles();
-        files.forEach(file => {
+        files.forEach((file: any) => {
             lines += file.sloc.total;
         });
         this.addCodeBlock({

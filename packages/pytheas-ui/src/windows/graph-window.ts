@@ -1,5 +1,5 @@
 import domtoimage from 'dom-to-image';
-import * as downloadjs from 'downloadjs';
+import downloadjs from 'downloadjs';
 import panzoom from 'panzoom';
 
 import { pubsub, EVENTS } from '../utils';
@@ -18,8 +18,8 @@ class GraphWindow {
 
     $graphContainer: HTMLElement;
     $graphContainerZoomable: HTMLElement;
-    $graph: HTMLPyGraphElement;
-    $graphOverview: HTMLPyGraphOverviewElement;
+    $graph: any; // HTMLPyGraphElement
+    $graphOverview: any; // HTMLPyGraphOverviewElement
 
     panZoomInstance: any;
     panZoomMessage: HTMLElement;
@@ -84,8 +84,7 @@ class GraphWindow {
         domtoimage
             .toPng(node)
             .then((dataUrl: string) => {
-                const img = new Image();
-                downloadjs.default(dataUrl, 'my-image.png', 'image/png');
+                downloadjs(dataUrl, 'my-image.png', 'image/png');
             })
             .catch((error: string) => {
                 console.error('oops, something went wrong!', error);
@@ -102,14 +101,14 @@ class GraphWindow {
             });
             this.panZoomMessage = document.querySelector('.graph-controls_level-message');
             zoomPlusButton.addEventListener('click', () => {
-                const e = document.createEvent('HTMLEvents');
+                const e: any = document.createEvent('HTMLEvents');
                 e.keyCode = 107;
                 e.initEvent('keydown', false, true);
                 this.$graphContainer.dispatchEvent(e);
                 this.displayZoomLevel();
             });
             zoomMinButton.addEventListener('click', () => {
-                const e = document.createEvent('HTMLEvents');
+                const e: any = document.createEvent('HTMLEvents');
                 e.keyCode = 109;
                 e.initEvent('keydown', false, true);
                 this.$graphContainer.dispatchEvent(e);
@@ -131,7 +130,7 @@ class GraphWindow {
         }, 2000);
     }
 
-    addGraph(element) {
+    addGraph(element: any) {
         this.$graph = document.createElement('py-graph');
         this.$graph.setAttribute('mxclient-path', 'scripts/mxgraph');
         this.$graph.data = element;
@@ -156,16 +155,16 @@ class GraphWindow {
         this.$graphContainerZoomable.appendChild(this.$graphOverview);
     }
 
-    onGraphOverviewDetailSelected(ev) {
+    onGraphOverviewDetailSelected(ev: any) {
         // console.log('onGraphOverviewDetailSelected: ', ev.detail);
         pubsub.publish(EVENTS.GRAPH_OVERVIEW_DETAIL_SELECTED, ev.detail);
     }
 
-    onGraphSubElementSelected(ev) {
+    onGraphSubElementSelected(ev: any) {
         console.log('onGraphSubElementSelected: ', ev.detail);
     }
 
-    onGraphElementSelected(ev) {
+    onGraphElementSelected(ev: any) {
         console.log('onGraphElementClicked: ', ev.detail);
         pubsub.publish(EVENTS.GRAPH_ELEMENT_SELECTED, ev.detail);
     }

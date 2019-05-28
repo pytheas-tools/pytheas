@@ -1,11 +1,10 @@
 import { PyElement } from '../py-element';
 
-import JavaAstFinder from './java-ast-finder';
-
 export class JavaClass extends PyElement {
-    ast: NodeObject;
+    ast: any; // NodeObject
 
-    constructor(classeNode: NodeObject, file: any) {
+    constructor(classeNode: any, file: any) {
+        // classeNode: NodeObject
         super();
         this.ast = classeNode;
         this.file = file;

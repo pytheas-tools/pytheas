@@ -80,7 +80,7 @@ class NavigationBar {
         });
     }
 
-    onUpdate(item) {
+    onUpdate(item: any) {
         pubsub.publish(EVENTS.NAVIGATIONBAR_ONUPDATE, item);
     }
 

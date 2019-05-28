@@ -1,19 +1,18 @@
 import { pubsub, EVENTS } from '../../utils';
 
-function fadeElement(a, b) {
-    if (b !== 'show') {
-        return (a.style.opacity =
-            setTimeout(() => {
-                a.style.display = 'none';
-            }, 200) * 0);
+function fadeElement(element: any, action: string) {
+    if (action !== 'show') {
+        setTimeout(() => {
+            element.style.display = 'none';
+        }, 200);
     }
-    a.style.display = 'block';
+    element.style.display = 'block';
     setTimeout(() => {
-        a.style.opacity = 1;
+        element.style.opacity = 1;
     }, 30);
 }
 
-function isNotBatman(a, h) {
+function isNotBatman(a: any, h: any) {
     for (; a && a !== document; a = a.parentNode) {
         if (a.classList.contains(h.substr(1))) {
             return 1;
@@ -53,7 +52,7 @@ class ContextmenuSingleton {
         });
     }
 
-    handleMenuAction(evt) {
+    handleMenuAction(evt: any) {
         // console.log('Action required: ' + evt);
         if (evt === 'saveasimage') {
             pubsub.publish(EVENTS.SAVEGRAPHASIMAGE);
@@ -63,9 +62,9 @@ class ContextmenuSingleton {
     updateHost() {
         const graphContainer = document.querySelector('.graph-container');
         if (graphContainer && document.querySelector('py-graph')) {
-            graphContainer.addEventListener('contextmenu', event => {
+            graphContainer.addEventListener('contextmenu', (event: any) => {
                 /** COPYRIGHT https://github.com/turbo/justContext.js */
-                Array.from(document.querySelectorAll('.jctx')).forEach((k, i) => {
+                Array.from(document.querySelectorAll('.jctx')).forEach((k: any, i) => {
                     k.style.display = 'none';
                 });
                 event.preventDefault();
@@ -75,7 +74,7 @@ class ContextmenuSingleton {
                         mID = '.' + y;
                     }
                 });
-                const x = document.querySelector('.jctx' + mID);
+                const x: any = document.querySelector('.jctx' + mID);
                 const maxLeft = (window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) - 10 - x.getBoundingClientRect().width;
                 const maxTop =
                     (window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight) - 10 - x.getBoundingClientRect().height;

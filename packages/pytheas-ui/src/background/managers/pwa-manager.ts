@@ -17,8 +17,8 @@ class PWASingleton {
             if (window.location.host.indexOf('localhost') !== -1 || (PYTHEAS_CONTEXT && PYTHEAS_CONTEXT === 'electron')) {
                 return;
             }
-            function showRefreshUI(registration) {
-                const $refreshToaster = document.querySelector('.refresh-toaster');
+            const showRefreshUI = (registration: any) => {
+                const $refreshToaster: any = document.querySelector('.refresh-toaster');
                 $refreshToaster.style.display = 'flex';
                 const $refreshToaster_Refresh_button = $refreshToaster.querySelector('.refresh-toaster__refresh-button');
                 if ($refreshToaster_Refresh_button) {
@@ -38,9 +38,9 @@ class PWASingleton {
                         $refreshToaster.style.display = 'none';
                     });
                 }
-            }
+            };
 
-            function onNewServiceWorker(registration, callback) {
+            const onNewServiceWorker = (registration: any, callback: any) => {
                 if (registration.waiting) {
                     // SW is waiting to activate. Can occur if multiple clients open and
                     // one of the clients is refreshed.
@@ -48,7 +48,7 @@ class PWASingleton {
                 }
 
                 function listenInstalledStateChange() {
-                    registration.installing.addEventListener('statechange', event => {
+                    registration.installing.addEventListener('statechange', (event: any) => {
                         if (event.target.state === 'installed') {
                             // A new service worker is available, inform the user
                             callback();
@@ -63,7 +63,7 @@ class PWASingleton {
                 // We are currently controlled so a new SW may be found...
                 // Add a listener in case a new SW is found,
                 registration.addEventListener('updatefound', listenInstalledStateChange);
-            }
+            };
 
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js').then(registration => {

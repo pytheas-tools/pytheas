@@ -5,7 +5,7 @@ import { NodeObject, TokenObject, TsAstFinder } from './ts-ast-finder';
 
 import { ECMAScriptParser } from './ecmascript-parser';
 
-const nodeToRange = (node): [number, number] => {
+const nodeToRange = (node: any): [number, number] => {
     if (typeof node.getStart === 'function' && typeof node.getEnd === 'function') {
         return [node.getStart(), node.getEnd()];
     } else if (typeof node.pos !== 'undefined' && typeof node.end !== 'undefined') {

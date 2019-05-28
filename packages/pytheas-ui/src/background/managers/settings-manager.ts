@@ -20,7 +20,7 @@ class SettingsSingleton {
 
     init() {
         const $themeSelector = document.getElementById('theme-selector');
-        $themeSelector.addEventListener('change', ev => {
+        $themeSelector.addEventListener('change', (ev: any) => {
             const selectedTheme = ev.target.value;
             this.settings.theme = selectedTheme;
             pubsub.publish(EVENTS.THEME_CHANGED, selectedTheme);

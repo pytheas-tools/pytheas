@@ -13,16 +13,16 @@ class RelationSingleton {
         return RelationSingleton.instance;
     }
 
-    findInListByName(list, name) {
-        return list.find(el => el.name === name);
+    findInListByName(list: any, name: any) {
+        return list.find((el: any) => el.name === name);
     }
 
-    mergeInRelations(elements) {
+    mergeInRelations(elements: any) {
         // Loop for each element
-        elements.map(element => {
+        elements.map((element: any) => {
             // loop for each out relation, and verify related element has the correct in relation referenced
             if (element.relations && element.relations.length > 0) {
-                element.relations.forEach(relation => {
+                element.relations.forEach((relation: any) => {
                     if (relation.type === RelationTypes.Out) {
                         const toElement = this.findInListByName(elements, relation.to);
                         if (toElement) {

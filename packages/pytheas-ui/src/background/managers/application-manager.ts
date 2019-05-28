@@ -47,9 +47,9 @@ class ApplicationSingleton {
             pubsub.publish(EVENTS.INIT_VIEW);
         });
 
-        pubsub.subscribe(EVENTS.CODEBLOCK_STATEMENT_CLICKED, () => {
+        pubsub.subscribe(EVENTS.CODEBLOCK_STATEMENT_CLICKED, element => {
             // console.log('ApplicationManager CODEBLOCK_STATEMENT_CLICKED notify everybody');
-            this.onSomethingSelected();
+            this.onSomethingSelected(element);
         });
 
         pubsub.subscribe(EVENTS.GRAPH_ELEMENT_SELECTED, element => {
@@ -66,7 +66,7 @@ class ApplicationSingleton {
         });
     }
 
-    onSomethingSelected(element) {
+    onSomethingSelected(element: any) {
         pubsub.publish(EVENTS.SOMETHING_SELECTED, element);
     }
 }

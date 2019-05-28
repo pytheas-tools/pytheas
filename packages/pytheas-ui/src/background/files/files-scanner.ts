@@ -45,7 +45,7 @@ class FilesScannerSingleton {
      * Scan files with File API
      * @param ev DragEvent Event from browser
      */
-    scanFilesFromBrowser(ev: DragEvent) {
+    scanFilesFromBrowser(ev: any) {
         this.scanPromise = new Promise((resolve, reject) => {
             this.scanResolve = resolve;
             this.scanReject = reject;
@@ -106,7 +106,7 @@ class FilesScannerSingleton {
         this.countFiles += quantity;
     }
 
-    private handleFile(file: FileEntry | File) {
+    private handleFile(file: any) {
         if (isFileSupported(file.extension)) {
             this.scannedFiles.push(file);
         } else {
@@ -145,7 +145,8 @@ class FilesScannerSingleton {
                     this.handleFile(file.getAsFile());
                     i++;
                     loopFiles();
-                } else if (File && file instanceof File) {
+                } else if (File && file) {
+                    // instanceof File
                     file.fullPath = file.name;
                     file.extension = getExtension(file.name);
                     this.handleFile(file);

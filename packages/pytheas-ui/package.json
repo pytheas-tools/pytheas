@@ -40,11 +40,6 @@
         "postcopy-index": "node scripts/update-version-during-build.js",
         "copy-assets": "npx rimraf output/assets && mkdir output/assets && cp -R src/assets/* output/assets",
         "replace-ionicons": "replace \"libs/ionicons/ionicons.js\" \"https://unpkg.com/ionicons@4.4.4/dist/ionicons.js\" output/index.html output/index.html",
-        "---WEB-COMPONENTS---": "",
-        "build-wc": "stencil build --config ./components/stencil.config.ts && npm run copy-wc",
-        "build-wc-prod": "NODE_ENV=production stencil build --config ./components/stencil.config.ts && npm run copy-wc",
-        "copy-wc": "npx rimraf output/web-components && mkdir output/web-components && cp -R ./components/dist output/web-components",
-        "start-wc": "stencil build --dev --watch --serve --es5 --config ./components/stencil.config.ts",
         "---BUILD-UTILS--": "",
         "clean-output": "npx rimraf output",
         "update-context:vscode": "replace \"__PYTHEAS_CONTEXT__\" \"vscode\" output/index.html output/index.html",
@@ -90,16 +85,9 @@
         "test:testcafe:local": "npx testcafe chromium test/testcafe/test.js",
         "test:testcafe:remote": "npx testcafe chrome,firefox test/testcafe/test.js",
         "test:testcafe:saucelabs": "npx testcafe \"saucelabs:Chrome@48.0:Linux\" test/testcafe/test.js --src \"http-server output -p 8383\"",
-        "test:unit": "jest --config jest.config.js --coverage",
-        "test:wc": "jest --config jest.wc.config.js --coverage"
+        "test:unit": "jest --config jest.config.js --coverage"
     },
     "watch": {
-        "build-wc": {
-            "patterns": [
-                "components"
-            ],
-            "extensions": "tsx"
-        },
         "compile-ts": {
             "patterns": [
                 "src"
@@ -132,8 +120,6 @@
     },
     "devDependencies": {
         "@babel/core": "^7.4.5",
-        "@stencil/core": "0.18.1",
-        "@stencil/sass": "^0.2.3",
         "@types/filesystem": "0.0.29",
         "@types/jest": "^24.0.13",
         "@types/split.js": "^1.3.2",

@@ -6,7 +6,7 @@ config.transform = {
     '^.+\\.(ts|tsx)$': '<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js'
 };
 
-config.testMatch = ['<rootDir>/components/**/*.spec.ts'];
+config.testMatch = ['<rootDir>/**/*.spec.ts'];
 config.moduleFileExtensions = ['ts', 'tsx', 'js', 'json', 'jsx'];
 
 // config.setupFiles = ['./test/setup-jest.js'];

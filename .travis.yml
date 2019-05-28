@@ -25,6 +25,12 @@ install:
     - cd packages/pytheas-ui-static-dependencies
     - npm i
     - npm run build:prod
+    - echo -e "\n**********\nBUILDING WEB COMPONENTS\n**********\n"
+    - cd ../pytheas-components
+    - npm ci
+    - npm run build:prod
+    - echo -e "\n**********\nTESTING WEB COMPONENTS\n**********\n"
+    - npm run test:wc
     - cd ../pytheas-ui
     - npm ci
 before_script:
@@ -35,8 +41,6 @@ before_script:
 script:
     - mkdir output && mkdir output/scripts
     - npm run build-browser-dependencies
-    - echo -e "\n**********\nTESTING WEB COMPONENTS\n**********\n"
-    - npm run test:wc
     - echo -e "\n**********\nBUILDING UNIT TESTING DEPENDENCIES\n**********\n"
     - npm run build:dev:test
     - echo -e "\n**********\nUNIT TESTING APP\n**********\n"

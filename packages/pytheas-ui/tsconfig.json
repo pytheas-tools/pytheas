@@ -20,5 +20,9 @@
     "atom": {
         "rewriteTsconfig": false
     },
-    "compileOnSave": false
+    "compileOnSave": false,
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": ["node_modules", "es"]
 }

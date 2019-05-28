@@ -27,7 +27,7 @@
     "build:prod": "NODE_ENV=production stencil build --config ./stencil.config.ts",
     "postbuild:prod": "npm run copy-wc",
     "test": "jest --config jest.config.js --coverage",
-    "copy-wc": "npx rimraf ../pytheas-ui/output/web-components && mkdir ../pytheas-ui/output/web-components && cp -R dist ../pytheas-ui/output/web-components"
+    "copy-wc": "npx rimraf ../pytheas-ui/output/web-components && mkdir ../pytheas-ui/output && mkdir ../pytheas-ui/output/web-components && cp -R dist ../pytheas-ui/output/web-components"
   },
   "devDependencies": {
     "@stencil/core": "0.18.1",

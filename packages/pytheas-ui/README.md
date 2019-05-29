@@ -1,5 +1,7 @@
 # Pytheas ui
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=pytheas-tools_pytheas&metric=alert_status)](https://sonarcloud.io/dashboard?id=pytheas-tools_pytheas)
+
 Sourcecode of the main UI of the application
 
 ```bash

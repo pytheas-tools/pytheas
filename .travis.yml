@@ -49,7 +49,7 @@ jobs:
               - cd packages/pytheas-ui-static-dependencies
               - npm ci
               - npm run build:prod
-              - cd ../packages/pytheas-ui
+              - cd ../pytheas-ui
               - npm ci
               - npm run build-browser-dependencies
           script:
@@ -62,7 +62,7 @@ jobs:
               - npm ci
           script:
               - echo "\n**********\nBUILDING STATIC DEPENDENCIES\n**********\n"
-              - cd packages/pytheas-ui-static-dependencies
+              - cd ../pytheas-ui-static-dependencies
               - npm ci
               - npm run build:prod
               - echo "\n**********\nBUILDING WEB COMPONENTS\n**********\n"

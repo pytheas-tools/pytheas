@@ -20,9 +20,9 @@
   },
   "homepage": "https://github.com/pytheas-tools/pytheas#readme",
   "devDependencies": {
-    "@vuepress/plugin-medium-zoom": "^1.0.0-alpha.48",
+    "@vuepress/plugin-medium-zoom": "^1.0.1",
     "madge": "^3.4.4",
-    "vuepress": "^0.14.11",
+    "vuepress": "^1.0.1",
     "webpack-dev-middleware": "^3.7.0"
   }
 }

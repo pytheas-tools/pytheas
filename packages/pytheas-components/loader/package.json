@@ -1,5 +1,5 @@
 {
-  "name": "test-stencil1-loader",
+  "name": "pytheas-loader",
   "typings": "./index.d.ts",
   "module": "./index.mjs",
   "main": "./index.cjs.js",

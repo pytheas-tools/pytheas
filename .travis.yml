@@ -46,7 +46,7 @@ jobs:
           install:
               - npm install npm@latest -g
           script:
-              - cd ../packages/pytheas-ui
+              - cd packages/pytheas-ui
               - npm run test:unit
               - sonar-scanner
         - stage: build prod app

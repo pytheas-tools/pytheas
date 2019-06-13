@@ -51,6 +51,9 @@ jobs:
               - npm run build:prod
               - cd ../pytheas-ui
               - npm ci
+              - mkdir output
+              - mkdir output/web-components
+              - mkdir output/scripts
               - npm run build-browser-dependencies
           script:
               - npm run test:unit

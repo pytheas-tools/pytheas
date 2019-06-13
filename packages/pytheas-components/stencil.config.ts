@@ -12,11 +12,18 @@ if (process.env.NODE_ENV && process.env.NODE_ENV === 'production') {
 
 export const config: Config = {
     namespace: 'pytheas',
-    minifyJs: (process.env.NODE_ENV && process.env.NODE_ENV === 'production') ? true : false,
-    minifyCss: (process.env.NODE_ENV && process.env.NODE_ENV === 'production') ? true : false,
+    minifyJs:
+        process.env.NODE_ENV && process.env.NODE_ENV === 'production'
+            ? true
+            : false,
+    minifyCss:
+        process.env.NODE_ENV && process.env.NODE_ENV === 'production'
+            ? true
+            : false,
     outputTargets: [
         {
-            type: 'dist'
+            type: 'dist',
+            esmLoaderPath: '../loader'
         },
         {
             type: 'www',

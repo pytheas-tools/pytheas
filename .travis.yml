@@ -24,52 +24,64 @@ before_install:
     -  #brew update
     -  #brew options graphviz
     -  #brew install graphviz
-install:
-    - npm install npm@latest -g
-    - echo -e "\n**********\nBUILDING STATIC DEPENDENCIES\n**********\n"
-    - cd packages/pytheas-ui-static-dependencies
-    - npm ci
-    - npm run build:prod
-    - echo -e "\n**********\nBUILDING WEB COMPONENTS\n**********\n"
-    - cd ../pytheas-components
-    - npm ci
-    - npm run build:prod
-    - echo -e "\n**********\nTESTING WEB COMPONENTS\n**********\n"
-    - npm run test
-    - cd ../pytheas-ui
-    - npm ci
 before_script:
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
     - sleep 3
     - fluxbox >/dev/null 2>&1 &
 script:
-    - mkdir output
-    - mkdir output/web-components
-    - mkdir output/scripts
-    - npm run copy-wc
-    - npm run build-browser-dependencies
-    - echo -e "\n**********\nBUILDING UNIT TESTING DEPENDENCIES\n**********\n"
-    - npm run build:dev:test
-    - echo -e "\n**********\nUNIT TESTING APP\n**********\n"
-    - npm run test:unit
-    - sonar-scanner
     -  #echo -e "\n**********\nE2E TESTING APP\n**********\n"
     -  #npm run test:e2e
-    - echo -e "\n**********\nBUILD PROD APP\n**********\n"
-    - npm run build
-    - npm run copy-wc
-    - echo -e "\n**********\nBUILD DOC\n**********\n"
-    - cd ../pytheas-documentation
-    - npm ci
-    -  #npm run madge
-    - npm run docs:build
-    - cp -R src/.vuepress/dist ../pytheas-ui/output/contributors-documentation
-    - cd ../pytheas-ui
-    - npm run doc:code
-    - cp -R code-documentation ./output/code-documentation
-    - echo -e "\n**********\nDEPLOY\n**********\n"
-    - bash ./deploy.sh
+
+jobs:
+    include:
+        - stage: testing web components
+          install:
+              - npm install npm@latest -g
+              - cd packages/pytheas-components
+              - npm ci
+          script:
+              - npm run test
+        - stage: unit testing app
+          install:
+              - npm install npm@latest -g
+          script:
+              - cd ../packages/pytheas-ui
+              - npm run test:unit
+              - sonar-scanner
+        - stage: build prod app
+          install:
+              - npm install npm@latest -g
+              - cd packages/pytheas-components
+              - npm ci
+          script:
+              - echo "\n**********\nBUILDING STATIC DEPENDENCIES\n**********\n"
+              - cd packages/pytheas-ui-static-dependencies
+              - npm ci
+              - npm run build:prod
+              - echo "\n**********\nBUILDING WEB COMPONENTS\n**********\n"
+              - cd ../pytheas-components
+              - npm ci
+              - npm run build:prod
+              - cd ../pytheas-ui
+              - mkdir output
+              - mkdir output/web-components
+              - mkdir output/scripts
+              - npm run build-browser-dependencies
+              - echo -e "\n**********\nBUILD PROD APP\n**********\n"
+              - npm run build
+              - npm run copy-wc
+              - echo -e "\n**********\nBUILD DOC\n**********\n"
+              - cd ../pytheas-documentation
+              - npm ci
+              -  #npm run madge
+              - npm run docs:build
+              - cp -R src/.vuepress/dist ../pytheas-ui/output/contributors-documentation
+              - cd ../pytheas-ui
+              - npm run doc:code
+              - cp -R code-documentation ./output/code-documentation
+              - echo -e "\n**********\nDEPLOY\n**********\n"
+              - bash ./deploy.sh
 branches:
     only:
         - develop

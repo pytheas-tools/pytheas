@@ -12,7 +12,7 @@
     "module": "esnext",
     "target": "es2017",
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "jsx": "react",
     "jsxFactory": "h"
   },

@@ -45,9 +45,14 @@ jobs:
         - stage: unit testing app
           install:
               - npm install npm@latest -g
-          script:
-              - cd packages/pytheas-ui
+              - echo "\n**********\nBUILDING STATIC DEPENDENCIES\n**********\n"
+              - cd packages/pytheas-ui-static-dependencies
               - npm ci
+              - npm run build:prod
+              - cd ../packages/pytheas-ui
+              - npm ci
+              - npm run build-browser-dependencies
+          script:
               - npm run test:unit
               - sonar-scanner
         - stage: build prod app

@@ -1,4 +1,12 @@
-import { Component, Element, Event, EventEmitter, Method, Prop } from '@stencil/core';
+import {
+    Component,
+    Element,
+    Event,
+    EventEmitter,
+    h,
+    Method,
+    Prop
+} from '@stencil/core';
 
 @Component({
     tag: 'py-codeblock',
@@ -62,25 +70,25 @@ export class CodeBlock {
     }
 
     @Method()
-    updateTheme(theme: string) {
+    async updateTheme(theme: string) {
         const localTheme = theme === 'theme-dark' ? 'monokai' : 'default';
         this.codeMirrorEditor.setOption('theme', localTheme);
     }
 
     @Method()
-    highlight(range) {
+    async highlight(range) {
         this._highlight(range);
     }
 
     @Method()
-    highlights(ranges) {
+    async highlights(ranges) {
         ranges.forEach(range => {
             this._highlight(range);
         });
     }
 
     @Method()
-    unHighlight() {
+    async unHighlight() {
         // this.codeMirrorEditor.setValue(this.code);
         console.log(this.codeMirrorEditor.getAllMarks());
         this.codeMirrorEditor.getAllMarks().forEach(mark => {
@@ -93,7 +101,9 @@ export class CodeBlock {
         const positionFromIndex = (doc, index) => {
             return doc.posFromIndex(index);
         };
-        const [start, end] = range.map(index => positionFromIndex(this.codeMirrorEditor.doc, index));
+        const [start, end] = range.map(index =>
+            positionFromIndex(this.codeMirrorEditor.doc, index)
+        );
 
         this.codeMirrorEditor.markText(start, end, {
             className: 'marked'
@@ -117,17 +127,23 @@ export class CodeBlock {
 
     async bootstrapEditor() {
         const cm = window['CodeMirror'];
-        this.codeMirrorEditor = cm(this.el.querySelector('.py-codeblock__code-view'), {
-            value: this.code,
-            mode: this.language ? 'text/' + this.language : 'javascript',
-            lineNumbers: true,
-            viewportMargin: Infinity,
-            lineWrapping: true,
-            foldGutter: true,
-            readOnly: true,
-            theme: this.theme && this.theme === 'theme-dark' ? 'monokai' : 'default',
-            gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
-        });
+        this.codeMirrorEditor = cm(
+            this.el.querySelector('.py-codeblock__code-view'),
+            {
+                value: this.code,
+                mode: this.language ? 'text/' + this.language : 'javascript',
+                lineNumbers: true,
+                viewportMargin: Infinity,
+                lineWrapping: true,
+                foldGutter: true,
+                readOnly: true,
+                theme:
+                    this.theme && this.theme === 'theme-dark'
+                        ? 'monokai'
+                        : 'default',
+                gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter']
+            }
+        );
 
         cm.on(this.codeMirrorEditor.getWrapperElement(), 'mouseover', event => {
             const node = event.target || event.srcElement;
@@ -193,13 +209,28 @@ export class CodeBlock {
                         <span>{this.filename}</span>
                     </div>
                     <div class="py-codeblock__top-bar__buttons">
-                        <button class="button reduce" title="Reduce" type="button" onClick={this.reduce.bind(this)}>
+                        <button
+                            class="button reduce"
+                            title="Reduce"
+                            type="button"
+                            onClick={this.reduce.bind(this)}
+                        >
                             -
                         </button>
-                        <button class="button open" title="Open" type="button" onClick={this.open.bind(this)}>
+                        <button
+                            class="button open"
+                            title="Open"
+                            type="button"
+                            onClick={this.open.bind(this)}
+                        >
                             =
                         </button>
-                        <button class="button maximize" title="Maximize" type="button" onClick={this.maximize.bind(this)}>
+                        <button
+                            class="button maximize"
+                            title="Maximize"
+                            type="button"
+                            onClick={this.maximize.bind(this)}
+                        >
                             &#9633;
                         </button>
                     </div>

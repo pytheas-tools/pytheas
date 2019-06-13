@@ -1,4 +1,11 @@
-import { Component, Element, Event, EventEmitter, Prop } from '@stencil/core';
+import {
+    Component,
+    Element,
+    Event,
+    EventEmitter,
+    h,
+    Prop
+} from '@stencil/core';
 
 declare global {
     interface Window {
@@ -41,7 +48,11 @@ export class Graph {
     styleWhiteColumnGroup;
 
     componentWillLoad() {
-        console.log('Graph is about to be rendered..: ', this.data, this.mxclientPath);
+        console.log(
+            'Graph is about to be rendered..: ',
+            this.data,
+            this.mxclientPath
+        );
     }
 
     componentDidLoad() {
@@ -74,7 +85,9 @@ export class Graph {
     }
 
     async bootstrapGraph() {
-        this.graph = new window.mxGraph(this.graphElement.querySelector('#graphContainer'));
+        this.graph = new window.mxGraph(
+            this.graphElement.querySelector('#graphContainer')
+        );
         console.log(this.graph);
         this.setupGraphStyles();
         this.setupHoverCells();
@@ -86,7 +99,10 @@ export class Graph {
                 console.log('click main : ', cell);
                 this.graphElementSelected.emit(cell.pytheasElement);
             }
-            if (cell && (cell.style === 'property' || cell.style === 'method')) {
+            if (
+                cell &&
+                (cell.style === 'property' || cell.style === 'method')
+            ) {
                 console.log('click submain : ', cell);
                 this.graphSubElementSelected.emit({
                     value: cell.value,
@@ -119,12 +135,24 @@ export class Graph {
             if (relation.type === 'in') {
                 const element = this.buildMainGraphBlock(relation.from);
                 relation.from.mxElement = element;
-                this.graph.insertEdge(this.graph.getDefaultParent(), null, '', element, this.data.mxElement);
+                this.graph.insertEdge(
+                    this.graph.getDefaultParent(),
+                    null,
+                    '',
+                    element,
+                    this.data.mxElement
+                );
             }
             if (relation.type === 'out') {
                 const element = this.buildMainGraphBlock(relation.to);
                 relation.to.mxElement = element;
-                this.graph.insertEdge(this.graph.getDefaultParent(), null, '', this.data.mxElement, element);
+                this.graph.insertEdge(
+                    this.graph.getDefaultParent(),
+                    null,
+                    '',
+                    this.data.mxElement,
+                    element
+                );
             }
         });
 
@@ -178,15 +206,35 @@ export class Graph {
     }
 
     buildMainGraphBlock(element, mainSelection?) {
-        const mxGraphVertexElementStyle = mainSelection ? 'columnSelection' : 'column';
-        const mxGraphVertexElement = this.graph.insertVertex(this.graph.getDefaultParent(), null, element.name, 0, 0, 200, 200, mxGraphVertexElementStyle);
+        const mxGraphVertexElementStyle = mainSelection
+            ? 'columnSelection'
+            : 'column';
+        const mxGraphVertexElement = this.graph.insertVertex(
+            this.graph.getDefaultParent(),
+            null,
+            element.name,
+            0,
+            0,
+            200,
+            200,
+            mxGraphVertexElementStyle
+        );
         element.mxElement = mxGraphVertexElement;
         mxGraphVertexElement.pytheasElement = element;
 
         const mxGraphVertexElementGeometry = mxGraphVertexElement.getGeometry();
 
         if (element.publicElements.length > 0) {
-            const mxGraphVertexElementPublic = this.graph.insertVertex(mxGraphVertexElement, null, 'Public', 0, 0, 80, 30, 'whiteColumn');
+            const mxGraphVertexElementPublic = this.graph.insertVertex(
+                mxGraphVertexElement,
+                null,
+                'Public',
+                0,
+                0,
+                80,
+                30,
+                'whiteColumn'
+            );
             element.mxPublicElement = mxGraphVertexElementPublic;
 
             const mxGraphVertexElementPublicGeometry = mxGraphVertexElementPublic.getGeometry();
@@ -206,21 +254,40 @@ export class Graph {
                 mxGraphVertexElementPublicChild.pytheasElement = element;
                 // Resize it
                 const mxGraphVertexElementPublicChildGeometry = mxGraphVertexElementPublicChild.getGeometry();
-                const mxGraphVertexElementPublicChildPreferredGeometry = this.graph.getPreferredSizeForCell(mxGraphVertexElementPublicChild);
+                const mxGraphVertexElementPublicChildPreferredGeometry = this.graph.getPreferredSizeForCell(
+                    mxGraphVertexElementPublicChild
+                );
 
-                if (mxGraphVertexElementPublicChildPreferredGeometry.width > maxWidthForElements) {
-                    maxWidthForElements = mxGraphVertexElementPublicChildPreferredGeometry.width;
+                if (
+                    mxGraphVertexElementPublicChildPreferredGeometry.width >
+                    maxWidthForElements
+                ) {
+                    maxWidthForElements =
+                        mxGraphVertexElementPublicChildPreferredGeometry.width;
                 }
-                mxGraphVertexElementPublicChildGeometry.width = mxGraphVertexElementPublicChildPreferredGeometry.width + MARGIN_CELL;
+                mxGraphVertexElementPublicChildGeometry.width =
+                    mxGraphVertexElementPublicChildPreferredGeometry.width +
+                    MARGIN_CELL;
             });
 
             // Resize public column
-            mxGraphVertexElementPublicGeometry.width = maxWidthForElements + MARGIN_CELL * 2;
-            mxGraphVertexElementGeometry.width = mxGraphVertexElementPublicGeometry.width + MARGIN_CELL;
+            mxGraphVertexElementPublicGeometry.width =
+                maxWidthForElements + MARGIN_CELL * 2;
+            mxGraphVertexElementGeometry.width =
+                mxGraphVertexElementPublicGeometry.width + MARGIN_CELL;
         }
 
         if (element.privateElements.length > 0) {
-            const mxGraphVertexElementPrivate = this.graph.insertVertex(mxGraphVertexElement, null, 'Private', 0, 0, 80, 30, 'whiteColumn');
+            const mxGraphVertexElementPrivate = this.graph.insertVertex(
+                mxGraphVertexElement,
+                null,
+                'Private',
+                0,
+                0,
+                80,
+                30,
+                'whiteColumn'
+            );
             element.mxPrivateElement = mxGraphVertexElementPrivate;
 
             const mxGraphVertexElementPrivateGeometry = mxGraphVertexElementPrivate.getGeometry();
@@ -240,18 +307,31 @@ export class Graph {
                 mxGraphVertexElementPrivateChild.pytheasElement = element;
                 // Resize it
                 const mxGraphVertexElementPrivateChildGeometry = mxGraphVertexElementPrivateChild.getGeometry();
-                const mxGraphVertexElementPrivateChildPreferredGeometry = this.graph.getPreferredSizeForCell(mxGraphVertexElementPrivateChild);
+                const mxGraphVertexElementPrivateChildPreferredGeometry = this.graph.getPreferredSizeForCell(
+                    mxGraphVertexElementPrivateChild
+                );
 
-                if (mxGraphVertexElementPrivateChildPreferredGeometry.width > maxWidthForElements) {
-                    maxWidthForElements = mxGraphVertexElementPrivateChildPreferredGeometry.width;
+                if (
+                    mxGraphVertexElementPrivateChildPreferredGeometry.width >
+                    maxWidthForElements
+                ) {
+                    maxWidthForElements =
+                        mxGraphVertexElementPrivateChildPreferredGeometry.width;
                 }
-                mxGraphVertexElementPrivateChildGeometry.width = mxGraphVertexElementPrivateChildPreferredGeometry.width + MARGIN_CELL;
+                mxGraphVertexElementPrivateChildGeometry.width =
+                    mxGraphVertexElementPrivateChildPreferredGeometry.width +
+                    MARGIN_CELL;
             });
 
             // Resize private column
-            mxGraphVertexElementPrivateGeometry.width = maxWidthForElements + MARGIN_CELL * 2;
-            if (mxGraphVertexElementPrivateGeometry.width > mxGraphVertexElementGeometry.width) {
-                mxGraphVertexElementGeometry.width = mxGraphVertexElementPrivateGeometry.width + MARGIN_CELL;
+            mxGraphVertexElementPrivateGeometry.width =
+                maxWidthForElements + MARGIN_CELL * 2;
+            if (
+                mxGraphVertexElementPrivateGeometry.width >
+                mxGraphVertexElementGeometry.width
+            ) {
+                mxGraphVertexElementGeometry.width =
+                    mxGraphVertexElementPrivateGeometry.width + MARGIN_CELL;
             }
         }
 
@@ -259,7 +339,10 @@ export class Graph {
     }
 
     layoutHierarchicalGraph = objects => {
-        const layout = new window.mxHierarchicalLayout(this.graph, window.mxConstants.DIRECTION_WEST);
+        const layout = new window.mxHierarchicalLayout(
+            this.graph,
+            window.mxConstants.DIRECTION_WEST
+        );
 
         this.graph.getModel().beginUpdate();
         try {
@@ -293,10 +376,13 @@ export class Graph {
         function updateStyle(state, hover) {
             if (hover) {
                 if (state.cell.style === 'whiteColumn') {
-                    styleWhiteColumnGroup[window.mxConstants.STYLE_SWIMLANE_FILLCOLOR] = '#fff';
+                    styleWhiteColumnGroup[
+                        window.mxConstants.STYLE_SWIMLANE_FILLCOLOR
+                    ] = '#fff';
                     state.style[window.mxConstants.STYLE_STROKECOLOR] = '#fff';
                 } else {
-                    state.style[window.mxConstants.STYLE_STROKECOLOR] = '#707070';
+                    state.style[window.mxConstants.STYLE_STROKECOLOR] =
+                        '#707070';
                 }
             }
         }
@@ -312,14 +398,20 @@ export class Graph {
                 }
             },
             mouseMove(sender, me) {
-                if (this.currentState != null && me.getState() === this.currentState) {
+                if (
+                    this.currentState != null &&
+                    me.getState() === this.currentState
+                ) {
                     return;
                 }
 
                 var tmp = mainGraph.view.getState(me.getCell());
 
                 // Ignores everything but vertices
-                if (mainGraph.isMouseDown || (tmp != null && !mainGraph.getModel().isVertex(tmp.cell))) {
+                if (
+                    mainGraph.isMouseDown ||
+                    (tmp != null && !mainGraph.getModel().isVertex(tmp.cell))
+                ) {
                     tmp = null;
                 }
 
@@ -376,12 +468,15 @@ export class Graph {
         this.graph.border = 10;
 
         const styleEdge = this.graph.getStylesheet().getDefaultEdgeStyle();
-        styleEdge[window.mxConstants.STYLE_EDGE] = window.mxEdgeStyle.EntityRelation;
+        styleEdge[window.mxConstants.STYLE_EDGE] =
+            window.mxEdgeStyle.EntityRelation;
         styleEdge[window.mxConstants.STYLE_STROKECOLOR] = '#c8c7c7';
         styleEdge[window.mxConstants.STYLE_STROKEWIDTH] = '2';
         styleEdge[window.mxConstants.STYLE_ROUNDED] = true;
 
-        const styleCommonCell = this.graph.getStylesheet().getDefaultVertexStyle();
+        const styleCommonCell = this.graph
+            .getStylesheet()
+            .getDefaultVertexStyle();
         styleCommonCell[window.mxConstants.STYLE_FONTSIZE] = '16';
 
         const styleColumn = [];
@@ -395,27 +490,35 @@ export class Graph {
         styleColumn[window.mxConstants.STYLE_STARTSIZE] = 30;
         styleColumn[window.mxConstants.STYLE_ROUNDED] = true;
         styleColumn[window.mxConstants.STYLE_FOLDABLE] = false;
-        styleColumn[window.mxConstants.STYLE_FONTSTYLE] = window.mxConstants.FONT_BOLD;
+        styleColumn[window.mxConstants.STYLE_FONTSTYLE] =
+            window.mxConstants.FONT_BOLD;
         this.graph.getStylesheet().putCellStyle('column', styleColumn);
 
         const styleColumnSelection = Object.assign({}, styleColumn);
         styleColumnSelection[window.mxConstants.STYLE_STROKECOLOR] = '#454545';
-        this.graph.getStylesheet().putCellStyle('columnSelection', styleColumnSelection);
+        this.graph
+            .getStylesheet()
+            .putCellStyle('columnSelection', styleColumnSelection);
 
         const styleWhiteColumnGroup = [];
         styleWhiteColumnGroup[window.mxConstants.STYLE_FOLDABLE] = false;
         styleWhiteColumnGroup[window.mxConstants.STYLE_FONTCOLOR] = '#000000';
         styleWhiteColumnGroup[window.mxConstants.STYLE_FILLCOLOR] = '#ffffff';
-        styleWhiteColumnGroup[window.mxConstants.STYLE_SWIMLANE_FILLCOLOR] = '#fff';
-        styleWhiteColumnGroup[window.mxConstants.STYLE_FONTSTYLE] = window.mxConstants.FONT_BOLD;
+        styleWhiteColumnGroup[window.mxConstants.STYLE_SWIMLANE_FILLCOLOR] =
+            '#fff';
+        styleWhiteColumnGroup[window.mxConstants.STYLE_FONTSTYLE] =
+            window.mxConstants.FONT_BOLD;
         styleWhiteColumnGroup[window.mxConstants.STYLE_STROKECOLOR] = '#fff';
         styleWhiteColumnGroup[window.mxConstants.STYLE_SHAPE] = 'swimlane';
         styleWhiteColumnGroup[window.mxConstants.STYLE_ROUNDED] = true;
         this.styleWhiteColumnGroup = styleWhiteColumnGroup;
-        this.graph.getStylesheet().putCellStyle('whiteColumn', styleWhiteColumnGroup);
+        this.graph
+            .getStylesheet()
+            .putCellStyle('whiteColumn', styleWhiteColumnGroup);
 
         const styleVariable = [];
-        styleVariable[window.mxConstants.STYLE_SHAPE] = window.mxConstants.SHAPE_RECTANGLE;
+        styleVariable[window.mxConstants.STYLE_SHAPE] =
+            window.mxConstants.SHAPE_RECTANGLE;
         styleVariable[window.mxConstants.STYLE_ROUNDED] = true;
         styleVariable[window.mxConstants.STYLE_FILLCOLOR] = '#6fb4d3';
         styleVariable[window.mxConstants.STYLE_FONTCOLOR] = '#232323';
@@ -423,7 +526,8 @@ export class Graph {
         this.graph.getStylesheet().putCellStyle('property', styleVariable);
 
         const styleMethod = [];
-        styleMethod[window.mxConstants.STYLE_SHAPE] = window.mxConstants.SHAPE_RECTANGLE;
+        styleMethod[window.mxConstants.STYLE_SHAPE] =
+            window.mxConstants.SHAPE_RECTANGLE;
         styleMethod[window.mxConstants.STYLE_ROUNDED] = true;
         styleMethod[window.mxConstants.STYLE_FILLCOLOR] = '#f9bb43';
         styleMethod[window.mxConstants.STYLE_FONTCOLOR] = '#232323';

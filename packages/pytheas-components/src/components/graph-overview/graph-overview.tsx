@@ -1,4 +1,12 @@
-import { Component, Prop, Event, EventEmitter, State, Method } from '@stencil/core';
+import {
+    Component,
+    Event,
+    EventEmitter,
+    h,
+    Method,
+    Prop,
+    State
+} from '@stencil/core';
 import { OverviewData } from './overview-data';
 
 @Component({
@@ -64,7 +72,7 @@ export class GraphOverview {
     }
 
     @Method()
-    selectType(ev, notify) {
+    async selectType(ev, notify) {
         this.selectedType = ev.target ? ev.target.dataset.type : ev;
         // console.log('selectType: ', this.selectedType);
         if (this.dataOrderedByFirstLetter[this.selectedType]) {
@@ -72,7 +80,9 @@ export class GraphOverview {
             if (typeof notify === 'undefined') {
                 this.graphOverviewDetailSelected.emit(this.selectedType);
             }
-            this.selectedElements = this.dataOrderedByFirstLetter[this.selectedType];
+            this.selectedElements = this.dataOrderedByFirstLetter[
+                this.selectedType
+            ];
         }
     }
 
@@ -119,12 +129,18 @@ export class GraphOverview {
             return (
                 <div class="graph-overview__type-list">
                     <div class="graph-overview__type-list__spacer">
-                        <div class="title">{this.getPluralForType(this.selectedType)}</div>
+                        <div class="title">
+                            {this.getPluralForType(this.selectedType)}
+                        </div>
                         <ul>
                             {Object.keys(this.selectedElements).map(key => (
                                 <li>
                                     <span class="letter-group">{key}</span>
-                                    <ul class="elements">{this.renderListOfElements(this.selectedElements[key].elements)}</ul>
+                                    <ul class="elements">
+                                        {this.renderListOfElements(
+                                            this.selectedElements[key].elements
+                                        )}
+                                    </ul>
                                 </li>
                             ))}
                         </ul>

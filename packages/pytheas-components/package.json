@@ -2,12 +2,17 @@
   "name": "pytheas-components",
   "version": "0.1.0",
   "description": "Pytheas Web Component",
-  "module": "dist/esm/index.js",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "es2015": "dist/esm/index.mjs",
+  "es2017": "dist/esm/index.mjs",
   "types": "dist/types/components.d.ts",
   "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "unpkg": "dist/pytheas/pytheas.js",
   "files": [
-    "dist/"
+    "dist/",
+    "loader/"
   ],
   "private": true,
   "repository": {
@@ -27,8 +32,8 @@
     "test": "jest --config jest.config.js --coverage"
   },
   "devDependencies": {
-    "@stencil/core": "0.18.1",
-    "@stencil/sass": "^0.2.3",
+    "@stencil/core": "1.0.3",
+    "@stencil/sass": "1.0.0",
     "jest": "^24.8.0",
     "stencil-strip-debug": "^1.0.0",
     "ts-jest": "^24.0.2"

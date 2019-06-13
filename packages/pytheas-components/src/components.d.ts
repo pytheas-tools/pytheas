@@ -5,90 +5,40 @@
  */
 
 
-import '@stencil/core';
-
-
+import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
   OverviewData,
 } from './components/graph-overview/overview-data';
 
-
 export namespace Components {
-
   interface PyCodeblock {
     'code': string;
     'codeMirrorEditor': any;
     'codemirrorPath': string;
     'filename': string;
-    'highlight': (range: any) => void;
-    'highlights': (ranges: any) => void;
+    'highlight': (range: any) => Promise<void>;
+    'highlights': (ranges: any) => Promise<void>;
     'language': string;
     'theme': string;
-    'unHighlight': () => void;
-    'updateTheme': (theme: string) => void;
+    'unHighlight': () => Promise<void>;
+    'updateTheme': (theme: string) => Promise<void>;
   }
-  interface PyCodeblockAttributes extends StencilHTMLAttributes {
-    'code'?: string;
-    'codeMirrorEditor'?: any;
-    'codemirrorPath'?: string;
-    'filename'?: string;
-    'language'?: string;
-    'onCodeblockMaximized'?: (event: CustomEvent) => void;
-    'onCodeblockUnmaximized'?: (event: CustomEvent) => void;
-    'onTokenHovered'?: (event: CustomEvent) => void;
-    'theme'?: string;
-  }
-
-  interface PyGraphOverview {
-    'data': OverviewData;
-    'selectType': (ev: any, notify: any) => void;
-  }
-  interface PyGraphOverviewAttributes extends StencilHTMLAttributes {
-    'data'?: OverviewData;
-    'onGraphElementSelected'?: (event: CustomEvent) => void;
-    'onGraphOverviewDetailSelected'?: (event: CustomEvent) => void;
-  }
-
   interface PyGraph {
     'data': any;
     'mxclientPath': string;
   }
-  interface PyGraphAttributes extends StencilHTMLAttributes {
-    'data'?: any;
-    'mxclientPath'?: string;
-    'onGraphElementSelected'?: (event: CustomEvent) => void;
-    'onGraphSubElementSelected'?: (event: CustomEvent) => void;
+  interface PyGraphOverview {
+    'data': OverviewData;
+    'selectType': (ev: any, notify: any) => Promise<void>;
   }
-
   interface PyNavigationBar {
     'backDisabled': boolean;
     'current': string;
     'nextDisabled': boolean;
   }
-  interface PyNavigationBarAttributes extends StencilHTMLAttributes {
-    'backDisabled'?: boolean;
-    'current'?: string;
-    'nextDisabled'?: boolean;
-    'onNavigationBarBackEvent'?: (event: CustomEvent) => void;
-    'onNavigationBarHomeEvent'?: (event: CustomEvent) => void;
-    'onNavigationBarNextEvent'?: (event: CustomEvent) => void;
-  }
 }
 
 declare global {
-  interface StencilElementInterfaces {
-    'PyCodeblock': Components.PyCodeblock;
-    'PyGraphOverview': Components.PyGraphOverview;
-    'PyGraph': Components.PyGraph;
-    'PyNavigationBar': Components.PyNavigationBar;
-  }
-
-  interface StencilIntrinsicElements {
-    'py-codeblock': Components.PyCodeblockAttributes;
-    'py-graph-overview': Components.PyGraphOverviewAttributes;
-    'py-graph': Components.PyGraphAttributes;
-    'py-navigation-bar': Components.PyNavigationBarAttributes;
-  }
 
 
   interface HTMLPyCodeblockElement extends Components.PyCodeblock, HTMLStencilElement {}
@@ -97,16 +47,16 @@ declare global {
     new (): HTMLPyCodeblockElement;
   };
 
-  interface HTMLPyGraphOverviewElement extends Components.PyGraphOverview, HTMLStencilElement {}
-  var HTMLPyGraphOverviewElement: {
-    prototype: HTMLPyGraphOverviewElement;
-    new (): HTMLPyGraphOverviewElement;
-  };
-
   interface HTMLPyGraphElement extends Components.PyGraph, HTMLStencilElement {}
   var HTMLPyGraphElement: {
     prototype: HTMLPyGraphElement;
     new (): HTMLPyGraphElement;
+  };
+
+  interface HTMLPyGraphOverviewElement extends Components.PyGraphOverview, HTMLStencilElement {}
+  var HTMLPyGraphOverviewElement: {
+    prototype: HTMLPyGraphOverviewElement;
+    new (): HTMLPyGraphOverviewElement;
   };
 
   interface HTMLPyNavigationBarElement extends Components.PyNavigationBar, HTMLStencilElement {}
@@ -114,28 +64,61 @@ declare global {
     prototype: HTMLPyNavigationBarElement;
     new (): HTMLPyNavigationBarElement;
   };
-
   interface HTMLElementTagNameMap {
-    'py-codeblock': HTMLPyCodeblockElement
-    'py-graph-overview': HTMLPyGraphOverviewElement
-    'py-graph': HTMLPyGraphElement
-    'py-navigation-bar': HTMLPyNavigationBarElement
-  }
-
-  interface ElementTagNameMap {
     'py-codeblock': HTMLPyCodeblockElement;
-    'py-graph-overview': HTMLPyGraphOverviewElement;
     'py-graph': HTMLPyGraphElement;
+    'py-graph-overview': HTMLPyGraphOverviewElement;
     'py-navigation-bar': HTMLPyNavigationBarElement;
   }
-
-
-  export namespace JSX {
-    export interface Element {}
-    export interface IntrinsicElements extends StencilIntrinsicElements {
-      [tagName: string]: any;
-    }
-  }
-  export interface HTMLAttributes extends StencilHTMLAttributes {}
-
 }
+
+declare namespace LocalJSX {
+  interface PyCodeblock extends JSXBase.HTMLAttributes<HTMLPyCodeblockElement> {
+    'code'?: string;
+    'codeMirrorEditor'?: any;
+    'codemirrorPath'?: string;
+    'filename'?: string;
+    'language'?: string;
+    'onCodeblockMaximized'?: (event: CustomEvent<any>) => void;
+    'onCodeblockUnmaximized'?: (event: CustomEvent<any>) => void;
+    'onTokenHovered'?: (event: CustomEvent<any>) => void;
+    'theme'?: string;
+  }
+  interface PyGraph extends JSXBase.HTMLAttributes<HTMLPyGraphElement> {
+    'data'?: any;
+    'mxclientPath'?: string;
+    'onGraphElementSelected'?: (event: CustomEvent<any>) => void;
+    'onGraphSubElementSelected'?: (event: CustomEvent<any>) => void;
+  }
+  interface PyGraphOverview extends JSXBase.HTMLAttributes<HTMLPyGraphOverviewElement> {
+    'data'?: OverviewData;
+    'onGraphElementSelected'?: (event: CustomEvent<any>) => void;
+    'onGraphOverviewDetailSelected'?: (event: CustomEvent<any>) => void;
+  }
+  interface PyNavigationBar extends JSXBase.HTMLAttributes<HTMLPyNavigationBarElement> {
+    'backDisabled'?: boolean;
+    'current'?: string;
+    'nextDisabled'?: boolean;
+    'onNavigationBarBackEvent'?: (event: CustomEvent<any>) => void;
+    'onNavigationBarHomeEvent'?: (event: CustomEvent<any>) => void;
+    'onNavigationBarNextEvent'?: (event: CustomEvent<any>) => void;
+  }
+
+  interface IntrinsicElements {
+    'py-codeblock': PyCodeblock;
+    'py-graph': PyGraph;
+    'py-graph-overview': PyGraphOverview;
+    'py-navigation-bar': PyNavigationBar;
+  }
+}
+
+export { LocalJSX as JSX };
+
+
+declare module "@stencil/core" {
+  export namespace JSX {
+    interface IntrinsicElements extends LocalJSX.IntrinsicElements {}
+  }
+}
+
+

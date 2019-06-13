@@ -15,7 +15,7 @@
     "scripts": {
         "---DEVELOPMENT---": "",
         "prestart": "npm run clean-output && mkdir output && mkdir output/scripts",
-        "start": "npm-run-all -p serve watch build-browser-dependencies copy-demos",
+        "start": "npm-run-all -p serve watch build-browser-dependencies copy-demos copy-wc",
         "serve": "live-server output --port=8383 --host=localhost --quiet",
         "watch": "npm-watch",
         "---BUILD-EXTERNAL-DEPENDENCIES---": "",

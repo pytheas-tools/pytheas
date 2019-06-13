@@ -82,7 +82,8 @@
         <li data-action="saveasimage">Save as image</li>
     </ul>
 
-    <script src="web-components/pytheas.js"></script>
+    <script type="module" src="web-components/pytheas/pytheas.esm.js"></script>
+    <script nomodule="" src="web-components/pytheas/pytheas.js"></script>
 
     <script src="libs/ionicons/ionicons.js"></script>
 
@@ -90,8 +91,8 @@
         var PYTHEAS_CONTEXT = '__PYTHEAS_CONTEXT__';
     </script>
 
-    <script src="scripts/app.js" nomodule></script>
-    <script src="scripts/app_es6.js" type="module"></script>
+    <script nomodule src="scripts/app.js"></script>
+    <script type="module" src="scripts/app_es6.js"></script>
 </body>
 
 </html>

@@ -70,9 +70,9 @@ jobs:
               - npm run build:prod
               - echo "\n**********\nBUILDING WEB COMPONENTS\n**********\n"
               - cd ../pytheas-components
-              - npm ci
               - npm run build:prod
               - cd ../pytheas-ui
+              - npm ci
               - mkdir output
               - mkdir output/web-components
               - mkdir output/scripts

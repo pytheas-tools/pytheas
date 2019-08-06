@@ -6,3 +6,6 @@ jobs:
         steps:
             - checkout
             - run: echo "hello world"
+            - cd packages/pytheas-documentation
+            - npm i
+            - npm run madge

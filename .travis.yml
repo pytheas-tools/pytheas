@@ -2,7 +2,7 @@ os:
     - linux
 language: node_js
 node_js: stable
-dist: trusty
+dist: bionic
 sudo: required
 addons:
     firefox: latest-beta
@@ -18,7 +18,8 @@ addons:
 
 before_install:
     - stty cols 80
-    - sudo apt-get update && sudo apt-get install -y graphviz
+    - sudo apt-get update
+    - sudo apt-get install -y graphviz
     -  #yes | sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
     -  #echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >>~/.profile
     -  #eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)

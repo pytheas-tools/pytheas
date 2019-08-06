@@ -5,7 +5,6 @@ jobs:
             - image: circleci/node:7.10
         steps:
             - checkout
-            - run: echo "hello world"
-            - cd packages/pytheas-documentation
-            - npm i
-            - npm run madge
+            - run: cd packages/pytheas-documentation
+            - run: npm i
+            - run: npm run madge

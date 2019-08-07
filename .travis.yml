@@ -9,6 +9,7 @@ addons:
         sources:
             - google-chrome
             - sourceline: 'deb http://deb.debian.org/debian stretch main'
+              key_url: 'https://ftp-master.debian.org/keys/archive-key-8.asc'
         packages:
             - google-chrome-stable
             - graphviz

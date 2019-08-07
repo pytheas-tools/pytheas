@@ -8,10 +8,10 @@ addons:
     apt:
         sources:
             - google-chrome
-            - sourceline: 'deb http://deb.debian.org/debian stretch/main'
+            #- sourceline: 'deb http://deb.debian.org/debian stretch/main'
         packages:
             - google-chrome-stable
-            - graphviz
+            #- graphviz
     sonarcloud:
         organization: 'pytheas-tools'
         token:

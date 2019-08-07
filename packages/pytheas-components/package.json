@@ -32,9 +32,9 @@
     "test": "stencil test --spec --coverage"
   },
   "devDependencies": {
-    "@stencil/core": "1.1.5",
+    "@stencil/core": "1.2.3",
     "@stencil/sass": "1.0.1",
-    "@types/jest": "24.0.15",
+    "@types/jest": "24.0.17",
     "jest": "^24.8.0",
     "jest-cli": "24.8.0",
     "stencil-strip-debug": "^1.0.0",

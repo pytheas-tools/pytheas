@@ -5,6 +5,5 @@ output
 dist
 doc
 coverage
-cypress
 code-documentation
 es

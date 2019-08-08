@@ -48,22 +48,32 @@ jobs:
               - cd ../pytheas-ui
               - npm ci
               - mkdir output
-              - mkdir output/web-components
               - mkdir output/scripts
               - npm run build-browser-dependencies
           script:
               - npm run test:unit
               - sonar-scanner
+        - stage: e2e testing app
+          install:
+              - npm install npm@latest -g
+              - echo "\n**********\nBUILDING WEB COMPONENTS\n**********\n"
+              - cd packages/pytheas-components
+              - npm run build:prod
+              - echo -e "\n**********\nBUILD PROD APP\n**********\n"
+              - cd ../pytheas-ui
+              - npm ci
+              - mkdir output
+              - mkdir output/web-components
+              - mkdir output/scripts
+              - npm run build
+          script:
+              - npm run test:e2e
         - stage: build prod app
           install:
               - npm install npm@latest -g
               - cd packages/pytheas-components
               - npm ci
           script:
-              - echo "\n**********\nBUILDING STATIC DEPENDENCIES\n**********\n"
-              - cd ../pytheas-ui-static-dependencies
-              - npm ci
-              - npm run build:prod
               - echo "\n**********\nBUILDING WEB COMPONENTS\n**********\n"
               - cd ../pytheas-components
               - npm run build:prod

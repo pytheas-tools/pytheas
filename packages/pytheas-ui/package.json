@@ -24,7 +24,7 @@
         "compile-dragmock": "npx rollup -c test/vendors/drag-mock/rollup.config.js",
         "concat-app-dragmock": "npx concat -o output/scripts/app_es6.js output/scripts/app_es6.js output/scripts/dragmock.js test/mock-drag.js",
         "---WEB-COMPONENTS---": "",
-        "copy-wc": "cp -R ../pytheas-components/dist output/web-components",
+        "copy-wc": "cp -R ../pytheas-components/dist/* output/web-components",
         "---SASS---": "",
         "compile-scss": "npx node-sass src/styles/app.scss output/styles/app.css",
         "---TYPESCRIPT---": "",

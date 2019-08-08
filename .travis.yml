@@ -17,17 +17,13 @@ addons:
         organization: 'pytheas-tools'
         token:
             secure: 'fm3A7MJufehMUvlFqVxGSumGJvpvOflM1FtCb4VGLeAXnZ0jQwd8ccbkNd2d0tZZia8GAVyya9gcsU+OGU/VEuyRg6BkK4cPw2LOAtk7uEEccLj7/LRWQDEK0aBMrnL5tlgpEvPz+WZeivOXXkbVuDg79cOl7irYW5hCx9Ng7Lpxd0Ry/PATdichuAa4FaNVYTV5cEUpz3jVTUjmg+UxQuPKCrkTIqqGV+v1iwcWSNjr0jrepMEaydDakxctkTqxekn8vMLeoG7R3udbRTdMU5qJqrI+2pJYXo/5hRjrKhUHa3Pai9RtRxufe3jN6EA7lbjIF06fFmgkwVsLT1lx8xQnaYD/jNtprkrR83B1QmKgh+Vl/JwQK4PPlCFKPyRfQUqQkq6W0oxumaezBzzXdPIf2emOUqaQBNT2RRkwZcSLnYaCzmZr7uCNKUORRnCkmY7IezYc+C8RTyY0FFXCj7mRjDLYMC9qVR+FO+oKthiJ3sIFhBSD6Nf4nXIgO0gt6losvuWBdlmvdxyftBlq2d8svOe+6YIuDziGiXK/K1i4bn6dsGlJSn8Jv4fbyyOrfeMEG0YLyPNCVbx59jvn47htOcfQTawJKGWYuT1NdMyKOLn/8MCnEbc5pYHhtHj6TnBhFzMULi2UKcq+R1pJMF1qd0GjamvnjnSWM4bt514='
-
-before_install:
-    -  # stty cols 80
-before_script:
-    -  # export DISPLAY=:99.0
-    -  # sh -e /etc/init.d/xvfb start
-    -  # sleep 3
-    -  # fluxbox >/dev/null 2>&1 &
-script:
-    -  #echo -e "\n**********\nE2E TESTING APP\n**********\n"
-    -  #npm run test:e2e
+cache:
+    # Caches $HOME/.npm when npm ci is default script command
+    # Caches node_modules in all other cases
+    npm: true
+    directories:
+        # we also need to cache folder with Cypress binary
+        - ~/.cache
 
 jobs:
     include:
@@ -58,6 +54,7 @@ jobs:
               - npm install npm@latest -g
               - echo "\n**********\nBUILDING WEB COMPONENTS\n**********\n"
               - cd packages/pytheas-components
+              - npm ci
               - npm run build:prod
               - echo -e "\n**********\nBUILD PROD APP\n**********\n"
               - cd ../pytheas-ui

@@ -21,6 +21,24 @@ class Game {
 new Game();
 `
                 );
+                event.dataTransfer.setData(
+                    'application/javascript',
+                    'player.js',
+                    `
+                    export class Player {
+                        name;
+                        power;
+                    
+                        constructor(name) {
+                            this.name = name;
+                        }
+                    
+                        init(power) {
+                            this.power = power;
+                        }
+                    }
+                `
+                );
             }
         })
         .drop(document, dropEvent => {});

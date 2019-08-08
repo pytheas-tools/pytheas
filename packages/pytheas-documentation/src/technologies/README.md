@@ -45,3 +45,9 @@ UML TypeScript :
 https://github.com/joaompneves/tsviz
 
 https://github.com/joaompneves/tsviz/blob/master/src/ts-analyser.ts
+
+## Notes on E2E testing
+
+Testcafe was selected as a cross browser solution without WebDriver.
+An issue with their internal http-reverse-proxy and native ES6 module breaks E2E testing with Stencil Web Components.
+-> Switching to Cypress.io during the fix of this issue. Test onl on Chrome.

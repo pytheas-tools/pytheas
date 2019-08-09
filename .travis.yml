@@ -27,6 +27,9 @@ cache:
         # we also need to cache folder with Cypress binary
         - ~/.cache
 
+before_install:
+    - sudo apt --fix-broken install
+
 jobs:
     include:
         - stage: testing web components

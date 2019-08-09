@@ -72,6 +72,9 @@ jobs:
               - cd packages/pytheas-components
               - npm ci
           script:
+              - echo "\n**********\nBUILDING STATIC DEPENDENCIES\n**********\n"
+              - cd ../pytheas-ui-static-dependencies
+              - npm ci
               - echo "\n**********\nBUILDING WEB COMPONENTS\n**********\n"
               - cd ../pytheas-components
               - npm run build:prod

@@ -49,7 +49,7 @@ jobs:
         - stage: e2e testing app
           install:
               - npm install npm@latest -g
-              - echo "\n**********\nBUILDING STATIC DEPENDENCIES\n**********\n"
+              - echo "\n**********\INSTALLING STATIC DEPENDENCIES\n**********\n"
               - cd packages/pytheas-ui-static-dependencies
               - npm ci
               - echo "\n**********\nBUILDING WEB COMPONENTS\n**********\n"
@@ -83,7 +83,6 @@ jobs:
               - mkdir output
               - mkdir output/web-components
               - mkdir output/scripts
-              - npm run build-browser-dependencies
               - echo -e "\n**********\nBUILD PROD APP\n**********\n"
               - npm run build
               - npm run copy-wc

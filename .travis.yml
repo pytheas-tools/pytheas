@@ -13,6 +13,7 @@ addons:
         packages:
             - google-chrome-stable
             - graphviz
+            - libgconf-2-4
     sonarcloud:
         organization: 'pytheas-tools'
         token:

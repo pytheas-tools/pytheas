@@ -4,17 +4,8 @@ language: node_js
 node_js: stable
 dist: bionic
 sudo: required
+
 addons:
-    apt:
-        sources:
-            - google-chrome
-            - sourceline: 'deb http://deb.debian.org/debian stretch main'
-              key_url: 'https://ftp-master.debian.org/keys/archive-key-8.asc'
-        packages:
-            - google-chrome-stable
-            - graphviz
-            - gconf2-common
-            - libgconf-2-4
     sonarcloud:
         organization: 'pytheas-tools'
         token:
@@ -28,7 +19,7 @@ cache:
         - ~/.cache
 
 before_install:
-    - sudo apt --fix-broken install
+    - sudo apt-get install -y google-chrome-stable
 
 jobs:
     include:

@@ -73,7 +73,7 @@ declare global {
 }
 
 declare namespace LocalJSX {
-  interface PyCodeblock extends JSXBase.HTMLAttributes<HTMLPyCodeblockElement> {
+  interface PyCodeblock {
     'code'?: string;
     'codeMirrorEditor'?: any;
     'codemirrorPath'?: string;
@@ -84,18 +84,18 @@ declare namespace LocalJSX {
     'onTokenHovered'?: (event: CustomEvent<any>) => void;
     'theme'?: string;
   }
-  interface PyGraph extends JSXBase.HTMLAttributes<HTMLPyGraphElement> {
+  interface PyGraph {
     'data'?: any;
     'mxclientPath'?: string;
     'onGraphElementSelected'?: (event: CustomEvent<any>) => void;
     'onGraphSubElementSelected'?: (event: CustomEvent<any>) => void;
   }
-  interface PyGraphOverview extends JSXBase.HTMLAttributes<HTMLPyGraphOverviewElement> {
+  interface PyGraphOverview {
     'data'?: OverviewData;
     'onGraphElementSelected'?: (event: CustomEvent<any>) => void;
     'onGraphOverviewDetailSelected'?: (event: CustomEvent<any>) => void;
   }
-  interface PyNavigationBar extends JSXBase.HTMLAttributes<HTMLPyNavigationBarElement> {
+  interface PyNavigationBar {
     'backDisabled'?: boolean;
     'current'?: string;
     'nextDisabled'?: boolean;
@@ -117,7 +117,12 @@ export { LocalJSX as JSX };
 
 declare module "@stencil/core" {
   export namespace JSX {
-    interface IntrinsicElements extends LocalJSX.IntrinsicElements {}
+    interface IntrinsicElements {
+      'py-codeblock': LocalJSX.PyCodeblock & JSXBase.HTMLAttributes<HTMLPyCodeblockElement>;
+      'py-graph': LocalJSX.PyGraph & JSXBase.HTMLAttributes<HTMLPyGraphElement>;
+      'py-graph-overview': LocalJSX.PyGraphOverview & JSXBase.HTMLAttributes<HTMLPyGraphOverviewElement>;
+      'py-navigation-bar': LocalJSX.PyNavigationBar & JSXBase.HTMLAttributes<HTMLPyNavigationBarElement>;
+    }
   }
 }
 

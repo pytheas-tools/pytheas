@@ -1,0 +1,15 @@
+{
+  "entries": [
+    "components/codeblock/codeblock.js",
+    "components/graph-overview/graph-overview.js",
+    "components/graph/graph.js",
+    "components/navigation-bar/navigation-bar.js"
+  ],
+  "compiler": {
+    "name": "@stencil/core",
+    "version": "1.7.5",
+    "typescriptVersion": "3.6.3"
+  },
+  "collections": [],
+  "bundles": []
+}

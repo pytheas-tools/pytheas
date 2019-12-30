@@ -1,0 +1,32 @@
+import { EventEmitter } from '../../stencil.core';
+export declare class CodeBlock {
+    code: string;
+    filename: string;
+    theme: string;
+    language: string;
+    codemirrorPath: string;
+    maximized: boolean;
+    codeMirrorEditor: any;
+    codeblockMaximized: EventEmitter;
+    codeblockUnmaximized: EventEmitter;
+    tokenHovered: EventEmitter;
+    el: HTMLElement;
+    reduceButton: HTMLButtonElement;
+    openButton: HTMLButtonElement;
+    fullsizeButton: HTMLButtonElement;
+    topBar: HTMLElement;
+    codeView: HTMLElement;
+    componentWillLoad(): void;
+    componentDidLoad(): void;
+    updateTheme(theme: string): Promise<void>;
+    highlight(range: any): Promise<void>;
+    highlights(ranges: any): Promise<void>;
+    unHighlight(): Promise<void>;
+    _highlight(range: any): void;
+    injectEditorDependency(): Promise<unknown>;
+    bootstrapEditor(): Promise<void>;
+    reduce(): void;
+    open(): void;
+    maximize(): void;
+    render(): any;
+}

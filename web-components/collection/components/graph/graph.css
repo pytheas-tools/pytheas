@@ -1,0 +1,99 @@
+py-graph {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+py-graph svg text:hover {
+  cursor: default;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.block-class {
+  background: #e5e5e5;
+  border: 1px solid #c8c7c7;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 12px 15px;
+  border-radius: 10px;
+  margin: 30px;
+}
+.block-class.central {
+  border-color: #707070;
+  border-width: 2px;
+}
+.block-class:hover {
+  border-color: #707070;
+}
+
+.block-class_group {
+  background: white;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.block-class_group .container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+}
+.block-class_group .title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+.block-class_group .title ion-icon {
+  margin-right: 5px;
+  font-size: 20px;
+}
+
+.block-class_title {
+  font-weight: bold;
+  font-size: 18px;
+  width: 100%;
+  text-align: center;
+}
+.block-class_title.has-child {
+  margin-bottom: 10px;
+}
+
+.method {
+  background: #f9bb43;
+  border: 1px solid #f9bb43;
+}
+.method:hover {
+  border-color: #a77e2e;
+}
+
+.property {
+  background: #6fb4d3;
+  border: 1px solid #6fb4d3;
+}
+.property:hover {
+  border-color: #4e7f96;
+}
+
+.method,
+.property {
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin: 3px 0;
+  color: #232323;
+  cursor: default;
+}
+
+.outer-relations,
+.inner-relations {
+  display: flex;
+  flex-direction: column;
+}

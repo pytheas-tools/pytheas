@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@phenomnomnominal/tsquery": "^4.0.0",
-    "codemirror": "^5.49.2",
+    "codemirror": "^5.58.2",
     "java-ast": "^0.1.0",
     "vue-template-compiler": "^2.6.10"
   }
